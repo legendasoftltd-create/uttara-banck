@@ -22,7 +22,7 @@
                 </div>
             </div>
         </div>
-        <div class="about-menu-col">
+        <div class="about-menu-col container-fluid">
             <div class="seven-cols">
                 @php $a = 1; @endphp
                 @foreach($all_services as $service)

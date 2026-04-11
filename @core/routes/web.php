@@ -51,6 +51,11 @@ Route::group(['middleware' => ['setlang:frontend', 'globalVariable', 'maintains_
         Route::post($support_ticket_page_slug.'/new', 'SupportTicketController@store')->name('frontend.support.ticket.store');
     });
 
+    Route::group(['namespace' => 'Frontend'], function () {
+        Route::get('/locations', 'LocationController@index')->name('frontend.locations');
+        Route::get('/locations/{slug}', 'LocationController@show')->name('frontend.locations.single');
+    });
+
     /*==============================================
         FRONTEND ROUTES: COURSE MODULE
     ==============================================*/
@@ -564,4 +569,3 @@ require_once __DIR__.'/admin.php';
 Route::group(['middleware' => ['setlang:frontend', 'globalVariable', 'HtmlMinifier','maintains_mode']], function () {
     Route::get('/{slug}', 'FrontendController@dynamic_single_page')->name('frontend.dynamic.page');
 });
-

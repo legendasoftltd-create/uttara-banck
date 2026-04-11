@@ -252,7 +252,7 @@
                             <li><a href="#">Cautionary Notice</a></li>
                         </ul>
                     </li>
-                    <li><a href="our-location.html">Our Location</a></li>
+                    <li><a href="{{ route('frontend.locations') }}">Our Location</a></li>
                     <li><a href="#">iBanking</a></li>
                     <li><a href="https://play.google.com/store/apps/details?id=com.uttarabank.ublmobile">Uttara
                             eWallet</a></li>

@@ -594,6 +594,15 @@
                                     </ul>
                                 </li>
                             <?php endif; ?>
+                            <?php if(check_page_permission_by_string('Locations Manage')): ?>
+                                <li class="main_dropdown <?php echo e(active_menu('admin-home/locations')); ?> <?php if(request()->is('admin-home/locations/*')): ?> active <?php endif; ?>">
+                                    <a href="javascript:void(0)" aria-expanded="true"><?php echo e(__('Locations')); ?></a>
+                                    <ul class="collapse">
+                                        <li class="<?php echo e(active_menu('admin-home/locations')); ?>"><a href="<?php echo e(route('admin.locations.all')); ?>"><?php echo e(__('All Locations')); ?></a></li>
+                                        <li class="<?php echo e(active_menu('admin-home/locations/new')); ?>"><a href="<?php echo e(route('admin.locations.new')); ?>"><?php echo e(__('Add New Location')); ?></a></li>
+                                    </ul>
+                                </li>
+                            <?php endif; ?>
                         </ul>
                     </li>
                     <li class="main_dropdown

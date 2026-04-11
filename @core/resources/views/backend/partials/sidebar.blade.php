@@ -587,6 +587,15 @@
                                     </ul>
                                 </li>
                             @endif
+                            @if(check_page_permission_by_string('Locations Manage'))
+                                <li class="main_dropdown {{active_menu('admin-home/locations')}} @if(request()->is('admin-home/locations/*')) active @endif">
+                                    <a href="javascript:void(0)" aria-expanded="true">{{__('Locations')}}</a>
+                                    <ul class="collapse">
+                                        <li class="{{active_menu('admin-home/locations')}}"><a href="{{route('admin.locations.all')}}">{{__('All Locations')}}</a></li>
+                                        <li class="{{active_menu('admin-home/locations/new')}}"><a href="{{route('admin.locations.new')}}">{{__('Add New Location')}}</a></li>
+                                    </ul>
+                                </li>
+                            @endif
                         </ul>
                     </li>
                     <li class="main_dropdown

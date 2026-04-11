@@ -226,6 +226,19 @@ Route::prefix('admin-home')->middleware(['setlang:backend'])->group(function () 
         });
     });
 
+    /*==============================================
+         LOCATIONS MODULE
+    ==============================================*/
+    Route::prefix('locations')->middleware(['adminPermissionCheck:Locations Manage'])->group(function () {
+        Route::get('/', 'LocationController@all_locations')->name('admin.locations.all');
+        Route::get('/new', 'LocationController@new_location')->name('admin.locations.new');
+        Route::post('/new', 'LocationController@store_location');
+        Route::get('/edit/{id}', 'LocationController@edit_location')->name('admin.locations.edit');
+        Route::post('/update', 'LocationController@update_location')->name('admin.locations.update');
+        Route::post('/delete/{id}', 'LocationController@delete_location')->name('admin.locations.delete');
+        Route::post('/bulk-action', 'LocationController@bulk_action')->name('admin.locations.bulk.action');
+    });
+
 
 
     /*==============================================
@@ -2180,5 +2193,4 @@ Route::prefix('admin-home')->group(function () {
     Route::post('/update-order', 'Admin\PageBuilderController@update_addon_order')->name('admin.page.builder.update.addon.order');
     Route::post('/get-admin-markup', 'Admin\PageBuilderController@get_admin_panel_addon_markup')->name('admin.page.builder.get.addon.markup');
 });
-
 
