@@ -170,6 +170,158 @@
                 </div>
             </div>
         </section>
+
+        <section id="important"
+                class=" background-white relative-positioned">
+                <div class="text-center">
+                    <p class="subtitle fancy">
+                        <span class="skl-bar-2"></span>
+                        <span
+                            class="title-color text-uppercase">
+                            Important Information
+                        </span>
+                        <span class="skl-bar-1"></span>
+                    </p>
+                    <br>
+                    <br>
+                </div>
+                <div class="container-fluid">
+                    <div
+                        class="col-md-10 col-sm-6 col-xs-12"
+                        style="display: contents;">
+                        <div class="information-wrap">
+                            <div data-aos="fade-up"
+                                data-aos-duration="500"
+                                class="information-card">
+                                <ul>
+                                    <a href="#earnings_disclosure.html" target="_blank">
+                                        <li><i class="fa-regular fa-circle-dot"></i>
+                                            Uttara Bank PLC Earnings Disclosure - Q3'24</li>
+                                    </a>
+                                    <a href="#" target="_blank">
+                                        <li><i class="fa-regular fa-circle-dot"></i>
+                                        Notice regarding international payment settlement through credit card</li>
+                                    </a>
+
+                                    <a
+                                        href="#en/soc">
+                                        <li><i
+                                                class="fa-regular fa-circle-dot"></i>
+                                            Schedule of Charges
+                                            &amp; Forms</li>
+                                    </a>
+                                    <a
+                                        href="#client_end/img/Agent_Banking/1759660362_List-of-BBL-Terminated-Agents_5-Oct.pdf"
+                                        target="_blank"><i
+                                            class="fa-regular fa-circle-dot"></i>
+                                        List of Agents
+                                        Terminated on
+                                        basis of complaints,
+                                        irregularities or
+                                        non-compliance
+                                    </a>
+
+                                </ul>
+                            </div>
+
+                            <div data-aos="fade-up"
+                                data-aos-duration="600"
+                                class="information-card">
+                                <ul>
+
+                                    <a
+                                        href="#download/Uttara Bank PLC POS Merchant List.pdf"
+                                        target="_blank">
+                                        <li><i
+                                                class="fa-regular fa-circle-dot"></i>
+                                            Uttara Bank PLC POS
+                                            Merchant
+                                            List</li>
+                                    </a>
+                                    <a
+                                        href="#schedule_of_charges/Terms_and_Conditions_PB.pdf"
+                                        target="_blank">
+                                        <li><i
+                                                class="fa-regular fa-circle-dot"></i>
+                                            Terms &amp;
+                                            Conditions:
+                                            Premium Banking
+                                            Proposition</li>
+                                    </a>
+                                    <a
+                                        href="#important_notice_regarding_atm_withdrawal_limit.html"
+                                        target="_blank">
+                                        <li><i
+                                                class="fa-regular fa-circle-dot"></i>
+                                            Revised ATM
+                                            withdrawal
+                                            limit</li>
+                                    </a>
+                                    <a
+                                        href="#schedule_of_charges/Terms_and_Conditions_Retail_Banking.pdf"
+                                        target="_blank">
+                                        <li><i
+                                                class="fa-regular fa-circle-dot"></i>
+                                            Terms &amp;
+                                            Conditions:
+                                            Retail Banking</li>
+                                    </a>
+
+                                </ul>
+                            </div>
+
+                            <div data-aos="fade-up"
+                                data-aos-duration="700"
+                                class="information-card">
+                                <ul>
+                                    <a href="#download/Notice-of-the-21st-AGM.jpg" target="_blank">
+                                        <li><i class="fa-regular fa-circle-dot"></i>
+                                            Notice of the
+                                            Twenty-First
+                                            Annual General
+                                            Meeting
+                                            of
+                                            Uttara Bank PLC</li>
+                                    </a>
+                                    <a
+                                        href="#en/bida">
+                                        <li><i
+                                                class="fa-regular fa-circle-dot"></i>
+                                            The Bangladesh
+                                            Investment
+                                            Development
+                                            Authority
+                                            (BIDA)</li>
+                                    </a>
+
+                                    <a
+                                        href="#download/Uttara Bank PLC E-commerce Merchant List.pdf"
+                                        target="_blank">
+                                        <li><i
+                                                class="fa-regular fa-circle-dot"></i>
+                                            Uttara Bank PLC
+                                            E-commerce
+                                            Merchant List</li>
+                                    </a>
+
+                                    <a href>
+                                        <li
+                                            class="title video-btn"
+                                            data-toggle="modal"
+                                            data-src
+                                            data-target="#myModal"><i
+                                                class="fa-regular fa-circle-dot"></i>
+                                            Fake
+                                            Notes
+                                            Prevention
+                                            Video</li>
+                                    </a>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
     </div>
 <?php $__env->stopSection(); ?>
 
