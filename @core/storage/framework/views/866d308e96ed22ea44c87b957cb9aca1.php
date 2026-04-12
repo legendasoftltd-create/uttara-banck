@@ -92,85 +92,22 @@
                             <li><a href="#">Cash Dollar Transaction</a></li>
                         </ul>
                     </li>
+                    <?php $__currentLoopData = get_product_category_on_menu(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $data): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <li class="has-dropdown">
-                        <a href="#" class="dropdown-toggle">Loan Product</a>
+                        <a href="<?php echo e(route('frontend.products.category',['id' => $data->id, 'any' => $data->title])); ?>" class="dropdown-toggle"><?php echo e($data->title); ?></a>
                         <ul class="sub-menu">
-                            <li><a href="#">Uttaran Small Business Loan (USBL)</a></li>
-                            <li><a href="#">Nari Swanirbor Rin Prokalpo (NSRP)</a></li>
-                            <li><a href="#">Uttaran SME Sector Development Project Loan (USSDPL)</a></li>
-                            <li><a href="#">UBPLC Staff Credit - Personal Loan</a></li>
-                            <li><a href="#">Uttaran House Repairing / Renovation Loan</a></li>
-                            <li><a href="#">House Hold Durables</a></li>
-                            <li><a href="#">Consumer Credit – Personal Loan</a></li>
-                            <li><a href="#">Loan for Foreign Employment</a></li>
-                            <li><a href="#">Doctor’s Loan</a></li>
-                            <li><a href="#">Education Loan</a></li>
-                            <li><a href="#">Marriage Loan</a></li>
-                            <li><a href="#">Travel Loan</a></li>
-                            <li><a href="#">House Finance for Freedom Fighters</a></li>
-                            <li><a href="#">Uttaran Home Loan</a></li>
-                            <li><a href="#">Car/Motorcycle Loan</a></li>
-                            <li><a href="#">Trade Finance</a></li>
-                            <li><a href="#">Green Financing</a></li>
-                            <li><a href="#">Agricultural Credit</a></li>
-                            <li><a href="#">Lease Finance</a></li>
-                            <li><a href="#">Fixed Term Loan to Enterprise</a></li>
-                            <li><a href="#">Working Capital Loan</a></li>
+                            <?php $__currentLoopData = get_category_products_menu($data->id); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <li><a href="<?php echo e(route('frontend.products.single', $product->slug)); ?>"><?php echo e($product->title); ?></a></li>
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </ul>
                     </li>
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     <li class="has-dropdown">
-                        <a href="#" class="dropdown-toggle">Deposit Product</a>
+                        <a href="<?php echo e(route('frontend.service')); ?>" class="dropdown-toggle">Our Services</a>
                         <ul class="sub-menu">
-                            <li><a href="#">Savings Bank Account (Clients)</a></li>
-                            <li><a href="#">Uttaran Kotipoti Deposit Scheme</a></li>
-                            <li><a href="#">Savings Bank Account (School Banking)</a></li>
-                            <li><a href="#">Savings Bank Account (Garments Workers)</a></li>
-                            <li><a href="#">Double Benefit Deposit Scheme</a></li>
-                            <li><a href="#">Savings Bank Account (Farmers)</a></li>
-                            <li><a href="#">Savings Bank Account (Leather Factory Workers)</a></li>
-                            <li><a href="#">Uttaran Lakhpoti Deposit Scheme</a></li>
-                            <li><a href="#">Uttaran Millionaire Deposit Scheme</a></li>
-                            <li><a href="#">Bank Account (Non Privileged Farmers, Woman & Young Entrepreneurs)</a></li>
-                            <li><a href="#">Special Notice Deposit</a></li>
-                            <li><a href="#">Uttaran Physically Challenged Persons SB A/C</a></li>
-                            <li><a href="#">Uttaran Street Urchin and Working Children SB A/C</a></li>
-                            <li><a href="#">Fixed Deposit Receipt Account</a></li>
-                            <li><a href="#">Current Account (Non-Individual)</a></li>
-                            <li><a href="#">Under Privileged SB A/C</a></li>
-                            <li><a href="#">Monthly Deposit Scheme (MDS)</a></li>
-                            <li><a href="#">Current Account (Individual)</a></li>
-                            <li><a href="#">Uttaran Swapnapuran Sanchaya Prokolpa</a></li>
-                            <li><a href="#">Uttaran Bibaha Sanchaya Prokolpa</a></li>
-                            <li><a href="#">Mashik Munafa Prokalpa</a></li>
-                            <li><a href="#">Uttaran Taka 10 SB Account</a></li>
-                            <li><a href="#">Uttaran Footwear and Leather Products Workers SB A/C</a></li>
-                            <li><a href="#">National Service Programme SB A/C</a></li>
-                            <li><a href="#">The inhabitants of earlier enclaves taka 10 SB A/C</a></li>
-                            <li><a href="#">Uttaran Five Million Deposit Scheme</a></li>
-                            <li><a href="#">Uttaran Labonya Deposit Scheme</a></li>
-                            <li><a href="#">Uttaran Probashi Deposit Scheme</a></li>
-                            <li><a href="#">‘UB 100 days FDR’, ‘UB 200 days FDR’ and ‘UB 300 days FDR’</a></li>
-                            <li><a href="#">Uttaran Shohoz Bazar Scheme (USBS)</a></li>
-                            <li><a href="#">Uttaran Swanirbhar Shanchaya Scheme (USSS)</a></li>
-                        </ul>
-                    </li>
-                    <li class="has-dropdown">
-                        <a href="#" class="dropdown-toggle">Our Services</a>
-                        <ul class="sub-menu">
-                            <li><a href="#">International Division</a></li>
-                            <li><a href="#">International Trade Services</a></li>
-                            <li><a href="#">Risk Management Department</a></li>
-                            <li><a href="#">Treasury Service</a></li>
-                            <li><a href="#">AD Branches</a></li>
-                            <li><a href="#">Foreign Currency Account</a></li>
-                            <li><a href="#">NFCD Account</a></li>
-                            <li><a href="#">RFCD Account</a></li>
-                            <li><a href="#">Standard Settlement Instruction</a></li>
-                            <li><a href="#">Off - Shore Banking Unit</a></li>
-                            <li><a href="#">Exchange Rate</a></li>
-                            <li><a href="#">FDI Help Desk</a></li>
-                            <li><a href="#">Government Securities Investment Window</a></li>
-                            <li><a href="#">Cash Dollar Transaction</a></li>
+                            <?php $__currentLoopData = get_services(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $service): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <li><a href="<?php echo e(route('frontend.services.single', $service->slug)); ?>"><?php echo e($service->title); ?></a></li>
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </ul>
                     </li>
                     <li class="has-dropdown">

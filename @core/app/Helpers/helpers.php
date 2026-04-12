@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use App\MediaUpload;
 use App\Products;
 use App\Page;
+use App\Services;
 use Illuminate\Support\Facades\Session;
 
 
@@ -2757,6 +2758,11 @@ function get_category_products($id){
     return $products;
 }
 
+function get_category_products_menu($id){
+    $products = Products::where(['status' => 'publish', 'category_id' => $id])->orderBy('id', 'desc')->get();
+    return $products;
+}
+
 function get_product_variant_list_by_id($id){
     $varitnt = \App\ProductVariant::find($id);
     if (empty($varitnt)){
@@ -2824,4 +2830,9 @@ function timeAgo($date) {
     }
 
     return $created->format('d M y');
+}
+
+function get_services(){
+    $services = Services::where(['status' => 'publish'])->orderBy('id', 'desc')->paginate(get_static_option('service_post_items'));
+    return $services;
 }
