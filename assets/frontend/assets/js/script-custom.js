@@ -42,14 +42,13 @@ function openVideo() {
   const modal = document.getElementById("videoModal");
   const iframe = document.getElementById("videoFrame");
   const videoId = "YOUR_VIDEO_ID_HERE";
-  iframe.src = `https://www.youtube.com/embed/_dV-OuWNRpU?si=mSf6hvq_9L-L7T1f`;
+  iframe.src = `https://www.youtube.com/embed/t_KKNNeH8jU?autoplay=1`;
   modal.style.display = "flex";
 }
 
 function closeVideo() {
   const modal = document.getElementById("videoModal");
   const iframe = document.getElementById("videoFrame");
-
   modal.style.display = "none";
   iframe.src = "";
 }
@@ -67,25 +66,20 @@ window.onclick = function (event) {
 
 function openTab(evt, tabName) {
   var i, tabContent;
-
   tabContent = document.getElementsByClassName("tab-content");
   for (i = 0; i < tabContent.length; i++) {
     tabContent[i].classList.remove("active");
   }
-
   var navItems = document.getElementsByClassName("nav-item");
   for (i = 0; i < navItems.length; i++) {
     navItems[i].classList.remove("active");
   }
-
   var tabLinks = document.getElementsByClassName("tab-item");
   for (i = 0; i < tabLinks.length; i++) {
     tabLinks[i].classList.remove("active");
   }
-
   var el = document.getElementById(tabName);
   if (el) el.classList.add("active");
-
   if (evt && evt.currentTarget) {
     evt.currentTarget.classList.add("active");
     evt.currentTarget.scrollIntoView({
@@ -243,24 +237,20 @@ function openModal(card) {
   const name = card.querySelector("h3").innerText;
   const designation = card.querySelector("p").innerText;
   const imgPath = card.querySelector("img").src;
-  const description =
-    card.getAttribute("data-description") ||
-    "Information will be updated soon.";
-
+  const description = card.getAttribute("data-description") || "Information will be updated soon.";
   document.getElementById("modalName").innerText = name;
   document.getElementById("modalDesignation").innerText = designation;
   document.getElementById("modalImg").src = imgPath;
   document.getElementById("modalDesc").innerHTML = description;
-
   modal.style.display = "block";
 }
 
-const closeBtn = document.querySelector(".close-btn");
-if (closeBtn) {
-  closeBtn.onclick = function () {
-    modal.style.display = "none";
-  };
-}
+// const closeBtn = document.querySelector(".close-btn");
+// if (closeBtn) {
+//   closeBtn.onclick = function () {
+//     modal.style.display = "none";
+//   };
+// }
 
 window.onclick = function (event) {
   if (event.target == modal) {
@@ -286,15 +276,15 @@ var swiper = new Swiper(".blog-grid", {
   breakpoints: {
     640: {
       slidesPerView: 2,
-      spaceBetween: 20,
+      spaceBetween: 30,
     },
     768: {
       slidesPerView: 3,
-      spaceBetween: 40,
+      spaceBetween: 30,
     },
     1024: {
       slidesPerView: 4,
-      spaceBetween: 50,
+      spaceBetween: 30,
     },
   },
 });

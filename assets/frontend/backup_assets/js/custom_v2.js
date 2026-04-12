@@ -409,7 +409,7 @@ let currentTab="atm"
 
 function loadLocations(type){
 
-list.innerHTML=""
+list.innerHTML="";
 
 data[type].forEach(item=>{
 
@@ -455,7 +455,7 @@ let filtered=data[currentTab].filter(item=>
 item.name.toLowerCase().includes(value)
 )
 
-list.innerHTML=""
+list.innerHTML="";
 
 filtered.forEach(item=>{
 
