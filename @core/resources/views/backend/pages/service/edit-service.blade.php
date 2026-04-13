@@ -112,7 +112,7 @@
                                 <label for="meta_description">{{__('Meta Description')}}</label>
                                 <textarea name="meta_description"  class="form-control" rows="5" id="meta_description">{{$service->meta_description}}</textarea>
                             </div>
-                            <div class="form-group">
+                            {{-- <div class="form-group">
                                 <label for="category">{{__('Category')}}</label>
                                 <select name="categories_id" id="category" class="form-control">
                                     <option value="">{{__('Select Category')}}</option>
@@ -120,7 +120,7 @@
                                         <option @if($service->categories_id == $data->id) selected @endif value="{{$data->id}}">{{$data->name}}</option>
                                     @endforeach
                                 </select>
-                            </div>
+                            </div> --}}
                             {{-- <div class="form-group">
                                 <label for="price_plan">{{__('Price Plans')}}</label>
                                 <select name="price_plan[]" multiple class="form-control nice-select wide" id="price_plan_select">
@@ -139,11 +139,11 @@
                                     <option @if($service->status == 'draft') selected @endif value="draft">{{__('Draft')}}</option>
                                 </select>
                             </div>
-                            <div class="form-group">
+                            {{-- <div class="form-group">
                                 <label for="sr_order">{{__('Order')}}</label>
                                 <input type="text" class="form-control"  id="sr_order"  name="sr_order" value="{{$service->sr_order}}">
                                 <span class="info-text">{{__('if you set order for it, all service will show in frontend as a per this order')}}</span>
-                            </div>
+                            </div> --}}
                             <x-media-upload :id="$service->image" :name="'image'" :dimentions="'1920x1280'" :title="__('Image')"/>
                             <button type="submit" class="btn btn-primary mt-4 pr-4 pl-4">{{__('Update Service')}}</button>
                         </form>

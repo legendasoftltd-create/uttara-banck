@@ -96,7 +96,7 @@
                                 <label for="meta_description">{{__('Meta Description')}}</label>
                                 <textarea name="meta_description"  class="form-control" rows="5" id="meta_description"></textarea>
                             </div>
-                            <div class="form-group">
+                            {{-- <div class="form-group">
                                 <label for="category">{{__('Category')}}</label>
                                 <select name="categories_id" id="category" class="form-control">
                                     <option value="">{{__('Select Category')}}</option>
@@ -104,8 +104,8 @@
                                         <option value="{{$category->id}}">{{$category->name}}</option>
                                     @endforeach
                                 </select>
-                                {{-- <span class="info-text">{{__('select language to get category by language')}}</span> --}}
-                            </div>
+                                <span class="info-text">{{__('select language to get category by language')}}</span>
+                            </div> --}}
                             {{-- <div class="form-group">
                                 <label for="price_plan">{{__('Price Plans')}}</label>
                                 <select name="price_plan[]" multiple class="form-control nice-select wide" id="price_plan_select"> </select>
@@ -119,11 +119,11 @@
                                     <option value="draft">{{__('Draft')}}</option>
                                 </select>
                             </div>
-                            <div class="form-group">
+                            {{-- <div class="form-group">
                                 <label for="sr_order">{{__('Order')}}</label>
                                 <input type="text" class="form-control"  value="{{old('sr_order')}}"  name="sr_order" placeholder="{{__('eg: 1')}}">
                                 <span class="info-text">{{__('if you set order for it, all service will show in frontend as a per this order')}}</span>
-                            </div>
+                            </div> --}}
                             <div class="form-group">
                                 <label for="image">{{__('Image')}}</label>
                                 <div class="media-upload-btn-wrapper">
@@ -133,7 +133,7 @@
                                         {{__('Upload Image')}}
                                     </button>
                                 </div>
-                                <small>{{__('Recommended image size 1920x1280')}}</small>
+                                {{-- <small>{{__('Recommended image size 1920x1280')}}</small> --}}
                             </div>
 
                             <button type="submit" class="btn btn-primary mt-4 pr-4 pl-4">{{__('Add Service')}}</button>
