@@ -17,7 +17,7 @@
                     <div class="carousel-item active col-md-3">
                         <div class="overflow-hidden">
                             
-                            <img class="img-fluid mx-auto d-block zoom" src="<?php echo e($bolg_image_details['img_url']); ?>"
+                            <img class="img-fluid mx-auto d-block zoom" src="<?php echo e($bolg_image_details['img_url'] ?? ''); ?>"
                                 width="100%" alt="Flexi Platinum Whats new">
                         </div>
                         <div class="whats-text-bg" data-toggle="modal" data-target="#">

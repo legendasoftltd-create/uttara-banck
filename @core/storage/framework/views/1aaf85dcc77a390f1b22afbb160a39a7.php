@@ -5,6 +5,26 @@
         $(document).ready(function (){
         var mainUploadBtn = '';
 
+        function isDocumentType(type) {
+            return ['pdf','doc','docx','txt','zip','csv','xlsx','xls','xlsm','xlsb','xltx','pptx','pptm','ppt'].includes(type);
+        }
+
+        function buildAttachmentPreview(src, type, title) {
+            if (isDocumentType(type)) {
+                return '<div class="attachment-preview"><div class="thumbnail"><div class="centered"><i class="fas fa-file file-icon"></i><span class="file-name">'+type+'</span></div></div></div>';
+            }
+
+            return '<div class="attachment-preview"><div class="thumbnail"><div class="centered"><img src="'+src+'" alt="'+(title || '')+'"></div></div></div>';
+        }
+
+        function buildMediaInfoPreview(src, type, title) {
+            if (isDocumentType(type)) {
+                return '<div class="attachment-preview"><div class="thumbnail"><div class="centered"><i class="fas fa-file file-icon"></i><span class="file-name">'+type+'</span></div></div></div>';
+            }
+
+            return '<img src="'+src+'" alt="'+(title || '')+'">';
+        }
+
         //after select image
         $(document).on('click','.media_upload_modal_submit_btn',function (e) {
             e.preventDefault();
@@ -17,13 +37,15 @@
                     var separator = allData.length == index ? '' : '|';
                     imageId += el.imgid + separator;
                     mainUploadBtn.prev('input').attr('data-imgsrc',el.imgsrc);
-                    mainUploadBtn.parent().find('.img-wrap').append('<div class="attachment-preview"><div class="thumbnail"><div class="centered"><img src="'+el.imgsrc+'"></div></div></div>');
+                    mainUploadBtn.parent().find('.img-wrap').append(buildAttachmentPreview(el.imgsrc, el.filetype, el.title));
                 });
                  mainUploadBtn.prev('input').val(imageId.substring(0,imageId.length -1));
 
             }
             $('#media_upload_modal').modal('hide');
-            $('.media_upload_form_btn').text('Change Image');
+            if (mainUploadBtn.length) {
+                mainUploadBtn.text(mainUploadBtn.data('btntitle').toString().replace('Select', 'Change'));
+            }
         });
 
 
@@ -123,14 +145,14 @@
 
             $('.img_alt_submit_btn').html('<i class="fas fa-check"></i>');
             $('.img-info .img-title').text(allData.title)
-            $('.media-uploader-image-info .img-wrapper img').attr('src',allData.imgsrc);
+            $('.media-uploader-image-info .img-wrapper').html(buildMediaInfoPreview(allData.imgsrc, allData.filetype, allData.title));
         });
 
         Dropzone.options.placeholderfForm = {
-            dictDefaultMessage: "<?php echo e(__('Drag or Select Your Image')); ?>",
+            dictDefaultMessage: "<?php echo e(__('Drag or Select Your File')); ?>",
             maxFiles: 50,
             maxFilesize: 10, //MB
-            acceptedFiles: 'image/*,application/pdf,.doc,.docx,.txt,.svg,.zip',
+            acceptedFiles: 'image/*,application/pdf,.doc,.docx,.txt,.svg,.zip,.csv,.xlsx,.xls,.xlsm,.xlsb,.xltx,.pptx,.pptm,.ppt',
             success: function (file, response) {
                 if (file.previewElement) {
                     return file.previewElement.classList.add("dz-success");
@@ -197,11 +219,11 @@
                     $('.media-uploader-image-list').html('');
                     $.each(data,function (index,value) {
 
-                        var imageMarkup ='<li data-date="'+value.upload_at+'" data-imgid="'+value.image_id+'" data-imgsrc="'+value.img_url+'" data-size="'+value.size+'" data-dimension="'+value.dimensions+'" data-title="'+value.title+'" data-alt="'+value.alt+'">\n' +
+                        var imageMarkup ='<li data-date="'+value.upload_at+'" data-imgid="'+value.image_id+'" data-imgsrc="'+value.img_url+'" data-filetype="'+value.type+'" data-size="'+value.size+'" data-dimension="'+value.dimensions+'" data-title="'+value.title+'" data-alt="'+value.alt+'">\n' +
                             '<div class="attachment-preview">\n' +
                             '<div class="thumbnail">\n' +
                             '<div class="centered">\n' ;
-                            if (['pdf','doc','docx','txt','zip','csv','xlsx','xlsm','xlsb','xltx','pptx','pptm','ppt'].includes(value.type)){
+                            if (isDocumentType(value.type)){
                                 imageMarkup += '<i class="fas fa-file file-icon"></i> \n' ;
                                 imageMarkup += '<span class="file-name">'+value.type+'</span> \n' ;
                             }else{
@@ -276,11 +298,11 @@
                     success: function (data) {
                         
                         $.each(data,function (index,value) {
-                            var imageMarkup ='<li data-date="'+value.upload_at+'" data-imgid="'+value.image_id+'" data-imgsrc="'+value.img_url+'" data-size="'+value.size+'" data-dimension="'+value.dimensions+'" data-title="'+value.title+'" data-alt="'+value.alt+'">\n' +
+                            var imageMarkup ='<li data-date="'+value.upload_at+'" data-imgid="'+value.image_id+'" data-imgsrc="'+value.img_url+'" data-filetype="'+value.type+'" data-size="'+value.size+'" data-dimension="'+value.dimensions+'" data-title="'+value.title+'" data-alt="'+value.alt+'">\n' +
                                 '<div class="attachment-preview">\n' +
                                 '<div class="thumbnail">\n' +
                                 '<div class="centered">\n' ;
-                            if (['pdf','doc','docx','txt','zip','csv','xlsx','xlsm','xlsb','xltx','pptx','pptm','ppt'].includes(value.type)){
+                            if (isDocumentType(value.type)){
                                 imageMarkup += '<i class="fas fa-file file-icon"></i> \n' ;
                                 imageMarkup += '<span class="file-name">'+value.type+'</span> \n' ;
                             }else{

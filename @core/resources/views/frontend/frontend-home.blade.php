@@ -306,14 +306,14 @@
                 </div>
             </div>
         </section>
-
+        <div class="empty-height-50"></div>
+        
         <section id="important"
                 class=" background-white relative-positioned">
                 <div class="text-center">
                     <p class="subtitle fancy">
                         <span class="skl-bar-2"></span>
-                        <span
-                            class="title-color text-uppercase">
+                        <span class="title-color text-uppercase">
                             Important Information
                         </span>
                         <span class="skl-bar-1"></span>
@@ -330,7 +330,13 @@
                                 data-aos-duration="500"
                                 class="information-card">
                                 <ul>
-                                    <a href="#earnings_disclosure.html" target="_blank">
+                                    @foreach($all_brand_logo as $data)
+                                        <a href="{{ $data->slug }}" target="_blank">
+                                            <li><i class="fa-regular fa-circle-dot"></i>
+                                                {{ $data->title }}</li>
+                                        </a>
+                                    @endforeach
+                                    {{-- <a href="#earnings_disclosure.html" target="_blank">
                                         <li><i class="fa-regular fa-circle-dot"></i>
                                             Uttara Bank PLC Earnings Disclosure - Q3'24</li>
                                     </a>
@@ -355,8 +361,7 @@
                                         basis of complaints,
                                         irregularities or
                                         non-compliance
-                                    </a>
-
+                                    </a> --}}
                                 </ul>
                             </div>
 
@@ -364,15 +369,11 @@
                                 data-aos-duration="600"
                                 class="information-card">
                                 <ul>
-
                                     <a
                                         href="#download/Uttara Bank PLC POS Merchant List.pdf"
                                         target="_blank">
-                                        <li><i
-                                                class="fa-regular fa-circle-dot"></i>
-                                            Uttara Bank PLC POS
-                                            Merchant
-                                            List</li>
+                                        <li><i class="fa-regular fa-circle-dot"></i>
+                                            Uttara Bank PLC POS Merchant List</li>s
                                     </a>
                                     <a
                                         href="#schedule_of_charges/Terms_and_Conditions_PB.pdf"
@@ -433,8 +434,7 @@
                                     <a
                                         href="#download/Uttara Bank PLC E-commerce Merchant List.pdf"
                                         target="_blank">
-                                        <li><i
-                                                class="fa-regular fa-circle-dot"></i>
+                                        <li><i class="fa-regular fa-circle-dot"></i>
                                             Uttara Bank PLC
                                             E-commerce
                                             Merchant List</li>

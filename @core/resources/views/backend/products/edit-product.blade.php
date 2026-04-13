@@ -44,7 +44,7 @@
                             @csrf
                             <div class="row">
                                 <div class="col-lg-12">
-                                    {{-- <div class="form-group">
+                                    <div class="form-group" hidden>
                                         <label for="language"><strong>{{__('Language')}}</strong></label>
                                         <select name="lang" id="language" class="form-control">
                                             @foreach($all_languages as $lang)
@@ -52,17 +52,17 @@
                                                         @endif value="{{$lang->slug}}">{{$lang->name}}</option>
                                             @endforeach
                                         </select>
-                                    </div> --}}
+                                    </div>
                                     <div class="form-group">
                                         <label for="title">{{__('Title')}}</label>
                                         <input type="text" class="form-control" id="title" name="title"
                                                value="{{$product->title}}">
                                     </div>
-                                    {{-- <div class="form-group">
+                                    <div class="form-group">
                                         <label for="slug">{{__('Slug')}}</label>
                                         <input type="text" class="form-control" id="slug" name="slug"
                                                value="{{$product->slug}}">
-                                    </div> --}}
+                                    </div>
                                     {{-- <div class="form-group">
                                         <label for="badge">{{__('Badge')}}</label>
                                         <input type="text" class="form-control" id="badge" name="badge"

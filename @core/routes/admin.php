@@ -1602,6 +1602,7 @@ Route::prefix('admin-home')->middleware(['setlang:backend'])->group(function () 
         //brand logos
         Route::get('/', 'BrandController@index')->name('admin.brands');
         Route::post('/', 'BrandController@store');
+        Route::post('/slug-check', 'BrandController@slug_check')->name('admin.brands.slug.check');
         Route::post('/update', 'BrandController@update')->name('admin.brands.update');
         Route::post('/delete/{id}', 'BrandController@delete')->name('admin.brands.delete');
         Route::post('/bulk-action', 'BrandController@bulk_action')->name('admin.brands.bulk.action');
@@ -2193,4 +2194,3 @@ Route::prefix('admin-home')->group(function () {
     Route::post('/update-order', 'Admin\PageBuilderController@update_addon_order')->name('admin.page.builder.update.addon.order');
     Route::post('/get-admin-markup', 'Admin\PageBuilderController@get_admin_panel_addon_markup')->name('admin.page.builder.get.addon.markup');
 });
-

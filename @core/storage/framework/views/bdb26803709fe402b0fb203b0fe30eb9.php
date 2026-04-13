@@ -1,10 +1,10 @@
-@extends('backend.admin-master')
-@section('site-title')
-    {{__('Brand Settings')}}
-@endsection
-@section('style')
-    <link rel="stylesheet" href="{{asset('assets/backend/css/dropzone.css')}}">
-    <link rel="stylesheet" href="{{asset('assets/backend/css/media-uploader.css')}}">
+<?php $__env->startSection('site-title'); ?>
+    <?php echo e(__('Brand Settings')); ?>
+
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('style'); ?>
+    <link rel="stylesheet" href="<?php echo e(asset('assets/backend/css/dropzone.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(asset('assets/backend/css/media-uploader.css')); ?>">
     <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
     <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap.min.css">
@@ -18,35 +18,35 @@
             display: inline-block;
         }
     </style>
-@endsection
-@section('content')
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('content'); ?>
     <div class="col-lg-12 col-ml-12 padding-bottom-30">
         <div class="row">
             <div class="col-lg-12">
                 <div class="margin-top-40"></div>
-                @include('backend/partials/message')
-                @if($errors->any())
+                <?php echo $__env->make('backend/partials/message', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+                <?php if($errors->any()): ?>
                     <div class="alert alert-danger">
                         <ul>
-                            @foreach($errors->all() as $error)
-                                <li>{{$error}}</li>
-                            @endforeach
+                            <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <li><?php echo e($error); ?></li>
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </ul>
                     </div>
-                @endif
+                <?php endif; ?>
             </div>
 
             <div class="col-lg-6 mt-5">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="header-title">{{__('All Brand Items')}}</h4>
+                        <h4 class="header-title"><?php echo e(__('All Brand Items')); ?></h4>
                         <div class="bulk-delete-wrapper">
                             <div class="select-box-wrap">
                                 <select name="bulk_option" id="bulk_option">
-                                    <option value="">{{{__('Bulk Action')}}}</option>
-                                    <option value="delete">{{{__('Delete')}}}</option>
+                                    <option value=""><?php echo e(__('Bulk Action')); ?></option>
+                                    <option value="delete"><?php echo e(__('Delete')); ?></option>
                                 </select>
-                                <button class="btn btn-primary btn-sm" id="bulk_delete_btn">{{__('Apply')}}</button>
+                                <button class="btn btn-primary btn-sm" id="bulk_delete_btn"><?php echo e(__('Apply')); ?></button>
                             </div>
                         </div>
                         <div class="table-wrap table-responsive">
@@ -57,67 +57,86 @@
                                     <input type="checkbox" class="all-checkbox">
                                 </div>
                             </th>
-                            <th>{{__('ID')}}</th>
-                            <th>{{__('Title')}}</th>
-                            <th>{{__('Slug')}}</th>
-                            <th>{{__('Url')}}</th>
-                            <th>{{__('File')}}</th>
-                            <th>{{__('Action')}}</th>
+                            <th><?php echo e(__('ID')); ?></th>
+                            <th><?php echo e(__('Title')); ?></th>
+                            <th><?php echo e(__('Slug')); ?></th>
+                            <th><?php echo e(__('Url')); ?></th>
+                            <th><?php echo e(__('File')); ?></th>
+                            <th><?php echo e(__('Action')); ?></th>
                             </thead>
                             <tbody>
-                            @foreach($all_brand as $data)
+                            <?php $__currentLoopData = $all_brand; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $data): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <tr>
                                     <td>
                                         <div class="bulk-checkbox-wrapper">
-                                            <input type="checkbox" class="bulk-checkbox" name="bulk_delete[]" value="{{$data->id}}">
+                                            <input type="checkbox" class="bulk-checkbox" name="bulk_delete[]" value="<?php echo e($data->id); ?>">
                                         </div>
                                     </td>
-                                    <td>{{$data->id}}</td>
-                                    <td>{{$data->title}}</td>
-                                    <td>{{$data->slug}}</td>
-                                    <td>{{$data->url}}</td>
+                                    <td><?php echo e($data->id); ?></td>
+                                    <td><?php echo e($data->title); ?></td>
+                                    <td><?php echo e($data->slug); ?></td>
+                                    <td><?php echo e($data->url); ?></td>
                                     <td>
-                                        @php
+                                        <?php
                                             $brand_img = get_attachment_image_by_id($data->image,null,true);
                                             $img_url = '';
                                             $brand_file = \App\MediaUpload::find($data->image);
                                             $brand_file_type = !empty($brand_file) ? strtolower(pathinfo($brand_file->path, PATHINFO_EXTENSION)) : '';
                                             $is_previewable_image = in_array($brand_file_type, ['jpg','jpeg','png','webp','gif','svg']);
-                                        @endphp
-                                        @if (!empty($brand_img))
+                                        ?>
+                                        <?php if(!empty($brand_img)): ?>
                                             <div class="attachment-preview brand-file-preview">
                                                 <div class="thumbnail">
                                                     <div class="centered">
-                                                        @if($is_previewable_image)
-                                                            <img class="avatar user-thumb" src="{{$brand_img['img_url']}}" alt="">
-                                                        @else
+                                                        <?php if($is_previewable_image): ?>
+                                                            <img class="avatar user-thumb" src="<?php echo e($brand_img['img_url']); ?>" alt="">
+                                                        <?php else: ?>
                                                             <i class="fas fa-file file-icon"></i>
-                                                            <span class="file-name">{{strtoupper($brand_file_type ?: 'FILE')}}</span>
-                                                        @endif
+                                                            <span class="file-name"><?php echo e(strtoupper($brand_file_type ?: 'FILE')); ?></span>
+                                                        <?php endif; ?>
                                                     </div>
                                                 </div>
                                             </div>
-                                            @php  $img_url = $brand_img['img_url']; @endphp
-                                        @endif
+                                            <?php  $img_url = $brand_img['img_url']; ?>
+                                        <?php endif; ?>
                                     </td>
                                     <td>
-                                        <x-delete-popover :url="route('admin.brands.delete',$data->id)"/>
+                                        <?php if (isset($component)) { $__componentOriginal3f85107cf99b1c6be1e1a6dd6bdb2be5 = $component; } ?>
+<?php if (isset($attributes)) { $__attributesOriginal3f85107cf99b1c6be1e1a6dd6bdb2be5 = $attributes; } ?>
+<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.delete-popover','data' => ['url' => route('admin.brands.delete',$data->id)]] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? (array) $attributes->getIterator() : [])); ?>
+<?php $component->withName('delete-popover'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag && $constructor = (new ReflectionClass(Illuminate\View\AnonymousComponent::class))->getConstructor()): ?>
+<?php $attributes = $attributes->except(collect($constructor->getParameters())->map->getName()->all()); ?>
+<?php endif; ?>
+<?php $component->withAttributes(['url' => \Illuminate\View\Compilers\BladeCompiler::sanitizeComponentAttribute(route('admin.brands.delete',$data->id))]); ?>
+<?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__attributesOriginal3f85107cf99b1c6be1e1a6dd6bdb2be5)): ?>
+<?php $attributes = $__attributesOriginal3f85107cf99b1c6be1e1a6dd6bdb2be5; ?>
+<?php unset($__attributesOriginal3f85107cf99b1c6be1e1a6dd6bdb2be5); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginal3f85107cf99b1c6be1e1a6dd6bdb2be5)): ?>
+<?php $component = $__componentOriginal3f85107cf99b1c6be1e1a6dd6bdb2be5; ?>
+<?php unset($__componentOriginal3f85107cf99b1c6be1e1a6dd6bdb2be5); ?>
+<?php endif; ?>
                                         <a href="#"
                                            data-toggle="modal"
                                            data-target="#brand_item_edit_modal"
                                            class="btn btn-xs btn-primary btn-sm mb-3 mr-1 brand_edit_btn"
-                                           data-id="{{$data->id}}"
-                                           data-title="{{$data->title}}"
-                                           data-slug="{{$data->slug}}"
-                                           data-url="{{$data->url}}"
-                                           data-imageid="{{$data->image}}"
-                                           data-image="{{$img_url}}"
+                                           data-id="<?php echo e($data->id); ?>"
+                                           data-title="<?php echo e($data->title); ?>"
+                                           data-slug="<?php echo e($data->slug); ?>"
+                                           data-url="<?php echo e($data->url); ?>"
+                                           data-imageid="<?php echo e($data->image); ?>"
+                                           data-image="<?php echo e($img_url); ?>"
                                         >
                                             <i class="ti-pencil"></i>
                                         </a>
                                     </td>
                                 </tr>
-                            @endforeach
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </tbody>
                         </table>
                         </div>
@@ -127,33 +146,34 @@
             <div class="col-lg-6 mt-5">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="header-title">{{__('New Brand')}}</h4>
-                        <form action="{{route('admin.brands')}}" method="post" enctype="multipart/form-data">
-                            @csrf
+                        <h4 class="header-title"><?php echo e(__('New Brand')); ?></h4>
+                        <form action="<?php echo e(route('admin.brands')); ?>" method="post" enctype="multipart/form-data">
+                            <?php echo csrf_field(); ?>
                             <div class="form-group">
-                                <label for="title">{{__('Title')}}</label>
-                                <input type="text" class="form-control"  id="title"  name="title" placeholder="{{__('Title')}}">
+                                <label for="title"><?php echo e(__('Title')); ?></label>
+                                <input type="text" class="form-control"  id="title"  name="title" placeholder="<?php echo e(__('Title')); ?>">
                             </div>
                             <div class="form-group">
-                                <label for="slug">{{__('Slug')}}</label>
-                                <input type="text" class="form-control" id="slug" name="slug" placeholder="{{__('Slug')}}">
+                                <label for="slug"><?php echo e(__('Slug')); ?></label>
+                                <input type="text" class="form-control" id="slug" name="slug" placeholder="<?php echo e(__('Slug')); ?>">
                             </div>
                             <div class="form-group">
-                                <label for="url">{{__('URl')}}</label>
-                                <input type="text" class="form-control"  id="url"  name="url" placeholder="{{__('Url')}}">
+                                <label for="url"><?php echo e(__('URl')); ?></label>
+                                <input type="text" class="form-control"  id="url"  name="url" placeholder="<?php echo e(__('Url')); ?>">
                             </div>
                             <div class="form-group">
-                                <label for="image">{{__('File')}}</label>
+                                <label for="image"><?php echo e(__('File')); ?></label>
                                 <div class="media-upload-btn-wrapper">
                                     <div class="img-wrap"></div>
                                     <input type="hidden" name="image">
                                     <button type="button" class="btn btn-info media_upload_form_btn" data-btntitle="Select Brand File" data-modaltitle="Upload Brand File" data-toggle="modal" data-target="#media_upload_modal">
-                                        {{__('Upload File')}}
+                                        <?php echo e(__('Upload File')); ?>
+
                                     </button>
                                 </div>
-                                <small>{{__('You can upload image, PDF, document, Excel, zip, or presentation files')}}</small>
+                                <small><?php echo e(__('You can upload image, PDF, document, Excel, zip, or presentation files')); ?></small>
                             </div>
-                            <button type="submit" class="btn btn-primary mt-4 pr-4 pl-4">{{__('Add New')}}</button>
+                            <button type="submit" class="btn btn-primary mt-4 pr-4 pl-4"><?php echo e(__('Add New')); ?></button>
                         </form>
                     </div>
                 </div>
@@ -165,48 +185,49 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">{{__('Edit Brand Item')}}</h5>
+                    <h5 class="modal-title"><?php echo e(__('Edit Brand Item')); ?></h5>
                     <button type="button" class="close" data-dismiss="modal"><span>×</span></button>
                 </div>
-                <form action="{{route('admin.brands.update')}}" id="brand_edit_modal_form"  method="post" enctype="multipart/form-data">
+                <form action="<?php echo e(route('admin.brands.update')); ?>" id="brand_edit_modal_form"  method="post" enctype="multipart/form-data">
                     <div class="modal-body">
-                        @csrf
+                        <?php echo csrf_field(); ?>
                         <input type="hidden" class="form-control" name="id"  id="brand_id" >
                         <div class="form-group">
-                            <label for="edit_title">{{__('Title')}}</label>
-                            <input type="text" class="form-control"  id="edit_title"  name="title" placeholder="{{__('Title')}}">
+                            <label for="edit_title"><?php echo e(__('Title')); ?></label>
+                            <input type="text" class="form-control"  id="edit_title"  name="title" placeholder="<?php echo e(__('Title')); ?>">
                         </div>
                         <div class="form-group">
-                            <label for="edit_slug">{{__('Slug')}}</label>
-                            <input type="text" class="form-control"  id="edit_slug"  name="slug" placeholder="{{__('Slug')}}">
+                            <label for="edit_slug"><?php echo e(__('Slug')); ?></label>
+                            <input type="text" class="form-control"  id="edit_slug"  name="slug" placeholder="<?php echo e(__('Slug')); ?>">
                         </div>
                         <div class="form-group">
-                            <label for="edit_url">{{__('URl')}}</label>
-                            <input type="text" class="form-control"  id="edit_url"  name="url" placeholder="{{__('Url')}}">
+                            <label for="edit_url"><?php echo e(__('URl')); ?></label>
+                            <input type="text" class="form-control"  id="edit_url"  name="url" placeholder="<?php echo e(__('Url')); ?>">
                         </div>
                         <div class="form-group">
-                            <label for="edit_image">{{__('File')}}</label>
+                            <label for="edit_image"><?php echo e(__('File')); ?></label>
                             <div class="media-upload-btn-wrapper">
                                 <div class="img-wrap"></div>
                                 <input type="hidden" id="edit_image" name="image" value="">
                                 <button type="button" class="btn btn-info media_upload_form_btn" data-btntitle="Select Brand File" data-modaltitle="Upload Brand File" data-toggle="modal" data-target="#media_upload_modal">
-                                    {{__('Upload File')}}
+                                    <?php echo e(__('Upload File')); ?>
+
                                 </button>
                             </div>
-                            <small>{{__('You can upload image, PDF, document, Excel, zip, or presentation files')}}</small>
+                            <small><?php echo e(__('You can upload image, PDF, document, Excel, zip, or presentation files')); ?></small>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{__('Close')}}</button>
-                        <button type="submit" class="btn btn-primary">{{__('Save Changes')}}</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal"><?php echo e(__('Close')); ?></button>
+                        <button type="submit" class="btn btn-primary"><?php echo e(__('Save Changes')); ?></button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-    @include('backend.partials.media-upload.media-upload-markup')
-@endsection
-@section('script')
+    <?php echo $__env->make('backend.partials.media-upload.media-upload-markup', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('script'); ?>
     <script>
         $(document).ready(function () {
             function convertToSlug(text) {
@@ -238,9 +259,9 @@
 
                 $.ajax({
                     type: 'POST',
-                    url: "{{route('admin.brands.slug.check')}}",
+                    url: "<?php echo e(route('admin.brands.slug.check')); ?>",
                     data: {
-                        _token: "{{csrf_token()}}",
+                        _token: "<?php echo e(csrf_token()); ?>",
                         type: type,
                         slug: slugField.val()
                     },
@@ -268,12 +289,12 @@
                     allIds.push($(this).val());
                 });
                 if(allIds != '' && bulkOption == 'delete'){
-                    $(this).text('{{__('Deleting...')}}');
+                    $(this).text('<?php echo e(__('Deleting...')); ?>');
                     $.ajax({
                         'type' : "POST",
-                        'url' : "{{route('admin.brands.bulk.action')}}",
+                        'url' : "<?php echo e(route('admin.brands.bulk.action')); ?>",
                         'data' : {
-                            _token: "{{csrf_token()}}",
+                            _token: "<?php echo e(csrf_token()); ?>",
                             ids: allIds
                         },
                         success:function (data) {
@@ -344,6 +365,8 @@
             } );
         } );
     </script>
-    <script src="{{asset('assets/backend/js/dropzone.js')}}"></script>
-    @include('backend.partials.media-upload.media-js')
-@endsection
+    <script src="<?php echo e(asset('assets/backend/js/dropzone.js')); ?>"></script>
+    <?php echo $__env->make('backend.partials.media-upload.media-js', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('backend.admin-master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /var/www/html/ubank.example.com/@core/resources/views/backend/pages/brand.blade.php ENDPATH**/ ?>

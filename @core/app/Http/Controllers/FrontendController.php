@@ -620,7 +620,7 @@ ITEM;
         
         
         
-                if (in_array($home_page_variant,['19'])){
+        if (in_array($home_page_variant,['19'])){
             //hot deal section products
              $selected_products = json_decode(get_static_option('home_page_19_'.get_user_lang().'_todays_deal_products')) ?? [];
              $hot_deal_pro = Products::with("ratings")

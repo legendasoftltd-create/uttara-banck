@@ -170,14 +170,14 @@
                 </div>
             </div>
         </section>
-
+        <div class="empty-height-50"></div>
+        
         <section id="important"
                 class=" background-white relative-positioned">
                 <div class="text-center">
                     <p class="subtitle fancy">
                         <span class="skl-bar-2"></span>
-                        <span
-                            class="title-color text-uppercase">
+                        <span class="title-color text-uppercase">
                             Important Information
                         </span>
                         <span class="skl-bar-1"></span>
@@ -194,33 +194,13 @@
                                 data-aos-duration="500"
                                 class="information-card">
                                 <ul>
-                                    <a href="#earnings_disclosure.html" target="_blank">
-                                        <li><i class="fa-regular fa-circle-dot"></i>
-                                            Uttara Bank PLC Earnings Disclosure - Q3'24</li>
-                                    </a>
-                                    <a href="#" target="_blank">
-                                        <li><i class="fa-regular fa-circle-dot"></i>
-                                        Notice regarding international payment settlement through credit card</li>
-                                    </a>
-
-                                    <a
-                                        href="#en/soc">
-                                        <li><i
-                                                class="fa-regular fa-circle-dot"></i>
-                                            Schedule of Charges
-                                            &amp; Forms</li>
-                                    </a>
-                                    <a
-                                        href="#client_end/img/Agent_Banking/1759660362_List-of-BBL-Terminated-Agents_5-Oct.pdf"
-                                        target="_blank"><i
-                                            class="fa-regular fa-circle-dot"></i>
-                                        List of Agents
-                                        Terminated on
-                                        basis of complaints,
-                                        irregularities or
-                                        non-compliance
-                                    </a>
-
+                                    <?php $__currentLoopData = $all_brand_logo; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $data): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <a href="<?php echo e($data->slug); ?>" target="_blank">
+                                            <li><i class="fa-regular fa-circle-dot"></i>
+                                                <?php echo e($data->title); ?></li>
+                                        </a>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                    
                                 </ul>
                             </div>
 
@@ -228,15 +208,11 @@
                                 data-aos-duration="600"
                                 class="information-card">
                                 <ul>
-
                                     <a
                                         href="#download/Uttara Bank PLC POS Merchant List.pdf"
                                         target="_blank">
-                                        <li><i
-                                                class="fa-regular fa-circle-dot"></i>
-                                            Uttara Bank PLC POS
-                                            Merchant
-                                            List</li>
+                                        <li><i class="fa-regular fa-circle-dot"></i>
+                                            Uttara Bank PLC POS Merchant List</li>s
                                     </a>
                                     <a
                                         href="#schedule_of_charges/Terms_and_Conditions_PB.pdf"
@@ -297,8 +273,7 @@
                                     <a
                                         href="#download/Uttara Bank PLC E-commerce Merchant List.pdf"
                                         target="_blank">
-                                        <li><i
-                                                class="fa-regular fa-circle-dot"></i>
+                                        <li><i class="fa-regular fa-circle-dot"></i>
                                             Uttara Bank PLC
                                             E-commerce
                                             Merchant List</li>
