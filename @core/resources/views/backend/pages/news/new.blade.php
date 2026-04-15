@@ -20,21 +20,21 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="header-wrap d-flex justify-content-between">
-                            <h4 class="header-title">{{__('Add New Blog Post')}}</h4>
-                            <a href="{{route('admin.blog')}}" class="btn btn-primary">{{__('All Blog')}}</a>
+                            <h4 class="header-title">{{__('Add New News Post')}}</h4>
+                            <a href="{{route('admin.news')}}" class="btn btn-primary">{{__('All News')}}</a>
                         </div>
 
-                        <form action="{{route('admin.blog.new')}}" method="post" enctype="multipart/form-data">
+                        <form action="{{route('admin.news.new')}}" method="post" enctype="multipart/form-data">
                             @csrf
                             @method('POST')
                             <div class="row">
                                 <div class="col-lg-8">
-                                    <div class="form-group">
+                                    <div class="form-group" hidden>
                                         <label for="language"><strong>{{__('Language')}}</strong></label>
                                         <select name="lang" id="language" class="form-control">
                                             <option value="">{{__('Select Language')}}</option>
                                             @foreach($all_languages as $lang)
-                                            <option value="{{$lang->slug}}">{{$lang->name}}</option>
+                                            <option value="{{$lang->slug}}" @if($lang->slug == get_default_language()) selected @endif>{{$lang->name}}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -57,7 +57,7 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
-                                    <div class="form-group">
+                                    <div class="form-group" hidden>
                                         <label for="title">{{__('Slug')}}</label>
                                         <input type="text" class="form-control"  id="slug"  value="{{old('slug')}}"  name="slug" placeholder="{{__('Slug')}}">
                                     </div>
@@ -65,13 +65,13 @@
                                         <label for="title">{{__('Excerpt')}}</label>
                                         <textarea name="excerpt" id="excerpt" class="form-control max-height-150" cols="30" rows="10"></textarea>
                                     </div>
-                                    <div class="form-group">
+                                    {{-- <div class="form-group">
                                         <label for="category">{{__('Category')}}</label>
                                         <select name="category" class="form-control" id="category">
                                             <option value="">{{__("Select Category")}}</option>
                                         </select>
                                         <span class="info-text">{{__('select language to get category by language')}}</span>
-                                    </div>
+                                    </div> --}}
                                     <div class="form-group">
                                         <label for="title">{{__('Tags')}}</label>
                                         <input type="text" class="form-control" name="tags" value="{{old('tags')}}" data-role="tagsinput">
@@ -80,10 +80,10 @@
                                         <label for="author">{{__('Author Name')}}</label>
                                         <input type="text" class="form-control" name="author" id="author" value="{{old('author')}}">
                                     </div>
-                                    <div class="form-group">
+                                    {{-- <div class="form-group">
                                         <label for="video_url">{{__('Video Url')}}</label>
                                         <input type="text" class="form-control" name="video_url" value="{{old('video_url')}}">
-                                    </div>
+                                    </div> --}}
                                     <div class="form-group">
                                         <label for="breaking_news"><strong>{{__('Is Breaking News')}}</strong></label>
                                         <label class="switch">
@@ -114,7 +114,7 @@
 @section('script')
     <script src="{{asset('assets/backend/js/summernote-bs4.js')}}"></script>
     <script src="{{asset('assets/backend/js/bootstrap-tagsinput.js')}}"></script>
-    <x-backend.auto-slug-js :url="route('admin.blog.slug.check')" :type="'new'"/>
+    <x-backend.auto-slug-js :url="route('admin.news.slug.check')" :type="'new'"/>
     <script>
         $(document).ready(function () {
 

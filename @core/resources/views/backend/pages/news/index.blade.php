@@ -43,7 +43,7 @@
                                </div>
                            </div>
                            <div class="right-wrap">
-                               <a href="{{route('admin.blog.new')}}" class="btn btn-primary">{{__('Create New News')}}</a>
+                               <a href="{{route('admin.news.new')}}" class="btn btn-primary">{{__('Create New News')}}</a>
                            </div>
                        </div>
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -115,15 +115,15 @@
                                                 </td>
                                                 <td>{{date_format($data->created_at,'d M Y')}}</td>
                                                 <td>
-                                                    <x-delete-popover :url="route('admin.blog.delete',$data->id)"/>
+                                                    <x-delete-popover :url="route('admin.news.delete',$data->id)"/>
                                                    
-                                                    <a class="btn btn-xs btn-primary btn-xs mb-3 mr-1" href="{{route('admin.blog.edit',$data->id)}}">
+                                                    <a class="btn btn-xs btn-primary btn-xs mb-3 mr-1" href="{{route('admin.news.edit',$data->id)}}">
                                                         <i class="ti-pencil"></i>
                                                     </a>
                                                     <a class="btn btn-xs btn-primary btn-xs mb-3 mr-1" target="_blank" href="{{route('frontend.news.single', $data->slug)}}">
                                                         <i class="ti-eye"></i>
                                                     </a>
-                                                    <form action="{{route('admin.blog.clone')}}" method="post" style="display: inline-block">
+                                                    <form action="{{route('admin.news.clone')}}" method="post" style="display: inline-block">
                                                         @csrf
                                                         <input type="hidden" name="item_id" value="{{$data->id}}">
                                                         <button type="submit" title="clone this to new draft" class="btn btn-xs btn-secondary btn-sm mb-3 mr-1"><i class="far fa-copy"></i></button>
@@ -168,7 +168,7 @@
                     $(this).text('{{__('Deleting...')}}');
                     $.ajax({
                         'type' : "POST",
-                        'url' : "{{route('admin.blog.bulk.action')}}",
+                        'url' : "{{route('admin.news.bulk.action')}}",
                         'data' : {
                             _token: "{{csrf_token()}}",
                             ids: allIds

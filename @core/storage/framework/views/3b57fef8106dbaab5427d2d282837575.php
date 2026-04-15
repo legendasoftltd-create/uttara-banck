@@ -90,24 +90,21 @@
                         </li>
                     <?php endif; ?>
 
-                    <?php if(check_page_permission_by_string('Blogs Manage')): ?>
+                    <?php if(check_page_permission_by_string('News Manage')): ?>
                         <li
                          class="main_dropdown
-                        <?php if(request()->is(['admin-home/blog/*','admin-home/blog'])): ?> active <?php endif; ?>
+                        <?php if(request()->is(['admin-home/news/*','admin-home/news'])): ?> active <?php endif; ?>
                         ">
                             <a href="javascript:void(0)" aria-expanded="true"><i class="ti-write"></i>
                                 <span><?php echo e(__('News')); ?></span></a>
                             <ul class="collapse">
-                                <li class="<?php echo e(active_menu('admin-home/blog')); ?>"><a
-                                            href="<?php echo e(route('admin.blog')); ?>"><?php echo e(__('All News')); ?></a></li>
-                                <li class="<?php echo e(active_menu('admin-home/blog/category')); ?>"><a
-                                            href="<?php echo e(route('admin.blog.category')); ?>"><?php echo e(__('Category')); ?></a></li>
-                                <li class="<?php echo e(active_menu('admin-home/blog/new')); ?>"><a
-                                            href="<?php echo e(route('admin.blog.new')); ?>"><?php echo e(__('Add New news')); ?></a></li>
-                                <li class="<?php echo e(active_menu('admin-home/blog/page-settings')); ?>"><a
-                                        href="<?php echo e(route('admin.blog.page.settings')); ?>"><?php echo e(__('News Page Settings')); ?></a></li>
-                                <li class="<?php echo e(active_menu('admin-home/blog/single-settings')); ?>"><a
-                                        href="<?php echo e(route('admin.blog.single.settings')); ?>"><?php echo e(__('News Single Settings')); ?></a></li>
+                                <li class="<?php echo e(active_menu('admin-home/news')); ?>"><a
+                                            href="<?php echo e(route('admin.news')); ?>"><?php echo e(__('All News')); ?></a></li>
+                                
+                                <li class="<?php echo e(active_menu('admin-home/news/new')); ?>"><a
+                                            href="<?php echo e(route('admin.news.new')); ?>"><?php echo e(__('Add New news')); ?></a></li>
+                                
+                                
                             </ul>
                         </li>
                     <?php endif; ?>

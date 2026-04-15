@@ -89,24 +89,24 @@
                         </li>
                     @endif
 
-                    @if(check_page_permission_by_string('Blogs Manage'))
+                    @if(check_page_permission_by_string('News Manage'))
                         <li
                          class="main_dropdown
-                        @if(request()->is(['admin-home/blog/*','admin-home/blog'])) active @endif
+                        @if(request()->is(['admin-home/news/*','admin-home/news'])) active @endif
                         ">
                             <a href="javascript:void(0)" aria-expanded="true"><i class="ti-write"></i>
                                 <span>{{__('News')}}</span></a>
                             <ul class="collapse">
-                                <li class="{{active_menu('admin-home/blog')}}"><a
-                                            href="{{route('admin.blog')}}">{{__('All News')}}</a></li>
-                                <li class="{{active_menu('admin-home/blog/category')}}"><a
-                                            href="{{route('admin.blog.category')}}">{{__('Category')}}</a></li>
-                                <li class="{{active_menu('admin-home/blog/new')}}"><a
-                                            href="{{route('admin.blog.new')}}">{{__('Add New news')}}</a></li>
-                                <li class="{{active_menu('admin-home/blog/page-settings')}}"><a
-                                        href="{{route('admin.blog.page.settings')}}">{{__('News Page Settings')}}</a></li>
-                                <li class="{{active_menu('admin-home/blog/single-settings')}}"><a
-                                        href="{{route('admin.blog.single.settings')}}">{{__('News Single Settings')}}</a></li>
+                                <li class="{{active_menu('admin-home/news')}}"><a
+                                            href="{{route('admin.news')}}">{{__('All News')}}</a></li>
+                                {{-- <li class="{{active_menu('admin-home/news/category')}}"><a
+                                            href="{{route('admin.news.category')}}">{{__('Category')}}</a></li> --}}
+                                <li class="{{active_menu('admin-home/news/new')}}"><a
+                                            href="{{route('admin.news.new')}}">{{__('Add New news')}}</a></li>
+                                {{-- <li class="{{active_menu('admin-home/news/page-settings')}}"><a
+                                        href="{{route('admin.news.page.settings')}}">{{__('News Page Settings')}}</a></li> --}}
+                                {{-- <li class="{{active_menu('admin-home/news/single-settings')}}"><a
+                                        href="{{route('admin.news.single.settings')}}">{{__('News Single Settings')}}</a></li> --}}
                             </ul>
                         </li>
                     @endif

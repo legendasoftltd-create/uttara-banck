@@ -1611,19 +1611,19 @@ Route::prefix('admin-home')->middleware(['setlang:backend'])->group(function () 
     /*==============================================
        BLOGS
     ==============================================*/
-    Route::prefix('news')->middleware(['adminPermissionCheck:Blogs Manage'])->group(function () {
+    Route::prefix('news')->middleware(['adminPermissionCheck:News Manage'])->group(function () {
         /*-------------------------
           BLOG ROUTES
         --------------------------*/
-        Route::get('/', 'BlogController@index')->name('admin.blog');
-        Route::get('/new', 'BlogController@new_blog')->name('admin.blog.new');
+        Route::get('/', 'BlogController@index')->name('admin.news');
+        Route::get('/new', 'BlogController@new_blog')->name('admin.news.new');
         Route::post('/new', 'BlogController@store_new_blog');
-        Route::post('/clone', 'BlogController@clone_blog')->name('admin.blog.clone');
-        Route::get('/edit/{id}', 'BlogController@edit_blog')->name('admin.blog.edit');
-        Route::post('/update/{id}', 'BlogController@update_blog')->name('admin.blog.update');
-        Route::post('/delete/{id}', 'BlogController@delete_blog')->name('admin.blog.delete');
-        Route::post('/bulk-action', 'BlogController@bulk_action')->name('admin.blog.bulk.action');
-        Route::post('/slug-check', 'BlogController@slug_check')->name('admin.blog.slug.check');
+        Route::post('/clone', 'BlogController@clone_blog')->name('admin.news.clone');
+        Route::get('/edit/{id}', 'BlogController@edit_blog')->name('admin.news.edit');
+        Route::post('/update/{id}', 'BlogController@update_blog')->name('admin.news.update');
+        Route::post('/delete/{id}', 'BlogController@delete_blog')->name('admin.news.delete');
+        Route::post('/bulk-action', 'BlogController@bulk_action')->name('admin.news.bulk.action');
+        Route::post('/slug-check', 'BlogController@slug_check')->name('admin.news.slug.check');
 
         /*-------------------------
           BLOG CATEGORIES ROUTES

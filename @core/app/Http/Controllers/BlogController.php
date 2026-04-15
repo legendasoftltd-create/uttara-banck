@@ -41,7 +41,7 @@ class BlogController extends Controller
     }
     public function store_new_blog(Request $request){
         $this->validate($request,[
-           'category' => 'required',
+        //    'category' => 'required',
            'blog_content' => 'required',
            'tags' => 'required',
            'excerpt' => 'required',
@@ -50,7 +50,7 @@ class BlogController extends Controller
            'status' => 'required',
            'author' => 'required',
            'slug' => 'nullable',
-           'video_url' => 'nullable|string',
+        //    'video_url' => 'nullable|string',
            'breaking_news' => 'nullable|string',
            'meta_tags' => 'nullable|string',
            'meta_description' => 'nullable|string',
@@ -76,7 +76,7 @@ class BlogController extends Controller
             'breaking_news' => !empty($request->breaking_news) ? 1 : 0,
         ]);
         return redirect()->back()->with([
-            'msg' => __('New Blog Post Added...'),
+            'msg' => __('New News Post Added...'),
             'type' => 'success'
         ]);
     }
@@ -102,7 +102,7 @@ class BlogController extends Controller
         ]);
 
         return redirect()->back()->with([
-            'msg' => __('Blog Post cloned success...'),
+            'msg' => __('News Post cloned success...'),
             'type' => 'success'
         ]);
     }
@@ -111,7 +111,7 @@ class BlogController extends Controller
         $blog_post = Blog::find($id);
         $all_category = BlogCategory::where('lang',$blog_post->lang)->get();
         $all_language = Language::all();
-        return view('backend.pages.blog.edit')->with([
+        return view('backend.pages.news.edit')->with([
             'all_category' => $all_category,
             'blog_post' => $blog_post,
             'all_languages' => $all_language,
@@ -119,7 +119,7 @@ class BlogController extends Controller
     }
     public function update_blog(Request $request,$id){
         $this->validate($request,[
-            'category' => 'required',
+            // 'category' => 'required',
             'blog_content' => 'required',
             'tags' => 'required',
             'excerpt' => 'required',
@@ -153,7 +153,7 @@ class BlogController extends Controller
         ]);
 
         return redirect()->back()->with([
-            'msg' => __('Blog Post updated...'),
+            'msg' => __('News Post updated...'),
             'type' => 'success'
         ]);
     }
@@ -161,7 +161,7 @@ class BlogController extends Controller
         Blog::find($id)->delete();
 
         return redirect()->back()->with([
-            'msg' => __('Blog Post Delete Success...'),
+            'msg' => __('News Post Delete Success...'),
             'type' => 'danger'
         ]);
     }

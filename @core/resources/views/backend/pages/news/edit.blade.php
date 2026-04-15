@@ -20,15 +20,15 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="header-wrap d-flex justify-content-between">
-                            <h4 class="header-title">{{__('Edit Blog Post')}}</h4>
-                            <a href="{{route('admin.news')}}" class="btn btn-primary">{{__('All Blog')}}</a>
+                            <h4 class="header-title">{{__('Edit News Post')}}</h4>
+                            <a href="{{route('admin.news')}}" class="btn btn-primary">{{__('All News')}}</a>
                         </div>
 
-                        <form action="{{route('admin.blog.update',$blog_post->id)}}" method="post" enctype="multipart/form-data">
+                        <form action="{{route('admin.news.update',$blog_post->id)}}" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="row">
                                 <div class="col-lg-8">
-                                    <div class="form-group">
+                                    <div class="form-group" hidden>
                                         <label for="language"><strong>{{__('Language')}}</strong></label>
                                         <select name="lang" id="language" class="form-control">
                                             @foreach($all_languages as $lang)
@@ -64,7 +64,7 @@
                                         <label for="title">{{__('Excerpt')}}</label>
                                         <textarea name="excerpt" id="excerpt" class="form-control max-height-150" cols="30" rows="10">{{$blog_post->excerpt}}</textarea>
                                     </div>
-                                    <div class="form-group">
+                                    {{-- <div class="form-group">
                                         <label for="category">{{__('Category')}}</label>
                                         <select name="category" class="form-control" id="category">
                                             <option value="">{{__("Select Category")}}</option>
@@ -72,7 +72,7 @@
                                                 <option @if($blog_post->blog_categories_id == $category->id) selected @endif value="{{$category->id}}">{{$category->name}}</option>
                                             @endforeach
                                         </select>
-                                    </div>
+                                    </div> --}}
                                     <div class="form-group">
                                         <label for="title">{{__('Tags')}}</label>
                                         <input type="text" class="form-control" value="{{$blog_post->tags}}" name="tags" data-role="tagsinput">
@@ -81,10 +81,10 @@
                                         <label for="author">{{__('Author Name')}}</label>
                                         <input type="text" class="form-control" name="author" value="{{$blog_post->author}}" id="author">
                                     </div>
-                                    <div class="form-group">
+                                    {{-- <div class="form-group">
                                         <label for="video_url">{{__('Video Url')}}</label>
                                         <input type="text" class="form-control" name="video_url" value="{{$blog_post->video_url}}">
-                                    </div>
+                                    </div> --}}
                                     <div class="form-group">
                                         <label for="breaking_news"><strong>{{__('Is Breaking News')}}</strong></label>
                                         <label class="switch">
@@ -115,7 +115,7 @@
 @section('script')
     <script src="{{asset('assets/backend/js/summernote-bs4.js')}}"></script>
     <script src="{{asset('assets/backend/js/bootstrap-tagsinput.js')}}"></script>
-    <x-backend.auto-slug-js :url="route('admin.blog.slug.check')" :type="'update'"/>
+    <x-backend.auto-slug-js :url="route('admin.news.slug.check')" :type="'update'"/>
     <script>
         $(document).ready(function () {
 

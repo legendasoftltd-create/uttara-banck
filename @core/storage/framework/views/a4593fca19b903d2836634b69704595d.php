@@ -112,9 +112,11 @@
                 <div class="text-center">
                     <p class="subtitle fancy">
                         <span class="skl-bar-2"></span>
-                        <span class="title-color text-uppercase">
-                            News
-                        </span>
+                        <a href="<?php echo e(route('frontend.news')); ?>" class="title-color text-uppercase">
+                            <span class="title-color text-uppercase">
+                                News
+                            </span>
+                        </a>
                         <span class="skl-bar-1"></span>
                     </p>
                     <br>
@@ -130,9 +132,7 @@
                                     <img src="<?php echo e($image_details['img_url'] ?? ''); ?>" alt="<?php echo e($blog->title); ?>">
                                     <div class="blog-text px-3 py-4">
                                         <div class="mt-2 d-flex justify-content-between">
-                                            <a href="<?php echo e(route('frontend.news.category', ['id' => $blog->blog_categories_id, 'any' => Str::slug($blog->category->name, '-', null)])); ?>"
-                                                class="pl-2 text-white"
-                                                style="border-left: 3px solid #9B5DE5;"><small> <?php echo e(Str::slug($blog->category->name, '-', "Uncategorized")); ?></small></a>
+                                            
                                             <a href="<?php echo e(route('frontend.news.single',$blog->slug)); ?>" class="text-white"><small><?php echo e($blog->author); ?></small></a>
                                         </div>
                                     </div>

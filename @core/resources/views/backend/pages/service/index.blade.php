@@ -71,8 +71,8 @@
                                         <th>{{__('Status')}}</th>
                                         <th>{{__('Image')}}</th>
                                         {{-- <th>{{__('Icon')}}</th> --}}
-                                        <th>{{__('Category')}}</th>
-                                        <th>{{__('Sorting Order')}}</th>
+                                        {{-- <th>{{__('Category')}}</th> --}}
+                                        {{-- <th>{{__('Sorting Order')}}</th> --}}
                                         <th>{{__('Date')}}</th>
                                         <th>{{__('Action')}}</th>
                                         </thead>

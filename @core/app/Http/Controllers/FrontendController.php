@@ -748,9 +748,15 @@ ITEM;
     {
         $default_lang = Language::where('default', 1)->first();
         $lang = !empty(session()->get('lang')) ? session()->get('lang') : $default_lang->slug;
-        $all_blogs = Blog::where(['lang'=> $lang , 'status' => 'publish'])->orderBy('id', 'desc')->paginate(get_static_option('blog_page_item'));
-        return view('frontend.pages.blog.blog')->with([
-            'all_blogs' => $all_blogs
+        $recent_last_blogs = Blog::where(['lang' => $lang,'status' => 'publish'])->orderBy('id', 'desc')->first();
+        $recent_last_blogs_skip_last = Blog::where(['lang' => $lang,'status' => 'publish'])->orderBy('id', 'desc')->skip(1)->take(4)->get();
+        $excludeIds = Blog::where(['lang' => $lang, 'status' => 'publish'])->orderBy('id', 'desc')->take(5)->pluck('id');   
+        $all_blogs = Blog::where(['lang'=> $lang , 'status' => 'publish'])->whereNotIn('id', $excludeIds)->orderBy('id', 'desc')->skip(5)->paginate(12);
+
+        return view('frontend.pages.news.news')->with([
+            'all_blogs' => $all_blogs,
+            'recent_last_blogs' => $recent_last_blogs,
+            'recent_last_blogs_skip_last' => $recent_last_blogs_skip_last,
         ]);
     }
 
@@ -817,14 +823,14 @@ ITEM;
         if (empty($blog_post)){
             abort(404);
         }
-        $all_recent_blogs = Blog::where(['lang' => $lang,'status' => 'publish'])->orderBy('id', 'desc')->paginate(get_static_option('blog_page_recent_post_widget_item'));
-        $all_category = BlogCategory::where(['status' => 'publish', 'lang' => $lang])->orderBy('id', 'desc')->get();
+        $all_recent_blogs = Blog::where(['lang' => $lang,'status' => 'publish'])->orderBy('id', 'desc')->take(4)->get();
+        // $all_category = BlogCategory::where(['status' => 'publish', 'lang' => $lang])->orderBy('id', 'desc')->get();
 
-        $all_related_blog = Blog::where(['lang' => $lang,'status' => 'publish'])->Where('blog_categories_id', $blog_post->blog_categories_id)->orderBy('id', 'desc')->take(6)->get();
+        $all_related_blog = Blog::where(['lang' => $lang,'status' => 'publish'])->skip(4)->orderBy('id', 'desc')->take(10)->get();
 
-        return view('frontend.pages.blog.blog-single')->with([
+        return view('frontend.pages.news.single-news')->with([
             'blog_post' => $blog_post,
-            'all_categories' => $all_category,
+            // 'all_categories' => $all_category,
             'all_recent_blogs' => $all_recent_blogs,
             'all_related_blog' => $all_related_blog,
         ]);
