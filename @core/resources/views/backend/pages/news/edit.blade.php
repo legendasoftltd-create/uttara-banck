@@ -77,11 +77,11 @@
                                         <label for="title">{{__('Tags')}}</label>
                                         <input type="text" class="form-control" value="{{$blog_post->tags}}" name="tags" data-role="tagsinput">
                                     </div>
-                                    <div class="form-group">
+                                    {{-- <div class="form-group">
                                         <label for="author">{{__('Author Name')}}</label>
                                         <input type="text" class="form-control" name="author" value="{{$blog_post->author}}" id="author">
                                     </div>
-                                    {{-- <div class="form-group">
+                                    <div class="form-group">
                                         <label for="video_url">{{__('Video Url')}}</label>
                                         <input type="text" class="form-control" name="video_url" value="{{$blog_post->video_url}}">
                                     </div> --}}
