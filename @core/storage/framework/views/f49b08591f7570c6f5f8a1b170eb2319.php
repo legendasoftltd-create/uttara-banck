@@ -24,17 +24,17 @@
                         </div>
                     </div>
                 <?php endif; ?>
-                <?php if(check_page_permission_by_string('Blogs Manage')): ?>
+                <?php if(check_page_permission_by_string('News Manage')): ?>
                     <div class="col-md-3 mt-md-5 mb-3">
                         <div class="card text-dark  mb-3">
                             <div class="dsh-box-style">
-                                <a href="<?php echo e(route('admin.blog.new')); ?>" class="add-new"><i class="ti-plus"></i></a>
+                                <a href="<?php echo e(route('admin.news.new')); ?>" class="add-new"><i class="ti-plus"></i></a>
                                 <div class="icon">
                                     <i class="ti-comments"></i>
                                 </div>
                                 <div class="content">
                                     <span class="total"><?php echo e($blog_count); ?></span>
-                                    <h4 class="title"><?php echo e(__('Total Blogs')); ?></h4>
+                                    <h4 class="title"><?php echo e(__('Total News')); ?></h4>
                                 </div>
                             </div>
                         </div>
