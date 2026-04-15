@@ -1,6 +1,7 @@
 # Laravel
 /@core/vendor/
 /@core/node_modules/
+@core/storage
 
 # Environment files
 @core/.env
