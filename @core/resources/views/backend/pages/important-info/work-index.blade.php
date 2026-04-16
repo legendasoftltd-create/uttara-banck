@@ -16,7 +16,7 @@
      </style>
 @endsection
 @section('site-title')
-    {{__('Case Study')}}
+    {{__('Important Information')}}
 @endsection
 @section('content')
     <div class="col-lg-12 col-ml-12 padding-bottom-30">
@@ -30,7 +30,7 @@
             <div class="col-lg-12 mt-5">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="header-title">{{__('Case Study Items')}}</h4>
+                        <h4 class="header-title">{{__('Important Information Items')}}</h4>
                         <div class="bulk-delete-wrapper">
                             <div class="select-box-wrap">
                                 <select name="bulk_option" id="bulk_option">

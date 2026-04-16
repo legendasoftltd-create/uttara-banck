@@ -182,128 +182,6 @@
                             </div>
                         </div>
                         @endforeach
-                        {{-- <div class="swiper-slide">
-                            <div class="blog-wraper" style="box-shadow: 0 0  20px #ddd;">
-                                <div class="position-relative" style="height: 320px; overflow: hidden;">
-                                    <img src="assets/images/blog/5453453542342).png" alt="Blog Image">
-                                    <div class="blog-text px-3 py-4">
-                                        <div class="mt-2 d-flex justify-content-between">
-                                            <a href="#" class="pl-2 text-white"
-                                                style="border-left: 3px solid #9B5DE5;"><small> {!! get_blog_category_by_id($blog->blog_categories_id,'link') !!}</small></a>
-                                            <a href="#" class="text-white"><small>{{$blog->author}}</small></a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="p-3 card-footer">
-                                    <h3 class="h6">
-                                        <a href="#" class="text-black" style="line-height: 1.6;">
-                                            Has inaugurated the 50th Sub
-                                            Branch of the Bank...
-                                        </a>
-                                    </h3>
-                                    <div class="d-flex align-items-center mr-4">
-                                        <svg height="16px" class="mr-2" version="1.1" id="Capa_1"
-                                            xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                                            x="0px" y="0px" viewBox="0 0 300.988 300.988"
-                                            style="enable-background:new 0 0 300.988 300.988;" xml:space="preserve">
-                                            <g>
-                                                <g>
-                                                    <path
-                                                        d="M150.494,0.001C67.511,0.001,0,67.512,0,150.495s67.511,150.493,150.494,150.493s150.494-67.511,150.494-150.493
-                                                            S233.476,0.001,150.494,0.001z M150.494,285.987C75.782,285.987,15,225.206,15,150.495S75.782,15.001,150.494,15.001
-                                                            s135.494,60.782,135.494,135.493S225.205,285.987,150.494,285.987z" />
-                                                    <polygon
-                                                        points="142.994,142.995 83.148,142.995 83.148,157.995 157.994,157.995 157.994,43.883 142.994,43.883 		" />
-                                                </g>
-                                        </svg>
-                                        <small class="mt-1" style="color: #9B5DE5;">6 min ago</small>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="blog-wraper" style="box-shadow: 0 0  20px #ddd;">
-                                <div class="position-relative" style="height: 320px; overflow: hidden;">
-                                    <img src="assets/images/blog/546778546453434534.png" alt>
-                                    <div class="blog-text px-3 py-4">
-                                        <div class="mt-2 d-flex justify-content-between">
-                                            <a href="#" class="pl-2 text-white"
-                                                style="border-left: 3px solid #9B5DE5;"><small>Travel</small></a>
-                                            <a href="#" class="text-white"><small>Sara Faizi</small></a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="p-3 card-footer">
-                                    <h3 class="h6">
-                                        <a href="#" class="text-black" style="line-height: 1.6;">
-                                            Has inaugurated the
-                                            “TakaPay
-                                            Debit Card” of the
-                                            Bank...
-                                        </a>
-                                    </h3>
-                                    <div class="d-flex align-items-center mr-4">
-                                        <svg height="16px" class="mr-2" version="1.1" id="Capa_1"
-                                            xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                                            x="0px" y="0px" viewBox="0 0 300.988 300.988"
-                                            style="enable-background:new 0 0 300.988 300.988;" xml:space="preserve">
-                                            <g>
-                                                <g>
-                                                    <path
-                                                        d="M150.494,0.001C67.511,0.001,0,67.512,0,150.495s67.511,150.493,150.494,150.493s150.494-67.511,150.494-150.493
-                                                            S233.476,0.001,150.494,0.001z M150.494,285.987C75.782,285.987,15,225.206,15,150.495S75.782,15.001,150.494,15.001
-                                                            s135.494,60.782,135.494,135.493S225.205,285.987,150.494,285.987z" />
-                                                    <polygon
-                                                        points="142.994,142.995 83.148,142.995 83.148,157.995 157.994,157.995 157.994,43.883 142.994,43.883 		" />
-                                                </g>
-                                        </svg>
-                                        <small class="mt-1" style="color: #9B5DE5;">6 min ago</small>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="swiper-slide">
-                            <div class="blog-wraper" style="box-shadow: 0 0  20px #ddd;">
-                                <div class="position-relative" style="height: 320px; overflow: hidden;">
-                                    <img src="assets/images/blog/623452345.png" alt>
-                                    <div class="blog-text px-3 py-4">
-                                        <div class="mt-2 d-flex justify-content-between">
-                                            <a href="#" class="pl-2 text-white"
-                                                style="border-left: 3px solid #9B5DE5;"><small>Travel</small></a>
-                                            <a href="#" class="text-white"><small>Sara Faizi</small></a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="p-3 card-footer">
-                                    <h3 class="h6">
-                                        <a href="#" class="text-black" style="line-height: 1.6;">
-                                            Has inaugurated the
-                                            “TakaPay
-                                            Debit Card” of the
-                                            Bank...
-                                        </a>
-                                    </h3>
-                                    <div class="d-flex align-items-center mr-4">
-                                        <svg height="16px" class="mr-2" version="1.1" id="Capa_1"
-                                            xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                                            x="0px" y="0px" viewBox="0 0 300.988 300.988"
-                                            style="enable-background:new 0 0 300.988 300.988;" xml:space="preserve">
-                                            <g>
-                                                <g>
-                                                    <path
-                                                        d="M150.494,0.001C67.511,0.001,0,67.512,0,150.495s67.511,150.493,150.494,150.493s150.494-67.511,150.494-150.493
-                                                            S233.476,0.001,150.494,0.001z M150.494,285.987C75.782,285.987,15,225.206,15,150.495S75.782,15.001,150.494,15.001
-                                                            s135.494,60.782,135.494,135.493S225.205,285.987,150.494,285.987z" />
-                                                    <polygon
-                                                        points="142.994,142.995 83.148,142.995 83.148,157.995 157.994,157.995 157.994,43.883 142.994,43.883 		" />
-                                                </g>
-                                        </svg>
-                                        <small class="mt-1" style="color: #9B5DE5;">6 min ago</small>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> --}}
                     </div>
                 </div>
             </div>
@@ -324,88 +202,32 @@
                     <br>
                 </div>
                 <div class="container-fluid">
-                    <div
-                        class="col-md-10 col-sm-6 col-xs-12"
-                        style="display: contents;">
+                    <div class="col-md-10 col-sm-6 col-xs-12" style="display: contents;">
                         <div class="information-wrap">
-                            <div data-aos="fade-up"
-                                data-aos-duration="500"
-                                class="information-card">
+                            <div data-aos="fade-up" data-aos-duration="500" class="information-card">
+                                <h3 class="h3">Important Information</h3>
                                 <ul>
-                                    @foreach($all_brand_logo as $data)
-                                        <a href="{{ $data->slug }}" target="_blank">
+                                    @foreach($all_work_category as $data)
+                                        <hr style="margin-top: .5rem; margin-bottom: .5rem;">
+                                        <a href="{{route('frontend.works.category', ['id' => $data->id, 'any' => $data->name])}}" target="_blank">
                                             <li><i class="fa-regular fa-circle-dot"></i>
-                                                {{ $data->title }}</li>
+                                                {{ $data->name }}</li>
                                         </a>
                                     @endforeach
-                                    {{-- <a href="#earnings_disclosure.html" target="_blank">
-                                        <li><i class="fa-regular fa-circle-dot"></i>
-                                            Uttara Bank PLC Earnings Disclosure - Q3'24</li>
-                                    </a>
-                                    <a href="#" target="_blank">
-                                        <li><i class="fa-regular fa-circle-dot"></i>
-                                        Notice regarding international payment settlement through credit card</li>
-                                    </a>
-
-                                    <a
-                                        href="#en/soc">
-                                        <li><i
-                                                class="fa-regular fa-circle-dot"></i>
-                                            Schedule of Charges
-                                            &amp; Forms</li>
-                                    </a>
-                                    <a
-                                        href="#client_end/img/Agent_Banking/1759660362_List-of-BBL-Terminated-Agents_5-Oct.pdf"
-                                        target="_blank"><i
-                                            class="fa-regular fa-circle-dot"></i>
-                                        List of Agents
-                                        Terminated on
-                                        basis of complaints,
-                                        irregularities or
-                                        non-compliance
-                                    </a> --}}
                                 </ul>
                             </div>
 
-                            <div data-aos="fade-up"
-                                data-aos-duration="600"
-                                class="information-card">
+                            <div data-aos="fade-up" data-aos-duration="600" class="information-card">
+                                <h3 class="h3">Important Downloads</h3>
                                 <ul>
-                                    <a
-                                        href="#download/Uttara Bank PLC POS Merchant List.pdf"
-                                        target="_blank">
-                                        <li><i class="fa-regular fa-circle-dot"></i>
-                                            Uttara Bank PLC POS Merchant List</li>s
-                                    </a>
-                                    <a
-                                        href="#schedule_of_charges/Terms_and_Conditions_PB.pdf"
-                                        target="_blank">
-                                        <li><i
-                                                class="fa-regular fa-circle-dot"></i>
-                                            Terms &amp;
-                                            Conditions:
-                                            Premium Banking
-                                            Proposition</li>
-                                    </a>
-                                    <a
-                                        href="#important_notice_regarding_atm_withdrawal_limit.html"
-                                        target="_blank">
-                                        <li><i
-                                                class="fa-regular fa-circle-dot"></i>
-                                            Revised ATM
-                                            withdrawal
-                                            limit</li>
-                                    </a>
-                                    <a
-                                        href="#schedule_of_charges/Terms_and_Conditions_Retail_Banking.pdf"
-                                        target="_blank">
-                                        <li><i
-                                                class="fa-regular fa-circle-dot"></i>
-                                            Terms &amp;
-                                            Conditions:
-                                            Retail Banking</li>
-                                    </a>
-
+                                    @foreach($all_brand_logo as $data)
+                                        <hr style="margin-top: .5rem; margin-bottom: .5rem;">
+                                                @php $image_details = get_attachment_image_by_id($blog->image, 'full'); @endphp
+                                                <a href="{{$image_details['img_url']}}" target="_blank">
+                                                    <li><i class="fa-regular fa-circle-dot"></i>
+                                                        {{ $data->title }}</li>
+                                                </a>
+                                    @endforeach
                                 </ul>
                             </div>
 

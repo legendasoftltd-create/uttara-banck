@@ -25,7 +25,7 @@ class WorksController extends Controller
         $work_category = WorksCategory::where(['status'=> 'publish','lang' => get_default_language()])->get();
         $all_language = Language::all();
 
-        return view('backend.pages.works.work-index')->with(['all_works' => $all_works, 'works_category' => $work_category,'all_language' => $all_language]);
+        return view('backend.pages.important-info.work-index')->with(['all_works' => $all_works, 'works_category' => $work_category,'all_language' => $all_language]);
     }
 
     public function new()
@@ -33,7 +33,7 @@ class WorksController extends Controller
         $work_category = WorksCategory::where(['status'=> 'publish','lang' => get_default_language()])->get();
         $all_language = Language::all();
 
-        return view('backend.pages.works.new-work')->with([ 'works_category' => $work_category,'all_language' => $all_language]);
+        return view('backend.pages.important-info.new-work')->with([ 'works_category' => $work_category,'all_language' => $all_language]);
     }
 
     public function edit($id)
@@ -42,7 +42,7 @@ class WorksController extends Controller
         $work_category = WorksCategory::where(['status'=> 'publish','lang' => $work_details->lang])->get();
         $all_language = Language::all();
 
-        return view('backend.pages.works.edit-work')->with([ 'work_details' => $work_details, 'works_category' => $work_category,'all_language' => $all_language]);
+        return view('backend.pages.important-info.edit-work')->with([ 'work_details' => $work_details, 'works_category' => $work_category,'all_language' => $all_language]);
     }
 
     public function store(Request $request)
@@ -57,8 +57,8 @@ class WorksController extends Controller
             'meta_description' => 'nullable|string',
             'gallery' => 'nullable|string',
             'description' => 'required|string',
-            'duration' => 'required|string',
-            'budget' => 'required|string',
+            'duration' => 'nullable|string',
+            'budget' => 'nullable|string',
             'status' => 'required|string',
             'categories_id' => 'required',
             'image' => 'nullable|string|max:191',
@@ -81,7 +81,7 @@ class WorksController extends Controller
             'categories_id' => serialize($request->categories_id),
         ]);
 
-        return redirect()->back()->with(['msg' => __('New Case Study Added...'), 'type' => 'success']);
+        return redirect()->back()->with(['msg' => __('New Important Information Added...'), 'type' => 'success']);
     }
 
     public function update(Request $request)
@@ -96,8 +96,8 @@ class WorksController extends Controller
             'meta_tag' => 'nullable|string',
             'meta_description' => 'nullable|string',
             'description' => 'required|string',
-            'duration' => 'required|string',
-            'budget' => 'required|string',
+            'duration' => 'nullable|string',
+            'budget' => 'nullable|string',
             'status' => 'required|string',
             'categories_id' => 'required',
             'image' => 'nullable|string|max:191',
@@ -121,7 +121,7 @@ class WorksController extends Controller
                 'categories_id' => serialize($request->categories_id),
             ]
         );
-        return redirect()->back()->with(['msg' => __('Case Study Item Updated...'), 'type' => 'success']);
+        return redirect()->back()->with(['msg' => __('Important Information Updated...'), 'type' => 'success']);
     }
 
     public function clone_new_draft(Request $request){
@@ -144,7 +144,7 @@ class WorksController extends Controller
                 'categories_id' => serialize($single_work->categories_id),
             ]
         );
-        return redirect()->back()->with(['msg' => __('Case Study Item Clone Success...'), 'type' => 'success']);
+        return redirect()->back()->with(['msg' => __('Important Information Clone Success...'), 'type' => 'success']);
     }
 
     public function delete($id)
@@ -156,7 +156,7 @@ class WorksController extends Controller
     public function category_index()
     {
         $all_category = WorksCategory::all()->groupBy('lang');
-        return view('backend.pages.works.category')->with(['all_category' => $all_category]);
+        return view('backend.pages.important-info.category')->with(['all_category' => $all_category]);
     }
 
     public function category_store(Request $request)
@@ -199,7 +199,7 @@ class WorksController extends Controller
     {
         if (Works::where('categories_id', $id)->first()) {
             return redirect()->back()->with([
-                'msg' => __('You Can Not Delete This Category, It Already Associated With A Case Study ...'),
+                'msg' => __('You Can Not Delete This Category, It Already Associated With An Important Information ...'),
                 'type' => 'danger'
             ]);
         }

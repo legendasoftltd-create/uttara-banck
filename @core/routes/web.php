@@ -166,6 +166,8 @@ Route::group(['middleware' => ['setlang:frontend', 'globalVariable', 'maintains_
     Route::get($knowledgebase_page_slug.'-search', 'FrontendController@knowledgebase_search')->name('frontend.knowledgebase.search');
 });
 
+Route::get('/brand/{slug}', 'FrontendController@get_single_brands')->middleware(['setlang:frontend', 'globalVariable', 'maintains_mode'])->name('frontend.brand.single');
+
 /*==============================================
     FRONTEND ROUTES: DONATIONS MODULE
 ==============================================*/

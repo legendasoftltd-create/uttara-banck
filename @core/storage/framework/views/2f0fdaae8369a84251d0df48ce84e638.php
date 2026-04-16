@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="<?php echo e(asset('assets/backend/css/bootstrap-tagsinput.css')); ?>">
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('site-title'); ?>
-    <?php echo e(__('New Case Study')); ?>
+    <?php echo e(__('New Important Information')); ?>
 
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('content'); ?>
@@ -59,17 +59,17 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="header-wrap d-flex justify-content-between">
-                            <h4 class="header-title"><?php echo e(__('New Case Study')); ?></h4>
-                            <a href="<?php echo e(route('admin.work')); ?>" class="btn btn-primary"><?php echo e(__('All Case Study')); ?></a>
+                            <h4 class="header-title"><?php echo e(__('New Important Information')); ?></h4>
+                            <a href="<?php echo e(route('admin.work')); ?>" class="btn btn-primary"><?php echo e(__('All Important Information')); ?></a>
                         </div>
                         <form action="<?php echo e(route('admin.work')); ?>" method="post" enctype="multipart/form-data">
                             <?php echo csrf_field(); ?>
-                            <div class="form-group">
+                            <div class="form-group" hidden>
                                 <label for="language"><?php echo e(__('Language')); ?></label>
                                 <select name="lang" id="language" class="form-control">
                                     <option value=""><?php echo e(__('Select Language')); ?></option>
                                     <?php $__currentLoopData = get_all_language(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $language): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                        <option value="<?php echo e($language->slug); ?>"><?php echo e($language->name); ?></option>
+                                        <option value="<?php echo e($language->slug); ?>" <?php if($language->slug == get_default_language()): ?> selected <?php endif; ?>><?php echo e($language->name); ?></option>
                                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </select>
                             </div>
@@ -81,18 +81,7 @@
                                 <label for="slug"><?php echo e(__('Slug')); ?></label>
                                 <input type="text" class="form-control"  value="<?php echo e(old('slug')); ?>"  name="slug" placeholder="<?php echo e(__('Slug')); ?>">
                             </div>
-                            <div class="form-group">
-                                <label for="clients"><?php echo e(__('Clients')); ?></label>
-                                <input type="text" class="form-control"  value="<?php echo e(old('clients')); ?>"  name="clients" placeholder="<?php echo e(__('Clients')); ?>">
-                            </div>
-                            <div class="form-group">
-                                <label for="duration"><?php echo e(__('Duration')); ?></label>
-                                <input type="text" class="form-control"  value="<?php echo e(old('duration')); ?>"  name="duration" placeholder="<?php echo e(__('Duration')); ?>">
-                            </div>
-                            <div class="form-group">
-                                <label for="budget"><?php echo e(__('Budget')); ?></label>
-                                <input type="text" class="form-control"  value="<?php echo e(old('budget')); ?>"  name="budget" placeholder="<?php echo e(__('Budget')); ?>">
-                            </div>
+                            
                             <div class="form-group">
                                 <label for="description"><?php echo e(__('Description')); ?></label>
                                 <input type="hidden" name="description" id="description" >
@@ -104,8 +93,12 @@
                             </div>
                             <div class="form-group">
                                 <label for="categories_id"><?php echo e(__('Category')); ?></label>
-                                <select name="categories_id[]" multiple id="category" class="form-control nice-select wide"></select>
-                                <span class="info-text"><?php echo e(__('select language to get price plan by language')); ?></span>
+                                <select name="categories_id[]" multiple id="category" class="form-control nice-select wide">
+                                    <?php $__currentLoopData = $works_category; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <option value="<?php echo e($category->id); ?>"><?php echo e($category->name); ?></option>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                </select>
+                                
                             </div>
                             <div class="form-group">
                                 <label for="meta_tags"><?php echo e(__('Meta Tags')); ?></label>
@@ -115,18 +108,7 @@
                                 <label for="meta_description"><?php echo e(__('Meta Description')); ?></label>
                                 <textarea name="meta_description"  class="form-control" rows="5" id="meta_description"></textarea>
                             </div>
-                            <div class="form-group">
-                                <label for="image"><?php echo e(__('Gallery')); ?></label>
-                                <div class="media-upload-btn-wrapper">
-                                    <div class="img-wrap"></div>
-                                    <input type="hidden" name="gallery">
-                                    <button type="button" class="btn btn-info media_upload_form_btn" data-mulitple="true" data-btntitle="Select Image" data-modaltitle="Upload Image" data-toggle="modal" data-target="#media_upload_modal">
-                                        <?php echo e(__('Upload Image')); ?>
-
-                                    </button>
-                                </div>
-                                <small><?php echo e(__('Recommended image size 1920x1280')); ?></small>
-                            </div>
+                            
                             <div class="form-group">
                                 <label for="status"><?php echo e(__('Status')); ?></label>
                                 <select name="status" id="status" class="form-control">
@@ -144,9 +126,9 @@
 
                                     </button>
                                 </div>
-                                <small><?php echo e(__('Recommended image size 1920x1280')); ?></small>
+                                
                             </div>
-                            <button type="submit" class="btn btn-primary mt-4 pr-4 pl-4"><?php echo e(__('Add New Case Study')); ?></button>
+                            <button type="submit" class="btn btn-primary mt-4 pr-4 pl-4"><?php echo e(__('Add New Important Information')); ?></button>
                         </form>
                     </div>
                 </div>

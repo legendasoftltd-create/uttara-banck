@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="{{asset('assets/backend/css/bootstrap-tagsinput.css')}}">
 @endsection
 @section('site-title')
-    {{__('New Case Study')}}
+    {{__('New Important Information')}}
 @endsection
 @section('content')
     <div class="col-lg-12 col-ml-12 padding-bottom-30">
@@ -21,17 +21,17 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="header-wrap d-flex justify-content-between">
-                            <h4 class="header-title">{{__('New Case Study')}}</h4>
-                            <a href="{{route('admin.work')}}" class="btn btn-primary">{{__('All Case Study')}}</a>
+                            <h4 class="header-title">{{__('New Important Information')}}</h4>
+                            <a href="{{route('admin.work')}}" class="btn btn-primary">{{__('All Important Information')}}</a>
                         </div>
                         <form action="{{route('admin.work')}}" method="post" enctype="multipart/form-data">
                             @csrf
-                            <div class="form-group">
+                            <div class="form-group" hidden>
                                 <label for="language">{{__('Language')}}</label>
                                 <select name="lang" id="language" class="form-control">
                                     <option value="">{{__('Select Language')}}</option>
                                     @foreach(get_all_language() as $language)
-                                        <option value="{{$language->slug}}">{{$language->name}}</option>
+                                        <option value="{{$language->slug}}" @if($language->slug == get_default_language()) selected @endif>{{$language->name}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -43,7 +43,7 @@
                                 <label for="slug">{{__('Slug')}}</label>
                                 <input type="text" class="form-control"  value="{{old('slug')}}"  name="slug" placeholder="{{__('Slug')}}">
                             </div>
-                            <div class="form-group">
+                            {{-- <div class="form-group">
                                 <label for="clients">{{__('Clients')}}</label>
                                 <input type="text" class="form-control"  value="{{old('clients')}}"  name="clients" placeholder="{{__('Clients')}}">
                             </div>
@@ -54,7 +54,7 @@
                             <div class="form-group">
                                 <label for="budget">{{__('Budget')}}</label>
                                 <input type="text" class="form-control"  value="{{old('budget')}}"  name="budget" placeholder="{{__('Budget')}}">
-                            </div>
+                            </div> --}}
                             <div class="form-group">
                                 <label for="description">{{__('Description')}}</label>
                                 <input type="hidden" name="description" id="description" >
@@ -66,8 +66,12 @@
                             </div>
                             <div class="form-group">
                                 <label for="categories_id">{{__('Category')}}</label>
-                                <select name="categories_id[]" multiple id="category" class="form-control nice-select wide"></select>
-                                <span class="info-text">{{__('select language to get price plan by language')}}</span>
+                                <select name="categories_id[]" multiple id="category" class="form-control nice-select wide">
+                                    @foreach($works_category as $category)
+                                        <option value="{{$category->id}}">{{$category->name}}</option>
+                                    @endforeach
+                                </select>
+                                {{-- <span class="info-text">{{__('select language to get price plan by language')}}</span> --}}
                             </div>
                             <div class="form-group">
                                 <label for="meta_tags">{{__('Meta Tags')}}</label>
@@ -77,7 +81,7 @@
                                 <label for="meta_description">{{__('Meta Description')}}</label>
                                 <textarea name="meta_description"  class="form-control" rows="5" id="meta_description"></textarea>
                             </div>
-                            <div class="form-group">
+                            {{-- <div class="form-group">
                                 <label for="image">{{__('Gallery')}}</label>
                                 <div class="media-upload-btn-wrapper">
                                     <div class="img-wrap"></div>
@@ -87,7 +91,7 @@
                                     </button>
                                 </div>
                                 <small>{{__('Recommended image size 1920x1280')}}</small>
-                            </div>
+                            </div> --}}
                             <div class="form-group">
                                 <label for="status">{{__('Status')}}</label>
                                 <select name="status" id="status" class="form-control">
@@ -104,9 +108,9 @@
                                         {{__('Upload Image')}}
                                     </button>
                                 </div>
-                                <small>{{__('Recommended image size 1920x1280')}}</small>
+                                {{-- <small>{{__('Recommended image size 1920x1280')}}</small> --}}
                             </div>
-                            <button type="submit" class="btn btn-primary mt-4 pr-4 pl-4">{{__('Add New Case Study')}}</button>
+                            <button type="submit" class="btn btn-primary mt-4 pr-4 pl-4">{{__('Add New Important Information')}}</button>
                         </form>
                     </div>
                 </div>

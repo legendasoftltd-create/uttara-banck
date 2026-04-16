@@ -1883,7 +1883,7 @@ Route::prefix('admin-home')->middleware(['setlang:backend'])->group(function () 
     /*==============================================
              CASE STUDY MODULE ROUTES
     ==============================================*/
-    Route::prefix('works')->middleware(['adminPermissionCheck:Case Study'])->group(function () {
+    Route::prefix('important-information')->middleware(['adminPermissionCheck:Important Information'])->group(function () {
 
         Route::get('/', 'WorksController@index')->name('admin.work');
         Route::post('/', 'WorksController@store');

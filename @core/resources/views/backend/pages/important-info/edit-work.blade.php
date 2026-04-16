@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="{{asset('assets/backend/css/bootstrap-tagsinput.css')}}">
 @endsection
 @section('site-title')
-    {{__('Edit Case Study')}}
+    {{__('Edit Important Information')}}
 @endsection
 @section('content')
     <div class="col-lg-12 col-ml-12 padding-bottom-30">
@@ -21,13 +21,13 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="header-wrap d-flex justify-content-between">
-                            <h4 class="header-title">{{__('Edit Case Study')}}</h4>
-                            <a href="{{route('admin.work')}}" class="btn btn-primary">{{__('All Case Study')}}</a>
+                            <h4 class="header-title">{{__('Edit Important Information')}}</h4>
+                            <a href="{{route('admin.work')}}" class="btn btn-primary">{{__('All Important Information')}}</a>
                         </div>
                         <form action="{{route('admin.work.update')}}" method="post" enctype="multipart/form-data">
                             <input type="hidden" name="id" value="{{$work_details->id}}">
                             @csrf
-                            <div class="form-group">
+                            <div class="form-group" hidden>
                                 <label for="language">{{__('Language')}}</label>
                                 <select name="lang" id="language" class="form-control">
                                     @foreach(get_all_language() as $language)
@@ -43,7 +43,7 @@
                                 <label for="slug">{{__('Slug')}}</label>
                                 <input type="text" class="form-control"  id="slug"  name="slug" value="{{$work_details->slug}}">
                             </div>
-                            <div class="form-group">
+                            {{-- <div class="form-group">
                                 <label for="clients">{{__('Clients')}}</label>
                                 <input type="text" class="form-control"  id="clients"  name="clients" value="{{$work_details->clients}}">
                             </div>
@@ -54,7 +54,7 @@
                             <div class="form-group">
                                 <label for="budget">{{__('Budget')}}</label>
                                 <input type="text" class="form-control"  id="budget"  name="budget" value="{{$work_details->budget}}">
-                            </div>
+                            </div> --}}
                             <div class="form-group">
                                 <label for="description">{{__('Description')}}</label>
                                 <input type="hidden" name="description" id="description" value="{{$work_details->description}}">
@@ -85,7 +85,7 @@
                                 <textarea name="meta_description"  class="form-control" rows="5" id="meta_description">{{$work_details->meta_description}}</textarea>
                             </div>
 
-                            <div class="form-group">
+                            {{-- <div class="form-group">
                                 <label for="image">{{__('Gallery')}}</label>
                                 @php
                                     $gallery_images = !empty( $work_details->gallery) ? explode('|', $work_details->gallery) : [];
@@ -113,7 +113,7 @@
                                     </button>
                                 </div>
                                 <small>{{__('Recommended image size 1920x1280')}}</small>
-                            </div>
+                            </div> --}}
                             <div class="form-group">
                                 <label for="status">{{__('Status')}}</label>
                                 <select name="status" id="status" class="form-control">
@@ -123,7 +123,7 @@
                             </div>
                             <x-media-upload :id="$work_details->image" :name="'image'" :dimentions="'1920x1280'" :title="__('Image')"/>
 
-                            <button type="submit" class="btn btn-primary mt-4 pr-4 pl-4">{{__('Update Case Study')}}</button>
+                            <button type="submit" class="btn btn-primary mt-4 pr-4 pl-4">{{__('Update Important Information')}}</button>
                         </form>
                     </div>
                 </div>

@@ -147,23 +147,22 @@
                         </ul>
                     </li>
                     <?php endif; ?>
-                    <?php if(check_page_permission_by_string('Case Study')): ?>
+                    <?php if(check_page_permission_by_string('Important Information')): ?>
                     <li class="main_dropdown
                     <?php if(request()->is(['admin-home/works/*','admin-home/works'])): ?> active <?php endif; ?> ">
                         <a href="javascript:void(0)"
                            aria-expanded="true">
                             <i class="ti-layout"></i>
-                            <span><?php echo e(__('Case Study')); ?></span>
+                            <span><?php echo e(__('Important Information')); ?></span>
                         </a>
                         <ul class="collapse">
                             <li class="<?php echo e(active_menu('admin-home/works')); ?>"><a
-                                        href="<?php echo e(route('admin.work')); ?>"><?php echo e(__('All Case Study')); ?></a></li>
+                                        href="<?php echo e(route('admin.work')); ?>"><?php echo e(__('All Important Information')); ?></a></li>
                             <li class="<?php echo e(active_menu('admin-home/works/new')); ?>"><a
-                                    href="<?php echo e(route('admin.work.new')); ?>"><?php echo e(__('New Case Study')); ?></a></li>
+                                    href="<?php echo e(route('admin.work.new')); ?>"><?php echo e(__('New Important Information')); ?></a></li>
                             <li class="<?php echo e(active_menu('admin-home/works/category')); ?>"><a
                                         href="<?php echo e(route('admin.work.category')); ?>"><?php echo e(__('Category')); ?></a></li>
-                            <li class="<?php echo e(active_menu('admin-home/works/single-page/settings')); ?>"><a
-                                    href="<?php echo e(route('admin.work.single.page.settings')); ?>"><?php echo e(__('Case Single Page Settings')); ?></a></li>
+                            
                         </ul>
                     </li>
                     <?php endif; ?>

@@ -165,7 +165,6 @@
                             </div>
                         </div>
                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                        
                     </div>
                 </div>
             </div>
@@ -186,63 +185,32 @@
                     <br>
                 </div>
                 <div class="container-fluid">
-                    <div
-                        class="col-md-10 col-sm-6 col-xs-12"
-                        style="display: contents;">
+                    <div class="col-md-10 col-sm-6 col-xs-12" style="display: contents;">
                         <div class="information-wrap">
-                            <div data-aos="fade-up"
-                                data-aos-duration="500"
-                                class="information-card">
+                            <div data-aos="fade-up" data-aos-duration="500" class="information-card">
+                                <h3 class="h3">Important Information</h3>
                                 <ul>
-                                    <?php $__currentLoopData = $all_brand_logo; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $data): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                        <a href="<?php echo e($data->slug); ?>" target="_blank">
+                                    <?php $__currentLoopData = $all_work_category; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $data): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <hr style="margin-top: .5rem; margin-bottom: .5rem;">
+                                        <a href="<?php echo e(route('frontend.works.category', ['id' => $data->id, 'any' => $data->name])); ?>" target="_blank">
                                             <li><i class="fa-regular fa-circle-dot"></i>
-                                                <?php echo e($data->title); ?></li>
+                                                <?php echo e($data->name); ?></li>
                                         </a>
                                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                    
                                 </ul>
                             </div>
 
-                            <div data-aos="fade-up"
-                                data-aos-duration="600"
-                                class="information-card">
+                            <div data-aos="fade-up" data-aos-duration="600" class="information-card">
+                                <h3 class="h3">Important Downloads</h3>
                                 <ul>
-                                    <a
-                                        href="#download/Uttara Bank PLC POS Merchant List.pdf"
-                                        target="_blank">
-                                        <li><i class="fa-regular fa-circle-dot"></i>
-                                            Uttara Bank PLC POS Merchant List</li>s
-                                    </a>
-                                    <a
-                                        href="#schedule_of_charges/Terms_and_Conditions_PB.pdf"
-                                        target="_blank">
-                                        <li><i
-                                                class="fa-regular fa-circle-dot"></i>
-                                            Terms &amp;
-                                            Conditions:
-                                            Premium Banking
-                                            Proposition</li>
-                                    </a>
-                                    <a
-                                        href="#important_notice_regarding_atm_withdrawal_limit.html"
-                                        target="_blank">
-                                        <li><i
-                                                class="fa-regular fa-circle-dot"></i>
-                                            Revised ATM
-                                            withdrawal
-                                            limit</li>
-                                    </a>
-                                    <a
-                                        href="#schedule_of_charges/Terms_and_Conditions_Retail_Banking.pdf"
-                                        target="_blank">
-                                        <li><i
-                                                class="fa-regular fa-circle-dot"></i>
-                                            Terms &amp;
-                                            Conditions:
-                                            Retail Banking</li>
-                                    </a>
-
+                                    <?php $__currentLoopData = $all_brand_logo; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $data): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <hr style="margin-top: .5rem; margin-bottom: .5rem;">
+                                                <?php $image_details = get_attachment_image_by_id($blog->image, 'full'); ?>
+                                                <a href="<?php echo e($image_details['img_url']); ?>" target="_blank">
+                                                    <li><i class="fa-regular fa-circle-dot"></i>
+                                                        <?php echo e($data->title); ?></li>
+                                                </a>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </ul>
                             </div>
 

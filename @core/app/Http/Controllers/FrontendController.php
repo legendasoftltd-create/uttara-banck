@@ -995,6 +995,12 @@ ITEM;
         ]);
     }
 
+    public function get_single_brands($slug)
+    {
+        $brand = Brand::where('slug', $slug)->first();
+        return view('frontend.pages.brand.brand-single')->with(['brand' => $brand]);
+    }
+
     public function service_page()
     {
         $default_lang = Language::where('default', 1)->first();
