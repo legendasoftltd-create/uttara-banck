@@ -48,6 +48,7 @@ use App\ServiceCategory;
 use App\Services;
 use App\Blog;
 use App\BlogCategory;
+use App\BankDownload;
 use App\Brand;
 use App\HeaderSlider;
 use App\KeyFeatures;
@@ -97,6 +98,10 @@ class FrontendController extends Controller
         $all_price_plan = PricePlan::where(['lang' => $lang, 'status' => 'publish'])->orderBy('id', 'desc')->take(get_static_option('home_page_01_price_plan_section_items'))->get();
         $all_team_members = TeamMember::where('lang', $lang)->orderBy('id', 'desc')->take(get_static_option('home_page_01_team_member_items'))->get();
         $all_brand_logo = Brand::all();
+        $all_bank_downloads = BankDownload::where([
+            'lang' => $lang,
+            'status' => 'publish',
+        ])->orderBy('publish_date', 'desc')->take(8)->get();
         $all_work = Works::where(['lang' => $lang, 'status' => 'publish'])->orderBy('id', 'desc')->take(get_static_option('home_page_01_case_study_items'))->get();
         $all_blog = Blog::where(['lang' => $lang, 'status' => 'publish'])->orderBy('id', 'desc')->take(6)->get();
         $all_contact_info = ContactInfoItem::where(['lang' => $lang])->orderBy('id', 'desc')->get();
@@ -128,6 +133,7 @@ class FrontendController extends Controller
             'all_price_plan' => $all_price_plan,
             'all_team_members' => $all_team_members,
             'all_brand_logo' => $all_brand_logo,
+            'all_bank_downloads' => $all_bank_downloads,
             'all_work_category' => $all_work_category,
             'all_work' => $all_work,
             'all_service_category' => $all_service_category,

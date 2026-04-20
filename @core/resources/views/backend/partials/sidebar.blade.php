@@ -274,7 +274,9 @@
                     'admin-home/appointment/*',
                     'admin-home/courses/*',
                     'admin-home/support-tickets/*',
-                    'admin-home/support-tickets'
+                    'admin-home/support-tickets',
+                    'admin-home/bank-downloads',
+                    'admin-home/bank-downloads/*'
                     ])) active @endif">
                         <a href="javascript:void(0)" aria-expanded="true"><i class="ti-settings"></i>
                             <span>{{__('All Modules')}}</span></a>
@@ -593,6 +595,17 @@
                                     <ul class="collapse">
                                         <li class="{{active_menu('admin-home/locations')}}"><a href="{{route('admin.locations.all')}}">{{__('All Locations')}}</a></li>
                                         <li class="{{active_menu('admin-home/locations/new')}}"><a href="{{route('admin.locations.new')}}">{{__('Add New Location')}}</a></li>
+                                    </ul>
+                                </li>
+                            @endif
+                            @if(check_page_permission_by_string('Bank Downloads'))
+                                <li class="main_dropdown {{active_menu('admin-home/bank-downloads')}} @if(request()->is('admin-home/bank-downloads/*')) active @endif">
+                                    <a href="javascript:void(0)" aria-expanded="true">{{__('Bank Downloads')}}</a>
+                                    <ul class="collapse">
+                                        <li class="{{active_menu('admin-home/bank-downloads')}}"><a href="{{route('admin.bank.download')}}">{{__('All Downloads')}}</a></li>
+                                        <li class="{{active_menu('admin-home/bank-downloads/new')}}"><a href="{{route('admin.bank.download.new')}}">{{__('Add New Download')}}</a></li>
+                                        <li class="{{active_menu('admin-home/bank-downloads/category')}}"><a href="{{route('admin.bank.download.category')}}">{{__('Categories')}}</a></li>
+                                        <li class="{{active_menu('admin-home/bank-downloads/subcategory')}}"><a href="{{route('admin.bank.download.subcategory')}}">{{__('Subcategories')}}</a></li>
                                     </ul>
                                 </li>
                             @endif

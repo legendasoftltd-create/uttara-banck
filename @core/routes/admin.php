@@ -1661,6 +1661,52 @@ Route::prefix('admin-home')->middleware(['setlang:backend'])->group(function () 
     });
 
     /*==============================================
+       BANK DOWNLOADS MODULE ROUTES
+    ==============================================*/
+    Route::prefix('bank-downloads')->middleware(['adminPermissionCheck:Bank Downloads'])->group(function () {
+        
+        /*------------------------------------
+           BANK DOWNLOADS ROUTES
+        ------------------------------------*/
+        Route::get('/', 'BankDownloadController@index')->name('admin.bank.download');
+        Route::get('/new', 'BankDownloadController@new_download')->name('admin.bank.download.new');
+        Route::post('/new', 'BankDownloadController@store_new_download');
+        Route::get('/edit/{id}', 'BankDownloadController@edit_download')->name('admin.bank.download.edit');
+        Route::post('/update/{id}', 'BankDownloadController@update_download')->name('admin.bank.download.update');
+        Route::post('/delete/{id}', 'BankDownloadController@delete_download')->name('admin.bank.download.delete');
+        Route::post('/bulk-action', 'BankDownloadController@bulk_action')->name('admin.bank.download.bulk.action');
+        Route::post('/slug-check', 'BankDownloadController@slug_check')->name('admin.bank.download.slug.check');
+        Route::post('/delete-file', 'BankDownloadController@delete_file')->name('admin.bank.download.delete.file');
+        
+        /*------------------------------------
+           BANK DOWNLOAD CATEGORIES ROUTES
+        ------------------------------------*/
+        Route::group(['prefix' => 'category'],function (){
+            Route::get('/', 'BankDownloadController@category')->name('admin.bank.download.category');
+            Route::post('/', 'BankDownloadController@new_category');
+            Route::post('/delete/{id}', 'BankDownloadController@delete_category')->name('admin.bank.download.category.delete');
+            Route::post('/update', 'BankDownloadController@update_category')->name('admin.bank.download.category.update');
+            Route::post('/bulk-action', 'BankDownloadController@category_bulk_action')->name('admin.bank.download.category.bulk.action');
+        });
+
+        /*------------------------------------
+           BANK DOWNLOAD SUBCATEGORIES ROUTES
+        ------------------------------------*/
+        Route::group(['prefix' => 'subcategory'],function (){
+            Route::get('/', 'BankDownloadController@subcategory')->name('admin.bank.download.subcategory');
+            Route::post('/', 'BankDownloadController@new_subcategory');
+            Route::post('/delete/{id}', 'BankDownloadController@delete_subcategory')->name('admin.bank.download.subcategory.delete');
+            Route::post('/update', 'BankDownloadController@update_subcategory')->name('admin.bank.download.subcategory.update');
+            Route::post('/bulk-action', 'BankDownloadController@subcategory_bulk_action')->name('admin.bank.download.subcategory.bulk.action');
+        });
+
+        /*------------------------------------
+           AJAX ROUTES
+        ------------------------------------*/
+        Route::get('/subcategories-by-category/{category_id}', 'BankDownloadController@get_subcategories_by_category')->name('admin.bank.download.subcategories.by.category');
+    });
+
+    /*==============================================
       PAGES ROUTES
     ==============================================*/
     Route::prefix('page')->middleware(['adminPermissionCheck:Pages Manage'])->group(function () {

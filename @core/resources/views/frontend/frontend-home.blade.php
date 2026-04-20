@@ -220,14 +220,19 @@
                             <div data-aos="fade-up" data-aos-duration="600" class="information-card">
                                 <h3 class="h3">Important Downloads</h3>
                                 <ul>
-                                    @foreach($all_brand_logo as $data)
+                                    @forelse($all_bank_downloads as $download)
                                         <hr style="margin-top: .5rem; margin-bottom: .5rem;">
-                                                @php $image_details = get_attachment_image_by_id($blog->image, 'full'); @endphp
-                                                <a href="{{$image_details['img_url']}}" target="_blank">
-                                                    <li><i class="fa-regular fa-circle-dot"></i>
-                                                        {{ $data->title }}</li>
-                                                </a>
-                                    @endforeach
+                                        @php
+                                            $firstFile = is_array($download->files) ? ($download->files[0] ?? null) : null;
+                                        @endphp
+                                        <a href="{{ !empty($firstFile['name']) ? asset('assets/uploads/bank-downloads/' . $firstFile['name']) : route('frontend.bank.downloads.single', $download->slug) }}"
+                                            target="_blank">
+                                            <li><i class="fa-regular fa-circle-dot"></i>
+                                                {{ $download->title }}</li>
+                                        </a>
+                                    @empty
+                                        <li>{{ __('No downloads found') }}</li>
+                                    @endforelse
                                 </ul>
                             </div>
 

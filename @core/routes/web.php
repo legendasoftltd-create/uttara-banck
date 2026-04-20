@@ -471,6 +471,18 @@ Route::group(['middleware' => ['setlang:frontend', 'globalVariable', 'maintains_
         Route::get( $blog_page_slug.'-category/{id}/{any}', 'FrontendController@category_wise_blog_page')->name('frontend.news.category');
         Route::get( $blog_page_slug.'-tags/{name}', 'FrontendController@tags_wise_blog_page')->name('frontend.news.tags.page');
 
+    /*--------------------------------------
+        FRONTEND: BANK DOWNLOADS ROUTES
+    ---------------------------------------*/
+    Route::group(['namespace' => 'Frontend'], function () {
+        $downloads_page_slug = get_static_option('bank_downloads_page_slug') ?? 'bank-downloads';
+        Route::get($downloads_page_slug, 'BankDownloadController@page')->name('frontend.bank.downloads');
+        Route::get($downloads_page_slug . '/{slug}', 'BankDownloadController@single')->name('frontend.bank.downloads.single');
+        Route::get($downloads_page_slug . '-category/{id}/{slug?}', 'BankDownloadController@category')->name('frontend.bank.downloads.category');
+        Route::get($downloads_page_slug . '-subcategory/{id}/{slug?}', 'BankDownloadController@subcategory')->name('frontend.bank.downloads.subcategory');
+        Route::get($downloads_page_slug . '-search', 'BankDownloadController@search')->name('frontend.bank.downloads.search');
+    });
+
     /*------------------------------------
         FRONTEND: ROUTES
     ------------------------------------*/

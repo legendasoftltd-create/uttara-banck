@@ -274,7 +274,9 @@
                     'admin-home/appointment/*',
                     'admin-home/courses/*',
                     'admin-home/support-tickets/*',
-                    'admin-home/support-tickets'
+                    'admin-home/support-tickets',
+                    'admin-home/bank-downloads',
+                    'admin-home/bank-downloads/*'
                     ])): ?> active <?php endif; ?>">
                         <a href="javascript:void(0)" aria-expanded="true"><i class="ti-settings"></i>
                             <span><?php echo e(__('All Modules')); ?></span></a>
@@ -596,6 +598,17 @@
                                     <ul class="collapse">
                                         <li class="<?php echo e(active_menu('admin-home/locations')); ?>"><a href="<?php echo e(route('admin.locations.all')); ?>"><?php echo e(__('All Locations')); ?></a></li>
                                         <li class="<?php echo e(active_menu('admin-home/locations/new')); ?>"><a href="<?php echo e(route('admin.locations.new')); ?>"><?php echo e(__('Add New Location')); ?></a></li>
+                                    </ul>
+                                </li>
+                            <?php endif; ?>
+                            <?php if(check_page_permission_by_string('Bank Downloads')): ?>
+                                <li class="main_dropdown <?php echo e(active_menu('admin-home/bank-downloads')); ?> <?php if(request()->is('admin-home/bank-downloads/*')): ?> active <?php endif; ?>">
+                                    <a href="javascript:void(0)" aria-expanded="true"><?php echo e(__('Bank Downloads')); ?></a>
+                                    <ul class="collapse">
+                                        <li class="<?php echo e(active_menu('admin-home/bank-downloads')); ?>"><a href="<?php echo e(route('admin.bank.download')); ?>"><?php echo e(__('All Downloads')); ?></a></li>
+                                        <li class="<?php echo e(active_menu('admin-home/bank-downloads/new')); ?>"><a href="<?php echo e(route('admin.bank.download.new')); ?>"><?php echo e(__('Add New Download')); ?></a></li>
+                                        <li class="<?php echo e(active_menu('admin-home/bank-downloads/category')); ?>"><a href="<?php echo e(route('admin.bank.download.category')); ?>"><?php echo e(__('Categories')); ?></a></li>
+                                        <li class="<?php echo e(active_menu('admin-home/bank-downloads/subcategory')); ?>"><a href="<?php echo e(route('admin.bank.download.subcategory')); ?>"><?php echo e(__('Subcategories')); ?></a></li>
                                     </ul>
                                 </li>
                             <?php endif; ?>

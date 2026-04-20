@@ -203,14 +203,19 @@
                             <div data-aos="fade-up" data-aos-duration="600" class="information-card">
                                 <h3 class="h3">Important Downloads</h3>
                                 <ul>
-                                    <?php $__currentLoopData = $all_brand_logo; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $data): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <?php $__empty_1 = true; $__currentLoopData = $all_bank_downloads; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $download): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
                                         <hr style="margin-top: .5rem; margin-bottom: .5rem;">
-                                                <?php $image_details = get_attachment_image_by_id($blog->image, 'full'); ?>
-                                                <a href="<?php echo e($image_details['img_url']); ?>" target="_blank">
-                                                    <li><i class="fa-regular fa-circle-dot"></i>
-                                                        <?php echo e($data->title); ?></li>
-                                                </a>
-                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                        <?php
+                                            $firstFile = is_array($download->files) ? ($download->files[0] ?? null) : null;
+                                        ?>
+                                        <a href="<?php echo e(!empty($firstFile['name']) ? asset('assets/uploads/bank-downloads/' . $firstFile['name']) : route('frontend.bank.downloads.single', $download->slug)); ?>"
+                                            target="_blank">
+                                            <li><i class="fa-regular fa-circle-dot"></i>
+                                                <?php echo e($download->title); ?></li>
+                                        </a>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
+                                        <li><?php echo e(__('No downloads found')); ?></li>
+                                    <?php endif; ?>
                                 </ul>
                             </div>
 
