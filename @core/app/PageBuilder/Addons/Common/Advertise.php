@@ -25,7 +25,7 @@ class Advertise extends PageBuilderBase
 
         $output .= Select::get([
             'name' => 'advertisement_type',
-            'label' => __('Advertisement Type'),
+            'label' => __('Activity Type'),
             'class'=> 'backend_addon_advertisement_type',
             'options' => [
                 'image' => __('Image'),
@@ -33,12 +33,12 @@ class Advertise extends PageBuilderBase
                 'scripts' => __('Scripts'),
             ],
             'value' => $widget_saved_values['advertisement_type'] ?? null,
-            'info' => __('set advertisement_type')
+            'info' => __('set activity type')
         ]);
 
         $output .= Select::get([
             'name' => 'advertisement_size',
-            'label' => __('Advertisement Size'),
+            'label' => __('Activity Size'),
             'options' => [
                 '350*250' => __('300 x 250'),
                 '320*50' => __('320 x 50'),
@@ -54,7 +54,7 @@ class Advertise extends PageBuilderBase
                 '250*1110' => __('250 X 1110'),
             ],
             'value' => $widget_saved_values['advertisement_size'] ?? null,
-            'info' => __('set Advertisement Size')
+            'info' => __('set activity size')
         ]);
 
         $output .= Slider::get([
@@ -132,7 +132,7 @@ class Advertise extends PageBuilderBase
 
     public function addon_title()
     {
-        return __('Advertisement : 01');
+        return __('Our Activities : 01');
     }
 
     private function script_add($slot){

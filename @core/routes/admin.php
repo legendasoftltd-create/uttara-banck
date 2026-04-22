@@ -1650,7 +1650,7 @@ Route::prefix('admin-home')->middleware(['setlang:backend'])->group(function () 
 /*==============================================
    ADVERTISEMENT
 ==============================================*/
-    Route::group(['prefix'=>'advertisement','namespace' => 'Admin'],function(){
+    Route::group(['prefix'=>'our-activities','namespace' => 'Admin'],function(){
         Route::get('/','AdvertisementController@index')->name('admin.advertisement');
         Route::get('/new','AdvertisementController@new_advertisement')->name('admin.advertisement.new');
         Route::post('/store','AdvertisementController@store_advertisement')->name('admin.advertisement.store');

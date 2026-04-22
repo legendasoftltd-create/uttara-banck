@@ -116,13 +116,13 @@
                         @if(request()->is(['admin-home/advertisement/*','admin-home/advertisement'])) active @endif
                         ">
                         <a href="javascript:void(0)" aria-expanded="true"><i class="ti-write"></i>
-                            <span>{{__('Advertisements')}}</span></a>
+                            <span>{{__('Our Activities')}}</span></a>
                         <ul class="collapse">
                                 <li class="{{active_menu('admin-home/advertisement')}} @if(request()->is('admin-home/advertisement/edit/*')) active @endif"><a
-                                            href="{{route('admin.advertisement')}}">{{__('All Advertisements')}}</a></li>
+                                            href="{{route('admin.advertisement')}}">{{__('All Our Activities')}}</a></li>
 
                                 <li class="{{active_menu('admin-home/advertisement/new')}}"><a
-                                            href="{{route('admin.advertisement.new')}}">{{__('Add New Advertisement')}}</a></li>
+                                            href="{{route('admin.advertisement.new')}}">{{__('Add New Activity')}}</a></li>
                         </ul>
                     </li>
 
@@ -1406,7 +1406,7 @@
                                                 </li>
                                                 <li class="{{active_menu('admin-home/home-page-20/advertisement-area')}}">
                                                     <a href="{{route('admin.home20.advertisement')}}">
-                                                        {{__('Advertisement Area')}}
+                                                        {{__('Our Activities Area')}}
                                                     </a>
                                                 </li>
                                                 <li class="{{active_menu('admin-home/home-page-20/popular-news-area')}}">

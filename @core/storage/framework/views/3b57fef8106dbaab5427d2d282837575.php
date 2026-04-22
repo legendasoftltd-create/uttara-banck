@@ -114,13 +114,13 @@
                         <?php if(request()->is(['admin-home/advertisement/*','admin-home/advertisement'])): ?> active <?php endif; ?>
                         ">
                         <a href="javascript:void(0)" aria-expanded="true"><i class="ti-write"></i>
-                            <span><?php echo e(__('Advertisements')); ?></span></a>
+                            <span><?php echo e(__('Our Activities')); ?></span></a>
                         <ul class="collapse">
                                 <li class="<?php echo e(active_menu('admin-home/advertisement')); ?> <?php if(request()->is('admin-home/advertisement/edit/*')): ?> active <?php endif; ?>"><a
-                                            href="<?php echo e(route('admin.advertisement')); ?>"><?php echo e(__('All Advertisements')); ?></a></li>
+                                            href="<?php echo e(route('admin.advertisement')); ?>"><?php echo e(__('All Our Activities')); ?></a></li>
 
                                 <li class="<?php echo e(active_menu('admin-home/advertisement/new')); ?>"><a
-                                            href="<?php echo e(route('admin.advertisement.new')); ?>"><?php echo e(__('Add New Advertisement')); ?></a></li>
+                                            href="<?php echo e(route('admin.advertisement.new')); ?>"><?php echo e(__('Add New Activity')); ?></a></li>
                         </ul>
                     </li>
 
@@ -1545,7 +1545,7 @@
                                                 </li>
                                                 <li class="<?php echo e(active_menu('admin-home/home-page-20/advertisement-area')); ?>">
                                                     <a href="<?php echo e(route('admin.home20.advertisement')); ?>">
-                                                        <?php echo e(__('Advertisement Area')); ?>
+                                                        <?php echo e(__('Our Activities Area')); ?>
 
                                                     </a>
                                                 </li>

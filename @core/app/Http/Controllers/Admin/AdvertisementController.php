@@ -50,7 +50,7 @@ class AdvertisementController extends Controller
             'image' => $request->image,
         ]);
 
-        return redirect()->back()->with(['msg' => __('New Advertisement Created Successfully'), 'type' => 'success']);
+        return redirect()->back()->with(['msg' => __('New Activity Created Successfully'), 'type' => 'success']);
     }
 
     public function edit_advertisement($id)
@@ -83,13 +83,13 @@ class AdvertisementController extends Controller
             'image' => $request->image,
         ]);
 
-        return redirect()->back()->with(['msg' => __('Advertisement Updated Successfully'), 'type' => 'success']);
+        return redirect()->back()->with(['msg' => __('Activity Updated Successfully'), 'type' => 'success']);
     }
 
 
     public function delete_advertisement($id){
         Advertisement::find($id)->delete();
-        return redirect()->back()->with(['msg' => __('Advertisement Deleted Successfully'), 'type' => 'danger']);
+        return redirect()->back()->with(['msg' => __('Activity Deleted Successfully'), 'type' => 'danger']);
     }
 
     public function bulk_action(Request $request){

@@ -1,6 +1,6 @@
 @extends('backend.admin-master')
 @section('site-title')
-    {{__('All Advertisements')}}
+    {{__('All Our Activities')}}
 @endsection
 
 @section('style')
@@ -21,7 +21,7 @@
                     <div class="card-body">
                         <div class="header-wrap d-flex justify-content-between">
                             <div class="left-content">
-                                <h4 class="header-title">{{__('All Advertisements')}}  </h4>
+                                <h4 class="header-title">{{__('All Our Activities')}}  </h4>
                                 <div class="bulk-delete-wrapper">
                                     <div class="select-box-wrap">
                                         <select name="bulk_option" id="bulk_option">
@@ -33,7 +33,7 @@
                                 </div>
                             </div>
                             <div class="right-content">
-                                <a href="{{ route('admin.advertisement.new')}}" class="btn btn-primary">{{__('Add New Advertisement')}}</a>
+                                <a href="{{ route('admin.advertisement.new')}}" class="btn btn-primary">{{__('Add New Activity')}}</a>
                             </div>
                         </div>
                         <div class="table-wrap table-responsive">

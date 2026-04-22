@@ -1,7 +1,7 @@
 @extends('backend.admin-master')
 
 @section('site-title')
-    {{__('New Advertisement')}}
+    {{__('New Activity')}}
 @endsection
 
 @section('style')
@@ -22,10 +22,10 @@
                     <div class="card-body">
                         <div class="header-wrap d-flex justify-content-between">
                             <div class="left-content">
-                                <h4 class="header-title">{{__('Add New Advertisement')}}   </h4>
+                                <h4 class="header-title">{{__('Add New Activity')}}   </h4>
                             </div>
                             <div class="right-content">
-                                <a class="btn btn-info btn-sm" href="{{route('admin.advertisement')}}">{{__('All Advertisements')}}</a>
+                                <a class="btn btn-info btn-sm" href="{{route('admin.advertisement')}}">{{__('All Our Activities')}}</a>
                             </div>
                         </div>
                         <form action="{{route('admin.advertisement.store')}}" method="post" enctype="multipart/form-data">
@@ -39,7 +39,7 @@
                                      <input type="text" class="form-control" name="title" id="title" placeholder="Title">
                                  </div>
                                  <div class="form-group col-md-12">
-                                     <label for="title">{{__('Advertisement Type')}}</label>
+                                     <label for="title">{{__('Activity Type')}}</label>
                                      <select class="form-control" name="type" id="type">
                                          <option selected disabled>{{__('Select a Type')}}</option>
                                          <option value="image">{{__('Image')}}</option>
@@ -49,7 +49,7 @@
                                  </div>
 
                                  <div class="form-group col-md-12">
-                                     <label for="title">{{__('Advertisement Size')}}</label>
+                                     <label for="title">{{__('Activity Size')}}</label>
                                      <select class="form-control" name="size" id="size">
                                          <option selected disabled>{{__('Select a Size')}}</option>
                                          <option value="350*250">{{__('350 x 250')}}</option>
@@ -68,7 +68,7 @@
                                  </div>
 
                                  <div class="form-group col-md-12" id="slot" style="display: none">
-                                     <label for="title">{{__('Advertisement Slot')}}</label>
+                                     <label for="title">{{__('Activity Slot')}}</label>
                                      <input type="text" class="form-control" name="slot" >
                                  </div>
 
@@ -102,7 +102,7 @@
                                     </div>
                                 </div>
 
-                                <button id="submit" type="submit" class="btn btn-primary mt-5 submit_btn">{{__('Submit Advertise ')}}</button>
+                                <button id="submit" type="submit" class="btn btn-primary mt-5 submit_btn">{{__('Submit Activity')}}</button>
                               </div>
                         </form>
                    </div>
@@ -151,4 +151,3 @@
     <script src="{{asset('assets/backend/js/bootstrap-tagsinput.js')}}"></script>
     <x-media.js/>
 @endsection
-

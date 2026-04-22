@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="{{asset('assets/backend/css/media-uploader.css')}}">
 @endsection
 @section('site-title')
-    {{__('Advertisement Area')}}
+    {{__('Our Activities Area')}}
 @endsection
 @section('content')
     <div class="col-lg-12 col-ml-12 padding-bottom-30">
@@ -18,14 +18,14 @@
             <div class="col-lg-12 mt-t">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="header-title">{{__('Advertisement Area Settings')}}</h4>
+                        <h4 class="header-title">{{__('Our Activities Area Settings')}}</h4>
 
                         <form action="{{route('admin.home20.advertisement')}}" method="post" enctype="multipart/form-data">
                             @csrf
 
-                            <h3 class="pb-3">{{__('Top Advertise Section ')}}</h3>
+                            <h3 class="pb-3">{{__('Top Activities Section')}}</h3>
                             <div class="form-group">
-                                <label for="title">{{__('Advertisement Type')}}</label>
+                                <label for="title">{{__('Activity Type')}}</label>
                                 <select class="form-control" name="home_page_newspaper_advertisement_type" id="type">
                                     <option selected disabled>{{__('Select a Type')}}</option>
                                     <option value="image"{{get_static_option('home_page_newspaper_advertisement_type') == 'image' ? 'selected' : ''}}>{{__('Image')}}</option>
@@ -35,7 +35,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="title">{{__('Advertisement Size')}}</label>
+                                <label for="title">{{__('Activity Size')}}</label>
                                 <select class="form-control" name="home_page_newspaper_advertisement_size" id="size">
                                     <option selected disabled>{{__('Select a Size')}}</option>
                                     <option value="350*250" {{get_static_option('home_page_newspaper_advertisement_size') == '350*250' ? 'selected' : ''}}>{{__('350 x 250')}}</option>
@@ -54,9 +54,9 @@
                             </div>
 
 
-                            <h3 class="mt-5 pb-3">{{__('Bottom Advertise Section ')}}</h3>
+                            <h3 class="mt-5 pb-3">{{__('Bottom Activities Section')}}</h3>
                             <div class="form-group">
-                                <label for="title">{{__('Advertisement Type')}}</label>
+                                <label for="title">{{__('Activity Type')}}</label>
                                 <select class="form-control" name="home_page_newspaper_advertisement_type_bottom" id="type">
                                     <option selected disabled>{{__('Select a Type')}}</option>
                                     <option value="image"{{get_static_option('home_page_newspaper_advertisement_type_bottom') == 'image' ? 'selected' : ''}}>{{__('Image')}}</option>
@@ -66,7 +66,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="title">{{__('Advertisement Size')}}</label>
+                                <label for="title">{{__('Activity Size')}}</label>
                                 <select class="form-control" name="home_page_newspaper_advertisement_size_bottom" id="size">
                                     <option selected disabled>{{__('Select a Size')}}</option>
                                     <option value="350*250" {{get_static_option('home_page_newspaper_advertisement_size_bottom') == '350*250' ? 'selected' : ''}}>{{__('350 x 250')}}</option>
