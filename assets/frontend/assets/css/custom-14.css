@@ -4940,7 +4940,7 @@ html.monochrome {
 /* Modal Content Box */
 .modal-content {
     position: relative;
-    width: 80%;
+    width: 90%;
     max-width: 800px;
     background: #000;
     border-radius: 8px;
@@ -4990,6 +4990,7 @@ html.monochrome {
     border-radius: 8px;
     padding: 25px;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    background: #cccccc52;
 }
 
 #important .information-wrap .information-card:hover {
@@ -5829,7 +5830,7 @@ select:focus {
 }
 
 #important .information-wrap .information-card ul a li {
-    line-height: 12px;
+    line-height: 28px;
 }
 
 .loan-section .card {
@@ -6909,11 +6910,19 @@ a.btn.btn-view:hover {
     color: #000;
     margin: 0;
     padding: 0;
-    max-width: 1230px;
+    max-width: 1920px;
     margin: auto;
     overflow: hidden;
     min-height: 500px;
-    position: relative;
+    width: 85%;
+    padding-left: 5rem;
+    padding-right: 5rem;
+}
+.carousel-3D-swiper-section .swiper-button-prev{
+    left: 4%;
+}
+.carousel-3D-swiper-section .swiper-button-next{
+    right: 4%;
 }
 
 .carousel-3D-swiper-section .swiper-wrapper {
@@ -7552,3 +7561,124 @@ td {
 .card a img {
     width: 100%;
 }
+
+.location-section .tab-wrapper{
+                display:flex;
+                justify-content:center;
+                gap:6px;
+                background:#00602230;
+                padding:8px;
+                border-radius:40px;
+                width:fit-content;
+                margin:auto;
+                margin-bottom:40px;
+                flex-wrap:wrap;
+            }
+
+            .location-section .tab{
+                border:none;
+                padding:11px 18px;
+                background:transparent;
+                border-radius:30px;
+                cursor:pointer;
+                font-size:14px;
+                font-weight:500;
+            }
+
+            .location-section .tab.active{
+                background:#006022;
+                color:white;
+            }
+
+            /* grid */
+
+            .location-section .location-grid{
+                display:grid;
+                grid-template-columns:1fr 1fr;
+                gap:30px;
+            }
+
+            /* map */
+
+            .location-section .map-area{
+                height:420px;
+                border-radius:12px;
+                overflow:hidden;
+            }
+
+            .location-section .map-area iframe{
+                width:100%;
+                height:100%;
+                border:none;
+            }
+
+            /* list */
+
+            .location-section .list-area{
+                background:white;
+                border-radius:12px;
+                padding:20px;
+                box-shadow:0 8px 20px rgba(0,0,0,0.08);
+                height:420px;
+                display:flex;
+                flex-direction:column;
+            }
+
+            /* search */
+
+            .location-section .search-boxs input{
+                width:100%;
+                padding:12px;
+                border-radius:8px;
+                border:1px solid #ddd;
+                margin-bottom:15px;
+            }
+
+            /* list */
+
+            .location-section .branch-list{
+                overflow-y:auto;
+                flex:1;
+            }
+
+            .location-section .branch-item{
+                padding:16px;
+                border:1px solid #eee;
+                border-radius:8px;
+                margin-bottom:10px;
+                cursor:pointer;
+                transition:.3s;
+            }
+
+            .location-section .branch-item:hover{
+                background:#f3f6ff;
+            }
+
+            /* scrollbar */
+
+            .location-section .branch-list::-webkit-scrollbar{
+            width:6px;
+            }
+
+            .location-section .branch-list::-webkit-scrollbar-thumb{
+                background:#c6d3f5;
+                border-radius:10px;
+            }
+
+            /* responsive */
+
+            @media(max-width:992px){
+
+            .location-section .location-grid{
+                grid-template-columns:1fr;
+            }
+
+            .location-section .map-area{
+            height:350px;
+            }
+
+            .location-section .list-area{
+                height:auto;
+            }
+
+            }

@@ -357,121 +357,148 @@ searchBtn.onclick = () => {
   searchBox.classList.toggle("active");
 };
 
+const data = window.locationData || null;
+const tabs = document.querySelectorAll(".tab");
+const list = document.getElementById("branchList");
+const map = document.getElementById("mapFrame");
+const search = document.getElementById("searchInputLocation");
 
-const data = {
+if (data && tabs.length && list && map && search) {
+  const availableTabs = Object.keys(data).filter(function (key) {
+    return Array.isArray(data[key]) && data[key].length;
+  });
 
-atm:[
-{name:"Adabar ATM", location:"adabor dhaka"},
-{name:"Dhanmondi ATM", location:"dhanmondi dhaka"},
-{name:"Uttara ATM", location:"uttara dhaka"},
-{name:"Adabar ATM", location:"adabor dhaka"},
-{name:"Dhanmondi ATM", location:"dhanmondi dhaka"},
-{name:"Uttara ATM", location:"uttara dhaka"},
-{name:"Adabar ATM", location:"adabor dhaka"},
-{name:"Dhanmondi ATM", location:"dhanmondi dhaka"},
-{name:"Uttara ATM", location:"uttara dhaka"},
-{name:"Adabar ATM", location:"adabor dhaka"},
-{name:"Dhanmondi ATM", location:"dhanmondi dhaka"},
-{name:"Uttara ATM", location:"uttara dhaka"}
-],
+  let currentTab =
+    Array.from(tabs).find(function (tab) {
+      return tab.classList.contains("active") && data[tab.dataset.tab];
+    })?.dataset.tab || availableTabs[0] || null;
 
-branch:[
-{name:"Agrabad Branch", location:"agrabad chittagong"},
-{name:"Gulshan Branch", location:"gulshan dhaka"},
-{name:"Mirpur Branch", location:"mirpur dhaka"},
-{name:"Agrabad Branch", location:"agrabad chittagong"},
-{name:"Gulshan Branch", location:"gulshan dhaka"},
-{name:"Mirpur Branch", location:"mirpur dhaka"},
-{name:"Agrabad Branch", location:"agrabad chittagong"},
-{name:"Gulshan Branch", location:"gulshan dhaka"},
-{name:"Mirpur Branch", location:"mirpur dhaka"}
-],
+  function getEmbedUrl(item) {
+    if (item.latitude && item.longitude) {
+      return (
+        "https://maps.google.com/maps?q=" +
+        encodeURIComponent(item.latitude + "," + item.longitude) +
+        "&t=&z=15&ie=UTF8&iwloc=&output=embed"
+      );
+    }
 
-subbranch:[
-{name:"Adamjee Nagar Sub Branch", location:"adamjee nagar"},
-{name:"Aftabnagar Sub Branch", location:"aftabnagar"},
-{name:"Ali Bhaban", location:"ali bhaban dhaka"},
-{name:"Adamjee Nagar Sub Branch", location:"adamjee nagar"},
-{name:"Aftabnagar Sub Branch", location:"aftabnagar"},
-{name:"Ali Bhaban", location:"ali bhaban dhaka"},
-{name:"Adamjee Nagar Sub Branch", location:"adamjee nagar"},
-{name:"Aftabnagar Sub Branch", location:"aftabnagar"},
-{name:"Ali Bhaban", location:"ali bhaban dhaka"}
-]
+    if (item.query) {
+      return (
+        "https://maps.google.com/maps?q=" +
+        encodeURIComponent(item.query) +
+        "&t=&z=15&ie=UTF8&iwloc=&output=embed"
+      );
+    }
+
+    return "";
+  }
+
+  function renderMap(item) {
+    if (!item) {
+      map.innerHTML =
+        '<div class="branch-item">No map available for this location.</div>';
+      return;
+    }
+
+    if (item.map && item.map.toLowerCase().indexOf("<iframe") !== -1) {
+      map.innerHTML = item.map;
+      return;
+    }
+
+    const src = item.map || getEmbedUrl(item);
+
+    if (!src) {
+      map.innerHTML =
+        '<div class="branch-item">No map available for this location.</div>';
+      return;
+    }
+
+    map.innerHTML =
+      '<iframe src="' +
+      src +
+      '" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>';
+  }
+
+  function buildLocationItem(item, isActive) {
+    const div = document.createElement("div");
+    div.className = "branch-item" + (isActive ? " active" : "");
+    const title = document.createElement("strong");
+    title.textContent = item.name;
+    div.appendChild(title);
+
+    if (item.address) {
+      const address = document.createElement("p");
+      address.textContent = item.address;
+      div.appendChild(address);
+    }
+
+    div.onclick = function () {
+      list.querySelectorAll(".branch-item").forEach(function (node) {
+        node.classList.remove("active");
+      });
+      div.classList.add("active");
+      renderMap(item);
+    };
+
+    return div;
+  }
+
+  function getFilteredLocations() {
+    const items = Array.isArray(data[currentTab]) ? data[currentTab] : [];
+    const value = search.value.toLowerCase().trim();
+
+    if (!value) {
+      return items;
+    }
+
+    return items.filter(function (item) {
+      return [item.name, item.address, item.query]
+        .filter(Boolean)
+        .some(function (field) {
+          return field.toLowerCase().includes(value);
+        });
+    });
+  }
+
+  function loadLocations() {
+    const items = getFilteredLocations();
+    list.innerHTML = "";
+
+    if (!items.length) {
+      map.innerHTML =
+        '<div class="branch-item">No locations found for this selection.</div>';
+      list.innerHTML =
+        '<div class="branch-item">No locations found for this selection.</div>';
+      return;
+    }
+
+    items.forEach(function (item, index) {
+      list.appendChild(buildLocationItem(item, index === 0));
+    });
+
+    renderMap(items[0]);
+  }
+
+  tabs.forEach(function (tab) {
+    if (tab.dataset.tab === currentTab) {
+      tab.classList.add("active");
+    } else {
+      tab.classList.remove("active");
+    }
+
+    tab.addEventListener("click", function () {
+      currentTab = tab.dataset.tab;
+      search.value = "";
+
+      tabs.forEach(function (t) {
+        t.classList.remove("active");
+      });
+      tab.classList.add("active");
+
+      loadLocations();
+    });
+  });
+
+  loadLocations();
+  search.addEventListener("input", loadLocations);
 }
-
-const tabs=document.querySelectorAll(".tab")
-const list=document.getElementById("branchList")
-const map=document.getElementById("mapFrame")
-const search=document.getElementById("searchInputLocation")
-
-let currentTab="atm"
-
-function loadLocations(type){
-
-list.innerHTML="";
-
-data[type].forEach(item=>{
-
-const div=document.createElement("div")
-
-div.className="branch-item"
-div.innerText=item.name
-
-div.onclick=()=>{
-
-map.src=`https://maps.google.com/maps?q=${item.location}&t=&z=15&ie=UTF8&iwloc=&output=embed`
-
-}
-
-list.appendChild(div)
-
-})
-
-}
-
-loadLocations(currentTab)
-
-tabs.forEach(tab=>{
-
-tab.addEventListener("click",()=>{
-
-tabs.forEach(t=>t.classList.remove("active"))
-tab.classList.add("active")
-
-currentTab=tab.dataset.tab
-
-loadLocations(currentTab)
-
-})
-
-})
-
-search.addEventListener("keyup",()=>{
-
-let value=search.value.toLowerCase()
-
-let filtered=data[currentTab].filter(item=>
-item.name.toLowerCase().includes(value)
-)
-
-list.innerHTML="";
-
-filtered.forEach(item=>{
-
-const div=document.createElement("div")
-
-div.className="branch-item"
-div.innerText=item.name
-
-div.onclick=()=>{
-
-map.src=`https://maps.google.com/maps?q=${item.location}&t=&z=15&ie=UTF8&iwloc=&output=embed`
-
-}
-
-list.appendChild(div)
-
-})
-
-})

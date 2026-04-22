@@ -61,6 +61,7 @@ use App\Testimonial;
 use App\VideoGallery;
 use App\Works;
 use App\WorksCategory;
+use App\BankDownloadCategory;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Http\Request;
@@ -98,6 +99,8 @@ class FrontendController extends Controller
         $all_price_plan = PricePlan::where(['lang' => $lang, 'status' => 'publish'])->orderBy('id', 'desc')->take(get_static_option('home_page_01_price_plan_section_items'))->get();
         $all_team_members = TeamMember::where('lang', $lang)->orderBy('id', 'desc')->take(get_static_option('home_page_01_team_member_items'))->get();
         $all_brand_logo = Brand::all();
+
+        $all_download_categories = BankDownloadCategory::where('lang', get_default_language())->get();
         $all_bank_downloads = BankDownload::where([
             'lang' => $lang,
             'status' => 'publish',
@@ -134,6 +137,7 @@ class FrontendController extends Controller
             'all_team_members' => $all_team_members,
             'all_brand_logo' => $all_brand_logo,
             'all_bank_downloads' => $all_bank_downloads,
+            'all_download_categories' => $all_download_categories,
             'all_work_category' => $all_work_category,
             'all_work' => $all_work,
             'all_service_category' => $all_service_category,

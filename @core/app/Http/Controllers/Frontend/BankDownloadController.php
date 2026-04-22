@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\BankDownload;
 use App\BankDownloadCategory;
 use App\BankDownloadSubcategory;
+use App\Helpers\LanguageHelper;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,7 @@ class BankDownloadController extends Controller
 
     public function page()
     {
-        $lang = get_current_language()->slug;
+        $lang = $lang = LanguageHelper::user_lang_slug();
         
         $all_categories = BankDownloadCategory::where(['status' => 'publish', 'lang' => $lang])
             ->with(['subcategories' => function ($q) use ($lang) {
@@ -36,7 +37,7 @@ class BankDownloadController extends Controller
 
     public function single($slug)
     {
-        $lang = get_current_language()->slug;
+        $lang = LanguageHelper::user_lang_slug();
         $download = BankDownload::where(['slug' => $slug, 'status' => 'publish', 'lang' => $lang])
             ->with(['category', 'subcategory'])
             ->firstOrFail();
@@ -55,7 +56,7 @@ class BankDownloadController extends Controller
 
     public function category($category_id, $slug = null)
     {
-        $lang = get_current_language()->slug;
+        $lang = LanguageHelper::user_lang_slug();
         
         $category = BankDownloadCategory::where(['id' => $category_id, 'status' => 'publish', 'lang' => $lang])->firstOrFail();
         
@@ -80,7 +81,7 @@ class BankDownloadController extends Controller
 
     public function subcategory($subcategory_id, $slug = null)
     {
-        $lang = get_current_language()->slug;
+        $lang = LanguageHelper::user_lang_slug();
         
         $subcategory = BankDownloadSubcategory::where(['id' => $subcategory_id, 'status' => 'publish', 'lang' => $lang])->firstOrFail();
         
@@ -105,7 +106,7 @@ class BankDownloadController extends Controller
 
     public function search(Request $request)
     {
-        $lang = get_current_language()->slug;
+        $lang = LanguageHelper::user_lang_slug();
         $search_term = $request->get('q', '');
         
         $all_categories = BankDownloadCategory::where(['status' => 'publish', 'lang' => $lang])

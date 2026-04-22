@@ -1,7 +1,19 @@
-@extends('frontend.layouts.app')
-
-@section('page_title')
-    {{ isset($page_title) ? $page_title : 'Bank Downloads' }}
+@extends('frontend.frontend-page-master')
+@php
+    $page_name = get_static_option('bank_downloads_page_' . $user_select_lang_slug . '_name');
+@endphp
+@section('site-title')
+    {{ $page_name }}
+@endsection
+@section('page-title')
+    {{ $page_name ?? "Bank Downloads" }} {{ $current_category ? $current_category->title : __('All Categories') }}
+@endSection
+@section('page-meta-data')
+    <meta name="description" content="{{ get_static_option('bank_downloads_page_' . $user_select_lang_slug . '_meta_description') }}">
+    <meta name="tags" content="{{ get_static_option('bank_downloads_page_' . $user_select_lang_slug . '_meta_tags') }}">
+    {!! render_og_meta_image_by_attachment_id(
+        get_static_option('bank_downloads_page_' . $user_select_lang_slug . '_meta_image'),
+    ) !!}
 @endsection
 
 @section('content')

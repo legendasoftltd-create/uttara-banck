@@ -111,4 +111,66 @@
             </div>
         </div>
     </section>
+
+    <section class="location-section">
+                <div class="container-fluid">
+                <div class="empty-height-50"></div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h2 class="text-center title-color">
+                                FIND OUR LOCATIONS
+                            </h2>
+                            <div class="title-seperator">
+                            </div>
+                        </div>
+                    </div>
+                        <br>
+                        <br>
+                    <div class="tab-wrapper">
+                    @forelse($types as $key => $type)
+                        <button class="tab {{ $key === 0 ? 'active' : '' }}" data-tab="{{ $type }}">
+                            {{ ucwords(str_replace('_',' ', $type)) }}
+                        </button>
+                    @empty
+                        <div class="col-lg-12">
+                            <div class="alert alert-warning">{{__('No locations found for the selected filters.')}}</div>
+                        </div>
+                    @endforelse
+                    </div>
+                    <div class="location-grid">
+                        <div class="map-area" id="mapFrame">
+                        </div>
+
+                        <div class="list-area">
+                            <div class="search-boxs">
+                                <input type="text" id="searchInputLocation" placeholder="Search...">
+                            </div>
+                            <div class="branch-list" id="branchList"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        @php
+            $locationData = $locationDirectory->groupBy('type')->map(function ($items) {
+                return $items->map(function ($item) {
+                    return [
+                        'name' => $item->name,
+                        'address' => $item->address,
+                        'map' => $item->map,
+                        'latitude' => $item->latitude,
+                        'longitude' => $item->longitude,
+                        'query' => collect([
+                            $item->name,
+                            $item->address,
+                            $item->upazila,
+                            $item->district,
+                            $item->division,
+                        ])->filter()->implode(', '),
+                    ];
+                })->values();
+            });
+        @endphp
+<script>
+    window.locationData = @json($locationData);
+</script>
 @endsection

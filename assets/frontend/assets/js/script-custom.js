@@ -341,7 +341,7 @@ const carousel3Dswiper = new Swiper(".carousel-3D-swiper", {
   coverflowEffect: {
     rotate: 0,
     stretch: 0,
-    depth: 350,
+    depth: 274,
     modifier: 1,
     slideShadows: true,
   },

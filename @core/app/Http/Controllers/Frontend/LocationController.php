@@ -31,10 +31,15 @@ class LocationController extends Controller
             $query->where('locker', (int) $request->locker);
         }
 
-        $locations = $query->orderBy('type')->orderBy('name')->paginate(12)->withQueryString();
-
+        $filteredQuery = (clone $query)->orderBy('type')->orderBy('name');
+        $locations = (clone $filteredQuery)->paginate(12)->withQueryString();
+        $locationDirectory = (clone $filteredQuery)->get();
+        $types = $locationDirectory->pluck('type')->unique()->values();
+            
         return view('frontend.pages.locations.index')->with([
             'locations' => $locations,
+            'locationDirectory' => $locationDirectory,
+            'types' => $types,
             'user_select_lang_slug' => LanguageHelper::user_lang_slug(),
             'filters' => $request->only(['type', 'division', 'district', 'upazila', 'branch_point', 'dhaka_branch', 'locker']),
             'divisions' => Location::published()->whereNotNull('division')->where('division', '!=', '')->distinct()->orderBy('division')->pluck('division'),
