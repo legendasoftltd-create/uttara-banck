@@ -113,15 +113,15 @@
 
 
                     <li class="main_dropdown
-                        @if(request()->is(['admin-home/advertisement/*','admin-home/advertisement'])) active @endif
+                        @if(request()->is(['admin-home/our-activities/*','admin-home/our-activities'])) active @endif
                         ">
                         <a href="javascript:void(0)" aria-expanded="true"><i class="ti-write"></i>
                             <span>{{__('Our Activities')}}</span></a>
                         <ul class="collapse">
-                                <li class="{{active_menu('admin-home/advertisement')}} @if(request()->is('admin-home/advertisement/edit/*')) active @endif"><a
+                                <li class="{{active_menu('admin-home/our-activities')}} @if(request()->is('admin-home/our-activities/edit/*')) active @endif"><a
                                             href="{{route('admin.advertisement')}}">{{__('All Our Activities')}}</a></li>
 
-                                <li class="{{active_menu('admin-home/advertisement/new')}}"><a
+                                <li class="{{active_menu('admin-home/our-activities/new')}}"><a
                                             href="{{route('admin.advertisement.new')}}">{{__('Add New Activity')}}</a></li>
                         </ul>
                     </li>
@@ -144,8 +144,8 @@
                                     href="{{route('admin.services.new')}}">{{__('New Service')}}</a></li>
                             <li class="{{active_menu('admin-home/services/category')}}"><a
                                     href="{{route('admin.service.category')}}">{{__('Category')}}</a></li>
-                            <li class="{{active_menu('admin-home/services/page-settings')}}"><a
-                                    href="{{route('admin.services.page.settings')}}">{{__('Service Page')}}</a></li>
+                            {{-- <li class="{{active_menu('admin-home/services/page-settings')}}"><a
+                                    href="{{route('admin.services.page.settings')}}">{{__('Service Page')}}</a></li> --}}
                         </ul>
                     </li>
                     @endif
@@ -183,9 +183,9 @@
                                 <li class="{{active_menu('admin-home/gallery-page/category')}}">
                                     <a href="{{route('admin.gallery.category')}}" >{{__('Category')}}</a>
                                 </li>
-                                <li class="{{active_menu('admin-home/gallery-page/page-settings')}}">
+                                {{-- <li class="{{active_menu('admin-home/gallery-page/page-settings')}}">
                                     <a href="{{route('admin.gallery.page.settings')}}" >{{__('Page Settings')}}</a>
-                                </li>
+                                </li> --}}
                             </ul>
                         </li>
                     @endif
@@ -200,13 +200,13 @@
                                 <li class="{{active_menu('admin-home/video-gallery')}}">
                                     <a href="{{route('admin.video.gallery.all')}}" >{{__('Video Gallery')}}</a>
                                 </li>
-                                <li class="{{active_menu('admin-home/video-gallery/page-settings')}}">
+                                {{-- <li class="{{active_menu('admin-home/video-gallery/page-settings')}}">
                                     <a href="{{route('admin.video.gallery.page.settings')}}" >{{__('Page Settings')}}</a>
-                                </li>
+                                </li> --}}
                             </ul>
                         </li>
                     @endif
-                    @if(check_page_permission_by_string('Price Plan'))
+                    {{-- @if(check_page_permission_by_string('Price Plan'))
                         <li class="main_dropdown {{active_menu('admin-home/price-plan')}}
                         @if(request()->is('admin-home/price-plan/*')) active @endif
                                 ">
@@ -225,7 +225,7 @@
 
                             </ul>
                         </li>
-                    @endif
+                    @endif --}}
                     @if(check_page_permission_by_string('Faq'))
                     <li class="main_dropdown {{active_menu('admin-home/faq')}}">
                         <a href="{{route('admin.faq')}}" aria-expanded="true"><i class="ti-control-forward"></i>

@@ -111,15 +111,15 @@
 
 
                     <li class="main_dropdown
-                        <?php if(request()->is(['admin-home/advertisement/*','admin-home/advertisement'])): ?> active <?php endif; ?>
+                        <?php if(request()->is(['admin-home/our-activities/*','admin-home/our-activities'])): ?> active <?php endif; ?>
                         ">
                         <a href="javascript:void(0)" aria-expanded="true"><i class="ti-write"></i>
                             <span><?php echo e(__('Our Activities')); ?></span></a>
                         <ul class="collapse">
-                                <li class="<?php echo e(active_menu('admin-home/advertisement')); ?> <?php if(request()->is('admin-home/advertisement/edit/*')): ?> active <?php endif; ?>"><a
+                                <li class="<?php echo e(active_menu('admin-home/our-activities')); ?> <?php if(request()->is('admin-home/our-activities/edit/*')): ?> active <?php endif; ?>"><a
                                             href="<?php echo e(route('admin.advertisement')); ?>"><?php echo e(__('All Our Activities')); ?></a></li>
 
-                                <li class="<?php echo e(active_menu('admin-home/advertisement/new')); ?>"><a
+                                <li class="<?php echo e(active_menu('admin-home/our-activities/new')); ?>"><a
                                             href="<?php echo e(route('admin.advertisement.new')); ?>"><?php echo e(__('Add New Activity')); ?></a></li>
                         </ul>
                     </li>
@@ -142,8 +142,7 @@
                                     href="<?php echo e(route('admin.services.new')); ?>"><?php echo e(__('New Service')); ?></a></li>
                             <li class="<?php echo e(active_menu('admin-home/services/category')); ?>"><a
                                     href="<?php echo e(route('admin.service.category')); ?>"><?php echo e(__('Category')); ?></a></li>
-                            <li class="<?php echo e(active_menu('admin-home/services/page-settings')); ?>"><a
-                                    href="<?php echo e(route('admin.services.page.settings')); ?>"><?php echo e(__('Service Page')); ?></a></li>
+                            
                         </ul>
                     </li>
                     <?php endif; ?>
@@ -181,9 +180,7 @@
                                 <li class="<?php echo e(active_menu('admin-home/gallery-page/category')); ?>">
                                     <a href="<?php echo e(route('admin.gallery.category')); ?>" ><?php echo e(__('Category')); ?></a>
                                 </li>
-                                <li class="<?php echo e(active_menu('admin-home/gallery-page/page-settings')); ?>">
-                                    <a href="<?php echo e(route('admin.gallery.page.settings')); ?>" ><?php echo e(__('Page Settings')); ?></a>
-                                </li>
+                                
                             </ul>
                         </li>
                     <?php endif; ?>
@@ -199,33 +196,11 @@
                                 <li class="<?php echo e(active_menu('admin-home/video-gallery')); ?>">
                                     <a href="<?php echo e(route('admin.video.gallery.all')); ?>" ><?php echo e(__('Video Gallery')); ?></a>
                                 </li>
-                                <li class="<?php echo e(active_menu('admin-home/video-gallery/page-settings')); ?>">
-                                    <a href="<?php echo e(route('admin.video.gallery.page.settings')); ?>" ><?php echo e(__('Page Settings')); ?></a>
-                                </li>
+                                
                             </ul>
                         </li>
                     <?php endif; ?>
-                    <?php if(check_page_permission_by_string('Price Plan')): ?>
-                        <li class="main_dropdown <?php echo e(active_menu('admin-home/price-plan')); ?>
-
-                        <?php if(request()->is('admin-home/price-plan/*')): ?> active <?php endif; ?>
-                                ">
-                            <a href="javascript:void(0)" aria-expanded="true"><i class="ti-write"></i>
-                                <span><?php echo e(__('Price Plan')); ?></span></a>
-                            <ul class="collapse">
-                                <li class="<?php echo e(active_menu('admin-home/price-plan')); ?>">
-                                    <a href="<?php echo e(route('admin.price.plan')); ?>" ><?php echo e(__('All Price Plan')); ?></a>
-                                </li>
-                                <li class="<?php echo e(active_menu('admin-home/price-plan/new')); ?>">
-                                    <a href="<?php echo e(route('admin.price.plan.new')); ?>" ><?php echo e(__('New Price Plan')); ?></a>
-                                </li>
-                                <li class="<?php echo e(active_menu('admin-home/price-plan/category')); ?>">
-                                    <a href="<?php echo e(route('admin.price.plan.category')); ?>" ><?php echo e(__('Category')); ?></a>
-                                </li>
-
-                            </ul>
-                        </li>
-                    <?php endif; ?>
+                    
                     <?php if(check_page_permission_by_string('Faq')): ?>
                     <li class="main_dropdown <?php echo e(active_menu('admin-home/faq')); ?>">
                         <a href="<?php echo e(route('admin.faq')); ?>" aria-expanded="true"><i class="ti-control-forward"></i>
