@@ -58,7 +58,15 @@ class BankDownloadController extends Controller
     {
         $lang = LanguageHelper::user_lang_slug();
         
-        $category = BankDownloadCategory::where(['id' => $category_id, 'status' => 'publish', 'lang' => $lang])->firstOrFail();
+        $category = BankDownloadCategory::where(['id' => $category_id, 'status' => 'publish', 'lang' => $lang])
+            ->with(['subcategories' => function ($query) use ($lang) {
+                $query->where(['status' => 'publish', 'lang' => $lang])
+                    ->with(['downloads' => function ($downloadQuery) use ($lang) {
+                        $downloadQuery->where(['status' => 'publish', 'lang' => $lang])
+                            ->orderBy('publish_date', 'desc');
+                    }]);
+            }])
+            ->firstOrFail();
         
         $all_categories = BankDownloadCategory::where(['status' => 'publish', 'lang' => $lang])
             ->with(['subcategories' => function ($q) use ($lang) {
@@ -66,15 +74,27 @@ class BankDownloadController extends Controller
             }])
             ->get();
         
-        $all_downloads = BankDownload::where(['category_id' => $category_id, 'status' => 'publish', 'lang' => $lang])
+        $all_downloads = BankDownload::where([
+                'category_id' => $category_id,
+                'status' => 'publish',
+                'lang' => $lang,
+            ])
+            ->whereNull('subcategory_id')
             ->orderBy('publish_date', 'desc')
             ->with(['category', 'subcategory'])
-            ->paginate(12);
+            ->get();
+
+        $subcategory_sections = $category->subcategories
+            ->filter(function ($subcategory) {
+                return $subcategory->downloads->count() > 0;
+            })
+            ->values();
         
         return view(self::BASE_PATH . 'index')->with([
             'all_downloads' => $all_downloads,
             'all_categories' => $all_categories,
             'current_category' => $category,
+            'subcategory_sections' => $subcategory_sections,
             'page_title' => $category->title
         ]);
     }

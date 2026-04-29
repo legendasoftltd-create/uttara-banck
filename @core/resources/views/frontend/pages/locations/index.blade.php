@@ -6,7 +6,7 @@
     {{__('Branch, Sub-Branch & ATM List')}}
 @endsection
 @section('content')
-    <section class="padding-120">
+    {{-- <section class="padding-120">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
@@ -110,7 +110,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
 
     <section class="location-section">
                 <div class="container-fluid">
