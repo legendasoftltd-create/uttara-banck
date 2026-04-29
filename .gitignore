@@ -1,12 +1,16 @@
 # Laravel
 /@core/vendor/
 /@core/node_modules/
-@core/storage
+/@core/storage/cache/*
+/@core/storage/logs/*
+/@core/storage/framework/sessions/*
+/@core/storage/framework/views/*
+/@core/storage/framework/cache/data/*
 
 # Environment files
 @core/.env
 @core/.env.backup
-@core/.env.production
+@core/.env.productiong
 @core/.env.local
 
 # Composer
