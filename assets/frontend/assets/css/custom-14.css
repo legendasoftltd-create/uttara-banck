@@ -7682,3 +7682,125 @@ td {
             }
 
             }
+
+            /* ===============================================
+Download Page Design CSS Starts Here 
+================================================= */
+
+/* Main Accordion Style */
+.download-page .main-category {
+    border-bottom: 1px solid #e0e0e0;
+    margin-bottom: 10px;
+}
+
+.download-page .main-category summary {
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 15px;
+    color: #008649;
+    font-weight: 500;
+    cursor: pointer;
+    background: #fdfdfd;
+}
+
+.download-page .main-category summary::-webkit-details-marker {
+    display: none;
+}
+
+/* Green Circle Arrow */
+.download-page .down-arrow {
+    width: 22px;
+    height: 22px;
+    background: #6dbb54;
+    border-radius: 50%;
+    position: relative;
+}
+
+.download-page .down-arrow::after {
+    content: '';
+    position: absolute;
+    top: 8px;
+    left: 7px;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 6px solid #fff;
+}
+
+/* List Items */
+.download-page .form-list {
+    list-style: none;
+    padding: 10px 0 10px 25px;
+}
+
+.download-page .form-list li {
+    color: #006022;
+    margin-bottom: 12px;
+    font-size: 15px;
+}
+
+/* 2nd Step Dropdown Style */
+.download-page .sub-summary {
+    list-style: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+    outline: none;
+}
+
+.download-page .sub-summary::-webkit-details-marker {
+    display: none;
+}
+
+/* Inner List (Indentation and Arrows) */
+.download-page .sub-list {
+    list-style: none;
+    padding-left: 35px;
+    margin-top: 10px;
+}
+
+.download-page .sub-list li {
+    position: relative;
+    padding-left: 20px;
+    color: #008649;
+    font-weight: normal;
+}
+
+.download-page .sub-list li::before {
+    content: '>';
+    position: absolute;
+    left: 0;
+    font-weight: bold;
+    color: #555;
+}
+
+/* Play Icon Styling */
+.download-page  .play-icon {
+    width: 14px;
+    height: 14px;
+    border: 1px solid #777;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 10px;
+    position: relative;
+    flex-shrink: 0;
+}
+
+.download-page .play-icon::after {
+    content: '';
+    position: absolute;
+    top: 3px;
+    left: 5px;
+    border-top: 3.5px solid transparent;
+    border-bottom: 3.5px solid transparent;
+    border-left: 5px solid #777;
+}
+
+            
+.download-pages .dropdown-parent { cursor: pointer; }
+.download-pages .dropdown-parent .dropdown-toggle-parent::after { content: " ▼"; display: inline-block; margin-left: 6px; font-size: 0.9em; }
+.download-pages .dropdown-parent.dropdown-open .dropdown-toggle-parent::after { content: " ▲"; }
+.download-pages .dropdown-child { display: none; }
+.download-pages .dropdown-child td { background-color: #f9f9f9; }

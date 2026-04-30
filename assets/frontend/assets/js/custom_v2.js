@@ -532,3 +532,58 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 });
+
+
+jQuery(function($) {
+function toggleDropdownChildren($parentRow) {
+    var parentId = $parentRow.data('dropdown');
+    var $children = $('.dropdown-child[data-parent="' + parentId + '"]');
+    if ($children.length === 0) {
+        return false;
+    }
+    $children.toggle();
+    $parentRow.toggleClass('dropdown-open', $children.is(':visible'));
+    return true;
+}
+
+$('table').on('click', '.dropdown-parent .btn-view', function(event) {
+    var $row = $(this).closest('tr.dropdown-parent');
+    if (!$row.length) {
+        return;
+    }
+    var handled = toggleDropdownChildren($row);
+    if (handled) {
+        event.preventDefault();
+        event.stopPropagation();
+    }
+});
+
+$('table').on('click', 'tr.dropdown-parent', function(event) {
+    if ($(event.target).is('a, button, input')) {
+        return;
+    }
+    toggleDropdownChildren($(this));
+});
+});
+
+$(document).on('click', '.btn-view', function () {
+    let title = $(this).data('title');
+    let file = $(this).data('file');
+
+    $('#exampleModalCenterTitle').text(title);
+
+    let ext = file.split('.').pop().toLowerCase();
+    let content = '';
+
+    if (['jpg', 'jpeg', 'png', 'gif', 'webp'].includes(ext)) {
+        content = `<img src="${file}" class="img-fluid" style="width:100%;">`;
+    } 
+    else if (ext === 'pdf') {
+        content = `<iframe src="${file}" width="100%" height="600px"></iframe>`;
+    } 
+    else {
+        content = `<p>Preview not available. <a href="${file}" target="_blank">Download File</a></p>`;
+    }
+
+    $('#exampleModalCenter .modal-body').html(content);
+});
