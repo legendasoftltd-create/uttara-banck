@@ -47,7 +47,7 @@
         </div>
     </section>
 <?php endif; ?>
-<?php if($category->title == 'Accounts'): ?>
+<?php if($category->title == 'Card'): ?>
     <section class="container-fluid">
             <div>
                 <div class="about-menu-col">

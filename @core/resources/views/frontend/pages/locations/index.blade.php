@@ -156,6 +156,11 @@
                     return [
                         'name' => $item->name,
                         'address' => $item->address,
+                        'phone' => $item->mobile,
+                        'email' => $item->email,
+                        'division' => $item->division,
+                        'district' => $item->district,
+                        'upazila' => $item->upazila,
                         'map' => $item->map,
                         'latitude' => $item->latitude,
                         'longitude' => $item->longitude,
@@ -165,6 +170,9 @@
                             $item->upazila,
                             $item->district,
                             $item->division,
+                            $item->email,
+                            $item->mobile,
+                            $item->routing_no
                         ])->filter()->implode(', '),
                     ];
                 })->values();

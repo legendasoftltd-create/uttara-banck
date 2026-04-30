@@ -47,7 +47,7 @@
         </div>
     </section>
 @endif
-@if($category->title == 'Accounts')
+@if($category->title == 'Card')
     <section class="container-fluid">
             <div>
                 <div class="about-menu-col">

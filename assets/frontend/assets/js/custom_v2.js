@@ -422,14 +422,22 @@ if (data && tabs.length && list && map && search) {
   function buildLocationItem(item, isActive) {
     const div = document.createElement("div");
     div.className = "branch-item" + (isActive ? " active" : "");
-    const title = document.createElement("strong");
+    const title = document.createElement("h2");
     title.textContent = item.name;
     div.appendChild(title);
 
-    if (item.address) {
-      const address = document.createElement("p");
-      address.textContent = item.address;
-      div.appendChild(address);
+    if (item) {
+      const phone = document.createElement("p");
+
+      let parts = [];
+      if (item.phone) parts.push("Phone: " + item.phone);
+      if (item.mobile) parts.push("Mobile: " + item.mobile);
+      if (item.email) parts.push("Email: " + item.email);
+      if (item.address) parts.push("Address: " + item.address);
+
+      phone.textContent = parts.join(", ");
+
+      div.appendChild(phone);
     }
 
     div.onclick = function () {
@@ -502,3 +510,25 @@ if (data && tabs.length && list && map && search) {
   loadLocations();
   search.addEventListener("input", loadLocations);
 }
+
+
+document.addEventListener("DOMContentLoaded", function () {
+  const params = new URLSearchParams(window.location.search);
+  const tab = params.get("tab");
+
+  if (tab) {
+    // Remove active from all tabs
+    document.querySelectorAll(".tab").forEach(btn => {
+      btn.classList.remove("active");
+    });
+
+    // Add active to matching tab
+    const activeTab = document.querySelector(`.tab[data-tab="${tab}"]`);
+    if (activeTab) {
+      activeTab.classList.add("active");
+
+      // OPTIONAL: trigger click if your tab uses click event to load data
+      activeTab.click();
+    }
+  }
+});

@@ -32,49 +32,7 @@
     <section class="bank-downloads-page padding-top-60 padding-bottom-90">
         <div class="container">
             <div class="row">
-                <div class="col-lg-3 col-md-4 mb-4 mb-lg-0">
-                    <div class="downloads-sidebar">
-                        <h5 class="sidebar-title">{{ __('Categories') }}</h5>
-                        <div class="category-list">
-                            <a href="{{ route('frontend.bank.downloads') }}"
-                                class="category-item {{ !isset($current_category) && !isset($current_subcategory) ? 'active' : '' }}">
-                                {{ __('All Downloads') }}
-                            </a>
-                            @foreach ($all_categories as $category)
-                                <div class="category-group">
-                                    <a href="{{ route('frontend.bank.downloads.category', ['id' => $category->id, 'slug' => $category->slug]) }}"
-                                        class="category-item {{ isset($current_category) && $current_category->id == $category->id ? 'active' : '' }}">
-                                        {{ $category->title }}
-                                    </a>
-                                    @if ($category->subcategories->count() > 0)
-                                        <div class="subcategory-list">
-                                            @foreach ($category->subcategories as $subcategory)
-                                                <a href="{{ route('frontend.bank.downloads.subcategory', ['id' => $subcategory->id, 'slug' => $subcategory->slug]) }}"
-                                                    class="subcategory-item {{ isset($current_subcategory) && $current_subcategory->id == $subcategory->id ? 'active' : '' }}">
-                                                    {{ $subcategory->title }}
-                                                </a>
-                                            @endforeach
-                                        </div>
-                                    @endif
-                                </div>
-                            @endforeach
-                        </div>
-
-                        <div class="sidebar-search mt-4">
-                            <form action="{{ route('frontend.bank.downloads.search') }}" method="GET">
-                                <div class="input-group">
-                                    <input type="text" name="q" class="form-control" placeholder="{{ __('Search') }}"
-                                        value="{{ $search_term ?? '' }}">
-                                    <button class="btn btn-primary" type="submit">
-                                        <i class="icon-search"></i> {{ __('Search') }}
-                                    </button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-9 col-md-8">
+                <div class="col-lg-12 col-md-12">
                     @if ($isCategoryPage)
                         <div id="scroll-down"></div>
                         <div class="empty-height-50"></div>
