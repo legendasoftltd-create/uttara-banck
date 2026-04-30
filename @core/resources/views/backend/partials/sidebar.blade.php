@@ -226,7 +226,7 @@
                             </ul>
                         </li>
                     @endif --}}
-                    @if(check_page_permission_by_string('Faq'))
+                    {{-- @if(check_page_permission_by_string('Faq'))
                     <li class="main_dropdown {{active_menu('admin-home/faq')}}">
                         <a href="{{route('admin.faq')}}" aria-expanded="true"><i class="ti-control-forward"></i>
                             <span>{{__('Faq')}}</span></a>
@@ -237,8 +237,8 @@
                         <a href="{{route('admin.brands')}}" aria-expanded="true"><i class="ti-control-forward"></i>
                             <span>{{__('Brand Logos')}}</span></a>
                     </li>
-                    @endif
-                    @if(check_page_permission_by_string('Team Members'))
+                    @endif --}}
+                    {{-- @if(check_page_permission_by_string('Team Members'))
                     <li class="main_dropdown {{active_menu('admin-home/team-member')}}">
                         <a href="{{route('admin.team.member')}}" aria-expanded="true"><i class="ti-control-forward"></i>
                             <span>{{__('Team Members')}}</span></a>
@@ -249,13 +249,13 @@
                         <a href="{{route('admin.testimonial')}}" aria-expanded="true"><i class="ti-control-forward"></i>
                             <span>{{__('Testimonial')}}</span></a>
                     </li>
-                    @endif
-                    @if(check_page_permission_by_string('Counterup'))
+                    @endif --}}
+                    {{-- @if(check_page_permission_by_string('Counterup'))
                     <li class="main_dropdown {{active_menu('admin-home/counterup')}}">
                         <a href="{{route('admin.counterup')}}" aria-expanded="true"><i class="ti-exchange-vertical"></i>
                             <span>{{__('Counterup')}}</span></a>
                     </li>
-                    @endif
+                    @endif --}}
                     <li class="main_dropdown
                     @if(request()->is(['admin-home/quote-manage/*',
                     'admin-home/package/*',
@@ -281,7 +281,7 @@
                         <a href="javascript:void(0)" aria-expanded="true"><i class="ti-settings"></i>
                             <span>{{__('All Modules')}}</span></a>
                         <ul class="collapse ">
-                            @if(check_page_permission_by_string('Courses Manage')  && !empty(get_static_option('course_module_status')))
+                            {{-- @if(check_page_permission_by_string('Courses Manage')  && !empty(get_static_option('course_module_status')))
                                 <li class="main_dropdown @if(request()->is('admin-home/courses/*')) active @endif ">
                                     <a href="javascript:void(0)" aria-expanded="true">
                                         {{__('Courses Manage')}}</a>
@@ -425,7 +425,7 @@
                                     </ul>
                                 </li>
                             @endif
-                            @if(check_page_permission_by_string('Events Manage') && !empty(get_static_option('events_module_status')))
+                            @if(check_page_permission_by_string('Events Manage') && !empty(get_static_option('events_module_status'))) 
                                     <li class="main_dropdown
                                     @if(request()->is(['admin-home/events/*','admin-home/events'])) active @endif
                                             ">
@@ -466,7 +466,7 @@
                                                         href="{{route('admin.events.settings')}}">{{__('Settings')}}</a></li>
                                         </ul>
                                     </li>
-                                @endif
+                                @endif --}}
                             @if(check_page_permission_by_string('Products Manage') && !empty(get_static_option('product_module_status')))
                                     <li class="main_dropdown
                                     {{active_menu('admin-home/products')}}
@@ -483,7 +483,7 @@
                                                         href="{{route('admin.products.category.all')}}">{{__('Category')}}</a></li>
                                             <li class="{{active_menu('admin-home/products/subcategory')}}"><a
                                                         href="{{route('admin.products.subcategory.all')}}">{{__('Sub Category')}}</a></li>
-                                            <li class="{{active_menu('admin-home/products/shipping')}}"><a
+                                            {{-- <li class="{{active_menu('admin-home/products/shipping')}}"><a
                                                         href="{{route('admin.products.shipping.all')}}">{{__('Shipping')}}</a></li>
                                             <li class="{{active_menu('admin-home/products/coupon')}}"><a
                                                         href="{{route('admin.products.coupon.all')}}">{{__('Coupon')}}</a></li>
@@ -515,11 +515,11 @@
                                             </li>
                                             <li class="{{active_menu('admin-home/products/settings')}}">
                                                 <a href="{{route('admin.products.settings')}}">{{__('Settings')}}</a>
-                                            </li>
+                                            </li> --}}
                                         </ul>
                                     </li>
                                 @endif
-                            @if(check_page_permission_by_string('Donations Manage') && !empty(get_static_option('donations_module_status')))
+                            {{-- @if(check_page_permission_by_string('Donations Manage') && !empty(get_static_option('donations_module_status')))
                                     <li class="main_dropdown
                                     {{active_menu('admin-home/donations')}}
                                     @if(request()->is('admin-home/donations/*')) active @endif
@@ -571,7 +571,7 @@
                                                     href="{{route('admin.knowledge.page.settings')}}">{{__('Knowledgebase Page Settings')}}</a></li>
                                     </ul>
                                 </li>
-                            @endif
+                            @endif --}}
                             @if(check_page_permission_by_string('Support Tickets') && !empty(get_static_option('support_ticket_module_status')))
                                 <li class="main_dropdown {{active_menu('admin-home/support-tickets')}} @if(request()->is('admin-home/support-tickets/*')) active @endif"
                                 >
@@ -584,8 +584,8 @@
                                                     href="{{route('admin.support.ticket.new')}}">{{__('Add New Ticket')}}</a></li>
                                         <li class="{{active_menu('admin-home/support-tickets/department')}}"><a
                                                     href="{{route('admin.support.ticket.department')}}">{{__('Departments')}}</a></li>
-                                        <li class="{{active_menu('admin-home/support-tickets/page-settings')}}"><a
-                                                    href="{{route('admin.support.ticket.page.settings')}}">{{__('Page Settings')}}</a></li>
+                                        {{-- <li class="{{active_menu('admin-home/support-tickets/page-settings')}}"><a
+                                                    href="{{route('admin.support.ticket.page.settings')}}">{{__('Page Settings')}}</a></li> --}}
                                     </ul>
                                 </li>
                             @endif
@@ -611,7 +611,7 @@
                             @endif
                         </ul>
                     </li>
-                    <li class="main_dropdown
+                    {{-- <li class="main_dropdown
                         @if(request()->is([
                             'admin-home/home-page-01/*',
                             'admin-home/home-'.$home_page_variant.'/*',
@@ -646,8 +646,8 @@
                                     </a>
                                     <ul class="collapse">
                                         {{-- page builder check --}}
-                                        @if(empty(get_static_option('home_page_page_builder_status')))
-                                        @if(in_array($home_page_variant,['01','02','03','04']))
+                                        {{-- @if(empty(get_static_option('home_page_page_builder_status'))) --}}
+                                        {{-- @if(in_array($home_page_variant,['01','02','03','04']))
                                             <li class="{{active_menu('admin-home/header')}}">
                                                 <a href="{{route('admin.header')}}">
                                                     {{__('Header Area')}}
@@ -694,8 +694,8 @@
                                                 <li class="{{active_menu('admin-home/home-page-01/brand-logos')}}"><a
                                                             href="{{route('admin.homeone.brand.logos')}}">{{__('Brands Logos Area')}}</a></li>
                                             @endif
-                                        @endif
-                                        @if($home_page_variant == '05')
+                                        @endif --}}
+                                        {{-- @if($home_page_variant == '05')
                                             <li class="{{active_menu('admin-home/home-05/header')}}">
                                                 <a href="{{route('admin.home05.header')}}">
                                                     {{__('Header Area')}}
@@ -736,8 +736,8 @@
                                                     {{__('News Area')}}
                                                 </a>
                                             </li>
-                                        @endif
-                                        @if($home_page_variant == '06')
+                                        @endif --}}
+                                        {{-- @if($home_page_variant == '06')
                                             <li class="{{active_menu('admin-home/home-06/header')}}">
                                                 <a href="{{route('admin.home06.header')}}">
                                                     {{__('Header Area')}}
@@ -781,8 +781,8 @@
                                                     {{__('News area')}}
                                                 </a>
                                             </li>
-                                        @endif
-                                        @if($home_page_variant == '07')
+                                        @endif --}}
+                                        {{-- @if($home_page_variant == '07')
                                             <li class="{{active_menu('admin-home/home-07/header')}}">
                                                 <a href="{{route('admin.home07.header')}}">
                                                     {{__('Header Area')}}
@@ -823,8 +823,8 @@
                                                     {{__('News Area')}}
                                                 </a>
                                             </li>
-                                        @endif
-                                        @if($home_page_variant == '08')
+                                        @endif --}}
+                                        {{-- @if($home_page_variant == '08')
                                             <li class="{{active_menu('admin-home/home-08/header')}}">
                                                 <a href="{{route('admin.home08.header')}}">
                                                     {{__('Header Area')}}
@@ -865,9 +865,9 @@
                                                     {{__('News area')}}
                                                 </a>
                                             </li>
-                                        @endif
+                                        @endif --}}
 
-                                        @if($home_page_variant == '09')
+                                        {{-- @if($home_page_variant == '09')
                                             <li class="{{active_menu('admin-home/home-09/header')}}">
                                                 <a href="{{route('admin.home09.header')}}">
                                                     {{__('Header Area')}}
@@ -908,8 +908,8 @@
                                                     {{__('News Area')}}
                                                 </a>
                                             </li>
-                                        @endif
-                                        @if($home_page_variant == '10')
+                                        @endif --}}
+                                        {{-- @if($home_page_variant == '10')
                                             <li class="{{active_menu('admin-home/home-10/header-area')}}">
                                                 <a href="{{route('admin.home10.header')}}">
                                                     {{__('Header Area')}}
@@ -960,8 +960,8 @@
                                                     {{__('Contact Area')}}
                                                 </a>
                                             </li>
-                                        @endif
-                                        @if($home_page_variant == '11')
+                                        @endif --}}
+                                        {{-- @if($home_page_variant == '11')
                                             <li class="{{active_menu('admin-home/home-11/header-area')}}">
                                                 <a href="{{route('admin.home11.header')}}">
                                                     {{__('Header Area')}}
@@ -1012,8 +1012,8 @@
                                                     {{__('News Area')}}
                                                 </a>
                                             </li>
-                                            @endif
-                                        @if($home_page_variant == '12')
+                                            @endif --}}
+                                        {{-- @if($home_page_variant == '12')
                                             <li class="{{active_menu('admin-home/home-12/header-area')}}">
                                                 <a href="{{route('admin.home12.header')}}">
                                                     {{__('Header Area')}}
@@ -1054,8 +1054,8 @@
                                                     {{__('News Area')}}
                                                 </a>
                                             </li>
-                                            @endif
-                                            @if($home_page_variant == '13')
+                                            @endif --}}
+                                            {{-- @if($home_page_variant == '13')
                                                 <li class="{{active_menu('admin-home/home-13/header-area')}}">
                                                     <a href="{{route('admin.home13.header')}}">
                                                         {{__('Header Area')}}
@@ -1101,8 +1101,8 @@
                                                         {{__('News Area')}}
                                                     </a>
                                                 </li>
-                                            @endif
-                                            @if($home_page_variant == '14')
+                                            @endif --}}
+                                            {{-- @if($home_page_variant == '14')
                                                 <li class="{{active_menu('admin-home/home-14/header-area')}}">
                                                     <a href="{{route('admin.home14.header')}}">
                                                         {{__('Header Area')}}
@@ -1148,8 +1148,8 @@
                                                         {{__('Contact Area')}}
                                                     </a>
                                                 </li>
-                                            @endif
-                                            @if($home_page_variant == '15')
+                                            @endif --}}
+                                            {{-- @if($home_page_variant == '15')
                                                 <li class="{{active_menu('admin-home/home-15/header-area')}}">
                                                     <a href="{{route('admin.home15.header')}}">
                                                         {{__('Header Area')}}
@@ -1185,8 +1185,8 @@
                                                         {{__('Top Selling Products Area')}}
                                                     </a>
                                                 </li>
-                                            @endif
-                                            @if($home_page_variant == '16')
+                                            @endif --}}
+                                            {{-- @if($home_page_variant == '16')
                                                 <li class="{{active_menu('admin-home/home-16/header-area')}}">
                                                     <a href="{{route('admin.home16.header')}}">
                                                         {{__('Header Area')}}
@@ -1227,8 +1227,8 @@
                                                         {{__('News Area')}}
                                                     </a>
                                                 </li>
-                                            @endif
-                                            @if($home_page_variant == '17')
+                                            @endif --}}
+                                            {{-- @if($home_page_variant == '17')
                                                 <li class="{{active_menu('admin-home/home-17/header-area')}}">
                                                     <a href="{{route('admin.home17.header')}}">
                                                         {{__('Header Area')}}
@@ -1269,8 +1269,8 @@
                                                         {{__('Call To Action Area')}}
                                                     </a>
                                                 </li>
-                                            @endif
-                                            @if($home_page_variant == '18')
+                                            @endif --}}
+                                            {{-- @if($home_page_variant == '18')
                                                 <li class="{{active_menu('admin-home/home-18/header-area')}}">
                                                     <a href="{{route('admin.home18.header')}}">
                                                         {{__('Header Area')}}
@@ -1307,7 +1307,7 @@
                                                     </a>
                                                 </li>
                                             @endif
-                                            @if($home_page_variant == '21')
+                                            {{-- @if($home_page_variant == '21')
                                                 <li class="{{active_menu('admin-home/home-21/header-area')}}">
                                                     <a href="{{route('admin.home21.header')}}">
                                                         {{__('Header Area')}}
@@ -1348,10 +1348,10 @@
                                                         {{__('Newsletter Area')}}
                                                     </a>
                                                 </li>
-                                            @endif
+                                            @endif --}}
 
 
-                                            @if($home_page_variant == '19')
+                                            {{-- @if($home_page_variant == '19')
                                                 <li class="{{active_menu('admin-home/home-page-19/header-area')}}">
                                                     <a href="{{route('admin.home19.header')}}">
                                                         {{__('Header Area')}}
@@ -1392,8 +1392,8 @@
                                                         {{__('Promotional Area')}}
                                                     </a>
                                                 </li>
-                                            @endif
-                                            @if($home_page_variant == '20')
+                                            @endif --}}
+                                            {{-- @if($home_page_variant == '20')
                                                 <li class="{{active_menu('admin-home/home-page-20/header-area')}}">
                                                     <a href="{{route('admin.home20.header')}}">
                                                         {{__('Header Area')}}
@@ -1429,22 +1429,22 @@
                                                         {{__('Hot News Area')}}
                                                     </a>
                                                 </li>
-                                            @endif
+                                            @endif --}}
 
-                                        <li class="{{active_menu('admin-home/home-page-01/section-manage')}}">
+                                        {{-- <li class="{{active_menu('admin-home/home-page-01/section-manage')}}">
                                             <a href="{{route('admin.homeone.section.manage')}}">{{__('Section Manage')}}</a>
-                                        </li>
+                                        </li> --}}
                                         {{--  page builder check end --}}
-                                        @endif
-                                        <li class="{{active_menu('admin-home/page-builder/home-page')}}">
+                                        {{-- @endif --}}
+                                        {{-- <li class="{{active_menu('admin-home/page-builder/home-page')}}">
                                             <a href="{{route('admin.home.page.builder')}}">
                                                 {{__('Home Page Builder')}}
                                             </a>
-                                        </li>
+                                        </li> --}}
 
-                                    </ul>
-                                </li>
-                            @endif
+                                    {{-- </ul>
+                                </li> --}}
+                            {{-- @endif
                             @if(check_page_permission('about_page_manage'))
                                 <li class="main_dropdown @if(request()->is('admin-home/about-page/*') || request()->is('admin-home/page-builder/about-page')  ) active @endif ">
                                     <a href="javascript:void(0)"
@@ -1540,21 +1540,21 @@
                                     </a>
                                 </li>
                             @endif
-                        </ul>
-                    </li>
-                    <li class="main_dropdown
-                    @if(request()->is([
-                    'admin-home/form-builder/*',
-                    'admin-home/email-template/*',
-                    'admin-home/popup-builder/*',
-                    'admin-home/widgets/*',
-                    'admin-home/widgets',
-                    'admin-home/menu-edit/*',
-                    'admin-home/media-upload/page',
-                    'admin-home/menu',
-                    'admin-home/appearance-setting/*'
-                    ])) active @endif
-                    ">
+                        </ul> --}}
+                    {{-- </li> --}}
+                    {{-- <li class="main_dropdown
+                        @if(request()->is([
+                        'admin-home/form-builder/*',
+                        'admin-home/email-template/*',
+                        'admin-home/popup-builder/*',
+                        'admin-home/widgets/*',
+                        'admin-home/widgets',
+                        'admin-home/menu-edit/*',
+                        'admin-home/media-upload/page',
+                        'admin-home/menu',
+                        'admin-home/appearance-setting/*'
+                        ])) active @endif
+                        ">
                         <a href="javascript:void(0)" aria-expanded="true"><i class="ti-settings"></i>
                             <span>{{__('Appearance Settings')}}</span></a>
                         <ul class="collapse ">
@@ -1688,15 +1688,16 @@
                                     </a>
                                 </li>
                         </ul>
-                    </li>
+                    </li> --}}
                     @if(check_page_permission_by_string('General Settings'))
                     <li class="main_dropdown @if(request()->is('admin-home/general-settings/*')) active @endif">
                         <a href="javascript:void(0)" aria-expanded="true"><i class="ti-settings"></i>
                             <span>{{__('General Settings')}}</span></a>
                         <ul class="collapse ">
-                            <li class="{{active_menu('admin-home/general-settings/site-identity')}}"><a
-                                        href="{{route('admin.general.site.identity')}}">{{__('Site Identity')}}</a></li>
-                            <li class="{{active_menu('admin-home/general-settings/basic-settings')}}"><a
+                            <li class="{{active_menu('admin-home/general-settings/site-identity')}}">
+                                <a href="{{route('admin.general.site.identity')}}">{{__('Site Identity')}}</a>
+                            </li>
+                            {{-- <li class="{{active_menu('admin-home/general-settings/basic-settings')}}"><a
                                         href="{{route('admin.general.basic.settings')}}">{{__('Basic Settings')}}</a>
                             </li>
                             <li class="{{active_menu('admin-home/general-settings/color-settings')}}"><a
@@ -1718,11 +1719,11 @@
                             </li>
                             <li class="{{active_menu('admin-home/general-settings/smtp-settings')}}"><a
                                         href="{{route('admin.general.smtp.settings')}}">{{__('SMTP Settings')}}</a>
-                            </li>
-{{--                            <li class="{{active_menu('admin-home/general-settings/regenerate-image')}}"><a--}}
-{{--                                        href="{{route('admin.general.regenerate.thumbnail')}}">{{__('Regenerate Media Image')}}</a>--}}
-{{--                            </li>--}}
-                            <li class="{{active_menu('admin-home/general-settings/page-settings')}}"><a
+                            </li> --}}
+                           {{-- <li class="{{active_menu('admin-home/general-settings/regenerate-image')}}"><a
+                                       href="{{route('admin.general.regenerate.thumbnail')}}">{{__('Regenerate Media Image')}}</a>
+                           </li> --}}
+                            {{-- <li class="{{active_menu('admin-home/general-settings/page-settings')}}"><a
                                         href="{{route('admin.general.page.settings')}}">{{__('Page Settings')}}</a></li>
                             @if(!empty(get_static_option('site_payment_gateway')))
                             <li class="{{active_menu('admin-home/general-settings/payment-settings')}}"><a
@@ -1763,16 +1764,16 @@
                             </li>
                             <li class="{{active_menu('admin-home/general-settings/software-update-setting')}}"><a
                                         href="{{route('admin.general.software.update.settings')}}">{{__('Check Update')}}</a>
-                            </li>
+                            </li> --}}
                         </ul>
                     </li>
                     @endif
-                    @if(check_page_permission('languages'))
+                    {{-- @if(check_page_permission('languages'))
                     <li class="main_dropdown @if(request()->is('admin-home/languages/*') || request()->is('admin-home/languages') ) active @endif">
                         <a href="{{route('admin.languages')}}" aria-expanded="true"><i class="ti-signal"></i>
                             <span>{{__('Languages')}}</span></a>
                     </li>
-                    @endif
+                    @endif --}}
                 </ul>
             </nav>
         </div>

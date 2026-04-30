@@ -40,7 +40,7 @@
                         </div>
                     </div>
                  @endif
-                    @if(check_page_permission_by_string('Job Post Manage') && !empty(get_static_option('job_module_status')))
+                    {{-- @if(check_page_permission_by_string('Job Post Manage') && !empty(get_static_option('job_module_status')))
                     <div class="col-md-3 mt-md-5 mb-3">
                         <div class="card text-dark  mb-3">
                             <div class="dsh-box-style">
@@ -115,7 +115,7 @@
                                 </div>
                             </div>
                         </div>
-                    @endif
+                    @endif --}}
                     @if(check_page_permission_by_string('Products Manage') && !empty(get_static_option('product_module_status')))
                     <div class="col-md-3 mt-md-5 mb-3">
                         <div class="card text-dark  mb-3">
@@ -131,7 +131,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-3 mt-md-5 mb-3">
+                    {{-- <div class="col-md-3 mt-md-5 mb-3">
                         <div class="card text-dark  mb-3">
                             <div class="dsh-box-style">
                                 <a href="{{route('admin.products.order.logs')}}" class="add-new"><i class="ti-eye"></i></a>
@@ -144,7 +144,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                     @endif
                     @if(check_page_permission_by_string('Services'))
                     <div class="col-md-3 mt-md-5 mb-3">
@@ -162,7 +162,7 @@
                         </div>
                     </div>
                     @endif
-                    @if(check_page_permission_by_string('Price Plan'))
+                    {{-- @if(check_page_permission_by_string('Price Plan'))
                     <div class="col-md-3 mt-md-5 mb-3">
                         <div class="card text-dark  mb-3">
                             <div class="dsh-box-style">
@@ -177,8 +177,8 @@
                             </div>
                         </div>
                     </div>
-                    @endif
-                     @if(check_page_permission_by_string('Case Study'))
+                    @endif --}}
+                     {{-- @if(check_page_permission_by_string('Case Study'))
                     <div class="col-md-3 mt-md-5 mb-3">
                         <div class="card text-dark  mb-3">
                             <div class="dsh-box-style">
@@ -252,12 +252,12 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    @endif
+                    </div> --}}
+                    {{-- @endif --}}
                 </div>
             </div>
         </div>
-        <div class="row">
+        {{-- <div class="row">
              @if(check_page_permission_by_string('Products Manage') && !empty(get_static_option('product_module_status')))
             <div class="col-lg-6">
                 <div class="card margin-top-40">
@@ -407,6 +407,6 @@
                 </div>
             </div>
             @endif
-        </div>
+        </div> --}}
     </div>
 @endsection
