@@ -31,7 +31,7 @@ class BankDownloadController extends Controller
         return view(self::BASE_PATH . 'index')->with([
             'all_downloads' => $all_downloads,
             'all_categories' => $all_categories,
-            'page_title' => get_static_option('bank_downloads_page_title') ?? 'Bank Downloads'
+            'page_title' => get_static_option('bank_downloads_page_title') ?? 'Important Downloads'
         ]);
     }
 
@@ -68,33 +68,33 @@ class BankDownloadController extends Controller
             }])
             ->firstOrFail();
         
-        $all_categories = BankDownloadCategory::where(['status' => 'publish', 'lang' => $lang])
-            ->with(['subcategories' => function ($q) use ($lang) {
-                $q->where(['status' => 'publish', 'lang' => $lang]);
-            }])
-            ->get();
+        // $all_categories = BankDownloadCategory::where(['status' => 'publish', 'lang' => $lang])
+        //     ->with(['subcategories' => function ($q) use ($lang) {
+        //         $q->where(['status' => 'publish', 'lang' => $lang]);
+        //     }])
+        //     ->get();
         
-        $all_downloads = BankDownload::where([
-                'category_id' => $category_id,
-                'status' => 'publish',
-                'lang' => $lang,
-            ])
-            ->whereNull('subcategory_id')
-            ->orderBy('publish_date', 'desc')
-            ->with(['category', 'subcategory'])
-            ->get();
+        // $all_downloads = BankDownload::where([
+        //         'category_id' => $category_id,
+        //         'status' => 'publish',
+        //         'lang' => $lang,
+        //     ])
+        //     ->whereNull('subcategory_id')
+        //     ->orderBy('publish_date', 'desc')
+        //     ->with(['category', 'subcategory'])
+        //     ->get();
 
-        $subcategory_sections = $category->subcategories
-            ->filter(function ($subcategory) {
-                return $subcategory->downloads->count() > 0;
-            })
-            ->values();
+        // $subcategory_sections = $category->subcategories
+        //     ->filter(function ($subcategory) {
+        //         return $subcategory->downloads->count() > 0;
+        //     })
+        //     ->values();
         
         return view(self::BASE_PATH . 'index')->with([
-            'all_downloads' => $all_downloads,
-            'all_categories' => $all_categories,
+            // 'all_downloads' => $all_downloads,
+            // 'all_categories' => $all_categories,
             'current_category' => $category,
-            'subcategory_sections' => $subcategory_sections,
+            // 'subcategory_sections' => $subcategory_sections,
             'page_title' => $category->title
         ]);
     }

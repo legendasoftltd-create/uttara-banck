@@ -97,7 +97,7 @@
                                                 <td>{{ $data->publish_date->format('M d, Y') }}</td>
                                                 <td>
                                                     <a href="{{route('admin.bank.download.edit', $data->id)}}" class="btn btn-primary btn-xs mb-3 mr-1">{{__('Edit')}}</a>
-                                                    <a href="{{route('frontend.bank.downloads.single', $data->slug)}}" target="_blank" class="btn btn-info btn-xs mb-3 mr-1">{{__('View')}}</a>
+                                                    {{-- <a href="{{route('frontend.bank.downloads.single', $data->slug)}}" target="_blank" class="btn btn-info btn-xs mb-3 mr-1">{{__('View')}}</a> --}}
                                                     <x-delete-popover :url="route('admin.bank.download.delete', $data->id)"/>
                                                 </td>
                                             </tr>

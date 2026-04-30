@@ -1,7 +1,21 @@
-@extends('frontend.layouts.app')
-
-@section('page_title')
-    {{ $download->title }}
+@extends('frontend.frontend-page-master')
+@php
+    $page_name = get_static_option('bank_downloads_page_' . $user_select_lang_slug . '_name');
+    $isCategoryPage = isset($current_category);
+@endphp
+@section('site-title')
+    {{ $page_name }}
+@endsection
+@section('page-title')
+    {{ $page_name ?? 'Bank Downloads' }}
+    {{ isset($current_category) ? ': ' . $current_category->title : (isset($current_subcategory) ? ': ' . $current_subcategory->title : '') }}
+@endsection
+@section('page-meta-data')
+    <meta name="description" content="{{ get_static_option('bank_downloads_page_' . $user_select_lang_slug . '_meta_description') }}">
+    <meta name="tags" content="{{ get_static_option('bank_downloads_page_' . $user_select_lang_slug . '_meta_tags') }}">
+    {!! render_og_meta_image_by_attachment_id(
+        get_static_option('bank_downloads_page_' . $user_select_lang_slug . '_meta_image'),
+    ) !!}
 @endsection
 
 @section('content')
@@ -45,8 +59,8 @@
                         </div>
                     @endif
 
-                    @php $files = is_array($download->files) ? $download->files : []; @endphp
-
+                    @php $files = json_decode($download->files, true) ? json_decode($download->files, true) : []; @endphp
+                    {{-- @dd($files) --}}
                     @if(count($files) > 0)
                         <div class="download-files mt-5">
                             <h5>@lang('available_files')</h5>
@@ -65,7 +79,7 @@
                                         <a href="{{ asset('assets/uploads/bank-downloads/' . $file['name']) }}" 
                                            class="btn btn-primary btn-sm" 
                                            download="{{ $file['original_name'] }}">
-                                            <i class="icon-download-alt"></i> @lang('download')
+                                            <i class="icon-download-alt"></i> @lang('download')sdsads
                                         </a>
                                     </div>
                                 @endforeach

@@ -52,11 +52,44 @@ class BankDownloadController extends Controller
     public function store_new_download(Request $request)
     {
         $this->validate($request, [
-            'title' => 'required|string',
+            'title' => 'required|string|max:255',
             'category_id' => 'required|integer',
             'status' => 'required',
             'lang' => 'required',
+            'file' => 'nullable|file|max:102400',
         ]);
+
+        // Validate file extension
+        $file_data = [];
+        if ($request->hasFile('file')) {
+            $allowed_extensions = ['jpg', 'jpeg', 'png', 'gif', 'webp', 'pdf', 'doc', 'docx', 'xls', 'xlsx', 'zip', 'rar', 'txt', 'csv'];
+            $file = $request->file('file');
+            $extension = strtolower($file->getClientOriginalExtension());
+            if (!in_array($extension, $allowed_extensions)) {
+                return redirect()->back()->withErrors([
+                    'file' => 'File type .' . $extension . ' is not allowed. Allowed types: ' . implode(', ', $allowed_extensions)
+                ])->withInput();
+            }
+
+            // Get file info before moving
+            $original_name = $file->getClientOriginalName();
+            $file_size = $file->getSize();
+            $mime_type = $file->getMimeType();
+
+            $upload_dir = 'assets/uploads/bank-downloads';
+            if (!file_exists($upload_dir)) {
+                mkdir($upload_dir, 0777, true);
+            }
+            $filename = time() . '_' . Str::random(10) . '.' . $file->getClientOriginalExtension();
+            $file->move($upload_dir, $filename);
+            
+            $file_data = [
+                'name' => $filename,
+                'original_name' => $original_name,
+                'size' => $file_size,
+                'mime' => $mime_type,
+            ];
+        }
 
         $slug = Str::slug($request->title);
         // Check if slug already exists for this language
@@ -65,27 +98,13 @@ class BankDownloadController extends Controller
             $slug = $slug . '-' . time();
         }
 
-        $files = [];
-        if ($request->hasFile('files')) {
-            foreach ($request->file('files') as $file) {
-                $filename = time() . '_' . Str::random(10) . '.' . $file->getClientOriginalExtension();
-                $file->move('assets/uploads/bank-downloads', $filename);
-                $files[] = [
-                    'name' => $filename,
-                    'original_name' => $file->getClientOriginalName(),
-                    'size' => $file->getSize(),
-                    'mime' => $file->getMimeType(),
-                ];
-            }
-        }
-
         BankDownload::create([
             'title' => $request->title,
             'slug' => $slug,
             'description' => $request->description,
             'category_id' => $request->category_id,
             'subcategory_id' => $request->subcategory_id,
-            'files' => json_encode($files),
+            'files' => json_encode($file_data ? [$file_data] : []),
             'publish_date' => $request->publish_date,
             'status' => $request->status,
             'lang' => $request->lang,
@@ -122,9 +141,10 @@ class BankDownloadController extends Controller
     public function update_download(Request $request, $id)
     {
         $this->validate($request, [
-            'title' => 'required|string',
+            'title' => 'required|string|max:255',
             'category_id' => 'required|integer',
             'status' => 'required',
+            'file' => 'nullable|file|max:102400',
         ]);
 
         $download = BankDownload::find($id);
@@ -134,17 +154,40 @@ class BankDownloadController extends Controller
 
         $files = json_decode($download->files, true) ?? [];
 
-        if ($request->hasFile('files')) {
-            foreach ($request->file('files') as $file) {
-                $filename = time() . '_' . Str::random(10) . '.' . $file->getClientOriginalExtension();
-                $file->move('assets/uploads/bank-downloads', $filename);
-                $files[] = [
-                    'name' => $filename,
-                    'original_name' => $file->getClientOriginalName(),
-                    'size' => $file->getSize(),
-                    'mime' => $file->getMimeType(),
-                ];
+        // Validate file extension
+        if ($request->hasFile('file')) {
+            $allowed_extensions = ['jpg', 'jpeg', 'png', 'gif', 'webp', 'pdf', 'doc', 'docx', 'xls', 'xlsx', 'zip', 'rar', 'txt', 'csv'];
+            $file = $request->file('file');
+            $extension = strtolower($file->getClientOriginalExtension());
+            if (!in_array($extension, $allowed_extensions)) {
+                return redirect()->back()->withErrors([
+                    'file' => 'File type .' . $extension . ' is not allowed. Allowed types: ' . implode(', ', $allowed_extensions)
+                ])->withInput();
             }
+
+            // Get file info before moving
+            $original_name = $file->getClientOriginalName();
+            $file_size = $file->getSize();
+            $mime_type = $file->getMimeType();
+
+            // Delete old file if exists
+            if (count($files) > 0 && file_exists('assets/uploads/bank-downloads/' . $files[0]['name'])) {
+                unlink('assets/uploads/bank-downloads/' . $files[0]['name']);
+            }
+
+            $upload_dir = 'assets/uploads/bank-downloads';
+            if (!file_exists($upload_dir)) {
+                mkdir($upload_dir, 0777, true);
+            }
+            $filename = time() . '_' . Str::random(10) . '.' . $file->getClientOriginalExtension();
+            $file->move($upload_dir, $filename);
+            
+            $files = [[
+                'name' => $filename,
+                'original_name' => $original_name,
+                'size' => $file_size,
+                'mime' => $mime_type,
+            ]];
         }
 
         $download->update([

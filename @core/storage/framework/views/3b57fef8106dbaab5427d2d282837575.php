@@ -1904,12 +1904,7 @@
                         </ul>
                     </li>
                     <?php endif; ?>
-                    <?php if(check_page_permission('languages')): ?>
-                    <li class="main_dropdown <?php if(request()->is('admin-home/languages/*') || request()->is('admin-home/languages') ): ?> active <?php endif; ?>">
-                        <a href="<?php echo e(route('admin.languages')); ?>" aria-expanded="true"><i class="ti-signal"></i>
-                            <span><?php echo e(__('Languages')); ?></span></a>
-                    </li>
-                    <?php endif; ?>
+                    
                 </ul>
             </nav>
         </div>

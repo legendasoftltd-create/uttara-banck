@@ -34,7 +34,7 @@
                             </div>
                             <div class="d-flex">
                                 <div class="form-group d-flex align-items-baseline">
-                                    <label class="form-control-label pr-4" for="category_id">{{__('Category')}}</label>
+                                    <label class="form-control-label pr-4" for="category_id">{{__('Category')}}:</label>
                                     <select name="category_id" id="category_id" class="form-control nice-select" required onchange="loadSubcategories()">
                                         <option value="">{{__('Select Category')}}</option>
                                         @foreach($all_categories as $category)
@@ -44,7 +44,7 @@
                                 </div>
 
                                 <div class="form-group d-flex align-items-baseline">
-                                    <label class="form-control-label pr-4 pl-4 ml-4" for="subcategory_id">{{__('Subcategory')}}</label>
+                                    <label class="form-control-label pr-4 pl-4 ml-4" for="subcategory_id">{{__('Sub Category')}}:</label>
                                     <select name="subcategory_id" id="subcategory_id" class="form-control nice-select">
                                         <option value="">{{__('Select Subcategory')}}</option>
                                     </select>
@@ -57,9 +57,9 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="files">{{__('Files')}}</label>
-                                <input type="file" name="files[]" id="files" class="form-control" multiple>
-                                <small class="info-text">{{__('You can upload multiple files')}}</small>
+                                <label for="file">{{__('File')}}</label>
+                                <input type="file" name="file" id="file" class="form-control" accept=".jpg,.jpeg,.png,.gif,.webp,.pdf,.doc,.docx,.xls,.xlsx,.zip,.rar,.txt,.csv">
+                                <small class="form-text text-muted">{{__('Supported formats: Images (JPG, PNG, GIF, WebP), Documents (PDF, DOC, DOCX, XLS, XLSX), Archives (ZIP, RAR), Text & CSV. Max 100MB')}}</small>
                             </div>
 
                             <div class="form-group">

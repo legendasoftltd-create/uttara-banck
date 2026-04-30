@@ -2836,3 +2836,26 @@ function get_services(){
     $services = Services::where(['status' => 'publish'])->orderBy('id', 'desc')->paginate(get_static_option('service_post_items'));
     return $services;
 }
+
+function get_file_type_badge($filename) {
+    $ext = strtoupper(pathinfo($filename, PATHINFO_EXTENSION));
+    $type_label = '';
+    
+    if (in_array($ext, ['JPG', 'JPEG', 'PNG', 'GIF', 'WEBP'])) {
+        $type_label = '<span class="badge badge-info">Image</span>';
+    } elseif (in_array($ext, ['PDF'])) {
+        $type_label = '<span class="badge badge-danger">PDF</span>';
+    } elseif (in_array($ext, ['DOC', 'DOCX'])) {
+        $type_label = '<span class="badge badge-primary">Document</span>';
+    } elseif (in_array($ext, ['XLS', 'XLSX'])) {
+        $type_label = '<span class="badge badge-success">Spreadsheet</span>';
+    } elseif (in_array($ext, ['ZIP', 'RAR'])) {
+        $type_label = '<span class="badge badge-warning">Archive</span>';
+    } elseif (in_array($ext, ['TXT', 'CSV'])) {
+        $type_label = '<span class="badge badge-secondary">Text</span>';
+    } else {
+        $type_label = '<span class="badge badge-dark">' . $ext . '</span>';
+    }
+    
+    return $type_label;
+}

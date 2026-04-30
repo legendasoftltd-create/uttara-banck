@@ -34,24 +34,26 @@
                                 <input type="text" class="form-control" id="title" name="title" value="{{$download->title}}" required>
                             </div>
 
-                            <div class="form-group">
-                                <label for="category_id">{{__('Category')}}</label>
-                                <select name="category_id" id="category_id" class="form-control nice-select" required onchange="loadSubcategories()">
-                                    <option value="">{{__('Select Category')}}</option>
-                                    @foreach($all_categories as $category)
-                                        <option value="{{ $category->id }}" @if($download->category_id == $category->id) selected @endif>{{ $category->title }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
+                            <div class="d-flex">
+                                <div class="form-group d-flex align-items-baseline">
+                                    <label class="form-control-label pr-4" for="category_id">{{__('Category')}}:</label>
+                                    <select name="category_id" id="category_id" class="form-control nice-select" required onchange="loadSubcategories()">
+                                        <option value="">{{__('Select Category')}}</option>
+                                        @foreach($all_categories as $category)
+                                            <option value="{{ $category->id }}" @if($download->category_id == $category->id) selected @endif>{{ $category->title }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
 
-                            <div class="form-group">
-                                <label for="subcategory_id">{{__('Subcategory')}}</label>
-                                <select name="subcategory_id" id="subcategory_id" class="form-control nice-select">
-                                    <option value="">{{__('Select Subcategory')}}</option>
-                                    @foreach($all_subcategories as $subcategory)
-                                        <option value="{{ $subcategory->id }}" @if($download->subcategory_id == $subcategory->id) selected @endif>{{ $subcategory->title }}</option>
-                                    @endforeach
-                                </select>
+                                <div class="form-group d-flex align-items-baseline">
+                                    <label class="form-control-label pr-4 pl-4 ml-4" for="subcategory_id">{{__('Sub Category')}}:</label>
+                                    <select name="subcategory_id" id="subcategory_id" class="form-control nice-select">
+                                        <option value="">{{__('Select Subcategory')}}</option>
+                                        @foreach($all_subcategories as $subcategory)
+                                            <option value="{{ $subcategory->id }}" @if($download->subcategory_id == $subcategory->id) selected @endif>{{ $subcategory->title }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                             </div>
 
                             <div class="form-group">
@@ -60,44 +62,35 @@
                             </div>
 
                             <div class="form-group">
-                                <label>{{__('Current Files')}}</label>
+                                <label>{{__('Current File')}}</label>
                                 <div class="card" style="margin-bottom: 20px;">
                                     <div class="card-body">
-                                        @php $files = is_array($download->files) ? $download->files : []; @endphp
+                                        @php $files = json_decode($download->files, true) ? json_decode($download->files, true) : []; @endphp
                                         @if(count($files) > 0)
-                                            <div class="table-responsive">
-                                                <table class="table table-sm">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>{{__('File Name')}}</th>
-                                                            <th>{{__('Size')}}</th>
-                                                            <th>{{__('Action')}}</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        @foreach($files as $file)
-                                                            <tr>
-                                                                <td>{{ $file['original_name'] }}</td>
-                                                                <td>{{ isset($file['size']) ? number_format($file['size'] / 1024, 2) . ' KB' : 'N/A' }}</td>
-                                                                <td>
-                                                                    <button type="button" class="btn btn-danger btn-xs" onclick="deleteFile('{{ $file['name'] }}')">{{__('Delete')}}</button>
-                                                                </td>
-                                                            </tr>
-                                                        @endforeach
-                                                    </tbody>
-                                                </table>
+                                            @php $file = $files[0]; @endphp
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <div>
+                                                    <p class="mb-2"><strong>{{ $file['original_name'] }}</strong></p>
+                                                    <p class="mb-0 text-muted">
+                                                        {!! get_file_type_badge($file['original_name']) !!}
+                                                        <span class="ml-2">{{ isset($file['size']) ? number_format($file['size'] / 1024, 2) . ' KB' : 'N/A' }}</span>
+                                                    </p>
+                                                </div>
+                                                <div>
+                                                    <a href="{{ asset('assets/uploads/bank-downloads/' . $file['name']) }}" class="btn btn-info btn-sm" download>{{__('Download')}}</a>
+                                                </div>
                                             </div>
                                         @else
-                                            <p class="text-muted">{{__('No files uploaded yet')}}</p>
+                                            <p class="text-muted">{{__('No file uploaded yet')}}</p>
                                         @endif
                                     </div>
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label for="files">{{__('Add More Files')}}</label>
-                                <input type="file" name="files[]" id="files" class="form-control" multiple>
-                                <small class="info-text">{{__('You can add more files to this download')}}</small>
+                                <label for="file">{{__('Change File')}}</label>
+                                <input type="file" name="file" id="file" class="form-control" accept=".jpg,.jpeg,.png,.gif,.webp,.pdf,.doc,.docx,.xls,.xlsx,.zip,.rar,.txt,.csv">
+                                <small class="form-text text-muted">{{__('Supported formats: Images (JPG, PNG, GIF, WebP), Documents (PDF, DOC, DOCX, XLS, XLSX), Archives (ZIP, RAR), Text & CSV. Max 100MB. Upload a new file to replace the current one')}}</small>
                             </div>
 
                             <div class="form-group">
@@ -141,30 +134,6 @@
                             subcategorySelect.appendChild(option);
                         });
                     });
-            }
-        }
-
-        function deleteFile(fileName) {
-            if (confirm('{{__('Are you sure?')}}')) {
-                fetch('{{ route("admin.bank.download.delete.file") }}', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                    },
-                    body: JSON.stringify({
-                        download_id: '{{ $download->id }}',
-                        file_name: fileName
-                    })
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.status) {
-                        location.reload();
-                    } else {
-                        alert(data.message);
-                    }
-                });
             }
         }
     </script>
