@@ -238,13 +238,13 @@
                             <span>{{__('Brand Logos')}}</span></a>
                     </li>
                     @endif --}}
-                    {{-- @if(check_page_permission_by_string('Team Members'))
+                    @if(check_page_permission_by_string('Team Members'))
                     <li class="main_dropdown {{active_menu('admin-home/team-member')}}">
                         <a href="{{route('admin.team.member')}}" aria-expanded="true"><i class="ti-control-forward"></i>
                             <span>{{__('Team Members')}}</span></a>
                     </li>
                     @endif
-                    @if(check_page_permission_by_string('Testimonial'))
+                    {{-- @if(check_page_permission_by_string('Testimonial'))
                     <li class="main_dropdown {{active_menu('admin-home/testimonial')}}">
                         <a href="{{route('admin.testimonial')}}" aria-expanded="true"><i class="ti-control-forward"></i>
                             <span>{{__('Testimonial')}}</span></a>
