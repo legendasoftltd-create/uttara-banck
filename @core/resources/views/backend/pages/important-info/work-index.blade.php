@@ -66,7 +66,7 @@
                                         <th>{{__('Status')}}</th>
                                         <th>{{__('Image')}}</th>
                                         <th>{{__('Category')}}</th>
-                                        <th>{{__('Date')}}</th>
+                                        <th>{{__('Publish Date')}}</th>
                                         <th>{{__('Action')}}</th>
                                         </thead>
                                         <tbody>
@@ -104,7 +104,7 @@
                                                     @endif
                                                 </td>
                                                 <td>{!! get_work_category_by_id($data->id,'string') !!}</td>
-                                                <td>{{date_format($data->created_at,'d M Y')}}</td>
+                                                <td>{{ optional($data->publish_date ?? $data->created_at)->format('d M Y') }}</td>
                                                 <td>
                                                     <x-delete-popover :url="route('admin.work.delete',$data->id)"/>
                                                     <a href="{{route('admin.work.edit',$data->id)}}" class="btn btn-xs btn-primary btn-xs mb-3 mr-1 work_edit_btn">

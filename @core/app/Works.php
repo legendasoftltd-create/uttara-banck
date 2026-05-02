@@ -11,6 +11,7 @@ class Works extends Model
         'title',
         'gallery',
         'status',
+        'publish_date',
         'lang',
         'categories_id',
         'slug',
@@ -23,6 +24,10 @@ class Works extends Model
         'description',
         'gallery',
         'image'
+    ];
+
+    protected $casts = [
+        'publish_date' => 'date'
     ];
 
     public function getCategoriesIdAttribute($value){

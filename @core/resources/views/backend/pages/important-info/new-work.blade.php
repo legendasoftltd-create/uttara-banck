@@ -100,6 +100,10 @@
                                 </select>
                             </div>
                             <div class="form-group">
+                                <label for="publish_date">{{__('Publish Date')}}</label>
+                                <input type="text" name="publish_date" id="publish_date" class="form-control publish-date-picker" value="{{old('publish_date')}}" placeholder="yyyy-mm-dd" autocomplete="off">
+                            </div>
+                            <div class="form-group">
                                 <label for="image">{{__('Image')}}</label>
                                 <div class="media-upload-btn-wrapper">
                                     <div class="img-wrap"></div>
@@ -150,6 +154,13 @@
             if($('.nice-select').length > 0){
                 $('.nice-select').niceSelect();
             }
+
+            $('.publish-date-picker').datepicker({
+                format: 'yyyy-mm-dd',
+                autoclose: true,
+                todayHighlight: true,
+                orientation: 'bottom'
+            });
 
 
             $(document).on('change','#language',function (e) {

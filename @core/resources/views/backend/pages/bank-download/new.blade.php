@@ -64,7 +64,7 @@
 
                             <div class="form-group">
                                 <label for="publish_date">{{__('Publish Date')}}</label>
-                                <input type="datetime-local" name="publish_date" id="publish_date" class="form-control">
+                                <input type="text" name="publish_date" id="publish_date" class="form-control publish-date-picker" value="{{old('publish_date')}}" placeholder="yyyy-mm-dd" autocomplete="off">
                             </div>
 
                             <div class="form-group">
@@ -95,6 +95,15 @@
 @section('script')
     <script src="{{asset('assets/backend/js/summernote-bs4.js')}}"></script>
     <script>
+        $(document).ready(function () {
+            $('.publish-date-picker').datepicker({
+                format: 'yyyy-mm-dd',
+                autoclose: true,
+                todayHighlight: true,
+                orientation: 'bottom'
+            });
+        });
+
         function loadSubcategories() {
             const categoryId = document.getElementById('category_id').value;
             if (categoryId) {

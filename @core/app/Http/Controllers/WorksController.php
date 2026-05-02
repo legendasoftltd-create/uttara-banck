@@ -60,6 +60,7 @@ class WorksController extends Controller
             'duration' => 'nullable|string',
             'budget' => 'nullable|string',
             'status' => 'required|string',
+            'publish_date' => 'nullable|date',
             'categories_id' => 'required',
             'image' => 'nullable|string|max:191',
         ]);
@@ -76,6 +77,7 @@ class WorksController extends Controller
             'duration' => $request->duration,
             'budget' => $request->budget,
             'status' => $request->status,
+            'publish_date' => $request->publish_date,
             'description' => $request->description,
             'image' => $request->image,
             'categories_id' => serialize($request->categories_id),
@@ -99,6 +101,7 @@ class WorksController extends Controller
             'duration' => 'nullable|string',
             'budget' => 'nullable|string',
             'status' => 'required|string',
+            'publish_date' => 'nullable|date',
             'categories_id' => 'required',
             'image' => 'nullable|string|max:191',
         ]);
@@ -116,6 +119,7 @@ class WorksController extends Controller
                 'duration' => $request->duration,
                 'budget' => $request->budget,
                 'status' => $request->status,
+                'publish_date' => $request->publish_date,
                 'description' => $request->description,
                 'image' => $request->image,
                 'categories_id' => serialize($request->categories_id),
@@ -139,6 +143,7 @@ class WorksController extends Controller
                 'gallery' => $single_work->gallery,
                 'budget' => $single_work->budget,
                 'status' => 'draft',
+                'publish_date' => $single_work->publish_date,
                 'description' => $single_work->description,
                 'image' => $single_work->image,
                 'categories_id' => serialize($single_work->categories_id),
@@ -232,5 +237,4 @@ class WorksController extends Controller
         return SlugChecker::Check($request,$query);
     }
 }
-
 

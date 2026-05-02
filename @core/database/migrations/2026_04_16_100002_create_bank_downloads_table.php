@@ -21,7 +21,7 @@ class CreateBankDownloadsTable extends Migration
             $table->unsignedBigInteger('category_id');
             $table->unsignedBigInteger('subcategory_id')->nullable();
             $table->longText('files')->nullable(); // JSON format for storing multiple files
-            $table->datetime('publish_date')->nullable();
+            $table->date('publish_date')->nullable();
             $table->string('status')->default('draft');
             $table->string('lang')->nullable();
             $table->timestamps();

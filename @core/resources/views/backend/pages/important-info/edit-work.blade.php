@@ -121,6 +121,10 @@
                                     <option @if($work_details->status == 'publish') selected @endif value="publish">{{__('Publish')}}</option>
                                 </select>
                             </div>
+                            <div class="form-group">
+                                <label for="publish_date">{{__('Publish Date')}}</label>
+                                <input type="text" name="publish_date" id="publish_date" class="form-control publish-date-picker" value="{{ optional($work_details->publish_date)->format('Y-m-d') }}" placeholder="yyyy-mm-dd" autocomplete="off">
+                            </div>
                             <x-media-upload :id="$work_details->image" :name="'image'" :dimentions="'1920x1280'" :title="__('Image')"/>
 
                             <button type="submit" class="btn btn-primary mt-4 pr-4 pl-4">{{__('Update Important Information')}}</button>
@@ -161,6 +165,13 @@
                     $(this).summernote('code', $(this).data('content'));
                 });
             }
+
+            $('.publish-date-picker').datepicker({
+                format: 'yyyy-mm-dd',
+                autoclose: true,
+                todayHighlight: true,
+                orientation: 'bottom'
+            });
 
             $(document).on('change','#language',function (e) {
                 e.preventDefault();
