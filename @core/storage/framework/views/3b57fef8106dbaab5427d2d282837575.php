@@ -290,7 +290,48 @@
                             <?php endif; ?>
                         </ul>
                     </li>
-                    
+                    <li class="main_dropdown
+                        <?php if(request()->is([
+                                'admin-home/home-page-01/*',
+                                'admin-home/home-'.$home_page_variant.'/*',
+                                'admin-home/home-page-'.$home_page_variant.'/*',
+                                'admin-home/header',
+                                'admin-home/keyfeatures',
+                                'admin-home/about-page/*',
+                                'admin-home/contact-page/*',
+                                'admin-home/feedback-page/*',
+                                'admin-home/404-page-manage',
+                                'admin-home/maintains-page/settings',
+                                'admin-home/page-builder/*'
+                            ])): ?> active <?php endif; ?> ">
+                        <a href="javascript:void(0)" aria-expanded="true"><i class="ti-settings"></i>
+                            <span><?php echo e(__('All Page Settings')); ?></span></a>
+                        <ul class="collapse ">
+                            <?php if(check_page_permission_by_string('Home Page Manage')): ?>
+                                <li class="main_dropdown
+                                <?php if(request()->is([
+                                    'admin-home/home-'.$home_page_variant.'/*',
+                                    'admin-home/home-page-'.$home_page_variant.'/*',
+                                    'admin-home/home-page-01/*',
+                                    'admin-home/header',
+                                    'admin-home/keyfeatures',
+                                    'admin-home/page-builder/home-page'
+                                    ])  ): ?> active <?php endif; ?>
+                                ">
+                                    <a href="javascript:void(0)"
+                                       aria-expanded="true">
+                                        <?php echo e(__('Home Page Manage')); ?>
+
+                                    </a>
+                                    <ul class="collapse">
+                                        <li class="<?php echo e(active_menu('admin-home/header')); ?>">
+                                            <a href="<?php echo e(route('admin.header')); ?>">
+                                                <?php echo e(__('Header Area')); ?>
+
+                                            </a>
+                                        </li>
+                                    </ul>
+                                        
                                         
                                         
                                         
@@ -319,8 +360,10 @@
                                         
 
                                     
+                            <?php endif; ?>
                             
-                    
+                        </ul> 
+                    </li>
                     
                     <?php if(check_page_permission_by_string('General Settings')): ?>
                     <li class="main_dropdown <?php if(request()->is('admin-home/general-settings/*')): ?> active <?php endif; ?>">

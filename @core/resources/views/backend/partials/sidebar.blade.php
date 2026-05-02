@@ -611,21 +611,20 @@
                             @endif
                         </ul>
                     </li>
-                    {{-- <li class="main_dropdown
+                    <li class="main_dropdown
                         @if(request()->is([
-                            'admin-home/home-page-01/*',
-                            'admin-home/home-'.$home_page_variant.'/*',
-                            'admin-home/home-page-'.$home_page_variant.'/*',
-                            'admin-home/header',
-                            'admin-home/keyfeatures',
-                            'admin-home/about-page/*',
-                            'admin-home/contact-page/*',
-                            'admin-home/feedback-page/*',
-                            'admin-home/404-page-manage',
-                            'admin-home/maintains-page/settings',
-                            'admin-home/page-builder/*'
-                        ])) active @endif
-                        ">
+                                'admin-home/home-page-01/*',
+                                'admin-home/home-'.$home_page_variant.'/*',
+                                'admin-home/home-page-'.$home_page_variant.'/*',
+                                'admin-home/header',
+                                'admin-home/keyfeatures',
+                                'admin-home/about-page/*',
+                                'admin-home/contact-page/*',
+                                'admin-home/feedback-page/*',
+                                'admin-home/404-page-manage',
+                                'admin-home/maintains-page/settings',
+                                'admin-home/page-builder/*'
+                            ])) active @endif ">
                         <a href="javascript:void(0)" aria-expanded="true"><i class="ti-settings"></i>
                             <span>{{__('All Page Settings')}}</span></a>
                         <ul class="collapse ">
@@ -645,6 +644,12 @@
                                         {{__('Home Page Manage')}}
                                     </a>
                                     <ul class="collapse">
+                                        <li class="{{active_menu('admin-home/header')}}">
+                                            <a href="{{route('admin.header')}}">
+                                                {{__('Header Area')}}
+                                            </a>
+                                        </li>
+                                    </ul>
                                         {{-- page builder check --}}
                                         {{-- @if(empty(get_static_option('home_page_page_builder_status'))) --}}
                                         {{-- @if(in_array($home_page_variant,['01','02','03','04']))
@@ -1444,8 +1449,8 @@
 
                                     {{-- </ul>
                                 </li> --}}
-                            {{-- @endif
-                            @if(check_page_permission('about_page_manage'))
+                            @endif
+                            {{-- @if(check_page_permission('about_page_manage'))
                                 <li class="main_dropdown @if(request()->is('admin-home/about-page/*') || request()->is('admin-home/page-builder/about-page')  ) active @endif ">
                                     <a href="javascript:void(0)"
                                        aria-expanded="true">
@@ -1539,9 +1544,9 @@
                                        {{__('Maintain Page Manage')}}
                                     </a>
                                 </li>
-                            @endif
-                        </ul> --}}
-                    {{-- </li> --}}
+                            @endif--}}
+                        </ul> 
+                    </li>
                     {{-- <li class="main_dropdown
                         @if(request()->is([
                         'admin-home/form-builder/*',

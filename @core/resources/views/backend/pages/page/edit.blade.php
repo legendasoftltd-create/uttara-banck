@@ -1,5 +1,6 @@
 @extends('backend.admin-master')
 @section('style')
+    <link rel="stylesheet" href="{{asset('assets/backend/css/codemirror.css')}}">
     <link rel="stylesheet" href="{{asset('assets/backend/css/summernote-bs4.css')}}">
     <link rel="stylesheet" href="{{asset('assets/backend/css/bootstrap-tagsinput.css')}}">
     <link rel="stylesheet" href="{{asset('assets/backend/css/dropzone.css')}}">
@@ -39,13 +40,13 @@
                                         <label for="title">{{__('Title')}}</label>
                                         <input type="text" class="form-control"  id="title" name="title" value="{{$page_post->title}}">
                                     </div>
-                                    <div class="form-group">
+                                    {{-- <div class="form-group">
                                         <label for="page_builder_status"><strong>{{__('Page Builder Enable/Disable')}}</strong></label>
                                         <label class="switch">
                                             <input type="checkbox" name="page_builder_status"  @if(!empty($page_post->page_builder_status)) checked @endif >
                                             <span class="slider onff"></span>
                                         </label>
-                                    </div>
+                                    </div> --}}
 
 
                                     <div class="form-group d-none breadcrumb_status">
@@ -61,7 +62,7 @@
                                     <div class="form-group classic-editor-wrapper @if(!empty($page_post->page_builder_status)) d-none @endif ">
                                         <label>{{__('Content')}}</label>
                                         <input type="hidden" name="page_content" value="{{$page_post->content}}">
-                                        <div class="summernote" data-content='{{$page_post->content}}'></div>
+                                        <div class="summernote" data-content='{{iFrameFilterInSummernoteAndRender($page_post->content)}}'></div>
                                     </div>
                                     <div class="btn-wrapper page-builder-btn-wrapper @if(empty($page_post->page_builder_status)) d-none @endif ">
                                         <a href="{{route('admin.dynamic.page.builder',['type' =>'dynamic-page','id' => $page_post->id])}}" target="_blank" class="btn btn-primary"> <i class="fas fa-external-link-alt"></i> {{__('Open Page Builder')}}</a>
@@ -107,10 +108,12 @@
 @endsection
 @section('script')
     <script src="{{asset('assets/backend/js/bootstrap-tagsinput.js')}}"></script>
+    <script src="{{asset('assets/backend/js/codemirror.js')}}"></script>
     <script src="{{asset('assets/backend/js/summernote-bs4.js')}}"></script>
     <x-backend.auto-slug-js :url="route('admin.page.slug.check')" :type="'update'"/>
     <script>
         $(document).ready(function () {
+            var insertFileText = {!! json_encode(__('Insert File')) !!};
 
             let page_builder = '{{$page_post->page_builder_status}}';
             let breadcrumb = '{{$page_post->breadcrumb_status}}';
@@ -131,14 +134,167 @@
                 }
             });
 
+            function syncClassicEditorContent(editor, contents) {
+                let finalContent = typeof iFrameFilterInSummernote === 'function'
+                    ? iFrameFilterInSummernote(contents)
+                    : contents;
+
+                $(editor).prev('input').val(finalContent);
+            }
+
+            var classicEditorContext = null;
+            var classicEditorNote = null;
+
+            function escapeClassicEditorHtml(text) {
+                return $('<div/>').text(text || '').html();
+            }
+
+            function classicEditorMediaMarkup(media) {
+                var title = escapeClassicEditorHtml(media.title || 'Download File');
+                var src = media.imgsrc || '';
+                var type = (media.filetype || '').toLowerCase();
+                var imageTypes = ['jpg', 'jpeg', 'png', 'webp', 'gif', 'svg'];
+                var videoTypes = ['mp4', 'webm', 'ogg', 'mov'];
+                var videoMime = type === 'mov' ? 'video/quicktime' : 'video/' + type;
+
+                if (imageTypes.indexOf(type) !== -1) {
+                    return '<p><img src="' + src + '" alt="' + title + '"></p>';
+                }
+
+                if (videoTypes.indexOf(type) !== -1) {
+                    return '<p><video controls style="max-width:100%;height:auto;"><source src="' + src + '" type="' + videoMime + '">' + title + '</video></p>';
+                }
+
+                return '<p><a href="' + src + '" target="_blank" rel="noopener">' + title + '</a></p>';
+            }
+
+            function insertClassicEditorMedia(markup) {
+                var note = classicEditorNote && classicEditorNote.length
+                    ? classicEditorNote
+                    : $('.classic-editor-wrapper .summernote').first();
+
+                if (!note.length) {
+                    return false;
+                }
+
+                var oldContent = note.summernote('code') || '';
+
+                if (classicEditorContext) {
+                    try {
+                        classicEditorContext.invoke('editor.restoreRange');
+                        classicEditorContext.invoke('editor.pasteHTML', markup);
+                        classicEditorContext.invoke('editor.afterCommand');
+                    } catch (error) {
+                        // Fall back to appending below if the saved editor range is gone.
+                    }
+                }
+
+                var newContent = note.summernote('code') || '';
+                if (newContent === oldContent) {
+                    note.summernote('code', oldContent + markup);
+                    newContent = note.summernote('code') || '';
+                }
+
+                syncClassicEditorContent(note, newContent);
+                return true;
+            }
+
+            $(document).on('click', '.media_upload_modal_submit_btn', function (e) {
+                if (!$('#media_upload_modal').is('[data-classic-editor-insert]')) {
+                    return;
+                }
+
+                e.preventDefault();
+                e.stopImmediatePropagation();
+
+                var selectedMedia = $('.media-uploader-image-list li.selected').first();
+                if (!selectedMedia.length) {
+                    selectedMedia = $('.media-uploader-image-list li').first();
+                }
+
+                if (!selectedMedia.length) {
+                    return;
+                }
+
+                if (insertClassicEditorMedia(classicEditorMediaMarkup(selectedMedia.data()))) {
+                    $('#media_upload_modal').removeAttr('data-classic-editor-insert').modal('hide');
+                }
+            });
+
+            $('#media_upload_modal').on('hidden.bs.modal', function () {
+                $(this).removeAttr('data-classic-editor-insert');
+            });
+
+            function openClassicEditorMediaModal(context) {
+                classicEditorContext = context;
+                classicEditorNote = $(context.layoutInfo.note);
+                classicEditorContext.invoke('editor.saveRange');
+
+                var modal = $('#media_upload_modal');
+                modal.attr('data-classic-editor-insert', 'true');
+                modal.find('.modal-title').text(insertFileText);
+                modal.find('.media_upload_modal_submit_btn').text(insertFileText).show();
+                modal.modal('show');
+                modal.find('a[href="#media_library"]').tab('show');
+                $('#load_all_media_images').trigger('click');
+            }
+
             $('.summernote').summernote({
-                height: 400,   //set editable area's height
-                codemirror: { // codemirror options
-                    theme: 'monokai'
+                disableDragAndDrop: true,
+                height: 400,
+                codeviewFilter: true,
+                codeviewIframeFilter: true,
+                buttons: {
+                    classicfile: function (context) {
+                        var ui = $.summernote.ui;
+
+                        return ui.button({
+                            className: 'note-btn-classic-file',
+                            contents: '<i class="fas fa-paperclip"></i>',
+                            tooltip: insertFileText,
+                            click: function () {
+                                openClassicEditorMediaModal(context);
+                            }
+                        }).render();
+                    }
+                },
+                toolbar: [
+                    ['style', ['style']],
+                    ['font', ['bold', 'italic', 'underline', 'strikethrough', 'superscript', 'subscript', 'clear']],
+                    ['fontname', ['fontname']],
+                    ['fontsize', ['fontsize']],
+                    ['color', ['color']],
+                    ['para', ['ul', 'ol', 'paragraph']],
+                    ['height', ['height']],
+                    ['table', ['table']],
+                    ['insert', ['link', 'picture', 'video', 'classicfile', 'hr']],
+                    ['history', ['undo', 'redo']],
+                    ['view', ['fullscreen', 'codeview', 'help']],
+                ],
+                styleTags: [
+                    'p',
+                    { title: 'Blockquote', tag: 'blockquote', className: 'blockquote', value: 'blockquote' },
+                    'pre', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'
+                ],
+                codemirror: {
+                    theme: 'default',
+                    mode: 'text/html',
+                    lineNumbers: true
                 },
                 callbacks: {
                     onChange: function(contents, $editable) {
-                        $(this).prev('input').val(contents);
+                        syncClassicEditorContent(this, contents);
+                    },
+                    onChangeCodeview: function(contents, $editable) {
+                        syncClassicEditorContent(this, contents);
+                    },
+                    onBlurCodeview: function(contents, $editable) {
+                        syncClassicEditorContent(this, contents);
+                    },
+                    onPaste: function (e) {
+                        var bufferText = ((e.originalEvent || e).clipboardData || window.clipboardData).getData('Text');
+                        e.preventDefault();
+                        document.execCommand('insertText', false, bufferText);
                     }
                 }
             });
@@ -147,6 +303,22 @@
                     $(this).summernote('code', $(this).data('content'));
                 });
             }
+
+            $(document).on('click', '.note-btn-classic-file', function (e) {
+                if ($('#media_upload_modal').is('[data-classic-editor-insert]')) {
+                    return;
+                }
+
+                var note = $(this).closest('.note-editor').prev('.summernote');
+                var context = note.data('summernote');
+
+                if (!context) {
+                    return;
+                }
+
+                e.preventDefault();
+                openClassicEditorMediaModal(context);
+            });
         });
     </script>
     <script src="{{asset('assets/backend/js/dropzone.js')}}"></script>

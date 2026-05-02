@@ -10,6 +10,7 @@
     {{$page_post->title}}
 @endsection
 @section('content')
+    <div class="empty-height-50"></div>
     @if($page_post->visibility === 'user' && !auth()->guard('web')->check())
        <section class="padding-top-100 padding-bottom-100">
             <div class="container">

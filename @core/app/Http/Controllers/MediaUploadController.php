@@ -18,7 +18,7 @@ class MediaUploadController extends Controller
     public function upload_media_file(Request $request)
     {
         $this->validate($request,[
-            'file' => 'nullable|mimes:jpg,jpeg,png,webp,gif,pdf,doc,docx,txt,svg,zip,csv,xlsx,xlsm,xlsb,xltx,pptx,pptm,ppt|max:2000000'
+            'file' => 'nullable|mimes:jpg,jpeg,png,webp,gif,pdf,doc,docx,txt,svg,zip,csv,xlsx,xlsm,xlsb,xltx,pptx,pptm,ppt,mp4,webm,ogg,mov|max:2000000'
         ]);
 
         if ($request->hasFile('file')) {
@@ -37,7 +37,7 @@ class MediaUploadController extends Controller
             $folder_path = 'assets/uploads/media-uploader/';
            
             
-            if (in_array($image_extenstion,['pdf','doc','docx','txt','svg','zip','csv','xlsx','xlsm','xlsb','xltx','pptx','pptm','ppt'])){
+            if (in_array($image_extenstion,['pdf','doc','docx','txt','svg','zip','csv','xlsx','xlsm','xlsb','xltx','pptx','pptm','ppt','mp4','webm','ogg','mov'])){
                 $request->file->move($folder_path, $image_db);
                 MediaUpload::create([
                     'title' => $image_name_with_ext,

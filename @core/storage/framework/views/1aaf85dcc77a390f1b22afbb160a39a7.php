@@ -9,9 +9,17 @@
             return ['pdf','doc','docx','txt','zip','csv','xlsx','xls','xlsm','xlsb','xltx','pptx','pptm','ppt'].includes(type);
         }
 
+        function isVideoType(type) {
+            return ['mp4','webm','ogg','mov'].includes(type);
+        }
+
         function buildAttachmentPreview(src, type, title) {
             if (isDocumentType(type)) {
                 return '<div class="attachment-preview"><div class="thumbnail"><div class="centered"><i class="fas fa-file file-icon"></i><span class="file-name">'+type+'</span></div></div></div>';
+            }
+
+            if (isVideoType(type)) {
+                return '<div class="attachment-preview"><div class="thumbnail"><div class="centered"><i class="fas fa-video file-icon"></i><span class="file-name">'+type+'</span></div></div></div>';
             }
 
             return '<div class="attachment-preview"><div class="thumbnail"><div class="centered"><img src="'+src+'" alt="'+(title || '')+'"></div></div></div>';
@@ -22,11 +30,19 @@
                 return '<div class="attachment-preview"><div class="thumbnail"><div class="centered"><i class="fas fa-file file-icon"></i><span class="file-name">'+type+'</span></div></div></div>';
             }
 
+            if (isVideoType(type)) {
+                return '<div class="attachment-preview"><div class="thumbnail"><div class="centered"><i class="fas fa-video file-icon"></i><span class="file-name">'+type+'</span></div></div></div>';
+            }
+
             return '<img src="'+src+'" alt="'+(title || '')+'">';
         }
 
         //after select image
         $(document).on('click','.media_upload_modal_submit_btn',function (e) {
+            if ($('#media_upload_modal').is('[data-classic-editor-insert]')) {
+                return;
+            }
+
             e.preventDefault();
             var allData = $('.media-uploader-image-list li.selected');
             if( typeof allData != 'undefined'){
@@ -151,14 +167,14 @@
         Dropzone.options.placeholderfForm = {
             dictDefaultMessage: "<?php echo e(__('Drag or Select Your File')); ?>",
             maxFiles: 50,
-            maxFilesize: 10, //MB
-            acceptedFiles: 'image/*,application/pdf,.doc,.docx,.txt,.svg,.zip,.csv,.xlsx,.xls,.xlsm,.xlsb,.xltx,.pptx,.pptm,.ppt',
+            maxFilesize: 100, //MB
+            acceptedFiles: 'image/*,video/mp4,video/webm,video/ogg,.mov,application/pdf,.doc,.docx,.txt,.svg,.zip,.csv,.xlsx,.xls,.xlsm,.xlsb,.xltx,.pptx,.pptm,.ppt',
             success: function (file, response) {
                 if (file.previewElement) {
-                    return file.previewElement.classList.add("dz-success");
+                    file.previewElement.classList.add("dz-success");
                 }
+                $('#load_all_media_images').tab('show');
                 $('#load_all_media_images').trigger('click');
-                $('.media-uploader-image-list li:first-child').addClass('selected');
             },
             error: function (file, message) {
                 if (file.previewElement) {
@@ -226,6 +242,9 @@
                             if (isDocumentType(value.type)){
                                 imageMarkup += '<i class="fas fa-file file-icon"></i> \n' ;
                                 imageMarkup += '<span class="file-name">'+value.type+'</span> \n' ;
+                            }else if (isVideoType(value.type)){
+                                imageMarkup += '<i class="fas fa-video file-icon"></i> \n' ;
+                                imageMarkup += '<span class="file-name">'+value.type+'</span> \n' ;
                             }else{
                                 imageMarkup += '<img src="'+value.img_url+'" alt="">\n' ;
                             }
@@ -244,6 +263,9 @@
                     hidePreloader();
                     $('.media_upload_modal_submit_btn').show();
                     selectOldImage();
+                    if ($('.media-uploader-image-list li.selected').length < 1) {
+                        $('.media-uploader-image-list li:first-child').trigger('click');
+                    }
                     $('#loadmorewrap button').show();
                 },
                 error: function (error) {
@@ -266,6 +288,10 @@
          * @since 2.2
          * */
         function selectOldImage(){
+            if (!mainUploadBtn || !mainUploadBtn.length) {
+                return;
+            }
+
             var imageId = mainUploadBtn.prev('input').val();
             var matches = imageId.match(/([|])/g);
             if(matches != null){
@@ -304,6 +330,9 @@
                                 '<div class="centered">\n' ;
                             if (isDocumentType(value.type)){
                                 imageMarkup += '<i class="fas fa-file file-icon"></i> \n' ;
+                                imageMarkup += '<span class="file-name">'+value.type+'</span> \n' ;
+                            }else if (isVideoType(value.type)){
+                                imageMarkup += '<i class="fas fa-video file-icon"></i> \n' ;
                                 imageMarkup += '<span class="file-name">'+value.type+'</span> \n' ;
                             }else{
                                 imageMarkup += '<img src="'+value.img_url+'" alt="">\n' ;
