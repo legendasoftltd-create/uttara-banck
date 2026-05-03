@@ -106,7 +106,7 @@
 
         <div class="empty-height-50"></div>
         <section>
-            <div class="container-fluid">
+            <div class="container">
                 <div class="text-center">
                     <p class="subtitle fancy">
                         <span class="skl-bar-2"></span>
@@ -185,7 +185,7 @@
                 <br>
                 <br>
             </div>
-            <div class="container-fluid">
+            <div class="container">
                 <div class="col-md-10 col-sm-6 col-xs-12" style="display: contents;">
                     <div class="information-wrap">
                         <div data-aos="fade-up" data-aos-duration="500" class="information-card">

@@ -1,6 +1,6 @@
 <section class="banner-section">
     <!-- Carousel Start-->
-    <div class="container-fluid">
+    <div class="container">
         <div id class="banner-carousel owl-carousel owl-theme">
             <?php $__currentLoopData = $all_header_slider; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $data): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 <?php

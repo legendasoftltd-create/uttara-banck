@@ -1,5 +1,5 @@
 <section id="whats-new">
-    <div class="container-fluid">
+    <div class="container">
         <div class="text-center mb-4">
             <p class="subtitle fancy">
                 <span class="skl-bar-2"></span>

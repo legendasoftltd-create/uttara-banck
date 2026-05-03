@@ -1,5 +1,5 @@
 @if ($category->title == 'Loan')
-    <section class="container-fluid">
+    <section class="container">
         <div class="swiper loanSlider">
             <div class="swiper-wrapper">
                 @foreach (get_category_products($category->id) as $product)
@@ -22,7 +22,7 @@
     </section>
 @endif
 @if ($category->title == 'Deposit')
-    <section class="carousel-3D-swiper-section" style="position: relative;">
+    <section class="carousel-3D-swiper-section container" style="position: relative;">
         <div>
             <div class="carousel-3D-swiper">
                 <div class="swiper-wrapper" style="max-width: 1230px;">
@@ -48,7 +48,7 @@
     </section>
 @endif
 @if($category->title == 'Card')
-    <section class="container-fluid">
+    <section class="container">
             <div>
                 <div class="about-menu-col">
                     <div class="seven-cols ">
