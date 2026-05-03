@@ -130,7 +130,7 @@ $spinner_icon =  $type === 'admin' ? 'fas fa-spinner fa-spin' : 'fa-spin las la-
         Dropzone.options.placeholderfForm = {
             dictDefaultMessage: "{{__('Drag or Select Your Image')}}",
             maxFiles: 50,
-            maxFilesize: 10, //MB
+            maxFilesize: 200, //MB
             acceptedFiles: 'image/*',
             success: function (file, response) {
                 if (file.previewElement) {

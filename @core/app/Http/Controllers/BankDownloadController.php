@@ -56,7 +56,7 @@ class BankDownloadController extends Controller
             'category_id' => 'required|integer',
             'status' => 'required',
             'lang' => 'required',
-            'file' => 'nullable|file|max:102400',
+            'file' => 'nullable|file|max:204800',
         ]);
 
         // Validate file extension
@@ -144,7 +144,7 @@ class BankDownloadController extends Controller
             'title' => 'required|string|max:255',
             'category_id' => 'required|integer',
             'status' => 'required',
-            'file' => 'nullable|file|max:102400',
+            'file' => 'nullable|file|max:204800',
         ]);
 
         $download = BankDownload::find($id);

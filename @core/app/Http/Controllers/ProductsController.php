@@ -70,7 +70,7 @@ class ProductsController extends Controller
             'status' => 'nullable|string|max:191',
             'badge' => 'nullable|string|max:191',
             'tax_percentage' => 'nullable|string|max:191',
-            'downloadable_file' => 'nullable|mimes:doc,docx,jpg,jpeg,png,webp,mp3,mp4,pdf,txt,zip|max:100650',
+            'downloadable_file' => 'nullable|mimes:doc,docx,jpg,jpeg,png,webp,mp3,mp4,pdf,txt,zip|max:204800',
         ]);
         $slug = !empty($request->slug) ? $request->slug : Str::slug($request->title, $request->lang);
 
@@ -200,7 +200,7 @@ class ProductsController extends Controller
             'gallery' => 'nullable|string|max:191',
             'status' => 'nullable|string|max:191',
             'badge' => 'nullable|string|max:191',
-            'downloadable_file' => 'nullable|mimes:doc,docx,jpg,jpeg,png,webp,mp3,mp4,pdf,txt,zip|max:10650',
+            'downloadable_file' => 'nullable|mimes:doc,docx,jpg,jpeg,png,webp,mp3,mp4,pdf,txt,zip|max:204800',
             'tax_percentage' => 'nullable',
         ]);
 
