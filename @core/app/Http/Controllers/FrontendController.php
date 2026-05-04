@@ -118,7 +118,7 @@ class FrontendController extends Controller
                 }
             }
         }
-        $all_work_category = WorksCategory::find($works_cat_ids);
+        $all_work_category = WorksCategory::get();
         $latest_products = Products::where(['lang' => $lang, 'status' => 'publish'])->orderBy('id', 'DESC')->take(get_static_option('home_page_products_area_items'))->get();
         // $all_products = Products::where(['status' => 'publish', 'category_id' => $id])->orderBy('id', 'desc')->paginate(get_static_option('product_post_items'));
         $categories = ProductCategory::all();
