@@ -23,7 +23,7 @@
 @endif
 @if ($category->title == 'Deposit')
     <section class="carousel-3D-swiper-section container" style="position: relative;">
-        <div>
+        <div class="carousel-3D-swiper-section">
             <div class="carousel-3D-swiper">
                 <div class="swiper-wrapper" style="max-width: 1230px;">
                     @foreach (get_category_products($category->id) as $product)

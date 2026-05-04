@@ -12,6 +12,7 @@ class SlugCheckRequest extends FormRequest
             'slug' => 'required|string',
             'type' => 'required|string',
             'lang' => 'nullable|string',
+            'date' => 'nullable|date',
         ];
     }
 

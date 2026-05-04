@@ -17,14 +17,15 @@
                     <h1 class="page-title">@yield('page-title')</h1>
                     <ul class="page-list">
                         <li><a href="{{url('/')}}">{{__('Home')}}</a></li>
-                        @php
+                        <li>/</li>
+                        <!-- @php
                         $pages_list = ['blog','work','service','product','career_with_us','events','knowledgebase','donation','appointment','courses','downloads','bank_downloads'];
                         @endphp
                         @foreach($pages_list as $page)
                             @if(\Illuminate\Support\Str::startsWith(request()->path(), get_static_option($page.'_page_slug')))
-                            <li><a href="{{url('/').'/'.get_static_option($page.'_page_slug')}}">{{get_static_option($page.'_page_' . $user_select_lang_slug . '_name')}}</a></li>
+                            <li>{{get_static_option($page.'_page_' . $user_select_lang_slug . '_name')}}</li>
                             @endif
-                        @endforeach
+                        @endforeach -->
                         <li>@yield('page-title')</li>
                     </ul>
                 </div>

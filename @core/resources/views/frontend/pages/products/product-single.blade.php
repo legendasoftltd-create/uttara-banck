@@ -307,12 +307,12 @@
         </div>
     </section> --}}
     <section class="content-section pt-4 mt-4">
-        <div class="container content-box">
-                <h2 class="title">{{ $product->title }}</h2>
+        <div class="container">
+              {{--  <h2 class="title">{{ $product->title }}</h2>
                 <p>{{$product->short_description}}</p>
 
                 <br>
-                <br>
+                <br> --}}
 
                 {!! iFrameFilterInSummernoteAndRender($product->description) !!}
         </div>

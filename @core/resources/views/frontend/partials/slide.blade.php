@@ -1,7 +1,7 @@
 <section class="banner-section">
     <!-- Carousel Start-->
     <div class="container">
-        <div id class="banner-carousel owl-carousel owl-theme">
+        <div class="banner-carousel owl-carousel owl-theme">
             @foreach ($all_header_slider as $data)
                 @php
                     $image_details = get_attachment_image_by_id($data->image, 'full');
@@ -38,6 +38,5 @@
                 </div>
             @endforeach
         </div>
-    </div>
     </div>
 </section>

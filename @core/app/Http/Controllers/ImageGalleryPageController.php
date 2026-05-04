@@ -6,6 +6,7 @@ use App\ImageGallery;
 use App\ImageGalleryCategory;
 use App\Language;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class ImageGalleryPageController extends Controller
 {
@@ -25,12 +26,16 @@ class ImageGalleryPageController extends Controller
         $this->validate($request,[
             'image' => 'required|string',
             'title' => 'nullable|string',
+            'publish_date' => 'nullable|date',
             'lang' => 'required|string',
             'cat_id' => 'required|string',
         ]);
         ImageGallery::create([
             'image' => $request->image,
             'title' => $request->title,
+            'publish_date' => $request->publish_date 
+                ? Carbon::parse($request->publish_date)->format('Y-m-d') 
+                : null,
             'lang' => $request->lang,
             'cat_id' => $request->cat_id,
         ]);
@@ -40,12 +45,16 @@ class ImageGalleryPageController extends Controller
         $this->validate($request,[
             'image' => 'required|string',
             'title' => 'nullable|string',
+            'publish_date' => 'nullable|date',
             'lang' => 'required|string',
             'cat_id' => 'required|string',
         ]);
         ImageGallery::find($request->id)->update([
             'image' => $request->image,
             'title' => $request->title,
+            'publish_date' => $request->publish_date 
+                ? Carbon::parse($request->publish_date)->format('Y-m-d') 
+                : null,
             'lang' => $request->lang,
             'cat_id' => $request->cat_id,
         ]);

@@ -33,35 +33,37 @@
     </section> --}}
     <div class="empty-height-50"></div>
     <div id="loan-products" class="category-section active">
-        <div class="row">
-            <div class="col-md-12">
-                <h2 class="text-center title-color">
-                    {{ $category_name }}
-                </h2>
-                <div class="title-seperator">
+        <div class="container">
+            <!-- <div class="row">
+                <div class="col-md-12">
+                    <h2 class="text-center title-color">
+                        {{ $category_name }}
+                    </h2>
+                    <div class="title-seperator">
+                    </div>
                 </div>
-            </div>
-        </div>
-        <section class="grid-section mt-4">
-            @foreach ($all_products as $product)
-                <div>
-                    <div class="cards-container">
-                        <div class="card">
-                            <div class="card-image">
-                                <img src="{{ get_attachment_image_by_id($product->image, 'full', false)['img_url'] ?? '' }}" alt="{{ $product->title }}">
-                            </div>
-                            <div class="card-content">
-                                <h3>{{ $product->title }}</h3>
-                                <div class="card-buttons">
-                                    <a href="{{ route('frontend.products.single', $product->slug) }}" class="btn">Explore
-                                        More</a>
+            </div> -->
+            <section class="grid-section mt-4">
+                @foreach ($all_products as $product)
+                    <div>
+                        <div class="cards-container">
+                            <div class="card">
+                                <div class="card-image">
+                                    <img src="{{ get_attachment_image_by_id($product->image, 'full', false)['img_url'] ?? '' }}" alt="{{ $product->title }}">
+                                </div>
+                                <div class="card-content">
+                                    <h3>{{ $product->title }}</h3>
+                                    <div class="card-buttons">
+                                        <a href="{{ route('frontend.products.single', $product->slug) }}" class="btn">Explore
+                                            More</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            @endforeach
-        </section>
+                @endforeach
+            </section>
         <div class="empty-height-50"></div>
+        </div>
     </div>
 @endsection

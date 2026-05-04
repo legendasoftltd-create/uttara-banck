@@ -4,6 +4,7 @@
 @endsection
 @section('style')
     <link rel="stylesheet" href="{{asset('assets/backend/css/summernote-bs4.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/backend/css/codemirror.css')}}">
     <link rel="stylesheet" href="{{asset('assets/backend/css/dropzone.css')}}">
     <link rel="stylesheet" href="{{asset('assets/backend/css/media-uploader.css')}}">
     <link rel="stylesheet" href="{{asset('assets/backend/css/bootstrap-tagsinput.css')}}">
@@ -213,6 +214,7 @@
 @section('script')
     <script src="{{asset('assets/backend/js/bootstrap-datepicker.min.js')}}"></script>
     <script src="{{asset('assets/backend/js/jquery.nice-select.min.js')}}"></script>
+    <script src="{{asset('assets/backend/js/codemirror.js')}}"></script>
     <script src="{{asset('assets/backend/js/summernote-bs4.js')}}"></script>
     <script src="{{asset('assets/backend/js/dropzone.js')}}"></script>
     <script src="{{asset('assets/backend/js/bootstrap-tagsinput.js')}}"></script>

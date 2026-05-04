@@ -114,6 +114,7 @@
                                                            data-image="{{$img_url}}"
                                                            data-lang="{{$data->lang}}"
                                                            data-catid="{{$data->cat_id}}"
+                                                           data-publish_date="{{$data->publish_date}}"
                                                         >
                                                             <i class="ti-pencil"></i>
                                                         </a>
@@ -149,6 +150,10 @@
                             <div class="form-group">
                                 <label for="title">{{__('Title')}}</label>
                                 <input type="text" name="title" id="title" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="title">{{__('Publish Date')}}</label>
+                                <input type="date" name="publish_date" id="publish_date" class="form-control" placeholder="DD-MM-YYYY">
                             </div>
                             <div class="form-group">
                                 <label for="cat_id">{{__('Category')}}</label>
@@ -199,6 +204,10 @@
                         <div class="form-group">
                             <label for="title">{{__('Title')}}</label>
                             <input type="text" name="title" id="edit_title" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="publish_date">{{__('Publish Date')}}</label>
+                            <input type="date" name="publish_date" id="edit_publish_date" class="form-control">
                         </div>
                         <div class="form-group">
                             <label for="cat_id">{{__('Category')}}</label>
@@ -284,6 +293,7 @@
                 var form = $('#testimonial_edit_modal_form');
                 form.find('#gallery_id').val(id);
                 form.find('#edit_title').val(el.data('title'));
+                form.find('#edit_publish_date').val(el.data('publish_date'));
                 form.find('select[name="lang"] option[value="'+lang+'"]').attr('selected',true);
                 $.ajax({
                     url : "{{route('admin.gallery.category.by.lang')}}",

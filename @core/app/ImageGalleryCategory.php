@@ -4,8 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ImageGalleryCategory extends Model
+class ImageGallery extends Model
 {
-    protected $table = 'image_gallery_categories';
-    protected $fillable = ['title','status','lang'];
+    protected $table = 'image_galleries';
+    protected $fillable = ['image','title','publish_date','lang','cat_id'];
 }
