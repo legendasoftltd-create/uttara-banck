@@ -326,6 +326,9 @@
 @section('script')
     <script src="{{asset('assets/backend/js/bootstrap-datepicker.min.js')}}"></script>
     <script src="{{asset('assets/backend/js/jquery.nice-select.min.js')}}"></script>
+    <script src="{{asset('assets/backend/js/summernote-bs4.js')}}"></script>
+    <script src="{{asset('assets/backend/js/dropzone.js')}}"></script>
+    <script src="{{asset('assets/backend/js/bootstrap-tagsinput.js')}}"></script>
     <x-backend.auto-slug-js :url="route('admin.products.slug.check')" :type="'update'" />
     <script>
         $(document).ready(function () {
@@ -419,8 +422,30 @@
             });
             $('.summernote').summernote({
                 height: 400,   //set editable area's height
+                codeviewFilter: true,
+                codeviewIframeFilter: true,
+                toolbar: [
+                    ['style', ['style']],
+                    ['font', ['bold', 'italic', 'underline', 'strikethrough', 'superscript', 'subscript', 'clear']],
+                    ['fontname', ['fontname']],
+                    ['fontsize', ['fontsize']],
+                    ['color', ['color']],
+                    ['para', ['ul', 'ol', 'paragraph']],
+                    ['height', ['height']],
+                    ['table', ['table']],
+                    ['insert', ['link', 'picture', 'video', 'hr']],
+                    ['history', ['undo', 'redo']],
+                    ['view', ['fullscreen', 'codeview', 'help']],
+                ],
+                styleTags: [
+                    'p',
+                    { title: 'Blockquote', tag: 'blockquote', className: 'blockquote', value: 'blockquote' },
+                    'pre', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'
+                ],
                 codemirror: { // codemirror options
-                    theme: 'monokai'
+                    theme: 'default',
+                    mode: 'text/html',
+                    lineNumbers: true
                 },
                 callbacks: {
                     onChange: function (contents, $editable) {
@@ -473,8 +498,5 @@
             }
         });
     </script>
-    <script src="{{asset('assets/backend/js/summernote-bs4.js')}}"></script>
-    <script src="{{asset('assets/backend/js/dropzone.js')}}"></script>
-    <script src="{{asset('assets/backend/js/bootstrap-tagsinput.js')}}"></script>
     @include('backend.partials.media-upload.media-js')
 @endsection
