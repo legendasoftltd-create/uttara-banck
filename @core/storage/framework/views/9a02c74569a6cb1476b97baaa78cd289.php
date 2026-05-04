@@ -1,5 +1,5 @@
 <section class="out-acivment">
-    <div class="container-fluid">
+    <div class="container">
         <div class="text-center">
             <p class="subtitle fancy">
                 <span class="skl-bar-2"></span>

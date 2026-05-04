@@ -167,7 +167,7 @@
         Dropzone.options.placeholderfForm = {
             dictDefaultMessage: "<?php echo e(__('Drag or Select Your File')); ?>",
             maxFiles: 50,
-            maxFilesize: 100, //MB
+            maxFilesize: 200, //MB
             acceptedFiles: 'image/*,video/mp4,video/webm,video/ogg,.mov,application/pdf,.doc,.docx,.txt,.svg,.zip,.csv,.xlsx,.xls,.xlsm,.xlsb,.xltx,.pptx,.pptm,.ppt',
             success: function (file, response) {
                 if (file.previewElement) {
