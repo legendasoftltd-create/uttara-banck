@@ -37,7 +37,7 @@
 </div> --}}
 <div class="header make-sticky">
     <!-- Navbar Start-->
-    <header class="header">
+    <header class="header container">
         <div class="nav-container">
             <div class="logo">
                 <a href="{{ url('/') }}">
