@@ -1,0 +1,44 @@
+# Laravel
+/@core/vendor/
+/@core/node_modules/
+/@core/storage/cache/*
+/@core/storage/logs/*
+/@core/storage/framework/sessions/*
+/@core/storage/framework/views/*
+/@core/storage/framework/cache/data/*
+
+# Environment files
+@core/.env
+@core/.env.backup
+@core/.env.productiong
+@core/.env.local
+
+# Composer
+@core/composer.lock
+
+# NPM
+@core/package-lock.json
+@core/yarn.lock
+@core/pnpm-lock.yaml
+
+# Build files
+@core/public/hot
+@core/public/build
+@core/public/mix-manifest.json
+
+# IDEs & Editors
+@core/.idea
+@core/.vscode
+
+# OS Files
+@core/.DS_Store
+
+# PHPUnit
+@core/.phpunit.result.cache
+
+# Laravel Mix
+@core/npm-debug.log
+@core/yarn-error.log
+
+# Logs
+@core/*.log

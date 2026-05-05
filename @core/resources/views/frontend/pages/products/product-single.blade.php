@@ -333,7 +333,8 @@
             <div class="empty-height-50"></div>
             <div class="product-grid">
             @foreach ($related_products as $data)
-                <div class="product-card">
+            
+                <div class="{{ $data->category_id == 3 ? 'card-product' : 'product-card' }}">
                     <div class="image-container">
                     @php
                         $image_details = get_attachment_image_by_id($data->image, 'full');

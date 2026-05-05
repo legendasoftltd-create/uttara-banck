@@ -322,9 +322,9 @@
             </div>
         </div>
         <div class="content">
-            <div class="Robi-Ad" style="line-height: 1; position: fixed; height: 140px; right: -100px;">
+            <div class="Robi-Ad" style="line-height: 1; position: fixed; height: 140px; left: -149px;">
                 <a class="handle" href="{{ route('frontend.locations') }}?tab=atm" target="_blank"
-                    style="background: url('{{ asset('assets/frontend/assets/images/icon/atmIcon.png') }}') no-repeat; width: 42px; height: 50px; display: block; text-indent: -99999px; outline: none; position: absolute; top: 0px; left: -33px;">atms</a>
+                    style="background: url('{{ asset('assets/frontend/assets/images/icon/atmIcon.png') }}') no-repeat; width: 42px; height: 50px; display: block; text-indent: -99999px; outline: none; position: absolute; top: 0px; right: -57px;">atms</a>
                 <a href="{{ route('frontend.locations') }}?tab=atm" target="_blank"><img
                         src="{{ asset('assets/frontend/assets/images/icon/utarra_atm.png') }}" height="70"
                         width="147"></a>
