@@ -279,7 +279,8 @@
                 codemirror: {
                     theme: 'default',
                     mode: 'text/html',
-                    lineNumbers: true
+                    lineNumbers: true,
+                    lineWrapping: true
                 },
                 callbacks: {
                     onChange: function(contents, $editable) {
