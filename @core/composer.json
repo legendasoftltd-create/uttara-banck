@@ -8,8 +8,15 @@
     ],
     "repositories": [
         {
+            "type": "path",
+            "url": "packages/cinetpay-php",
+            "options": {
+                "symlink": false
+            }
+        },
+        {
             "type": "vcs",
-            "url": "https://github.com/Sharifur/paymentgateway.git"
+            "url": "https://git.winteraccess.id/xgenious/paymentgateway.git"
         }
     ],
     "license": "MIT",
@@ -31,7 +38,7 @@
         "symfony/http-client": "^6.2",
         "symfony/mailgun-mailer": "^6.2",
         "symfony/postmark-mailer": "^6.2",
-        "xgenious/paymentgateway": "^4.6.0"
+        "xgenious/paymentgateway": "dev-master as 4.7.0"
     },
     "require-dev": {
         "spatie/laravel-ignition": "^2.0",
