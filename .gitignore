@@ -1,5 +1,9 @@
 # Laravel
+/.env
+/vendor/
+/storage/
 /@core/vendor/
+/@core/storage/
 /@core/node_modules/
 /@core/storage/cache/*
 /@core/storage/logs/*

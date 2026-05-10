@@ -1,1 +1,0 @@
-{"verify":false,"msg":"we could not able to verify your purchase code, if you continue facing this issue contact our support."}
