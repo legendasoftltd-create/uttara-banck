@@ -1,13 +1,6 @@
 @extends('frontend.frontend-master')
 
 @section('content')
-    {{-- @php
-    $page_partial = 'home-'.get_static_option('home_page_variant');
-    if (!empty(get_static_option('home_page_page_builder_status'))){
-        $page_partial = 'page-builder';
-    }
-    @endphp --}}
-    {{-- @include('frontend.home-pages.'.$page_partial) --}}
     <div class="content-body">
         <div class="news-bar">
             <div class="news-title">
@@ -108,8 +101,7 @@
         </section>
 
         <div class="empty-height-50"></div>
-        @include('frontend.partials.activities')
-
+            @include('frontend.partials.activities')
         <div class="empty-height-50"></div>
         <section>
             <div class="container">
@@ -213,7 +205,6 @@
                             <a href="{{ route('frontend.bank.downloads') }}" class="title-color text-uppercase">
                                 <h3 class="h3">Bank Downloads</h3>
                             </a>
-                            {{-- <h3 class="h3">Important Downloads</h3> --}}
                             <ul>
                                 @forelse($chunk as $category)
                                     <hr style="margin-top: .5rem; margin-bottom: .5rem;">
@@ -231,45 +222,6 @@
                             </ul>
                         </div>
                         @endforeach
-                        
-
-                        {{-- <div data-aos="fade-up" data-aos-duration="700" class="information-card">
-                            <ul>
-                                <a href="#download/Notice-of-the-21st-AGM.jpg" target="_blank">
-                                    <li><i class="fa-regular fa-circle-dot"></i>
-                                        Notice of the
-                                        Twenty-First
-                                        Annual General
-                                        Meeting
-                                        of
-                                        Uttara Bank PLC</li>
-                                </a>
-                                <a href="#en/bida">
-                                    <li><i class="fa-regular fa-circle-dot"></i>
-                                        The Bangladesh
-                                        Investment
-                                        Development
-                                        Authority
-                                        (BIDA)</li>
-                                </a>
-
-                                <a href="#download/Uttara Bank PLC E-commerce Merchant List.pdf" target="_blank">
-                                    <li><i class="fa-regular fa-circle-dot"></i>
-                                        Uttara Bank PLC
-                                        E-commerce
-                                        Merchant List</li>
-                                </a>
-
-                                <a href>
-                                    <li class="title video-btn" data-toggle="modal" data-src data-target="#myModal"><i
-                                            class="fa-regular fa-circle-dot"></i>
-                                        Fake
-                                        Notes
-                                        Prevention
-                                        Video</li>
-                                </a>
-                            </ul>
-                        </div> --}}
                     </div>
                 </div>
             </div>

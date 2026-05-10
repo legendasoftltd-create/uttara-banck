@@ -2859,3 +2859,9 @@ function get_file_type_badge($filename) {
     
     return $type_label;
 }
+
+function important_info(){
+    $informations = WorksCategory::orderBy('id','desc')->get();
+
+    return $informations;
+}

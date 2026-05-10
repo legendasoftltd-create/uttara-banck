@@ -1547,7 +1547,7 @@
                             @endif--}}
                         </ul> 
                     </li>
-                    {{-- <li class="main_dropdown
+                    <li class="main_dropdown
                         @if(request()->is([
                         'admin-home/form-builder/*',
                         'admin-home/email-template/*',
@@ -1563,7 +1563,7 @@
                         <a href="javascript:void(0)" aria-expanded="true"><i class="ti-settings"></i>
                             <span>{{__('Appearance Settings')}}</span></a>
                         <ul class="collapse ">
-                            @if(check_page_permission_by_string('Topbar Settings'))
+                            {{-- @if(check_page_permission_by_string('Topbar Settings'))
                                 <li class="{{active_menu('admin-home/appearance-setting/topbar-settings')}}">
                                     <a href="{{route('admin.topbar.settings')}}"
                                        aria-expanded="true">
@@ -1626,7 +1626,7 @@
                                                         href="{{route('admin.widgets')}}">{{__('All Widgets')}}</a></li>
                                         </ul>
                                     </li>
-                                @endif
+                                @endif --}}
                                 @if(check_page_permission_by_string('Popup Builder'))
                                     <li class="main_dropdown @if(request()->is('admin-home/popup-builder/*')) active @endif">
                                         <a href="javascript:void(0)"
@@ -1641,7 +1641,7 @@
                                         </ul>
                                     </li>
                                 @endif
-                                @if(check_page_permission_by_string('Form Builder'))
+                                {{-- @if(check_page_permission_by_string('Form Builder'))
                                     <li class="main_dropdown @if(request()->is('admin-home/form-builder/*')) active @endif">
                                         <a href="javascript:void(0)"
                                            aria-expanded="true">
@@ -1691,9 +1691,9 @@
                                        aria-expanded="true">
                                         {{__('Media Images Manage')}}
                                     </a>
-                                </li>
+                                </li> --}}
                         </ul>
-                    </li> --}}
+                    </li>
                     @if(check_page_permission_by_string('General Settings'))
                     <li class="main_dropdown @if(request()->is('admin-home/general-settings/*')) active @endif">
                         <a href="javascript:void(0)" aria-expanded="true"><i class="ti-settings"></i>

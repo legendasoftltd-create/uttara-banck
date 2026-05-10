@@ -77,14 +77,10 @@
                     </div>
                     <input type="text" placeholder="Search..." id="searchInput">
                 </div>
-                <!-- <div class="lang">
-                                <button class="active">EN</button>
-                                <button>BN</button>
-                            </div> -->
                 <div class="phone">
                     <a href="to:16645"> ☎ 16645 </a>
                 </div>
-                <a class="btn ibanking">iBanking</a>
+                <a href="https://ibanking.uttarabank-bd.com/iBankUltimus/LoginUI.aspx" class="btn ibanking">iBanking</a>
                 <div class="hamburger" id="menuBtn">
                     <span></span>
                     <span></span>
@@ -95,11 +91,17 @@
 
         </div>
         <nav class="d-block d-md-none text-center center-menu">
-            <a href="#">Retail</a>
-            <span>|</span>
-            <a href="sme.html">SME</a>
-            <span>|</span>
-            <a href="#">Corporate</a>
+            @foreach(get_product_category_on_menu() as $data)
+                    <a href="{{route('frontend.products.category',['id' => $data->id, 'any' => $data->title])}}" class="animateButton_button___WZrU">
+                        <div class="animateButton_fill__8C9aZ"></div>
+                        <span class="animateButton_text__mb1az">{{ $data->title }}</span>
+                    </a>
+                    <span>|</span>
+                @endforeach
+                <a href="{{route('frontend.service')}}" class="animateButton_button___WZrU">
+                    <div class="animateButton_fill__8C9aZ"></div>
+                    <span class="animateButton_text__mb1az">Services</span>
+                </a>
         </nav>
     </header>
 
@@ -113,16 +115,16 @@
                     <li class="has-dropdown">
                         <a href="#" class="dropdown-toggle">About Us</a>
                         <ul class="sub-menu">
-                            <li><a href="about.html#atGlance">Bank at a Glance</a></li>
-                            <li><a href="about.html#historyUBPLC">History of Uttara Bank PLC.</a></li>
-                            <li><a href="about.html#bod">Board of Directors</a></li>
-                            <li><a href="about.html#executive-committee">Executive Committee</a></li>
-                            <li><a href="about.html#audit-committee">Audit Committee</a></li>
-                            <li><a href="about.html#risk-management-committee">Risk Management Committee</a></li>
-                            <li><a href="about.html#senior-management">Senior Management</a></li>
+                            <li><a href="{{route('frontend.dynamic.page','bank-at-a-glance')}}">Bank at a Glance</a></li>
+                            <li><a href="{{route('frontend.dynamic.page','history-of-uttara-bank-plc.')}}">History of Uttara Bank PLC.</a></li>
+                            <li><a href="#">Board of Directors</a></li>
+                            <li><a href="#">Executive Committee</a></li>
+                            <li><a href="#">Audit Committee</a></li>
+                            <li><a href="#">Risk Management Committee</a></li>
+                            <li><a href="#">Senior Management</a></li>
                             <li><a href="#">Employee Information</a></li>
                             <li><a href="#">Shareholding Structure</a></li>
-                            <li><a href="#">Government Securities Investment Window</a></li>
+                            <li><a href="{{route('frontend.dynamic.page','government-securities-investment-window')}}">Government Securities Investment Window</a></li>
                             <li><a href="#">Cash Dollar Transaction</a></li>
                         </ul>
                     </li>
@@ -147,14 +149,27 @@
                     <li class="has-dropdown">
                         <a href="#" class="dropdown-toggle">Financial Reports</a>
                         <ul class="sub-menu">
-                            <li><a href="#">Annual Reports</a></li>
-                            <li><a href="#">1st Quarter Statement</a></li>
-                            <li><a href="#">Half Yearly Statement</a></li>
-                            <li><a href="#">3rd Quarter Statement</a></li>
-                            <li><a href="#">Credit Rating</a></li>
-                            <li><a href="#">Disclosures on Risk Based Capital</a></li>
-                            <li><a href="#">Disclosures on Green Banking</a></li>
-                            <li><a href="#">Important Disclosure</a></li>
+                        @php
+                            $allowed = [
+                                'Annual Reports',
+                                '1st Quarter Statement',
+                                'Half Yearly Statement',
+                                '3rd Quarter Statement',
+                                'Credit Rating',
+                                'Disclosures on Risk Based Capital',
+                                'Disclosures on Green Banking',
+                                'Important Disclosure'
+                            ];
+                        @endphp
+                            @foreach (important_info() as $info)
+                                @if(in_array($info->name, $allowed))
+                                    <li>
+                                        <a href="{{ route('frontend.works.category', ['id' => $info->id, 'any' => $info->name]) }}">
+                                            {{ $info->name }}
+                                        </a>
+                                    </li>
+                                @endif
+                            @endforeach
                         </ul>
                     </li>
                     <li class="has-dropdown">
@@ -170,7 +185,7 @@
                             <li><a href="{{ route('frontend.news') }}">News</a></li>
                             <li><a href="#">Auction</a></li>
                             <li><a href="#">Notice</a></li>
-                            <li><a href="#">Downloads</a></li>
+                            <li><a href="{{ route('frontend.bank.downloads') }}">Downloads</a></li>
                             <li><a href="#">Photo Gallery</a></li>
                             <li><a href="#">Video Gallery</a></li>
                             <li><a href="#">Useful Link</a></li>
@@ -190,20 +205,19 @@
                         </ul>
                     </li>
                     <li><a href="{{ route('frontend.locations') }}">Our Location</a></li>
-                    <li><a href="#">iBanking</a></li>
+                    <li><a href="{{ route('frontend.dynamic.page', 'ibanking') }}">iBanking</a></li>
                     <li><a href="https://play.google.com/store/apps/details?id=com.uttarabank.ublmobile">Uttara
                             eWallet</a></li>
                     <li><a href="#">Career</a></li>
                     <li><a href="#">Complain</a></li>
-                    <li><a href="#">Warning against illegal forex trading/dealing</a></li>
-                    <li><a href="#">National Integrity Strategy</a></li>
-                    <li><a href="#">Sanchayapatra</a></li>
+                    <li><a href="{{ route('frontend.dynamic.page', 'warning-against-illegal-forex-trading/dealing') }}">Warning against illegal forex trading/dealing</a></li>
+                    <li><a href="{{ route('frontend.dynamic.page', 'sanchayapatra') }}">Sanchayapatra</a></li>
                     <li><a href="#">Unclaimed Deposit List</a></li>
                     <li><a href="#">Financial Literacy</a></li>
                     <li><a href="#">Digital Banking</a></li>
                     <li><a href="#">Unclaimed Dividend</a></li>
-                    <li><a href="#">Citizen's Charter</a></li>
-                    <li><a href="#">FDI Help Desk</a></li>
+                    <li><a href="{{ route('frontend.dynamic.page', "citizen's-charter") }}">Citizen's Charter</a></li>
+                    <li><a href="{{ route('frontend.dynamic.page', 'fdi-help-desk') }}">FDI Help Desk</a></li>
                     <li><a href="#">Lending Interest Rate</a></li>
                     <li><a href="#">Contact</a></li>
                 </ul>

@@ -106,29 +106,32 @@
                     <div id="carouselExampleControls" class="carousel slide popup" data-ride="carousel">
                         <div class="carousel-inner">
                             @foreach($popup_details as $data)
-                                @if ($data->type == 'notice')
-                                    <div class="carousel-item active">
+                                @php
+                                    $popup_type = $data->type ?? null;
+                                @endphp
+                                @if ($popup_type === 'notice')
+                                    <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
                                         <div class="bg-white p-4 rounded shadow-sm news-card">
                                             <h4 class="news-title rounded">{{ $data->title }}</h4>
                                             <p class="news-desc">{{ $data->description }}</p>
                                         </div>
                                     </div>
-                                @elseif($data->type == 'only_image')
-                                    <div class="carousel-item">
+                                @elseif($popup_type === 'only_image')
+                                    <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
                                         @php
                                             $bolg_image_details = get_attachment_image_by_id($data->only_image, 'full');
                                         @endphp
                                         <img class="d-block w-100 rounded" src="{{$bolg_image_details['img_url']}}" alt="slider 02">
                                     </div>
-                                @elseif($data->type == 'promotion')
-                                    <div class="carousel-item">
+                                @elseif($popup_type === 'promotion')
+                                    <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
                                         @php
                                             $bolg_image_details = get_attachment_image_by_id($data->only_image, 'full');
                                         @endphp
                                         <img class="d-block w-100 rounded" src="{{$bolg_image_details['img_url']}}" alt="slider 02">
                                     </div>
                                 @else
-                                    <div class="carousel-item">
+                                    <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
                                         @php
                                             $bolg_image_details = get_attachment_image_by_id($data->only_image, 'full');
                                         @endphp
