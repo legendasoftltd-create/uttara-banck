@@ -245,8 +245,8 @@
             $('.summernote').summernote({
                 disableDragAndDrop: true,
                 height: 400,
-                codeviewFilter: true,
-                codeviewIframeFilter: true,
+                codeviewFilter: false,
+                codeviewIframeFilter: false,
                 buttons: {
                     classicfile: function (context) {
                         var ui = $.summernote.ui;
@@ -293,11 +293,6 @@
                     },
                     onBlurCodeview: function(contents, $editable) {
                         syncClassicEditorContent(this, contents);
-                    },
-                    onPaste: function (e) {
-                        var bufferText = ((e.originalEvent || e).clipboardData || window.clipboardData).getData('Text');
-                        e.preventDefault();
-                        document.execCommand('insertText', false, bufferText);
                     }
                 }
             });
