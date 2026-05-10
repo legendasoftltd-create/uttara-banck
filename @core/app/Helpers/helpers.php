@@ -609,11 +609,7 @@ function setEnvValue(array $values)
     }
 
     $str = substr($str, 0, -1);
-    if (!is_writable($envFile)) {
-        return false;
-    }
-
-    if (file_put_contents($envFile, $str) === false) return false;
+    if (!file_put_contents($envFile, $str)) return false;
     return true;
 }
 
