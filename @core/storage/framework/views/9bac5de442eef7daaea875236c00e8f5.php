@@ -288,7 +288,7 @@
             </div>
             <!--pop up    -->
             <div class="Cell-Ad"
-                style="line-height: 1; position: fixed; height: 140px; left: -187px; z-index: 99; top: 20%;transition: all 0.4s ease-in-out;transition: all 0.4s ease-in-out;">
+                style="line-height: 1; position: fixed; height: 140px; left: -187px; z-index: 99; top: 30%;transition: all 0.4s ease-in-out;transition: all 0.4s ease-in-out;">
                 <a class="Cell" href="<?php echo e(route('frontend.locations')); ?>?tab=branch" target="_blank"
                     style=" width: 29px; height: 140px; display: block; z-index: 99; outline: none; position: absolute; top: 0px; right: -29px;  box-shadow: rgba(160, 192, 229, 0.55) 0px 0px 10px 0px; border-radius: 0 10px 10px 0;background: #FFF;"><span
                         style="color: #008649; margin-top: 66px; -webkit-transform: rotate(-90deg); -moz-transform: rotate(-90deg); -ms-transform: rotate(-90deg); -o-transform: rotate(-90deg); float: left; margin-left: -33px; letter-spacing: 2px; text-transform: uppercase; font-size: 14px; font-weight: 500;">Branches</span></a>

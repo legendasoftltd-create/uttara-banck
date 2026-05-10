@@ -3487,7 +3487,7 @@ footer.main-footer .copyrights p {
     -o-transition: all 500ms ease;
     transition: all 500ms ease;
     box-shadow: 3px 0 15px rgba(0, 0, 0, 0.40);
-    z-index: 99999;
+    z-index: 998;
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
     border: 2px solid #fff;
@@ -5840,7 +5840,7 @@ select:focus {
     padding: 0px;
     width: 135px;
     background-color: transparent;
-    bottom: 5%;
+    top: 20%;
     position: fixed;
     z-index: 998;
     transition: all 0.4s ease-in-out;

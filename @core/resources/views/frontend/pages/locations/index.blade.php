@@ -115,7 +115,7 @@
     <section class="location-section">
                 <div class="container-fluid">
                 <div class="empty-height-50"></div>
-                    <div class="row">
+                    <!-- <div class="row">
                         <div class="col-md-12">
                             <h2 class="text-center title-color">
                                 FIND OUR LOCATIONS
@@ -123,9 +123,7 @@
                             <div class="title-seperator">
                             </div>
                         </div>
-                    </div>
-                        <br>
-                        <br>
+                    </div> -->
                     <div class="tab-wrapper">
                     @forelse($types as $key => $type)
                         <button class="tab {{ $key === 0 ? 'active' : '' }}" data-tab="{{ $type }}">

@@ -13,7 +13,7 @@
     <section class="location-section">
                 <div class="container-fluid">
                 <div class="empty-height-50"></div>
-                    <div class="row">
+                    <!-- <div class="row">
                         <div class="col-md-12">
                             <h2 class="text-center title-color">
                                 FIND OUR LOCATIONS
@@ -21,9 +21,7 @@
                             <div class="title-seperator">
                             </div>
                         </div>
-                    </div>
-                        <br>
-                        <br>
+                    </div> -->
                     <div class="tab-wrapper">
                     <?php $__empty_1 = true; $__currentLoopData = $types; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $type): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
                         <button class="tab <?php echo e($key === 0 ? 'active' : ''); ?>" data-tab="<?php echo e($type); ?>">

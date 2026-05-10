@@ -91,7 +91,7 @@
 </html> --}}
 <div class="empty-height-50"></div>
 <footer class="footer ">
-    <div class="container-fluid mx-auto">
+    <div class="container mx-auto">
         <div class="footer-wrapper" data-aos="fade-up" data-aos-duration="2000">
             <a style="display: inline-block;" href="{{url('/')}}" data-aos="fade-up" data-aos-duration="2000">
                 @if(!empty(filter_static_option_value('site_logo',$global_static_field_data)))
