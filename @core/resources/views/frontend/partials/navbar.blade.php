@@ -183,13 +183,13 @@
                         <a href="#" class="dropdown-toggle">Media Room</a>
                         <ul class="sub-menu">
                             <li><a href="{{ route('frontend.news') }}">News</a></li>
-                            <li><a href="#">Auction</a></li>
-                            <li><a href="#">Notice</a></li>
+                            <li><a href="{{ route('frontend.auction') }}">Auction</a></li>
+                            <li><a href="{{ route('frontend.notice') }}">Notice</a></li>
                             <li><a href="{{ route('frontend.bank.downloads') }}">Downloads</a></li>
                             <li><a href="#">Photo Gallery</a></li>
                             <li><a href="#">Video Gallery</a></li>
                             <li><a href="#">Useful Link</a></li>
-                            <li><a href="#">Tender</a></li>
+                            <li><a href="{{ route('frontend.tender') }}">Tender</a></li>
                         </ul>
                     </li>
                     <li class="has-dropdown">

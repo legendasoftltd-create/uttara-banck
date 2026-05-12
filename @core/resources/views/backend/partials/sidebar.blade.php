@@ -609,6 +609,46 @@
                                     </ul>
                                 </li>
                             @endif
+                            @if(check_page_permission_by_string('Auction Manage'))
+                                <li class="main_dropdown {{active_menu('admin-home/auction')}} @if(request()->is('admin-home/auction/*')) active @endif">
+                                    <a href="javascript:void(0)" aria-expanded="true"><i class="ti-announcement"></i> {{__('Auction')}}</a>
+                                    <ul class="collapse">
+                                        <li class="{{active_menu('admin-home/auction')}}"><a href="{{route('admin.auction.all')}}">{{__('All Auctions')}}</a></li>
+                                        <li class="{{active_menu('admin-home/auction/new')}}"><a href="{{route('admin.auction.new')}}">{{__('Add New Auction')}}</a></li>
+                                        <li class="{{active_menu('admin-home/auction/page-settings')}}"><a href="{{route('admin.auction.page.settings')}}">{{__('Page Settings')}}</a></li>
+                                    </ul>
+                                </li>
+                            @endif
+                            @if(check_page_permission_by_string('Notice Manage'))
+                                <li class="main_dropdown {{active_menu('admin-home/notice')}} @if(request()->is('admin-home/notice/*')) active @endif">
+                                    <a href="javascript:void(0)" aria-expanded="true"><i class="ti-bell"></i> {{__('Notice')}}</a>
+                                    <ul class="collapse">
+                                        <li class="{{active_menu('admin-home/notice')}}"><a href="{{route('admin.notice.all')}}">{{__('All Notices')}}</a></li>
+                                        <li class="{{active_menu('admin-home/notice/new')}}"><a href="{{route('admin.notice.new')}}">{{__('Add New Notice')}}</a></li>
+                                        <li class="{{active_menu('admin-home/notice/page-settings')}}"><a href="{{route('admin.notice.page.settings')}}">{{__('Page Settings')}}</a></li>
+                                    </ul>
+                                </li>
+                            @endif
+                            @if(check_page_permission_by_string('Tender Manage'))
+                                <li class="main_dropdown {{active_menu('admin-home/tender')}} @if(request()->is('admin-home/tender/*')) active @endif">
+                                    <a href="javascript:void(0)" aria-expanded="true"><i class="ti-file"></i> {{__('Tender')}}</a>
+                                    <ul class="collapse">
+                                        <li class="{{active_menu('admin-home/tender')}}"><a href="{{route('admin.tender.all')}}">{{__('All Tenders')}}</a></li>
+                                        <li class="{{active_menu('admin-home/tender/new')}}"><a href="{{route('admin.tender.new')}}">{{__('Add New Tender')}}</a></li>
+                                        <li class="{{active_menu('admin-home/tender/page-settings')}}"><a href="{{route('admin.tender.page.settings')}}">{{__('Page Settings')}}</a></li>
+                                    </ul>
+                                </li>
+                            @endif
+                            @if(check_page_permission_by_string('Useful Links Manage'))
+                                <li class="main_dropdown {{active_menu('admin-home/useful-links')}} @if(request()->is('admin-home/useful-links/*')) active @endif">
+                                    <a href="javascript:void(0)" aria-expanded="true"><i class="ti-link"></i> {{__('Useful Links')}}</a>
+                                    <ul class="collapse">
+                                        <li class="{{active_menu('admin-home/useful-links')}}"><a href="{{route('admin.useful.links.all')}}">{{__('All Links')}}</a></li>
+                                        <li class="{{active_menu('admin-home/useful-links/new')}}"><a href="{{route('admin.useful.links.new')}}">{{__('Add New Link')}}</a></li>
+                                        <li class="{{active_menu('admin-home/useful-links/page-settings')}}"><a href="{{route('admin.useful.links.page.settings')}}">{{__('Page Settings')}}</a></li>
+                                    </ul>
+                                </li>
+                            @endif
                         </ul>
                     </li>
                     <li class="main_dropdown

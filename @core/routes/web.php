@@ -484,6 +484,41 @@ Route::group(['middleware' => ['setlang:frontend', 'globalVariable', 'maintains_
     });
 
     /*------------------------------------
+        FRONTEND: AUCTION ROUTES
+    ------------------------------------*/
+    Route::group(['namespace' => 'Frontend'], function () {
+        $auction_page_slug = get_static_option('auction_page_slug') ?? 'auction';
+        Route::get($auction_page_slug, 'AuctionController@page')->name('frontend.auction');
+        Route::get($auction_page_slug . '/{slug}', 'AuctionController@single')->name('frontend.auction.single');
+    });
+
+    /*------------------------------------
+        FRONTEND: USEFUL LINKS ROUTES
+    ------------------------------------*/
+    Route::group(['namespace' => 'Frontend'], function () {
+        $useful_links_slug = get_static_option('useful_links_page_slug') ?? 'useful-links';
+        Route::get($useful_links_slug, 'UsefulLinkController@page')->name('frontend.useful.links');
+    });
+
+    /*------------------------------------
+        FRONTEND: TENDER ROUTES
+    ------------------------------------*/
+    Route::group(['namespace' => 'Frontend'], function () {
+        $tender_page_slug = get_static_option('tender_page_slug') ?? 'tender';
+        Route::get($tender_page_slug, 'TenderController@page')->name('frontend.tender');
+        Route::get($tender_page_slug . '/{slug}', 'TenderController@single')->name('frontend.tender.single');
+    });
+
+    /*------------------------------------
+        FRONTEND: NOTICE ROUTES
+    ------------------------------------*/
+    Route::group(['namespace' => 'Frontend'], function () {
+        $notice_page_slug = get_static_option('notice_page_slug') ?? 'notice';
+        Route::get($notice_page_slug, 'NoticeController@page')->name('frontend.notice');
+        Route::get($notice_page_slug . '/{slug}', 'NoticeController@single')->name('frontend.notice.single');
+    });
+
+    /*------------------------------------
         FRONTEND: ROUTES
     ------------------------------------*/
     Route::get('/' . $testimonial_page_slug, 'FrontendController@testimonials')->name('frontend.testimonials');

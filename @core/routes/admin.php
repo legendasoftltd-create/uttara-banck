@@ -1707,6 +1707,67 @@ Route::prefix('admin-home')->middleware(['setlang:backend'])->group(function () 
     });
 
     /*==============================================
+      USEFUL LINKS ROUTES
+    ==============================================*/
+    Route::prefix('useful-links')->middleware(['adminPermissionCheck:Useful Links Manage'])->group(function () {
+        Route::get('/', 'UsefulLinkController@index')->name('admin.useful.links.all');
+        Route::get('/new', 'UsefulLinkController@new_link')->name('admin.useful.links.new');
+        Route::post('/new', 'UsefulLinkController@store_link');
+        Route::get('/edit/{id}', 'UsefulLinkController@edit_link')->name('admin.useful.links.edit');
+        Route::post('/update/{id}', 'UsefulLinkController@update_link')->name('admin.useful.links.update');
+        Route::post('/delete/{id}', 'UsefulLinkController@delete_link')->name('admin.useful.links.delete');
+        Route::post('/bulk-action', 'UsefulLinkController@bulk_action')->name('admin.useful.links.bulk.action');
+        Route::post('/update-order', 'UsefulLinkController@update_order')->name('admin.useful.links.update.order');
+        Route::get('/page-settings', 'UsefulLinkController@page_settings')->name('admin.useful.links.page.settings');
+        Route::post('/page-settings', 'UsefulLinkController@update_page_settings')->name('admin.useful.links.page.settings.update');
+    });
+
+    /*==============================================
+      TENDER ROUTES
+    ==============================================*/
+    Route::prefix('tender')->middleware(['adminPermissionCheck:Tender Manage'])->group(function () {
+        Route::get('/', 'TenderController@index')->name('admin.tender.all');
+        Route::get('/new', 'TenderController@new_tender')->name('admin.tender.new');
+        Route::post('/new', 'TenderController@store_tender');
+        Route::get('/edit/{id}', 'TenderController@edit_tender')->name('admin.tender.edit');
+        Route::post('/update/{id}', 'TenderController@update_tender')->name('admin.tender.update');
+        Route::post('/delete/{id}', 'TenderController@delete_tender')->name('admin.tender.delete');
+        Route::post('/bulk-action', 'TenderController@bulk_action')->name('admin.tender.bulk.action');
+        Route::get('/page-settings', 'TenderController@page_settings')->name('admin.tender.page.settings');
+        Route::post('/page-settings', 'TenderController@update_page_settings')->name('admin.tender.page.settings.update');
+    });
+
+    /*==============================================
+      NOTICE ROUTES
+    ==============================================*/
+    Route::prefix('notice')->middleware(['adminPermissionCheck:Notice Manage'])->group(function () {
+        Route::get('/', 'NoticeController@index')->name('admin.notice.all');
+        Route::get('/new', 'NoticeController@new_notice')->name('admin.notice.new');
+        Route::post('/new', 'NoticeController@store_notice');
+        Route::get('/edit/{id}', 'NoticeController@edit_notice')->name('admin.notice.edit');
+        Route::post('/update/{id}', 'NoticeController@update_notice')->name('admin.notice.update');
+        Route::post('/delete/{id}', 'NoticeController@delete_notice')->name('admin.notice.delete');
+        Route::post('/bulk-action', 'NoticeController@bulk_action')->name('admin.notice.bulk.action');
+        Route::get('/page-settings', 'NoticeController@page_settings')->name('admin.notice.page.settings');
+        Route::post('/page-settings', 'NoticeController@update_page_settings')->name('admin.notice.page.settings.update');
+    });
+
+    /*==============================================
+      AUCTION ROUTES
+    ==============================================*/
+    Route::prefix('auction')->middleware(['adminPermissionCheck:Auction Manage'])->group(function () {
+        Route::get('/', 'AuctionController@index')->name('admin.auction.all');
+        Route::get('/new', 'AuctionController@new_auction')->name('admin.auction.new');
+        Route::post('/new', 'AuctionController@store_auction');
+        Route::get('/edit/{id}', 'AuctionController@edit_auction')->name('admin.auction.edit');
+        Route::post('/update/{id}', 'AuctionController@update_auction')->name('admin.auction.update');
+        Route::post('/delete/{id}', 'AuctionController@delete_auction')->name('admin.auction.delete');
+        Route::post('/bulk-action', 'AuctionController@bulk_action')->name('admin.auction.bulk.action');
+        Route::get('/page-settings', 'AuctionController@page_settings')->name('admin.auction.page.settings');
+        Route::post('/page-settings', 'AuctionController@update_page_settings')->name('admin.auction.page.settings.update');
+    });
+
+    /*==============================================
       PAGES ROUTES
     ==============================================*/
     Route::prefix('page')->middleware(['adminPermissionCheck:Pages Manage'])->group(function () {
