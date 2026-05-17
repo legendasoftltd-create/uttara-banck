@@ -1,7 +1,8 @@
 @extends('backend.admin-master')
+
 @section('style')
-    <link rel="stylesheet" href="{{ asset('assets/backend/css/summernote-bs4.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/backend/css/nice-select.css') }}">
+    <link rel="stylesheet" href="{{asset('assets/backend/css/codemirror.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/backend/css/summernote-bs4.css')}}">
 @endsection
 @section('site-title')
     {{ __('Edit Tender') }}
@@ -24,8 +25,7 @@
                             </a>
                         </div>
 
-                        <form action="{{ route('admin.tender.update', $tender->id) }}" method="post"
-                              enctype="multipart/form-data">
+                        <form action="{{ route('admin.tender.update', $tender->id) }}" method="post" enctype="multipart/form-data">
                             @csrf
 
                             <div class="form-group">
@@ -38,65 +38,65 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>{{ __('Notice Date') }} <span class="text-danger">*</span></label>
-                                        <input type="date" name="notice_date" class="form-control"
+                                        <input type="text" name="notice_date" class="form-control date-picker"
                                                value="{{ old('notice_date', $tender->notice_date ? $tender->notice_date->format('Y-m-d') : '') }}"
-                                               required>
+                                               placeholder="YYYY-MM-DD" autocomplete="off" required>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>{{ __('Expiry / Last Date') }}</label>
-                                        <input type="date" name="expiry_date" class="form-control"
-                                               value="{{ old('expiry_date', $tender->expiry_date ? $tender->expiry_date->format('Y-m-d') : '') }}">
+                                        <input type="text" name="expiry_date" class="form-control date-picker"
+                                               value="{{ old('expiry_date', $tender->expiry_date ? $tender->expiry_date->format('Y-m-d') : '') }}"
+                                               placeholder="YYYY-MM-DD" autocomplete="off">
                                     </div>
                                 </div>
                             </div>
 
-                            {{-- Current file --}}
                             @if($tender->file)
                                 <div class="form-group">
                                     <label>{{ __('Current File') }}</label>
-                                    <div class="d-flex align-items-center gap-3">
+                                    <div class="d-flex align-items-center">
                                         <a href="{{ asset('assets/uploads/tenders/' . $tender->file) }}"
-                                           target="_blank" class="btn btn-info btn-sm">
+                                           target="_blank" class="btn btn-info btn-sm mr-3">
                                             <i class="ti-eye"></i> {{ __('View Current File') }}
                                         </a>
-                                        <span class="text-muted ml-2" style="font-size:12px;">
-                                            {{ $tender->file }}
-                                        </span>
+                                        <small class="text-muted">{{ $tender->file }}</small>
                                     </div>
                                 </div>
                             @endif
 
                             <div class="form-group">
-                                <label>{{ __('Replace File (PDF)') }}</label>
-                                <input type="file" name="file" class="form-control"
-                                       accept=".pdf,.jpg,.jpeg,.png,.doc,.docx">
-                                <small class="text-muted">{{ __('Upload a new file to replace the existing one. Max 20MB.') }}</small>
+                                <label>{{ $tender->file ? __('Replace File') : __('Tender Document (PDF / Image)') }}</label>
+                                <div class="custom-file">
+                                    <input type="file" name="file" class="custom-file-input" id="tenderFile"
+                                           accept=".pdf,.jpg,.jpeg,.png,.doc,.docx">
+                                    <label class="custom-file-label" for="tenderFile">{{ __('Choose file') }}</label>
+                                </div>
+                                <small class="text-muted">{{ __('Leave blank to keep current file. Max 20MB.') }}</small>
                             </div>
 
                             <div class="form-group">
                                 <label>{{ __('Additional Description') }}</label>
-                                <textarea name="description" id="description"
-                                          class="form-control summernote">{{ old('description', $tender->description) }}</textarea>
+                                <input type="hidden" name="description" value="{{ old('description', $tender->description) }}">
+                                <div class="summernote" data-content="{{ old('description', $tender->description) }}"></div>
                             </div>
 
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>{{ __('Status') }}</label>
-                                        <select name="status" class="form-control nice-select">
-                                            <option value="publish"  {{ old('status', $tender->status) == 'publish'  ? 'selected' : '' }}>{{ __('Publish') }}</option>
-                                            <option value="draft"    {{ old('status', $tender->status) == 'draft'    ? 'selected' : '' }}>{{ __('Draft') }}</option>
-                                            <option value="archive"  {{ old('status', $tender->status) == 'archive'  ? 'selected' : '' }}>{{ __('Archive') }}</option>
+                                        <select name="status" class="form-control">
+                                            <option value="publish" {{ old('status', $tender->status) == 'publish' ? 'selected' : '' }}>{{ __('Publish') }}</option>
+                                            <option value="draft"   {{ old('status', $tender->status) == 'draft'   ? 'selected' : '' }}>{{ __('Draft') }}</option>
+                                            <option value="archive" {{ old('status', $tender->status) == 'archive' ? 'selected' : '' }}>{{ __('Archive') }}</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>{{ __('Language') }}</label>
-                                        <input type="text" class="form-control"
-                                               value="{{ $tender->lang }}" disabled>
+                                        <input type="text" class="form-control" value="{{ $tender->lang }}" disabled>
                                     </div>
                                 </div>
                             </div>
@@ -112,12 +112,49 @@
     </div>
 @endsection
 @section('script')
-    <script src="{{ asset('assets/backend/js/summernote-bs4.js') }}"></script>
-    <script src="{{ asset('assets/backend/js/nice-select.min.js') }}"></script>
+    <script src="{{asset('assets/backend/js/codemirror.js')}}"></script>
+    <script src="{{asset('assets/backend/js/summernote-bs4.js')}}"></script>
     <script>
         $(document).ready(function () {
-            $('.summernote').summernote({ height: 200 });
-            $('.nice-select').niceSelect();
+            $('.date-picker').datepicker({ format: 'yyyy-mm-dd', autoclose: true, todayHighlight: true, orientation: 'bottom' });
+
+            function syncContent(editor, contents) {
+                let final = typeof iFrameFilterInSummernote === 'function' ? iFrameFilterInSummernote(contents) : contents;
+                $(editor).prev('input').val(final);
+            }
+
+            $('.summernote').summernote({
+                disableDragAndDrop: true,
+                height: 250,
+                codeviewFilter: false,
+                codeviewIframeFilter: false,
+                toolbar: [
+                    ['style', ['style']],
+                    ['font', ['bold', 'italic', 'underline', 'strikethrough', 'clear']],
+                    ['fontsize', ['fontsize']],
+                    ['color', ['color']],
+                    ['para', ['ul', 'ol', 'paragraph']],
+                    ['table', ['table']],
+                    ['insert', ['link', 'hr']],
+                    ['history', ['undo', 'redo']],
+                    ['view', ['fullscreen', 'codeview']],
+                ],
+                codemirror: { theme: 'default', mode: 'text/html', lineNumbers: true, lineWrapping: true },
+                callbacks: {
+                    onChange: function(contents) { syncContent(this, contents); },
+                    onChangeCodeview: function(contents) { syncContent(this, contents); },
+                    onBlurCodeview: function(contents) { syncContent(this, contents); }
+                }
+            });
+
+            $('.summernote').each(function () {
+                $(this).summernote('code', $(this).data('content') || '');
+            });
+
+            $('.custom-file-input').on('change', function () {
+                var fileName = $(this).val().split('\\').pop();
+                $(this).next('.custom-file-label').text(fileName || '{{ __('Choose file') }}');
+            });
         });
     </script>
 @endsection

@@ -1,7 +1,7 @@
 @extends('backend.admin-master')
+
 @section('style')
-    <link rel="stylesheet" href="{{ asset('assets/backend/css/media-uploader.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/backend/css/nice-select.css') }}">
+    <x-media.css/>
 @endsection
 @section('site-title')
     {{ __('Edit Useful Link') }}
@@ -35,7 +35,7 @@
 
                             <div class="form-group">
                                 <label>{{ __('URL') }} <span class="text-danger">*</span></label>
-                                <input type="text" name="url" class="form-control"
+                                <input type="url" name="url" class="form-control"
                                        value="{{ old('url', $link->url) }}" required>
                             </div>
 
@@ -47,13 +47,13 @@
                                             {!! render_image_markup_by_attachment_id($link->image) !!}
                                         @endif
                                     </div>
-                                    <input type="hidden" name="image" id="link_image"
-                                           value="{{ old('image', $link->image) }}">
+                                    <input type="hidden" name="image" value="{{ old('image', $link->image) }}">
                                     <button type="button" class="btn btn-info media_upload_form_btn"
                                             data-btntitle="{{ __('Select Logo') }}"
-                                            data-modaltitle="{{ __('Upload Logo') }}"
-                                            data-input-id="link_image">
-                                        {{ __('Change Logo') }}
+                                            data-modaltitle="{{ __('Upload Organization Logo') }}"
+                                            data-toggle="modal"
+                                            data-target="#media_upload_modal">
+                                        {{ $link->image ? __('Change Logo') : __('Upload Logo') }}
                                     </button>
                                 </div>
                             </div>
@@ -69,7 +69,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>{{ __('Status') }}</label>
-                                        <select name="status" class="form-control nice-select">
+                                        <select name="status" class="form-control">
                                             <option value="publish" {{ old('status', $link->status) == 'publish' ? 'selected' : '' }}>{{ __('Publish') }}</option>
                                             <option value="draft"   {{ old('status', $link->status) == 'draft'   ? 'selected' : '' }}>{{ __('Draft') }}</option>
                                         </select>
@@ -92,11 +92,9 @@
             </div>
         </div>
     </div>
+    @include('backend.partials.media-upload.media-upload-markup')
 @endsection
 @section('script')
-    <script src="{{ asset('assets/backend/js/media-uploader.js') }}"></script>
-    <script src="{{ asset('assets/backend/js/nice-select.min.js') }}"></script>
-    <script>
-        $(document).ready(function () { $('.nice-select').niceSelect(); });
-    </script>
+    <script src="{{ asset('assets/backend/js/dropzone.js') }}"></script>
+    @include('backend.partials.media-upload.media-js')
 @endsection
