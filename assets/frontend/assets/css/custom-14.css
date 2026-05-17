@@ -3944,7 +3944,7 @@ html.monochrome {
     }
 
     .whats-text-bg a {
-        padding: 0px 112px;
+        /* padding: 0px 112px; */
         color: #fff;
     }
 
@@ -4072,7 +4072,7 @@ html.monochrome {
 
     .whats-text-bg a {
 
-        padding: 0px 112px;
+        /* padding: 0px 112px; */
 
         color: #fff;
 
@@ -4321,7 +4321,7 @@ html.monochrome {
     }
 
     .about-nav.dropdown {
-        width: 115px;
+        /* width: 115px; */
         padding: 10px;
     }
 
@@ -5094,6 +5094,7 @@ html.monochrome {
         grid-column: span 4;
         grid-row: auto;
     }
+
 }
 
 /* Mobile Layout */
@@ -5240,6 +5241,15 @@ html.monochrome {
     gap: 30px;
     max-width: 250px;
     height: 100%;
+    width: 250px;
+}
+
+.cards-container .card{
+    width: 100%;
+}
+
+.card-image img.atm-card{
+    height: auto;
 }
 
 .card {
@@ -5259,7 +5269,8 @@ html.monochrome {
 
 .card-image img {
     width: 100%;
-    /* height: 360px; */
+    height: 250px;
+    object-fit: cover;
 }
 
 .card-content {
@@ -6452,6 +6463,15 @@ select:focus {
     .video-container {
         width: 40%;
     }
+    .animateButton_fill__8C9aZ{
+        display: none;
+    }
+    .banner-carousel{
+        padding: 30px 0;
+    }
+    .banner-carousel .slide-item{
+        display: block;
+    }
 }
 
 @media (max-width: 480px) {
@@ -6779,6 +6799,9 @@ select:focus {
     .management-comete .card {
         width: calc(33.33% - 20px);
     }
+    .cards-container{
+        max-width: 210px;
+    }
 }
 
 @media (max-width: 600px) {
@@ -6893,6 +6916,9 @@ select:focus {
 @media (max-width: 767px) {
     .management-comete .description-text {
         max-height: 300px;
+    }
+    .cards-container{
+        max-width: 200px;
     }
 }
 
@@ -7425,6 +7451,7 @@ td {
 
 /* Mobile Responsiveness for Pagination */
 @media (max-width: 600px) {
+    
     .pagination-container {
         justify-content: center;
         /* Center on mobile for easier tapping */
@@ -7436,6 +7463,11 @@ td {
     }
 }
 
+@media (max-width: 500px) {
+    .cards-container{
+        max-width: 250px;
+    }
+}
 
 
 /* ================================================
@@ -7703,6 +7735,7 @@ td {
             @media(max-width:992px){
 
             .location-section .location-grid{
+                display: block;
                 grid-template-columns:1fr;
             }
 
