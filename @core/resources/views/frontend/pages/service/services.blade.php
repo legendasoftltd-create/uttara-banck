@@ -13,16 +13,7 @@
 @section('content')
 <div class="empty-height-50"></div>
     <section class="service-area service-page padding-120">
-        <div class="row">
-            <div class="col-md-12">
-                <h2 class="text-center title-color">
-                    Services
-                </h2>
-                <div class="title-seperator">
-                </div>
-            </div>
-        </div>
-        <div class="about-menu-col container-fluid">
+        <div class="about-menu-col container">
             <div class="seven-cols">
                 @php $a = 1; @endphp
                 @foreach($all_services as $service)
