@@ -33,7 +33,7 @@
                         </div>
                     </div>
                     <div class="video-container">
-                        <img src="{{ $image_details['img_url'] }}" alt="slider images" width="100">
+                        <img src="{{ isset($image_details['img_url']) ? $image_details['img_url'] : '' }}" alt="slider images" width="100">
                     </div>
                 </div>
             @endforeach

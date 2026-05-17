@@ -155,9 +155,10 @@
         $(document).ready(function() {
             var insertFileText = @json(__('Insert File'));
 
+    
             let page_builder = @json($page_post->page_builder_status ?? null);
             let breadcrumb = @json($page_post->breadcrumb_status ?? null);
-
+    
             if (page_builder == 'on') {
                 $('.breadcrumb_status').removeClass('d-none');
             }
@@ -178,13 +179,13 @@
                 let finalContent = typeof iFrameFilterInSummernote === 'function' ?
                     iFrameFilterInSummernote(contents) :
                     contents;
-
+    
                 $(editor).prev('input').val(finalContent);
             }
-
+    
             var classicEditorContext = null;
             var classicEditorNote = null;
-
+    
             function escapeClassicEditorHtml(text) {
                 return $('<div/>').text(text || '').html();
             }
@@ -196,30 +197,30 @@
                 var imageTypes = ['jpg', 'jpeg', 'png', 'webp', 'gif', 'svg'];
                 var videoTypes = ['mp4', 'webm', 'ogg', 'mov'];
                 var videoMime = type === 'mov' ? 'video/quicktime' : 'video/' + type;
-
+    
                 if (imageTypes.indexOf(type) !== -1) {
                     return '<p><img src="' + src + '" alt="' + title + '"></p>';
                 }
-
+    
                 if (videoTypes.indexOf(type) !== -1) {
                     return '<p><video controls style="max-width:100%;height:auto;"><source src="' + src + '" type="' +
                         videoMime + '">' + title + '</video></p>';
                 }
-
+    
                 return '<p><a href="' + src + '" target="_blank" rel="noopener">' + title + '</a></p>';
             }
-
+    
             function insertClassicEditorMedia(markup) {
                 var note = classicEditorNote && classicEditorNote.length ?
                     classicEditorNote :
                     $('.classic-editor-wrapper .summernote').first();
-
+    
                 if (!note.length) {
                     return false;
                 }
-
+    
                 var oldContent = note.summernote('code') || '';
-
+    
                 if (classicEditorContext) {
                     try {
                         classicEditorContext.invoke('editor.restoreRange');
@@ -229,48 +230,48 @@
                         // Fall back to appending below if the saved editor range is gone.
                     }
                 }
-
+    
                 var newContent = note.summernote('code') || '';
                 if (newContent === oldContent) {
                     note.summernote('code', oldContent + markup);
                     newContent = note.summernote('code') || '';
                 }
-
+    
                 syncClassicEditorContent(note, newContent);
                 return true;
             }
-
+    
             $(document).on('click', '.media_upload_modal_submit_btn', function(e) {
                 if (!$('#media_upload_modal').is('[data-classic-editor-insert]')) {
                     return;
                 }
-
+    
                 e.preventDefault();
                 e.stopImmediatePropagation();
-
+    
                 var selectedMedia = $('.media-uploader-image-list li.selected').first();
                 if (!selectedMedia.length) {
                     selectedMedia = $('.media-uploader-image-list li').first();
                 }
-
+    
                 if (!selectedMedia.length) {
                     return;
                 }
-
+    
                 if (insertClassicEditorMedia(classicEditorMediaMarkup(selectedMedia.data()))) {
                     $('#media_upload_modal').removeAttr('data-classic-editor-insert').modal('hide');
                 }
             });
-
+    
             $('#media_upload_modal').on('hidden.bs.modal', function() {
                 $(this).removeAttr('data-classic-editor-insert');
             });
-
+    
             function openClassicEditorMediaModal(context) {
                 classicEditorContext = context;
                 classicEditorNote = $(context.layoutInfo.note);
                 classicEditorContext.invoke('editor.saveRange');
-
+    
                 var modal = $('#media_upload_modal');
                 modal.attr('data-classic-editor-insert', 'true');
                 modal.find('.modal-title').text(insertFileText);
@@ -279,7 +280,7 @@
                 modal.find('a[href="#media_library"]').tab('show');
                 $('#load_all_media_images').trigger('click');
             }
-
+    
             $('.summernote').summernote({
                 disableDragAndDrop: true,
                 height: 400,
@@ -353,9 +354,10 @@
                     return;
                 }
 
+    
                 var note = $(this).closest('.note-editor').prev('.summernote');
                 var context = note.data('summernote');
-
+    
                 if (!context) {
                     return;
                 }
