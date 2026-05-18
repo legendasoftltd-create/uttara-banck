@@ -137,7 +137,7 @@
 
                         <aside class="sidebar">
                             <section class="sidebar-section">
-                                <h2 class="section-title">সর্বশেষ খবর</h2>
+                                <h2 class="section-title">Latest news</h2>
                                 <div class="scroll-area">
                                     @foreach($all_recent_blogs as $data)
                                         <div class="side-card">

@@ -502,6 +502,16 @@
         margin-bottom: 0;
         list-style: none;
     }
+    .breadcrumb-inner h1{
+        font-size: 1.3rem;
+    }
+    .news-section .side-item{
+        flex-direction: column-reverse;
+    }
+    .news-section .side-item img{
+        width: 100% !important; 
+        height: auto !important; 
+    }
 
 }
 
@@ -4343,7 +4353,7 @@ html.monochrome {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 100%;
+    /* height: 100%; */
 }
 
 
