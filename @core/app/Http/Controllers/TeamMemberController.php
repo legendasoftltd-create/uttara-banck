@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Designation;
 use App\Language;
 use App\TeamMember;
 use Illuminate\Http\Request;
@@ -18,22 +19,31 @@ class TeamMemberController extends Controller
     {
         $all_language = Language::all();
         $all_team_member = TeamMember::all()->groupBy('lang');
-        return view('backend.pages.team-member')->with(['all_team_member' => $all_team_member,'all_languages' => $all_language]);
+        $team_types = TeamMember::types();
+        $all_designations = Designation::all();
+        return view('backend.pages.team-member')->with([
+            'all_team_member'  => $all_team_member,
+            'all_languages'    => $all_language,
+            'team_types'       => $team_types,
+            'all_designations' => $all_designations,
+        ]);
     }
 
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required|string|max:191',
-            'lang' => 'required|string|max:191',
+            'name'        => 'required|string|max:191',
+            'lang'        => 'required|string|max:191',
+            'type'        => 'required|array|min:1',
+            'type.*'      => 'string',
             'designation' => 'required|string|max:191',
-            'image' => 'nullable|string|max:191',
-            'icon_one' => 'nullable|string|max:191',
-            'icon_two' => 'nullable|string|max:191',
-            'icon_three' => 'nullable|string|max:191',
-            'icon_one_url' => 'nullable|string|max:191',
-            'icon_two_url' => 'nullable|string|max:191',
-            'icon_three_url' => 'nullable|string|max:191'
+            'image'       => 'nullable|string|max:191',
+            'icon_one'    => 'nullable|string|max:191',
+            'icon_two'    => 'nullable|string|max:191',
+            'icon_three'  => 'nullable|string|max:191',
+            'icon_one_url'   => 'nullable|string|max:191',
+            'icon_two_url'   => 'nullable|string|max:191',
+            'icon_three_url' => 'nullable|string|max:191',
         ]);
         TeamMember::create($request->all());
 
@@ -42,19 +52,19 @@ class TeamMemberController extends Controller
 
     public function update(Request $request)
     {
-
-
         $this->validate($request, [
-            'name' => 'required|string|max:191',
-            'lang' => 'required|string|max:191',
+            'name'        => 'required|string|max:191',
+            'lang'        => 'required|string|max:191',
+            'type'        => 'required|array|min:1',
+            'type.*'      => 'string',
             'designation' => 'required|string|max:191',
-            'image' => 'nullable|string|max:191',
-            'icon_one' => 'nullable|string|max:191',
-            'icon_two' => 'nullable|string|max:191',
-            'icon_three' => 'nullable|string|max:191',
-            'icon_one_url' => 'nullable|string|max:191',
-            'icon_two_url' => 'nullable|string|max:191',
-            'icon_three_url' => 'nullable|string|max:191'
+            'image'       => 'nullable|string|max:191',
+            'icon_one'    => 'nullable|string|max:191',
+            'icon_two'    => 'nullable|string|max:191',
+            'icon_three'  => 'nullable|string|max:191',
+            'icon_one_url'   => 'nullable|string|max:191',
+            'icon_two_url'   => 'nullable|string|max:191',
+            'icon_three_url' => 'nullable|string|max:191',
         ]);
         TeamMember::find($request->id)->update($request->all());
 

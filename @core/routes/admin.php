@@ -1279,6 +1279,17 @@ Route::prefix('admin-home')->middleware(['setlang:backend'])->group(function () 
     });
 
     /*======================================
+        DESIGNATION ROUTES
+    =======================================*/
+    Route::prefix('designation')->middleware(['adminPermissionCheck:Team Members'])->group(function () {
+        Route::get('/', 'DesignationController@index')->name('admin.designation');
+        Route::post('/', 'DesignationController@store')->name('admin.designation.store');
+        Route::post('/update', 'DesignationController@update')->name('admin.designation.update');
+        Route::post('/delete/{id}', 'DesignationController@delete')->name('admin.designation.delete');
+        Route::post('/bulk-action', 'DesignationController@bulk_action')->name('admin.designation.bulk.action');
+    });
+
+    /*======================================
         EMAIL TEMPLATE SETTINGS
     =======================================*/
     Route::prefix('email-template')->middleware(['auth:admin','adminPermissionCheck:Email Templates' ])->namespace('Admin')->group(function () {

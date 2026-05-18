@@ -75,6 +75,7 @@
                                         <th>{{__('Image')}}</th>
                                         <th>{{__('Name')}}</th>
                                         <th>{{__('Designation')}}</th>
+                                        <th>{{__('Type')}}</th>
                                         <th>{{__('Action')}}</th>
                                         </thead>
                                         <tbody>
@@ -105,6 +106,11 @@
                                                 <td>{{$data->name}}</td>
                                                 <td>{{$data->designation}}</td>
                                                 <td>
+                                            @foreach((array)$data->type as $t)
+                                                <span class="badge badge-info mr-1">{{$team_types[$t] ?? $t}}</span>
+                                            @endforeach
+                                        </td>
+                                                <td>
                                                     <x-delete-popover :url="route('admin.team.member.delete',$data->id)"/>
                                                     <a href="#"
                                                        data-toggle="modal"
@@ -116,7 +122,9 @@
                                                        data-imageid="{{$data->image}}"
                                                        data-image="{{$img_url}}"
                                                        data-designation="{{$data->designation}}"
+                                                       data-description="{{$data->description}}"
                                                        data-lang="{{$data->lang}}"
+                                                       data-type="{{json_encode($data->type)}}"
                                                        data-iconOne="{{$data->icon_one}}"
                                                        data-iconTwo="{{$data->icon_two}}"
                                                        data-iconThree="{{$data->icon_three}}"
@@ -155,12 +163,33 @@
                                 </select>
                             </div>
                             <div class="form-group">
+                                <label class="d-block">{{__('Committee / Category')}} <span class="text-danger">*</span></label>
+                                @foreach($team_types as $value => $label)
+                                    <div class="custom-control custom-checkbox mb-1">
+                                        <input type="checkbox" class="custom-control-input" id="type_{{$value}}" name="type[]" value="{{$value}}">
+                                        <label class="custom-control-label" for="type_{{$value}}">{{$label}}</label>
+                                    </div>
+                                @endforeach
+                            </div>
+                            <div class="form-group">
                                 <label for="name">{{__('Name')}}</label>
                                 <input type="text" class="form-control"  id="name"  name="name" placeholder="{{__('Name')}}">
                             </div>
                             <div class="form-group">
                                 <label for="designation">{{__('Designation')}}</label>
-                                <input type="text" class="form-control"  id="designation"  name="designation" placeholder="{{__('Designation')}}">
+                                <select name="designation" id="designation" class="form-control">
+                                    <option value="">{{__('-- Select Designation --')}}</option>
+                                    @foreach($all_designations as $desig)
+                                        <option value="{{$desig->name}}">{{$desig->name}}</option>
+                                    @endforeach
+                                </select>
+                                <small class="text-muted">
+                                    <a href="{{route('admin.designation')}}" target="_blank">{{__('+ Manage Designations')}}</a>
+                                </small>
+                            </div>
+                            <div class="form-group">
+                                <label for="description">{{__('Description')}}</label>
+                                <textarea name="description" id="description" class="form-control" rows="4" placeholder="{{__('Brief description about this member...')}}"></textarea>
                             </div>
                             <div class="form-group">
                                 <label for="icon_one" class="d-block">{{__('Social Profile One')}}</label>
@@ -258,12 +287,30 @@
                             </select>
                         </div>
                         <div class="form-group">
+                            <label class="d-block">{{__('Committee / Category')}} <span class="text-danger">*</span></label>
+                            @foreach($team_types as $value => $label)
+                                <div class="custom-control custom-checkbox mb-1">
+                                    <input type="checkbox" class="custom-control-input edit-type-checkbox" id="edit_type_{{$value}}" name="type[]" value="{{$value}}">
+                                    <label class="custom-control-label" for="edit_type_{{$value}}">{{$label}}</label>
+                                </div>
+                            @endforeach
+                        </div>
+                        <div class="form-group">
                             <label for="edit_name">{{__('Name')}}</label>
                             <input type="text" class="form-control"  id="edit_name"  name="name" placeholder="{{__('Name')}}">
                         </div>
                         <div class="form-group">
                             <label for="edit_designation">{{__('Designation')}}</label>
-                            <input type="text" class="form-control"  id="edit_designation"  name="designation" placeholder="{{__('Designation')}}">
+                            <select name="designation" id="edit_designation" class="form-control">
+                                <option value="">{{__('-- Select Designation --')}}</option>
+                                @foreach($all_designations as $desig)
+                                    <option value="{{$desig->name}}">{{$desig->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit_description">{{__('Description')}}</label>
+                            <textarea name="description" id="edit_description" class="form-control" rows="4" placeholder="{{__('Brief description about this member...')}}"></textarea>
                         </div>
                         <div class="form-group">
                             <label for="edit_icon_one" class="d-block">{{__('Social Profile One')}}</label>
@@ -400,7 +447,17 @@
                 form.attr('action',action);
                 form.find('#team_member_id').val(id);
                 form.find('#edit_name').val(name);
-                form.find('#edit_designation').val(designation);
+                form.find('#edit_designation').val(designation).trigger('change');
+                // Reset all type checkboxes then check the saved ones
+                form.find('.edit-type-checkbox').prop('checked', false);
+                var selectedTypes = el.data('type');
+                if (typeof selectedTypes === 'string') {
+                    try { selectedTypes = JSON.parse(selectedTypes); } catch(e) { selectedTypes = [selectedTypes]; }
+                }
+                if (!Array.isArray(selectedTypes)) { selectedTypes = [selectedTypes]; }
+                $.each(selectedTypes, function(i, val) {
+                    form.find('.edit-type-checkbox[value="' + val + '"]').prop('checked', true);
+                });
                 form.find('#edit_description').val(el.data('description'));
                 form.find('#edit_icon_one').val(el.data('iconone'));
                 form.find('#edit_icon_two').val(el.data('icontwo'));

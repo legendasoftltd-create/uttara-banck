@@ -1041,9 +1041,20 @@ ITEM;
     {
         $default_lang = Language::where('default', 1)->first();
         $lang = !empty(session()->get('lang')) ? session()->get('lang') : $default_lang->slug;
-        $all_team_members = TeamMember::where('lang', $lang)->orderBy('id', 'desc')->paginate(12);
+        $team_types = TeamMember::types();
+        $members = TeamMember::where('lang', $lang)->orderBy('id', 'asc')->get();
 
-        return view('frontend.pages.team-page')->with(['all_team_members' => $all_team_members]);
+        $all_team_members = [];
+        foreach (array_keys($team_types) as $typeKey) {
+            $all_team_members[$typeKey] = $members->filter(function ($m) use ($typeKey) {
+                return in_array($typeKey, (array) $m->type);
+            });
+        }
+
+        return view('frontend.pages.team-page')->with([
+            'all_team_members' => $all_team_members,
+            'team_types' => $team_types,
+        ]);
     }
 
     public function faq_page()

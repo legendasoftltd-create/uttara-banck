@@ -243,6 +243,10 @@
                         <a href="{{route('admin.team.member')}}" aria-expanded="true"><i class="ti-control-forward"></i>
                             <span>{{__('Team Members')}}</span></a>
                     </li>
+                    <li class="main_dropdown {{active_menu('admin-home/designation')}}">
+                        <a href="{{route('admin.designation')}}" aria-expanded="true"><i class="ti-control-forward"></i>
+                            <span>{{__('Designations')}}</span></a>
+                    </li>
                     @endif
                     {{-- @if(check_page_permission_by_string('Testimonial'))
                     <li class="main_dropdown {{active_menu('admin-home/testimonial')}}">
