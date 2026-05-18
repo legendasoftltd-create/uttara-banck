@@ -6825,18 +6825,22 @@ select:focus {
     height: 100%;
     background-color: rgba(0, 0, 0, 0.7);
     backdrop-filter: blur(5px);
+    overflow-y: auto;
 }
 
 .management-comete .modal-content {
     background-color: #fff;
     margin: 5% auto;
-    padding: 30px;
+    padding: 0;
     width: 70%;
     max-width: 800px;
     border-radius: 15px;
     position: relative;
     animation: slideDown 0.4s ease-out;
-    max-height: 80vh;
+    max-height: 85vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
 }
 
 @keyframes slideDown {
@@ -6852,28 +6856,41 @@ select:focus {
 }
 
 .management-comete .close-btn {
-    position: absolute;
-    right: 20px;
-    top: 15px;
-    font-size: 30px;
+    display: block;
+    text-align: right;
+    padding: 14px 20px 0;
+    font-size: 28px;
+    line-height: 1;
     cursor: pointer;
     color: #333;
+    flex-shrink: 0;
+    background: #fff;
+    border-radius: 15px 15px 0 0;
+}
+.management-comete .close-btn:hover {
+    color: #012C60;
 }
 
 .management-comete .modal-body {
     display: flex;
     gap: 30px;
     align-items: flex-start;
+    overflow-y: auto;
+    flex: 1;
+    padding: 10px 30px 30px;
 }
 
 .management-comete .modal-img-container {
-    flex: 0 0 250px;
+    flex: 0 0 200px;
 }
 
 .management-comete .modal-img-container img {
     width: 100%;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    height: auto;
+    border-radius: 8px;
+    border: 1px solid #dde3ec;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    display: block;
 }
 
 .management-comete .modal-text {
@@ -6893,49 +6910,38 @@ select:focus {
 }
 
 .management-comete .description-text {
-    margin-top: 20px;
-    line-height: 1.6;
+    margin-top: 15px;
+    line-height: 1.75;
     color: #444;
-    font-size: 15px;
-    overflow-y: auto;
-}
-
-@media (min-width: 1024px) {
-    .management-comete .description-text {
-        max-height: 450px;
-    }
-}
-
-/* Tablets */
-@media (max-width: 1023px) and (min-width: 768px) {
-    .management-comete .description-text {
-        max-height: 350px;
-    }
+    font-size: 14px;
 }
 
 @media (max-width: 767px) {
-    .management-comete .description-text {
-        max-height: 300px;
-    }
-    .cards-container{
+    .cards-container {
         max-width: 200px;
     }
 }
 
 @media (max-width: 768px) {
+    .management-comete .modal-content {
+        width: 92%;
+        margin: 8% auto;
+        max-height: 88vh;
+    }
+
     .management-comete .modal-body {
         flex-direction: column;
         align-items: center;
+        padding: 10px 18px 24px;
     }
 
-    .management-comete .modal-content {
-        width: 90%;
-        margin: 10% auto;
-        padding: 20px;
+    .management-comete .modal-img-container {
+        flex: none;
+        width: 160px;
     }
 
     .management-comete .modal-text {
-        text-align: center;
+        text-align: left;
     }
 }
 

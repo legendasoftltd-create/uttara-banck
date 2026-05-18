@@ -1037,23 +1037,34 @@ ITEM;
     }
     
 
+    public function team_page_committee($committee)
+    {
+        $slug_map    = TeamMember::slugMap();
+        $active_type = $slug_map[$committee] ?? array_key_first(TeamMember::types());
+        request()->merge(['type' => $active_type]);
+        return $this->team_page();
+    }
+
     public function team_page()
     {
         $default_lang = Language::where('default', 1)->first();
         $lang = !empty(session()->get('lang')) ? session()->get('lang') : $default_lang->slug;
         $team_types = TeamMember::types();
-        $members = TeamMember::where('lang', $lang)->orderBy('id', 'asc')->get();
 
-        $all_team_members = [];
-        foreach (array_keys($team_types) as $typeKey) {
-            $all_team_members[$typeKey] = $members->filter(function ($m) use ($typeKey) {
-                return in_array($typeKey, (array) $m->type);
-            });
+        $active_type = request()->get('type', array_key_first($team_types));
+        if (!array_key_exists($active_type, $team_types)) {
+            $active_type = array_key_first($team_types);
         }
 
+        $members = TeamMember::where('lang', $lang)->orderBy('id', 'asc')->get()
+            ->filter(function ($m) use ($active_type) {
+                return in_array($active_type, (array) $m->type);
+            });
+
         return view('frontend.pages.team-page')->with([
-            'all_team_members' => $all_team_members,
-            'team_types' => $team_types,
+            'members'     => $members,
+            'team_types'  => $team_types,
+            'active_type' => $active_type,
         ]);
     }
 

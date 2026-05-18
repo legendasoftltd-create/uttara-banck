@@ -451,6 +451,9 @@ Route::group(['middleware' => ['setlang:frontend', 'globalVariable', 'maintains_
     Route::get('/' . $about_page_slug, 'FrontendController@about_page')->name('frontend.about');
     Route::get('/' . $faq_page_slug, 'FrontendController@faq_page')->name('frontend.faq');
     Route::get('/' . $team_page_slug, 'FrontendController@team_page')->name('frontend.team');
+    Route::get('/{committee}', 'FrontendController@team_page_committee')
+        ->where('committee', 'board-of-director|executive-committee|audit-committee|risk-management-committee|senior-management')
+        ->name('frontend.team.committee');
     Route::get('/' . $price_plan_page_slug, 'FrontendController@price_plan_page')->name('frontend.price.plan');
     Route::get('/' . $contact_page_slug, 'FrontendController@contact_page')->name('frontend.contact');
     Route::get('/' . $quote_page_slug, 'FrontendController@request_quote')->name('frontend.request.quote');

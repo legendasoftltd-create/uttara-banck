@@ -21,4 +21,15 @@ class TeamMember extends Model
             'senior_management'         => 'Senior Management',
         ];
     }
+
+    public static function slugMap()
+    {
+        return [
+            'board-of-director'         => 'board_of_directors',
+            'executive-committee'       => 'executive_committee',
+            'audit-committee'           => 'audit_committee',
+            'risk-management-committee' => 'risk_management_committee',
+            'senior-management'         => 'senior_management',
+        ];
+    }
 }

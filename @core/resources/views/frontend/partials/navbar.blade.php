@@ -117,11 +117,11 @@
                         <ul class="sub-menu">
                             <li><a href="{{route('frontend.dynamic.page','bank-at-a-glance')}}">Bank at a Glance</a></li>
                             <li><a href="{{route('frontend.dynamic.page','history-of-uttara-bank-plc.')}}">History of Uttara Bank PLC.</a></li>
-                            <li><a href="#">Board of Directors</a></li>
-                            <li><a href="#">Executive Committee</a></li>
-                            <li><a href="#">Audit Committee</a></li>
-                            <li><a href="#">Risk Management Committee</a></li>
-                            <li><a href="#">Senior Management</a></li>
+                            <li><a href="{{ route('frontend.team.committee', ['committee' => 'board-of-director']) }}">Board of Directors</a></li>
+                            <li><a href="{{ route('frontend.team.committee', ['committee' => 'executive-committee']) }}">Executive Committee</a></li>
+                            <li><a href="{{ route('frontend.team.committee', ['committee' => 'audit-committee']) }}">Audit Committee</a></li>
+                            <li><a href="{{ route('frontend.team.committee', ['committee' => 'risk-management-committee']) }}">Risk Management Committee</a></li>
+                            <li><a href="{{ route('frontend.team.committee', ['committee' => 'senior-management']) }}">Senior Management</a></li>
                             <li><a href="#">Employee Information</a></li>
                             <li><a href="#">Shareholding Structure</a></li>
                             <li><a href="{{route('frontend.dynamic.page','government-securities-investment-window')}}">Government Securities Investment Window</a></li>
@@ -188,7 +188,7 @@
                             <li><a href="{{ route('frontend.bank.downloads') }}">Downloads</a></li>
                             <li><a href="#">Photo Gallery</a></li>
                             <li><a href="#">Video Gallery</a></li>
-                            <li><a href="#">Useful Link</a></li>
+                            <li><a href="{{ route('frontend.useful.links') }}">Useful Link</a></li>
                             <li><a href="{{ route('frontend.tender') }}">Tender</a></li>
                         </ul>
                     </li>
