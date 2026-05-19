@@ -7917,4 +7917,81 @@ Download Page Design CSS Starts Here
     box-shadow: 0 12px 25px rgba(0,134,73,0.2);
 }
 
+.auction-dropdown {
+    right: 0;
+    top: -45px;
+  position: absolute;
+  display: inline-block;
+}
+
+.auction-dropdown-button {
+  display: inline-flex;
+  align-items: center;
+  column-gap: 0.5rem;
+  border-radius: 0.375rem;
+  background: #008649;
+  padding: 0.625rem 0.875rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 500;
+  color: #ffffff;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  border: none;
+  outline: 1px solid #008649;
+  cursor: pointer;
+}
+.auction-dropdown-button:hover {
+  background: #008649;
+}
+
+.auction-chevron-icon {
+  width: 1rem;
+  height: 1rem;
+  transform: rotate(0);
+  transition: transform 0.3s ease;
+}
+.auction-chevron-icon.rotated {
+  transform: rotate(-180deg);
+}
+
+.auction-dropdown-content {
+  position: absolute;
+  top: 2rem;
+  margin-top: 0.5rem;
+  width: 10rem;
+  opacity: 0;
+  visibility: hidden;
+  transform: scaleY(0);
+  transform-origin: top right;
+  border-radius: 0.375rem;
+  background: #ffffff;
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  z-index: 99;
+}
+
+.auction-dropdown-link {
+  display: block;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: #4a5568;
+}
+.auction-dropdown-link:hover {
+  color: #111827;
+  background: #f1f1f1;
+}
+
+.auction-dropdown.active .auction-dropdown-content {
+  opacity: 1;
+  transform: scaleY(1);
+  visibility: visible;
+}
+
+.auction-table th{
+    font-size: 12px;
+}
+.auction-table td{
+    font-size: 12px;
+}
 
