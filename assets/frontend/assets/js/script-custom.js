@@ -321,6 +321,21 @@ var swiper = new Swiper(".loanSlider", {
   },
 });
 
+const dropdownContent = document.querySelector(".auction-dropdown");
+const chevron = document.getElementById("auction-chevron");
+
+function showMenu() {
+  dropdownContent.classList.toggle("active");
+  chevron.classList.toggle("rotated");
+}
+
+window.onclick = (event) => {
+  if (!event.target.matches(".auction-dropdown-button")) {
+    dropdownContent.classList.remove("active");
+    chevron.classList.remove("rotated");
+  }
+};
+
 const menu = document.querySelector(".make-sticky");
 const stickyPoint = menu.offsetTop;
 
@@ -399,3 +414,5 @@ const carousel3Dswiper = new Swiper(".carousel-3D-swiper", {
         }
     }
 });
+
+

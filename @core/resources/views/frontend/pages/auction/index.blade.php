@@ -1,16 +1,16 @@
 @extends('frontend.frontend-page-master')
 
 @section('site-title')
-    {{ get_static_option('auction_page_title') ?? __('Auction Notice') }}
+{{ get_static_option('auction_page_title') ?? __('Auction Notice') }}
 @endsection
 
 @section('page-title')
-    {{ get_static_option('auction_page_title') ?? __('Auction Notice') }}
+{{ get_static_option('auction_page_title') ?? __('Auction Notice') }}
 @endsection
 
 @section('page-meta-data')
-    <meta name="description" content="{{ get_static_option('auction_page_meta_description') }}">
-    <meta name="tags" content="{{ get_static_option('auction_page_meta_tags') }}">
+<meta name="description" content="{{ get_static_option('auction_page_meta_description') }}">
+<meta name="tags" content="{{ get_static_option('auction_page_meta_tags') }}">
 @endsection
 
 @section('style')
@@ -28,9 +28,11 @@
         margin: 0 0 30px 0;
         flex-wrap: wrap;
     }
+
     .auction-year-nav li {
         position: relative;
     }
+
     .auction-year-nav li a {
         display: block;
         padding: 10px 30px 10px 40px;
@@ -46,14 +48,17 @@
         white-space: nowrap;
         margin-right: 2px;
     }
+
     .auction-year-nav li:first-child a {
         clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 50%, calc(100% - 14px) 100%, 0 100%);
         padding-left: 22px;
     }
+
     .auction-year-nav li a:hover {
         background: #333;
         color: #fff;
     }
+
     .auction-year-nav li a.active {
         background: #222;
         color: #fff;
@@ -66,6 +71,7 @@
         padding: 6px 50px 6px 16px;
         margin-bottom: 2px;
     }
+
     .auction-list-header span {
         color: #e00;
         font-size: 14px;
@@ -78,12 +84,15 @@
         padding: 0;
         margin: 0;
     }
+
     .auction-list-item {
         border-bottom: 1px solid #e5e5e5;
     }
+
     .auction-list-item:last-child {
         border-bottom: none;
     }
+
     .auction-row-trigger {
         display: flex;
         align-items: center;
@@ -91,9 +100,11 @@
         cursor: pointer;
         gap: 8px;
     }
+
     .auction-row-trigger:hover .auction-notice-link {
         text-decoration: underline;
     }
+
     .auction-notice-link {
         flex: 1;
         color: #2e7d32;
@@ -101,6 +112,7 @@
         font-weight: 500;
         text-decoration: none;
     }
+
     .auction-expiry-date {
         min-width: 130px;
         text-align: right;
@@ -110,9 +122,11 @@
         white-space: nowrap;
         padding-right: 10px;
     }
+
     .auction-expiry-date.no-date {
         color: #777;
     }
+
     .auction-toggle-btn {
         width: 28px;
         height: 28px;
@@ -128,13 +142,16 @@
         transition: background 0.2s;
         font-size: 13px;
     }
+
     .auction-toggle-btn:hover {
         background: #1b5e20;
     }
+
     .auction-toggle-btn .chevron-icon {
         display: inline-block;
         transition: transform 0.25s;
     }
+
     .auction-toggle-btn.open .chevron-icon {
         transform: rotate(180deg);
     }
@@ -146,33 +163,40 @@
         border-top: 1px solid #e5e5e5;
         background: #fafafa;
     }
+
     .auction-accordion-body.show {
         display: block;
     }
+
     .auction-notice-image {
         text-align: center;
         margin-bottom: 16px;
     }
+
     .auction-notice-image img {
         max-width: 100%;
         height: auto;
         border: 1px solid #ccc;
     }
+
     .auction-notice-text {
         font-size: 14px;
         line-height: 1.8;
         color: #333;
     }
+
     .auction-read-more {
         margin-top: 12px;
         text-align: right;
     }
+
     .auction-read-more a {
         color: #2e7d32;
         font-size: 13px;
         font-weight: 600;
         text-decoration: none;
     }
+
     .auction-read-more a:hover {
         text-decoration: underline;
     }
@@ -190,31 +214,129 @@
 @section('content')
 <section class="auction-page-section">
     <div class="container">
-
+        <div class="empty-height-50"></div>
         {{-- Page heading --}}
         <div class="row mb-4">
             <div class="col-12 text-center">
-                <h2 style="color:#006837; font-weight:700;">
-                    {{ get_static_option('auction_page_title') ?? __('Auction Notice') }}
+                <h2 style="color:#006837; font-weight:500;">
+                    {{ get_static_option('auction_page_title') ?? __('Auction') }}
                 </h2>
                 <div class="title-seperator"></div>
             </div>
         </div>
+        <div style="position: relative;">
+            <div class="auction-dropdown">
+                <button type="button" onclick="showMenu()" class="auction-dropdown-button">
+                    Select
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" id="auction-chevron" class="auction-chevron-icon">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                    </svg>
+                </button>
+                <div class="auction-dropdown-content">
+                    <a href="#" class="auction-dropdown-link">2026</a>
+                    <a href="#" class="auction-dropdown-link">2025</a>
+                    <a href="#" class="auction-dropdown-link">2024</a>
+                </div>
+            </div>
+            @if($all_auctions->isEmpty())
+            <div class="auction-empty">{{ __('No auction notices found.') }}</div>
+            @else
+            <div style="overflow-x: auto;">
+                <table width="100%" class="auction-table" cellspacing="0" cellpadding="5" bordercolor="#DDDDDD" border="1" align="center" style="border-collapse: collapse; max-width:1230px;">
+                    <thead>
+                        <tr bgcolor="#008649">
+                            <th class="text-center">
+                                <font
+                                    color="#ffffff"><b>Sl
+                                        No.</b></font>
+                            </th>
+                            <th class="text-center">
+                                <font
+                                    color="#ffffff"><b>Title</b></font>
+                            </th>
+                            <th class="text-center">
+                                <font
+                                    color="#ffffff"><b>Entry
+                                        Date</b></font>
+                            </th>
+                            <th class="text-center">
+                                <font
+                                    color="#ffffff"><b>Expiry
+                                        Date</b></font>
+                            </th>
+                            <th class="text-center">
+                                <font
+                                    color="#ffffff"><b>View</b></font>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($all_auctions as $key => $auction)
+                        <tr>
+                            <td class="text-center">{{$key + 1}}</td>
+                            <td>{{ __('Auction') }} ({{ \Carbon\Carbon::parse($auction->notice_date)->format('F, d, Y') }})</td>
+                            <td class="text-center">{{ \Carbon\Carbon::parse($auction->notice_date)->format('F, d, Y') }}</td>
+                            <td class="text-center">{{ $auction->expiry_date ? \Carbon\Carbon::parse($auction->expiry_date)->format('F, d, Y') : '-' }}</td>
+                            <td class="text-center">
+                                <a href="assets/pdf/8_461_Snatak-Bangla-Chotogolpo.pdf" class="btn btn-view" data-toggle="modal" data-target="#exampleModalCenter">View</a>
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+            @endif
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModalCenter" tabindex="-1"
+            role="dialog" aria-labelledby="exampleModalCenterTitle"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered"
+                role="document" style="max-width: 100%;">
+                <div class="modal-content"
+                    style="background-color: #FFF; max-width: 991px; width: 100%; margin: 0 auto;">
+                    <div class="modal-header">
+                        <h5 class="modal-title"
+                            id="exampleModalCenterTitle">Auction
+                            (December, 28, 2025)</h5>
+                        <button type="button" class="close"
+                            data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <embed
+                            src="assets/pdf/8_461_Snatak-Bangla-Chotogolpo.pdf"
+                            type="application/pdf" width="100%"
+                            height="600px">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary"
+                            data-dismiss="modal">Close</button>
+                        <a
+                            href="assets/pdf/8_461_Snatak-Bangla-Chotogolpo.pdf"
+                            type="button" class="btn btn-view"
+                            download>Save changes</a>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         {{-- Year tabs (chevron breadcrumb style) --}}
-        @if(!empty($tab_years))
+        <!-- @if(!empty($tab_years))
         <ul class="auction-year-nav">
             @foreach($tab_years as $yr)
-                <li>
-                    <a href="{{ route('frontend.auction') }}?year={{ $yr }}"
-                       class="{{ (string)$active_year === (string)$yr && $selected_year !== 'archive' ? 'active' : '' }}">
-                        {{ $yr }}
-                    </a>
-                </li>
+            <li>
+                <a href="{{ route('frontend.auction') }}?year={{ $yr }}"
+                    class="{{ (string)$active_year === (string)$yr && $selected_year !== 'archive' ? 'active' : '' }}">
+                    {{ $yr }}
+                </a>
+            </li>
             @endforeach
             <li>
                 <a href="{{ route('frontend.auction') }}?year=archive"
-                   class="{{ $selected_year === 'archive' ? 'active' : '' }}">
+                    class="{{ $selected_year === 'archive' ? 'active' : '' }}">
                     {{ __('ARCHIVE') }}
                 </a>
             </li>
@@ -228,7 +350,7 @@
 
         {{-- Notice list --}}
         @if($all_auctions->isEmpty())
-            <div class="auction-empty">{{ __('No auction notices found.') }}</div>
+        <div class="auction-empty">{{ __('No auction notices found.') }}</div>
         @else
         <ul class="auction-list">
             @foreach($all_auctions as $auction)
@@ -249,14 +371,14 @@
                 {{-- Accordion body --}}
                 <div class="auction-accordion-body" id="body-{{ $auction->id }}">
                     @if($auction->image)
-                        <div class="auction-notice-image">
-                            {!! render_image_markup_by_attachment_id($auction->image) !!}
-                        </div>
+                    <div class="auction-notice-image">
+                        {!! render_image_markup_by_attachment_id($auction->image) !!}
+                    </div>
                     @endif
                     @if($auction->description)
-                        <div class="auction-notice-text">
-                            {!! $auction->description !!}
-                        </div>
+                    <div class="auction-notice-text">
+                        {!! $auction->description !!}
+                    </div>
                     @endif
                     <div class="auction-read-more">
                         <a href="{{ route('frontend.auction.single', $auction->slug) }}">
@@ -267,7 +389,7 @@
             </li>
             @endforeach
         </ul>
-        @endif
+        @endif -->
 
     </div>
 </section>
@@ -277,7 +399,7 @@
 <script>
     function toggleAuction(id) {
         var body = document.getElementById('body-' + id);
-        var btn  = document.getElementById('btn-'  + id);
+        var btn = document.getElementById('btn-' + id);
         if (!body) return;
         var isOpen = body.classList.contains('show');
         // Close all open ones first
