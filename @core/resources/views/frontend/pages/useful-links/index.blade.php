@@ -90,10 +90,10 @@
 @section('content')
 <section class="useful-links-section">
     <div class="container">
-
+    <div class="empty-height-50"></div>
         <div class="row mb-4">
             <div class="col-12 text-center">
-                <h2 style="color:#006837; font-weight:700;">
+                <h2 style="color:#006837; font-weight:500;">
                     {{ get_static_option('useful_links_page_title') ?? __('Useful Links') }}
                 </h2>
                 <div class="title-seperator"></div>

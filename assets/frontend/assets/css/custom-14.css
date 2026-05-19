@@ -4980,6 +4980,22 @@ html.monochrome {
     justify-content: center;
     align-items: center;
 }
+.close-button{
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    color: #000000;
+    font-size: 33px;
+    cursor: pointer;
+    background: #FFF;
+    z-index: 99;
+    border-radius: 50px;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 .cover_banner {
     height: 45vh;
