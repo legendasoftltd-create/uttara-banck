@@ -22,7 +22,7 @@
         @foreach($team_types as $typeKey => $typeLabel)
             @php $slug = $slug_map[$typeKey] ?? str_replace('_','-',$typeKey); @endphp
             <a href="{{ route('frontend.team.committee', ['committee' => $slug]) }}"
-               style="padding:8px 18px; border-radius:4px; font-size:14px; font-weight:600; text-decoration:none; white-space:nowrap;
+               style="padding:8px 18px; border-radius:4px; font-size:14px; font-weight:500; text-decoration:none; white-space:nowrap;
                       {{ $active_type === $typeKey ? 'background:#012C60; color:#fff;' : 'background:#eef1f6; color:#012C60;' }}">
                 {{ $typeLabel }}
             </a>
@@ -95,7 +95,7 @@
     {{-- Bio Modal — must be inside .management-comete for scoped CSS to apply --}}
     <div id="bioModal" class="modal">
         <div class="modal-content">
-            <span class="close-btn">&times;</span>
+            <span class="close-button">&times;</span>
             <div class="modal-body">
                 <div class="modal-img-container">
                     <img id="modalImg" src="" alt="Member Image">

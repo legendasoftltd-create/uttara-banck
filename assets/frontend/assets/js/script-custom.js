@@ -245,12 +245,12 @@ function openModal(card) {
   modal.style.display = "block";
 }
 
-// const closeBtn = document.querySelector(".close-btn");
-// if (closeBtn) {
-//   closeBtn.onclick = function () {
-//     modal.style.display = "none";
-//   };
-// }
+const closeBtn = document.querySelector(".close-button");
+if (closeBtn) {
+  closeBtn.onclick = function () {
+    modal.style.display = "none";
+  };
+}
 
 window.onclick = function (event) {
   if (event.target == modal) {
@@ -321,20 +321,38 @@ var swiper = new Swiper(".loanSlider", {
   },
 });
 
-const dropdownContent = document.querySelector(".auction-dropdown");
-const chevron = document.getElementById("auction-chevron");
+document.addEventListener("DOMContentLoaded", () => {
 
-function showMenu() {
-  dropdownContent.classList.toggle("active");
-  chevron.classList.toggle("rotated");
-}
+    const auctionDropdownContent = document.querySelector(".auction-dropdown");
+    const chevron = document.getElementById("auction-chevron");
 
-window.onclick = (event) => {
-  if (!event.target.matches(".auction-dropdown-button")) {
-    dropdownContent.classList.remove("active");
-    chevron.classList.remove("rotated");
-  }
-};
+    window.showMenu = function () {
+
+        if (auctionDropdownContent) {
+            auctionDropdownContent.classList.toggle("active");
+        }
+
+        if (chevron) {
+            chevron.classList.toggle("rotated");
+        }
+    };
+
+    window.onclick = (event) => {
+
+        if (!event.target.closest(".auction-dropdown-wrapper")) {
+
+            if (auctionDropdownContent) {
+                auctionDropdownContent.classList.remove("active");
+            }
+
+            if (chevron) {
+                chevron.classList.remove("rotated");
+            }
+
+        }
+    };
+
+});
 
 const menu = document.querySelector(".make-sticky");
 const stickyPoint = menu.offsetTop;

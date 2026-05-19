@@ -153,10 +153,10 @@
 @section('content')
 <section class="tender-page-section">
     <div class="container">
-
+<div class="empty-height-50"></div>
         <div class="row mb-4">
             <div class="col-12 text-center">
-                <h2 style="color:#006837; font-weight:700;">
+                <h2 style="color:#006837; font-weight:500;">
                     {{ get_static_option('tender_page_title') ?? __('Tender Notice') }}
                 </h2>
                 <div class="title-seperator"></div>
