@@ -162,107 +162,107 @@
                 <div class="title-seperator"></div>
             </div>
         </div>
-
-        {{-- Year tabs --}}
-        @if(!empty($tab_years))
-        <ul class="tender-year-nav">
-            @foreach($tab_years as $yr)
-                <li>
-                    <a href="{{ route('frontend.tender') }}?year={{ $yr }}"
-                       class="{{ (string)$active_year === (string)$yr && $selected_year !== 'archive' ? 'active' : '' }}">
-                        {{ $yr }}
-                    </a>
-                </li>
-            @endforeach
-            <li>
-                <a href="{{ route('frontend.tender') }}?year=archive"
-                   class="{{ $selected_year === 'archive' ? 'active' : '' }}">
-                    {{ __('ARCHIVE') }}
-                </a>
-            </li>
-        </ul>
-        @endif
-
-        {{-- Expiry Date header --}}
-        <div class="tender-list-header">
-            <span>{{ __('Expiry Date') }}</span>
+        
+         <div style="position: relative;">
+            <div class="auction-dropdown">
+                <button type="button" onclick="showMenu(event)" class="auction-dropdown-button">
+                    Select
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" id="auction-chevron" class="auction-chevron-icon">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                    </svg>
+                </button>
+                <div class="auction-dropdown-content">
+                    <a href="#" class="auction-dropdown-link">2026</a>
+                    <a href="#" class="auction-dropdown-link">2025</a>
+                    <a href="#" class="auction-dropdown-link">2024</a>
+                </div>
+            </div>
+            @if($all_tenders->isEmpty())
+                <div class="notice-empty">{{ __('No notices found.') }}</div>
+            @else
+            <div style="overflow-x: auto;">
+                <table width="100%" class="auction-table" cellspacing="0" cellpadding="5" bordercolor="#DDDDDD" border="1" align="center" style="border-collapse: collapse; max-width:1230px;">
+                    <thead>
+                        <tr bgcolor="#008649">
+                            <th class="text-center">
+                                <font
+                                    color="#ffffff"><b>Sl
+                                        No.</b></font>
+                            </th>
+                            <th class="text-center">
+                                <font
+                                    color="#ffffff"><b>Title</b></font>
+                            </th>
+                            <th class="text-center">
+                                <font
+                                    color="#ffffff"><b>Entry
+                                        Date</b></font>
+                            </th>
+                            <th class="text-center">
+                                <font
+                                    color="#ffffff"><b>Expiry
+                                        Date</b></font>
+                            </th>
+                            <th class="text-center">
+                                <font
+                                    color="#ffffff"><b>View</b></font>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                        @foreach($all_tenders as $key => $tenders)
+                        <tr>
+                            <td class="text-center">{{$key + 1}}</td>
+                            <td>{{ __('Notice') }} ({{ \Carbon\Carbon::parse($tenders->notice_date)->format('F, d, Y') }})</td>
+                            <td class="text-center">{{ \Carbon\Carbon::parse($tenders->notice_date)->format('F, d, Y') }}</td>
+                            <td class="text-center">{{ $tenders->expiry_date ? \Carbon\Carbon::parse($tenders->expiry_date)->format('F, d, Y') : '-' }}</td>
+                            <td class="text-center">
+                                <a href="{{$tenders->file}}" class="btn btn-view" data-toggle="modal" data-target="#exampleModalCenter">View</a>
+                                <a href="{{$tenders->file}}" class="btn btn-view" data-toggle="modal" data-target="#exampleModalCenter" download>Download</a>
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+            @endif
         </div>
 
-        {{-- List --}}
-        @if($all_tenders->isEmpty())
-            <div class="tender-empty">{{ __('No tender notices found.') }}</div>
-        @else
-        <ul class="tender-list">
-            @foreach($all_tenders as $tender)
-            <li class="tender-list-item">
-                {{-- Row trigger --}}
-                <div class="tender-row-trigger" onclick="toggleTender({{ $tender->id }})">
-                    <span class="tender-row-title">
-                        {{ $tender->title }}
-                        ({{ \Carbon\Carbon::parse($tender->notice_date)->format('F, d, Y') }})
-                    </span>
-                    <span class="tender-expiry-col {{ $tender->expiry_date ? '' : 'no-date' }}">
-                        {{ $tender->expiry_date
-                            ? \Carbon\Carbon::parse($tender->expiry_date)->format('M, d, Y')
-                            : '-' }}
-                    </span>
-                    <button class="tender-toggle-btn" id="tbtn-{{ $tender->id }}" aria-label="Toggle">
-                        <span class="chev">&#8964;</span>
-                    </button>
-                </div>
-
-                {{-- Accordion body --}}
-                <div class="tender-accordion-body" id="tbody-{{ $tender->id }}">
-
-                    @if($tender->file)
-                        @php
-                            $ext      = strtolower(pathinfo($tender->file, PATHINFO_EXTENSION));
-                            $fileUrl  = asset('assets/uploads/tenders/' . $tender->file);
-                            $isPdf    = ($ext === 'pdf');
-                            $isImage  = in_array($ext, ['jpg','jpeg','png','gif','webp']);
-                        @endphp
-
-                        @if($isPdf)
-                            {{-- Embedded PDF viewer (browser native) --}}
-                            <iframe class="tender-pdf-viewer"
-                                    src="{{ $fileUrl }}"
-                                    type="application/pdf"
-                                    title="{{ $tender->title }}">
-                                <p>
-                                    {{ __('Your browser cannot display PDFs.') }}
-                                    <a href="{{ $fileUrl }}" target="_blank">{{ __('Download PDF') }}</a>
-                                </p>
-                            </iframe>
-                        @elseif($isImage)
-                            <div class="tender-img-wrap">
-                                <img src="{{ $fileUrl }}" alt="{{ $tender->title }}">
-                            </div>
-                        @endif
-                    @endif
-
-                    @if($tender->description)
-                        <div class="tender-desc-wrap">
-                            {!! $tender->description !!}
-                        </div>
-                    @endif
-
-                    <div class="tender-footer-links">
-                        <a href="{{ route('frontend.tender.single', $tender->slug) }}">
-                            {{ __('View Full Details') }} &rarr;
-                        </a>
-                        @if($tender->file)
-                            <a href="{{ asset('assets/uploads/tenders/' . $tender->file) }}"
-                               target="_blank" download>
-                                <i class="ti-download"></i> {{ __('Download') }}
-                            </a>
-                        @endif
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModalCenter" tabindex="-1"
+            role="dialog" aria-labelledby="exampleModalCenterTitle"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered"
+                role="document" style="max-width: 100%;">
+                <div class="modal-content"
+                    style="background-color: #FFF; max-width: 991px; width: 100%; margin: 0 auto;">
+                    <div class="modal-header">
+                        <h5 class="modal-title"
+                            id="exampleModalCenterTitle">Notice
+                            (December, 28, 2025)</h5>
+                        <button type="button" class="close"
+                            data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <embed
+                            src="assets/pdf/8_461_Snatak-Bangla-Chotogolpo.pdf"
+                            type="application/pdf" width="100%"
+                            height="600px">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary"
+                            data-dismiss="modal">Close</button>
+                        <a
+                            href="assets/pdf/8_461_Snatak-Bangla-Chotogolpo.pdf"
+                            type="button" class="btn btn-view"
+                            download>Save changes</a>
                     </div>
                 </div>
-            </li>
-            @endforeach
-        </ul>
-        @endif
-
+            </div>
+        </div>
     </div>
 </section>
 @endsection

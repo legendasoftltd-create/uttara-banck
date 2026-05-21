@@ -12,22 +12,21 @@
 @endsection
 
 @section('content')
-<div class="empty-height-50"></div>
 
-<div class="container management-comete">
+<div class="container management-comete mt-4">
 
     {{-- Committee navigation links --}}
     @php $slug_map = array_flip(\App\TeamMember::slugMap()); @endphp
-    <div class="row" style="justify-content:center; gap:10px; margin-bottom:30px; flex-wrap:wrap;">
-        @foreach($team_types as $typeKey => $typeLabel)
-            @php $slug = $slug_map[$typeKey] ?? str_replace('_','-',$typeKey); @endphp
-            <a href="{{ route('frontend.team.committee', ['committee' => $slug]) }}"
-               style="padding:8px 18px; border-radius:4px; font-size:14px; font-weight:500; text-decoration:none; white-space:nowrap;
-                      {{ $active_type === $typeKey ? 'background:#012C60; color:#fff;' : 'background:#eef1f6; color:#012C60;' }}">
-                {{ $typeLabel }}
-            </a>
-        @endforeach
-    </div>
+    <!--<div class="row" style="justify-content:center; gap:10px; margin-bottom:30px; flex-wrap:wrap;">-->
+    <!--    @foreach($team_types as $typeKey => $typeLabel)-->
+    <!--        @php $slug = $slug_map[$typeKey] ?? str_replace('_','-',$typeKey); @endphp-->
+    <!--        <a href="{{ route('frontend.team.committee', ['committee' => $slug]) }}"-->
+    <!--           style="padding:8px 18px; border-radius:4px; font-size:14px; font-weight:500; text-decoration:none; white-space:nowrap;-->
+    <!--                  {{ $active_type === $typeKey ? 'background:#012C60; color:#fff;' : 'background:#eef1f6; color:#012C60;' }}">-->
+    <!--            {{ $typeLabel }}-->
+    <!--        </a>-->
+    <!--    @endforeach-->
+    <!--</div>-->
 
     <section class="board-section">
         <div class="row">
@@ -73,8 +72,10 @@
                         <div class="img-box">
                             {!! render_image_markup_by_attachment_id($second->image) !!}
                         </div>
-                        <h3>{{ $second->name }}</h3>
-                        <p>{{ $second->designation }}</p>
+                        <div class="p-2">
+                            <h3>{{ $second->name }}</h3>
+                            <p>{{ $second->designation }}</p>
+                        </div>
                     </div>
 
                     @foreach($remaining as $member)
@@ -83,8 +84,10 @@
                             <div class="img-box">
                                 {!! render_image_markup_by_attachment_id($member->image) !!}
                             </div>
-                            <h3>{{ $member->name }}</h3>
-                            <p>{{ $member->designation }}</p>
+                            <div class="p-2">
+                                <h3>{{ $member->name }}</h3>
+                                <p>{{ $member->designation }}</p>
+                            </div>
                         </div>
                     @endforeach
                 </div>
@@ -112,5 +115,4 @@
 
 </div>
 
-<div class="empty-height-50"></div>
 @endsection

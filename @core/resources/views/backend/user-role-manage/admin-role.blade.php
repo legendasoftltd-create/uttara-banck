@@ -79,7 +79,7 @@
                                             <td>{{$data->name}}</td>
                                             <td>
                                                <div class="permission-show">
-                                                   @php $all_per = json_decode($data->permission); @endphp
+                                                   @php $all_per = json_decode($data->permission) ?? []; @endphp
                                                    @foreach($all_per as $per)
                                                        <span class="text text-success">{{ucwords(str_replace('_',' ',$per))}}</span>
                                                    @endforeach

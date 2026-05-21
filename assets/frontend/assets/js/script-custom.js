@@ -39,25 +39,32 @@ $(document).ready(function () {
 })();
 
 function openVideo() {
-  const modal = document.getElementById("videoModal");
-  const iframe = document.getElementById("videoFrame");
-  const videoId = "YOUR_VIDEO_ID_HERE";
-  iframe.src = `https://www.youtube.com/embed/t_KKNNeH8jU?autoplay=1`;
-  modal.style.display = "flex";
+
+    const modal = document.getElementById("videoModal");
+    const iframe = document.getElementById("videoFrame");
+
+    iframe.src = "https://www.youtube.com/embed/t_KKNNeH8jU?autoplay=1";
+
+    modal.style.display = "flex";
 }
 
 function closeVideo() {
-  const modal = document.getElementById("videoModal");
-  const iframe = document.getElementById("videoFrame");
-  modal.style.display = "none";
-  iframe.src = "";
+
+    const modal = document.getElementById("videoModal");
+    const iframe = document.getElementById("videoFrame");
+
+    modal.style.display = "none";
+
+    iframe.src = "";
 }
 
-window.onclick = function (event) {
-  const modal = document.getElementById("videoModal");
-  if (event.target == modal) {
-    closeVideo();
-  }
+window.onclick = function(event) {
+
+    const modal = document.getElementById("videoModal");
+
+    if (event.target === modal) {
+        closeVideo();
+    }
 };
 
 // =================================
@@ -323,34 +330,31 @@ var swiper = new Swiper(".loanSlider", {
 
 document.addEventListener("DOMContentLoaded", () => {
 
-    const auctionDropdownContent = document.querySelector(".auction-dropdown");
+    const auctionDropdown = document.querySelector(".auction-dropdown");
     const chevron = document.getElementById("auction-chevron");
 
-    window.showMenu = function () {
+    window.showMenu = function (event) {
 
-        if (auctionDropdownContent) {
-            auctionDropdownContent.classList.toggle("active");
-        }
+        event.stopPropagation();
+
+        auctionDropdown.classList.toggle("active");
 
         if (chevron) {
             chevron.classList.toggle("rotated");
         }
     };
 
-    window.onclick = (event) => {
+    window.addEventListener("click", (event) => {
 
-        if (!event.target.closest(".auction-dropdown-wrapper")) {
+        if (!event.target.closest(".auction-dropdown")) {
 
-            if (auctionDropdownContent) {
-                auctionDropdownContent.classList.remove("active");
-            }
+            auctionDropdown.classList.remove("active");
 
             if (chevron) {
                 chevron.classList.remove("rotated");
             }
-
         }
-    };
+    });
 
 });
 

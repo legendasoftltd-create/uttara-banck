@@ -23,6 +23,9 @@
         padding: 0;
         margin: 0;
         border-top: 1px solid #e0e0e0;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 10px
     }
 
     .useful-link-item {
@@ -101,7 +104,7 @@
         </div>
 
         <div class="row">
-            <div class="col-lg-10 offset-lg-1">
+            <div class="col-lg-12">
 
                 @if($links->isEmpty())
                     <div class="useful-links-empty">

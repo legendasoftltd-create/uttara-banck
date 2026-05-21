@@ -226,7 +226,7 @@
         </div>
         <div style="position: relative;">
             <div class="auction-dropdown">
-                <button type="button" onclick="showMenu()" class="auction-dropdown-button">
+                <button type="button" onclick="showMenu(event)" class="auction-dropdown-button">
                     Select
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" id="auction-chevron" class="auction-chevron-icon">
                         <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
