@@ -152,6 +152,8 @@
 <section class="notice-page-section">
     <div class="container">
 
+        <div class="empty-height-50"></div>
+        
         <div class="row mb-4">
             <div class="col-12 text-center">
                 <h2 style="color:#006837; font-weight:700;">
@@ -160,74 +162,172 @@
                 <div class="title-seperator"></div>
             </div>
         </div>
+        {{-- Page heading --}}
 
-        {{-- Year tabs --}}
-        @if(!empty($tab_years))
-        <ul class="notice-year-nav">
-            @foreach($tab_years as $yr)
-                <li>
-                    <a href="{{ route('frontend.notice') }}?year={{ $yr }}"
-                       class="{{ (string)$active_year === (string)$yr && $selected_year !== 'archive' ? 'active' : '' }}">
-                        {{ $yr }}
-                    </a>
-                </li>
-            @endforeach
-            <li>
-                <a href="{{ route('frontend.notice') }}?year=archive"
-                   class="{{ $selected_year === 'archive' ? 'active' : '' }}">
-                    {{ __('ARCHIVE') }}
-                </a>
-            </li>
-        </ul>
-        @endif
-
-        {{-- Expiry Date header --}}
-        <div class="notice-list-header">
-            <span>{{ __('Expiry Date') }}</span>
+        <div style="position: relative;">
+            <div class="auction-dropdown">
+                <button type="button" onclick="showMenu(event)" class="auction-dropdown-button">
+                    Select
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" id="auction-chevron" class="auction-chevron-icon">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                    </svg>
+                </button>
+                <div class="auction-dropdown-content">
+                    <a href="#" class="auction-dropdown-link">2026</a>
+                    <a href="#" class="auction-dropdown-link">2025</a>
+                    <a href="#" class="auction-dropdown-link">2024</a>
+                </div>
+            </div>
+            @if($all_notices->isEmpty())
+                <div class="notice-empty">{{ __('No notices found.') }}</div>
+            @else
+            <div style="overflow-x: auto;">
+                <table width="100%" class="auction-table" cellspacing="0" cellpadding="5" bordercolor="#DDDDDD" border="1" align="center" style="border-collapse: collapse; max-width:1230px;">
+                    <thead>
+                        <tr bgcolor="#008649">
+                            <th class="text-center">
+                                <font
+                                    color="#ffffff"><b>Sl
+                                        No.</b></font>
+                            </th>
+                            <th class="text-center">
+                                <font
+                                    color="#ffffff"><b>Title</b></font>
+                            </th>
+                            <th class="text-center">
+                                <font
+                                    color="#ffffff"><b>Entry
+                                        Date</b></font>
+                            </th>
+                            <th class="text-center">
+                                <font
+                                    color="#ffffff"><b>Expiry
+                                        Date</b></font>
+                            </th>
+                            <th class="text-center">
+                                <font
+                                    color="#ffffff"><b>View</b></font>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($all_notices as $key => $notices)
+                        <tr>
+                            <td class="text-center">{{$key + 1}}</td>
+                            <td>{{ __('Notice') }} ({{ \Carbon\Carbon::parse($notices->notice_date)->format('F, d, Y') }})</td>
+                            <td class="text-center">{{ \Carbon\Carbon::parse($notices->notice_date)->format('F, d, Y') }}</td>
+                            <td class="text-center">{{ $notices->expiry_date ? \Carbon\Carbon::parse($notices->expiry_date)->format('F, d, Y') : '-' }}</td>
+                            <td class="text-center">
+                                <a href="assets/pdf/8_461_Snatak-Bangla-Chotogolpo.pdf" class="btn btn-view" data-toggle="modal" data-target="#exampleModalCenter">View</a>
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+            @endif
         </div>
 
-        {{-- List --}}
-        @if($all_notices->isEmpty())
-            <div class="notice-empty">{{ __('No notices found.') }}</div>
-        @else
-        <ul class="notice-list">
-            @foreach($all_notices as $notice)
-            <li class="notice-list-item">
-                <div class="notice-row-trigger" onclick="toggleNotice({{ $notice->id }})">
-                    <span class="notice-row-label">
-                        {{ __('Notice') }} ({{ \Carbon\Carbon::parse($notice->notice_date)->format('F, d, Y') }})
-                    </span>
-                    <span class="notice-expiry-col {{ $notice->expiry_date ? '' : 'no-date' }}">
-                        {{ $notice->expiry_date
-                            ? \Carbon\Carbon::parse($notice->expiry_date)->format('F, d, Y')
-                            : '-' }}
-                    </span>
-                    <button class="notice-toggle-btn" id="nbtn-{{ $notice->id }}" aria-label="Toggle">
-                        <span class="chev">&#8964;</span>
-                    </button>
-                </div>
-
-                <div class="notice-accordion-body" id="nbody-{{ $notice->id }}">
-                    @if($notice->image)
-                        <div class="notice-img-wrap">
-                            {!! render_image_markup_by_attachment_id($notice->image) !!}
-                        </div>
-                    @endif
-                    @if($notice->description)
-                        <div class="notice-body-text">
-                            {!! $notice->description !!}
-                        </div>
-                    @endif
-                    <div class="notice-view-link">
-                        <a href="{{ route('frontend.notice.single', $notice->slug) }}">
-                            {{ __('View Full Notice') }} &rarr;
-                        </a>
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModalCenter" tabindex="-1"
+            role="dialog" aria-labelledby="exampleModalCenterTitle"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered"
+                role="document" style="max-width: 100%;">
+                <div class="modal-content"
+                    style="background-color: #FFF; max-width: 991px; width: 100%; margin: 0 auto;">
+                    <div class="modal-header">
+                        <h5 class="modal-title"
+                            id="exampleModalCenterTitle">Notice
+                            (December, 28, 2025)</h5>
+                        <button type="button" class="close"
+                            data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <embed
+                            src="assets/pdf/8_461_Snatak-Bangla-Chotogolpo.pdf"
+                            type="application/pdf" width="100%"
+                            height="600px">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary"
+                            data-dismiss="modal">Close</button>
+                        <a
+                            href="assets/pdf/8_461_Snatak-Bangla-Chotogolpo.pdf"
+                            type="button" class="btn btn-view"
+                            download>Save changes</a>
                     </div>
                 </div>
-            </li>
-            @endforeach
-        </ul>
-        @endif
+            </div>
+        </div>
+
+        {{-- Year tabs --}}
+        <!--@if(!empty($tab_years))-->
+        <!--<ul class="notice-year-nav">-->
+        <!--    @foreach($tab_years as $yr)-->
+        <!--        <li>-->
+        <!--            <a href="{{ route('frontend.notice') }}?year={{ $yr }}"-->
+        <!--               class="{{ (string)$active_year === (string)$yr && $selected_year !== 'archive' ? 'active' : '' }}">-->
+        <!--                {{ $yr }}-->
+        <!--            </a>-->
+        <!--        </li>-->
+        <!--    @endforeach-->
+        <!--    <li>-->
+        <!--        <a href="{{ route('frontend.notice') }}?year=archive"-->
+        <!--           class="{{ $selected_year === 'archive' ? 'active' : '' }}">-->
+        <!--            {{ __('ARCHIVE') }}-->
+        <!--        </a>-->
+        <!--    </li>-->
+        <!--</ul>-->
+        <!--@endif-->
+
+        {{-- Expiry Date header --}}
+        <!--<div class="notice-list-header">-->
+        <!--    <span>{{ __('Expiry Date') }}</span>-->
+        <!--</div>-->
+
+        {{-- List --}}
+        <!--@if($all_notices->isEmpty())-->
+        <!--    <div class="notice-empty">{{ __('No notices found.') }}</div>-->
+        <!--@else-->
+        <!--<ul class="notice-list">-->
+        <!--    @foreach($all_notices as $notice)-->
+        <!--    <li class="notice-list-item">-->
+        <!--        <div class="notice-row-trigger" onclick="toggleNotice({{ $notice->id }})">-->
+        <!--            <span class="notice-row-label">-->
+        <!--                {{ __('Notice') }} ({{ \Carbon\Carbon::parse($notice->notice_date)->format('F, d, Y') }})-->
+        <!--            </span>-->
+        <!--            <span class="notice-expiry-col {{ $notice->expiry_date ? '' : 'no-date' }}">-->
+        <!--                {{ $notice->expiry_date ? \Carbon\Carbon::parse($notice->expiry_date)->format('F, d, Y') : '-' }}-->
+        <!--            </span>-->
+        <!--            <button class="notice-toggle-btn" id="nbtn-{{ $notice->id }}" aria-label="Toggle">-->
+        <!--                <span class="chev">&#8964;</span>-->
+        <!--            </button>-->
+        <!--        </div>-->
+
+        <!--        <div class="notice-accordion-body" id="nbody-{{ $notice->id }}">-->
+        <!--            @if($notice->image)-->
+        <!--                <div class="notice-img-wrap">-->
+        <!--                    {!! render_image_markup_by_attachment_id($notice->image) !!}-->
+        <!--                </div>-->
+        <!--            @endif-->
+        <!--            @if($notice->description)-->
+        <!--                <div class="notice-body-text">-->
+        <!--                    {!! $notice->description !!}-->
+        <!--                </div>-->
+        <!--            @endif-->
+        <!--            <div class="notice-view-link">-->
+        <!--                <a href="{{ route('frontend.notice.single', $notice->slug) }}">-->
+        <!--                    {{ __('View Full Notice') }} &rarr;-->
+        <!--                </a>-->
+        <!--            </div>-->
+        <!--        </div>-->
+        <!--    </li>-->
+        <!--    @endforeach-->
+        <!--</ul>-->
+        <!--@endif-->
 
     </div>
 </section>

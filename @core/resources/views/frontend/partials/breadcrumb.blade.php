@@ -14,7 +14,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="breadcrumb-inner">
-                    <h1 class="page-title">@yield('page-title')</h1>
+                    <!--<h1 class="page-title">@yield('page-title')</h1>-->
                     <ul class="page-list">
                         <li><a href="{{url('/')}}">{{__('Home')}}</a></li>
                         <li>/</li>

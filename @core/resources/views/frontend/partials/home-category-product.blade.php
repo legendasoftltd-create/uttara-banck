@@ -11,7 +11,7 @@
                                 @endphp
                                 <img src="{{ $image_details['img_url'] ?? '' }}" alt="{{ $product->title }}">
                                 <div class="text-overlay">
-                                    <h3>{{ $product->title }}</h3>
+                                    <p>{{ $product->title }}</p>
                                 </div>
                             </div>
                         </a>
@@ -35,7 +35,7 @@
                                 <img src="{{ $image_details['img_url'] ?? '' }}" alt="{{ $product->title }}">
                             </div>
                             <div class="details">
-                                <h3>{{ $product->title }}</h3>
+                                <p>{{ $product->title }}</p>
                                 <a href="{{ route('frontend.products.single', $product->slug) }}">Learn More</a>
                             </div>
                         </div>
@@ -61,7 +61,7 @@
                                         @endphp
                                         <img src="{{ $image_details['img_url'] ?? '' }}" alt="{{ $product->title }}">
                                         <div class="text-overlay">
-                                            <h3>{{ $product->title }}</h3>
+                                            <p>{{ $product->title }}</p>
                                         </div>
                                     </div>
                                 </a>
@@ -87,7 +87,7 @@
                             @endphp
                             <img src="{{ $image_details['img_url'] ?? '' }}" alt="Business">
                             <div class="text-overlay">
-                                <h3>{{ $product->title }}</h3>
+                                <p>{{ $product->title }}</p>
                             </div>
                         </div>
                     </a>
