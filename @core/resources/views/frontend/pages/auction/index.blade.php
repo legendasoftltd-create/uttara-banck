@@ -289,39 +289,41 @@
         </div>
 
         <!-- Modal -->
+        @foreach($all_auctions as $auction)
         <div class="modal fade" id="exampleModalCenter" tabindex="-1"
             role="dialog" aria-labelledby="exampleModalCenterTitle"
             aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered"
                 role="document" style="max-width: 100%;">
                 <div class="modal-content"
-                    style="background-color: #FFF; max-width: 991px; width: 100%; margin: 0 auto;">
+                    style="background-color: #FFF; width: 100%; margin: 0 auto;">
                     <div class="modal-header">
                         <h5 class="modal-title"
-                            id="exampleModalCenterTitle">Auction
-                            (December, 28, 2025)</h5>
+                            id="exampleModalCenterTitle">{{$auction->title}}</h5>
                         <button type="button" class="close"
                             data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <div class="modal-body">
-                        <embed
-                            src="assets/pdf/8_461_Snatak-Bangla-Chotogolpo.pdf"
-                            type="application/pdf" width="100%"
-                            height="600px">
+                    <div class="modal-body scroll-modal-body">
+                        @if($auction->image)
+                        {!! render_image_markup_by_attachment_id($auction->image) !!}
+                        @endif
                     </div>
+                    
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary"
-                            data-dismiss="modal">Close</button>
-                        <a
-                            href="assets/pdf/8_461_Snatak-Bangla-Chotogolpo.pdf"
-                            type="button" class="btn btn-view"
-                            download>Save changes</a>
+                        data-dismiss="modal">Close</button>
+                        @if($auction->image)
+                        <a href="{{ get_attachment_image_by_id($auction->image)['img_url'] }}"
+                        type="button" class="btn btn-view"
+                        download>Save changes</a>
+                        @endif
                     </div>
                 </div>
             </div>
         </div>
+        @endforeach
 
         {{-- Year tabs (chevron breadcrumb style) --}}
         <!-- @if(!empty($tab_years))

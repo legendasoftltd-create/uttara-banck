@@ -211,12 +211,12 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($all_notices as $key => $notices)
+                        @foreach($all_notices as $key => $notice)
                         <tr>
                             <td class="text-center">{{$key + 1}}</td>
-                            <td>{{ __('Notice') }} ({{ \Carbon\Carbon::parse($notices->notice_date)->format('F, d, Y') }})</td>
-                            <td class="text-center">{{ \Carbon\Carbon::parse($notices->notice_date)->format('F, d, Y') }}</td>
-                            <td class="text-center">{{ $notices->expiry_date ? \Carbon\Carbon::parse($notices->expiry_date)->format('F, d, Y') : '-' }}</td>
+                            <td>{{ $notice->title }} ({{ \Carbon\Carbon::parse($notice->notice_date)->format('F, d, Y') }})</td>
+                            <td class="text-center">{{ \Carbon\Carbon::parse($notice->notice_date)->format('F, d, Y') }}</td>
+                            <td class="text-center">{{ $notice->expiry_date ? \Carbon\Carbon::parse($notice->expiry_date)->format('F, d, Y') : '-' }}</td>
                             <td class="text-center">
                                 <a href="assets/pdf/8_461_Snatak-Bangla-Chotogolpo.pdf" class="btn btn-view" data-toggle="modal" data-target="#exampleModalCenter">View</a>
                             </td>
@@ -229,59 +229,87 @@
         </div>
 
         <!-- Modal -->
+        @foreach($all_notices as $notice)
         <div class="modal fade" id="exampleModalCenter" tabindex="-1"
             role="dialog" aria-labelledby="exampleModalCenterTitle"
             aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered"
                 role="document" style="max-width: 100%;">
                 <div class="modal-content"
-                    style="background-color: #FFF; max-width: 991px; width: 100%; margin: 0 auto;">
+                    style="background-color: #FFF; width: 100%; margin: 0 auto;">
                     <div class="modal-header">
                         <h5 class="modal-title"
-                            id="exampleModalCenterTitle">Notice
-                            (December, 28, 2025)</h5>
+                            id="exampleModalCenterTitle">{{$notice->title}}</h5>
                         <button type="button" class="close"
                             data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <div class="modal-body">
-                        <embed
-                            src="assets/pdf/8_461_Snatak-Bangla-Chotogolpo.pdf"
-                            type="application/pdf" width="100%"
-                            height="600px">
+                    <div class="modal-body scroll-modal-body">
+                        @if($notice->image)
+                            @php
+                                $file = get_attachment_image_by_id($notice->image);
+
+                                $fileUrl = $file['img_url'] ?? '';
+                                $filePath = $file['path'] ?? '';
+
+                                $extension = strtolower(pathinfo($filePath, PATHINFO_EXTENSION));
+
+                                $isPdf = $extension === 'pdf';
+                            @endphp
+
+                            @if($isPdf)
+
+                                {{-- Show PDF --}}
+                                <iframe 
+                                    src="{{ $fileUrl }}" 
+                                    width="100%" 
+                                    height="600px"
+                                    style="border:none;">
+                                </iframe>
+
+                            @else
+
+                                {{-- Show Image --}}
+                                {!! render_image_markup_by_attachment_id($notice->image) !!}
+
+                            @endif
+                        @endif
                     </div>
+                    
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary"
-                            data-dismiss="modal">Close</button>
-                        <a
-                            href="assets/pdf/8_461_Snatak-Bangla-Chotogolpo.pdf"
-                            type="button" class="btn btn-view"
-                            download>Save changes</a>
+                        data-dismiss="modal">Close</button>
+                        @if($notice->image)
+                        <a href="{{ get_attachment_image_by_id($notice->image)['img_url'] }}"
+                        type="button" class="btn btn-view"
+                        download>Save File</a>
+                        @endif
                     </div>
                 </div>
             </div>
         </div>
+        @endforeach
 
         {{-- Year tabs --}}
-        <!--@if(!empty($tab_years))-->
-        <!--<ul class="notice-year-nav">-->
-        <!--    @foreach($tab_years as $yr)-->
-        <!--        <li>-->
-        <!--            <a href="{{ route('frontend.notice') }}?year={{ $yr }}"-->
-        <!--               class="{{ (string)$active_year === (string)$yr && $selected_year !== 'archive' ? 'active' : '' }}">-->
-        <!--                {{ $yr }}-->
-        <!--            </a>-->
-        <!--        </li>-->
-        <!--    @endforeach-->
-        <!--    <li>-->
-        <!--        <a href="{{ route('frontend.notice') }}?year=archive"-->
-        <!--           class="{{ $selected_year === 'archive' ? 'active' : '' }}">-->
-        <!--            {{ __('ARCHIVE') }}-->
-        <!--        </a>-->
-        <!--    </li>-->
-        <!--</ul>-->
-        <!--@endif-->
+        <!-- @if(!empty($tab_years))
+        <ul class="notice-year-nav">
+           @foreach($tab_years as $yr)
+               <li>
+                   <a href="{{ route('frontend.notice') }}?year={{ $yr }}"
+                      class="{{ (string)$active_year === (string)$yr && $selected_year !== 'archive' ? 'active' : '' }}">
+                        {{ $yr }}
+                   </a>
+                </li>
+            @endforeach
+            <li>
+                <a href="{{ route('frontend.notice') }}?year=archive"
+                  class="{{ $selected_year === 'archive' ? 'active' : '' }}">
+                   {{ __('ARCHIVE') }}
+                </a>
+           </li>
+        </ul>
+        @endif -->
 
         {{-- Expiry Date header --}}
         <!--<div class="notice-list-header">-->
