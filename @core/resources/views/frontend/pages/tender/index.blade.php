@@ -211,15 +211,15 @@
                     </thead>
                     <tbody>
                         
-                        @foreach($all_tenders as $key => $tenders)
+                        @foreach($all_tenders as $key => $tender)
                         <tr>
                             <td class="text-center">{{$key + 1}}</td>
-                            <td>{{ __('Notice') }} ({{ \Carbon\Carbon::parse($tenders->notice_date)->format('F, d, Y') }})</td>
-                            <td class="text-center">{{ \Carbon\Carbon::parse($tenders->notice_date)->format('F, d, Y') }}</td>
-                            <td class="text-center">{{ $tenders->expiry_date ? \Carbon\Carbon::parse($tenders->expiry_date)->format('F, d, Y') : '-' }}</td>
+                            <td>{{ $tender->title }} ({{ \Carbon\Carbon::parse($tender->notice_date)->format('F, d, Y') }})</td>
+                            <td class="text-center">{{ \Carbon\Carbon::parse($tender->notice_date)->format('F, d, Y') }}</td>
+                            <td class="text-center">{{ $tender->expiry_date ? \Carbon\Carbon::parse($tender->expiry_date)->format('F, d, Y') : '-' }}</td>
                             <td class="text-center">
-                                <a href="{{$tenders->file}}" class="btn btn-view" data-toggle="modal" data-target="#exampleModalCenter">View</a>
-                                <a href="{{$tenders->file}}" class="btn btn-view" data-toggle="modal" data-target="#exampleModalCenter" download>Download</a>
+                                <a href="{{$tender->file}}" class="btn btn-view" data-toggle="modal" data-target="#exampleModalCenter">View</a>
+                                <a href="{{$tender->file}}" class="btn btn-view" data-toggle="modal" data-target="#exampleModalCenter" download>Download</a>
                             </td>
                         </tr>
                         @endforeach
@@ -230,39 +230,69 @@
         </div>
 
         <!-- Modal -->
+        @foreach($all_tenders as $tender)
         <div class="modal fade" id="exampleModalCenter" tabindex="-1"
             role="dialog" aria-labelledby="exampleModalCenterTitle"
             aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered"
                 role="document" style="max-width: 100%;">
                 <div class="modal-content"
-                    style="background-color: #FFF; max-width: 991px; width: 100%; margin: 0 auto;">
+                    style="background-color: #FFF; width: 100%; margin: 0 auto;">
                     <div class="modal-header">
                         <h5 class="modal-title"
-                            id="exampleModalCenterTitle">Notice
-                            (December, 28, 2025)</h5>
+                            id="exampleModalCenterTitle">{{$tender->title}}</h5>
                         <button type="button" class="close"
                             data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <div class="modal-body">
-                        <embed
-                            src="assets/pdf/8_461_Snatak-Bangla-Chotogolpo.pdf"
-                            type="application/pdf" width="100%"
-                            height="600px">
+                    <div class="modal-body scroll-modal-body">
+                        @if($tender->file)
+                        
+                            @php
+                                $extension = strtolower(pathinfo($tender->file, PATHINFO_EXTENSION));
+                                $isPdf = $extension === 'pdf';
+                            @endphp
+                            @if($isPdf)
+                                {{-- Show PDF --}}
+                                <iframe 
+                                    src="{{'assets/uploads/tenders/' . $tender->file }}" 
+                                    width="100%" 
+                                    height="600px"
+                                    style="border:none;">
+                                </iframe>
+                            @else
+                                {{-- Show Image --}}
+                                <img src="{!! $tender->file !!}" alt="{{ $tender->title}}">
+
+                            @endif
+                        @endif
                     </div>
+                    
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary"
-                            data-dismiss="modal">Close</button>
-                        <a
-                            href="assets/pdf/8_461_Snatak-Bangla-Chotogolpo.pdf"
-                            type="button" class="btn btn-view"
-                            download>Save changes</a>
+                        <button type="button"
+                                class="btn btn-secondary"
+                                data-dismiss="modal">
+                            Close
+                        </button>
+
+                        @php
+                            $file = $tender->file;
+                        @endphp
+
+                        @if(!empty($file['img_url']))
+                            <a href="{{ $file['img_url'] }}"
+                            type="button"
+                            class="btn btn-view"
+                            download>
+                                Save File
+                            </a>
+                        @endif
                     </div>
                 </div>
             </div>
         </div>
+        @endforeach
     </div>
 </section>
 @endsection
