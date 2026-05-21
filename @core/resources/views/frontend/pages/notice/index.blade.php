@@ -292,7 +292,7 @@
         @endforeach
 
         {{-- Year tabs --}}
-        @if(!empty($tab_years))
+        <!-- @if(!empty($tab_years))
         <ul class="notice-year-nav">
            @foreach($tab_years as $yr)
                <li>
@@ -309,7 +309,7 @@
                 </a>
            </li>
         </ul>
-        @endif
+        @endif -->
 
         {{-- Expiry Date header --}}
         <!--<div class="notice-list-header">-->
