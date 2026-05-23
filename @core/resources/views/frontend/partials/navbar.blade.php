@@ -186,8 +186,8 @@
                             <li><a href="{{ route('frontend.auction') }}">Auction</a></li>
                             <li><a href="{{ route('frontend.notice') }}">Notice</a></li>
                             <li><a href="{{ route('frontend.bank.downloads') }}">Downloads</a></li>
-                            <li><a href="#">Photo Gallery</a></li>
-                            <li><a href="#">Video Gallery</a></li>
+                            <li><a href="{{ route('frontend.image.gallery')}}">Photo Gallery</a></li>
+                            <li><a href="{{ route('frontend.video.gallery') }}">Video Gallery</a></li>
                             <li><a href="{{ route('frontend.useful.links') }}">Useful Link</a></li>
                             <li><a href="{{ route('frontend.tender') }}">Tender</a></li>
                         </ul>
