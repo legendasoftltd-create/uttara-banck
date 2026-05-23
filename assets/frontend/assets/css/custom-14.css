@@ -815,6 +815,7 @@ h6,
     font-style: normal;
     font-variant: normal;
     /*font-family: 'Helvetica Neue', sans-serif;*/
+    font-family: "Inter", sans-serif;
 }
 
 h1,
@@ -6074,7 +6075,9 @@ select:focus {
 /* ============================================================
         Contact Us Page Design
 =============================================================== */
-
+.contact-section{
+    margin: 35px auto;
+}
 /* Left Side Styles */
 .contact-section .contact-wrapper {
     display: flex;
@@ -7244,6 +7247,7 @@ td {
 
 .grid-section .item img {
     width: 100%;
+    object-fit: cover;
 }
 
 .grid-section .item .short-title {
@@ -7275,6 +7279,7 @@ td {
 .grid-section .popup-gallery img {
     width: 300px;
     height: 100%;
+    object-fit: cover;
 }
 
 .slide-item .slider-text {
