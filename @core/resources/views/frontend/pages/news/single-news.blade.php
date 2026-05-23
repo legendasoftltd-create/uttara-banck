@@ -120,7 +120,7 @@
                         <article class="article-body">
                         <header class="article-header">
                             <div class="meta-info">
-                                <span class="clock-icon">🕒</span> Published on: {{ $blog_post->created_at->format('h:i A, l, d F, Y') }}
+                                <span class="clock-icon">🕒</span> Published on: {{ $blog_post->created_at->format(' d F, Y') }}
                             </div>
                             <h1>{{ $blog_post->title }}</h1>
                         </header>
@@ -137,7 +137,7 @@
 
                         <aside class="sidebar">
                             <section class="sidebar-section">
-                                <h2 class="section-title">সর্বশেষ খবর</h2>
+                                <h2 class="section-title">Latest news</h2>
                                 <div class="scroll-area">
                                     @foreach($all_recent_blogs as $data)
                                         <div class="side-card">
@@ -146,7 +146,7 @@
                                                 <img src="{{ $image_details['img_url'] ?? ""}}" alt="{{ __($data->title) }}" width="300px">
                                                 <div class="side-card-info">
                                                     <h3>{{ $data->title }}</h3>
-                                                    <span class="time">🕒 {{ $data->created_at->format('h:i A, l, d F, Y') }}</span>
+                                                    <span class="time">🕒 {{ $data->created_at->format('d F, Y') }}</span>
                                                 </div>
                                             </a>
                                         </div>

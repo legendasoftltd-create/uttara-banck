@@ -39,25 +39,32 @@ $(document).ready(function () {
 })();
 
 function openVideo() {
-  const modal = document.getElementById("videoModal");
-  const iframe = document.getElementById("videoFrame");
-  const videoId = "YOUR_VIDEO_ID_HERE";
-  iframe.src = `https://www.youtube.com/embed/t_KKNNeH8jU?autoplay=1`;
-  modal.style.display = "flex";
+
+    const modal = document.getElementById("videoModal");
+    const iframe = document.getElementById("videoFrame");
+
+    iframe.src = "https://www.youtube.com/embed/t_KKNNeH8jU?autoplay=1";
+
+    modal.style.display = "flex";
 }
 
 function closeVideo() {
-  const modal = document.getElementById("videoModal");
-  const iframe = document.getElementById("videoFrame");
-  modal.style.display = "none";
-  iframe.src = "";
+
+    const modal = document.getElementById("videoModal");
+    const iframe = document.getElementById("videoFrame");
+
+    modal.style.display = "none";
+
+    iframe.src = "";
 }
 
-window.onclick = function (event) {
-  const modal = document.getElementById("videoModal");
-  if (event.target == modal) {
-    closeVideo();
-  }
+window.onclick = function(event) {
+
+    const modal = document.getElementById("videoModal");
+
+    if (event.target === modal) {
+        closeVideo();
+    }
 };
 
 // =================================
@@ -245,12 +252,12 @@ function openModal(card) {
   modal.style.display = "block";
 }
 
-// const closeBtn = document.querySelector(".close-btn");
-// if (closeBtn) {
-//   closeBtn.onclick = function () {
-//     modal.style.display = "none";
-//   };
-// }
+const closeBtn = document.querySelector(".close-button");
+if (closeBtn) {
+  closeBtn.onclick = function () {
+    modal.style.display = "none";
+  };
+}
 
 window.onclick = function (event) {
   if (event.target == modal) {
@@ -319,6 +326,36 @@ var swiper = new Swiper(".loanSlider", {
       spaceBetween: 15,
     },
   },
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    const auctionDropdown = document.querySelector(".auction-dropdown");
+    const chevron = document.getElementById("auction-chevron");
+
+    window.showMenu = function (event) {
+
+        event.stopPropagation();
+
+        auctionDropdown.classList.toggle("active");
+
+        if (chevron) {
+            chevron.classList.toggle("rotated");
+        }
+    };
+
+    window.addEventListener("click", (event) => {
+
+        if (!event.target.closest(".auction-dropdown")) {
+
+            auctionDropdown.classList.remove("active");
+
+            if (chevron) {
+                chevron.classList.remove("rotated");
+            }
+        }
+    });
+
 });
 
 const menu = document.querySelector(".make-sticky");
@@ -399,3 +436,5 @@ const carousel3Dswiper = new Swiper(".carousel-3D-swiper", {
         }
     }
 });
+
+

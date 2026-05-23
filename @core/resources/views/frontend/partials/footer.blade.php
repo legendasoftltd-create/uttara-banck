@@ -3,6 +3,7 @@
     $home_page19_color_con = $home_page_variant == '19' ? '' :  'footer-top';
 @endphp
 @if (!in_array(Route::currentRouteName(), ['frontend.course.lesson', 'frontend.course.lesson.start']))
+
 <footer class="footer-area home-variant-{{$home_page_variant}}
 @if ((request()->routeIs('homepage') || request()->routeIs('frontend.homepage.demo')) && $home_page_variant == '17' && filter_static_option_value('home_page_call_to_action_section_status', $static_field_data))
    has-top-padding
@@ -13,6 +14,7 @@
  footer-bg footer-color-three
 @endif
 ">
+
 @if (App\WidgetsBuilder\WidgetBuilderSetup::render_frontend_sidebar('footer', ['column' => true]))
 <div class="{{$home_page19_color_con}} padding-top-90 padding-bottom-65">
     <div class="container">
@@ -93,13 +95,13 @@
 <footer class="footer ">
     <div class="container mx-auto">
         <div class="footer-wrapper" data-aos="fade-up" data-aos-duration="2000">
-            <a style="display: inline-block;" href="{{url('/')}}" data-aos="fade-up" data-aos-duration="2000">
-                @if(!empty(filter_static_option_value('site_logo',$global_static_field_data)))
-                    {!! render_image_markup_by_attachment_id(filter_static_option_value('site_logo',$global_static_field_data)) !!}
-                @else
-                    <h2 class="site-title">{{filter_static_option_value('site_'.$user_select_lang_slug.'_title',$global_static_field_data)}}</h2>
-                @endif
-            </a>
+            <!--<a style="display: inline-block;" href="{{url('/')}}" data-aos="fade-up" data-aos-duration="2000">-->
+            <!--    @if(!empty(filter_static_option_value('site_logo',$global_static_field_data)))-->
+            <!--        {!! render_image_markup_by_attachment_id(filter_static_option_value('site_logo',$global_static_field_data)) !!}-->
+            <!--    @else-->
+            <!--        <h2 class="site-title">{{filter_static_option_value('site_'.$user_select_lang_slug.'_title',$global_static_field_data)}}</h2>-->
+            <!--    @endif-->
+            <!--</a>-->
         </div>
         <div class="footer-wrap">
             <div style="opacity: 1; transform: none; grid-column: span 3 / span 3;">
@@ -111,6 +113,21 @@
                         PLC Dhaka 1212</p>
                     <p class="font-light mt-2">24/7 Call
                         Center <a class="text-[#012C60] font-medium &quot;" href="tel:16645">16645</a></p>
+                </div>
+                <div class="footer-social mt-3" data-aos="fade-up" data-aos-duration="5000">
+                    {{-- <a target="_blank" aria-label="social icon 1" href="https://www.facebook.com/UttaraBankPLC/">
+                        <img alt="social icon" loading="lazy" width="24" height="24" decoding="async"
+                            data-nimg="1" class style="color:transparent"
+                            src="https://brackweb.s3.ap-southeast-1.amazonaws.com/uploads/all/facebook683e92811d513.png">
+                    </a>
+                    <a target="_blank" aria-label="social icon 4" href="https://www.youtube.com/@uttarabankbdplc">
+                        <img alt="social icon" loading="lazy" width="24" height="24" decoding="async"
+                            data-nimg="1" class style="color:transparent"
+                            src="https://brackweb.s3.ap-southeast-1.amazonaws.com/uploads/all/youtube683e9326e1f06.png">
+                    </a> --}}
+                    @foreach($all_social_item as $data)
+                                    <li><a href="{{$data->url}}" rel="canonical"><i class="{{$data->icon}}"></i></a></li>
+                                @endforeach
                 </div>
             </div>
             <div class="footer-menu" style="opacity: 1; transform: none;">
@@ -157,7 +174,7 @@
                         <li>
                             <a aria-label="Exchange Rates"
                                 class="text-[#637D92] sm:font-light hover:underline text-sm font-extralight sm:text-base sm:leading-[23px]"
-                                href="#">Exchange Rates</a>
+                                href="/service/exchange-rate">Exchange Rates</a>
                         </li>
                         <li>
                             <a aria-label="Risk Based Capital"
@@ -168,21 +185,6 @@
                 </div>
             </div>
             <div style="opacity: 1; transform: none;">
-                <div class="footer-social" data-aos="fade-up" data-aos-duration="5000">
-                    {{-- <a target="_blank" aria-label="social icon 1" href="https://www.facebook.com/UttaraBankPLC/">
-                        <img alt="social icon" loading="lazy" width="24" height="24" decoding="async"
-                            data-nimg="1" class style="color:transparent"
-                            src="https://brackweb.s3.ap-southeast-1.amazonaws.com/uploads/all/facebook683e92811d513.png">
-                    </a>
-                    <a target="_blank" aria-label="social icon 4" href="https://www.youtube.com/@uttarabankbdplc">
-                        <img alt="social icon" loading="lazy" width="24" height="24" decoding="async"
-                            data-nimg="1" class style="color:transparent"
-                            src="https://brackweb.s3.ap-southeast-1.amazonaws.com/uploads/all/youtube683e9326e1f06.png">
-                    </a> --}}
-                    @foreach($all_social_item as $data)
-                                    <li><a href="{{$data->url}}" rel="canonical"><i class="{{$data->icon}}"></i></a></li>
-                                @endforeach
-                </div>
                 <div class="footer-subscribe" data-aos="fade-up" data-aos-duration="5000">
                     <h3>Subscribe Newsletter</h3>
                     <form>
@@ -306,6 +308,11 @@
 <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
 
 <script src="{{ asset('assets/frontend/assets/js/script-custom.js') }}"></script>
+
+<script
+  src="https://uttarabank1.blocknots.com/static/widget.js"
+  data-bank-name="Uttara Bank Support">
+</script>
 
 
 <script>

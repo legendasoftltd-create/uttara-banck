@@ -226,7 +226,7 @@
                 </div>
             </div>
         </section>
-
+        
         <div id="sticky-container">
             <div class="sticky">
                 <div class="head-stk">

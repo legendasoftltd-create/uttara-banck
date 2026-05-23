@@ -23,6 +23,9 @@
         padding: 0;
         margin: 0;
         border-top: 1px solid #e0e0e0;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 10px
     }
 
     .useful-link-item {
@@ -90,10 +93,10 @@
 @section('content')
 <section class="useful-links-section">
     <div class="container">
-
+    <div class="empty-height-50"></div>
         <div class="row mb-4">
             <div class="col-12 text-center">
-                <h2 style="color:#006837; font-weight:700;">
+                <h2 style="color:#006837; font-weight:500;">
                     {{ get_static_option('useful_links_page_title') ?? __('Useful Links') }}
                 </h2>
                 <div class="title-seperator"></div>
@@ -101,7 +104,7 @@
         </div>
 
         <div class="row">
-            <div class="col-lg-10 offset-lg-1">
+            <div class="col-lg-12">
 
                 @if($links->isEmpty())
                     <div class="useful-links-empty">

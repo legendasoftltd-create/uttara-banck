@@ -103,4 +103,24 @@
             </div>
         </div>
     </div>
+    
+    <!-- Video Modal -->
+    <div id="videoModal" class="video-modal">
+        <div class="video-content">
+    
+            <span class="close-btn" onclick="closeVideo()">&times;</span>
+    
+            <iframe
+                id="videoFrame"
+                width="100%"
+                height="500"
+                src=""
+                frameborder="0"
+                allow="autoplay; encrypted-media"
+                allowfullscreen>
+            </iframe>
+    
+        </div>
+    </div>
+
 </section>

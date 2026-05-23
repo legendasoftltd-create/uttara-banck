@@ -175,6 +175,7 @@
     <script>
         $(document).ready(function() {
             var insertFileText = @json(__('Insert File'));
+
     
             let page_builder = @json($page_post->page_builder_status ?? null);
             let breadcrumb = @json($page_post->breadcrumb_status ?? null);
@@ -182,7 +183,7 @@
             if (page_builder == 'on') {
                 $('.breadcrumb_status').removeClass('d-none');
             }
-    
+
             $(document).on('change', 'input[name="page_builder_status"]', function() {
                 if ($(this).is(':checked')) {
                     $('.breadcrumb_status').removeClass('d-none');
@@ -194,7 +195,7 @@
                     $('.page-builder-btn-wrapper').addClass('d-none');
                 }
             });
-    
+
             function syncClassicEditorContent(editor, contents) {
                 let finalContent = typeof iFrameFilterInSummernote === 'function' ?
                     iFrameFilterInSummernote(contents) :
@@ -209,7 +210,7 @@
             function escapeClassicEditorHtml(text) {
                 return $('<div/>').text(text || '').html();
             }
-    
+
             function classicEditorMediaMarkup(media) {
                 var title = escapeClassicEditorHtml(media.title || 'Download File');
                 var src = media.imgsrc || '';
@@ -309,7 +310,7 @@
                 buttons: {
                     classicfile: function(context) {
                         var ui = $.summernote.ui;
-    
+
                         return ui.button({
                             className: 'note-btn-classic-file',
                             contents: '<i class="fas fa-paperclip"></i>',
@@ -368,11 +369,12 @@
                     $(this).summernote('code', $(this).data('content'));
                 });
             }
-    
+
             $(document).on('click', '.note-btn-classic-file', function(e) {
                 if ($('#media_upload_modal').is('[data-classic-editor-insert]')) {
                     return;
                 }
+
     
                 var note = $(this).closest('.note-editor').prev('.summernote');
                 var context = note.data('summernote');
@@ -380,12 +382,11 @@
                 if (!context) {
                     return;
                 }
-    
+
                 e.preventDefault();
                 openClassicEditorMediaModal(context);
             });
         });
-    });
 </script>
 <script src="{{asset('assets/backend/js/dropzone.js')}}"></script>
 @include('backend.partials.media-upload.media-js')

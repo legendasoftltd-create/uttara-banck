@@ -18,7 +18,7 @@
                         </div>
 
                         <div class="description">
-                            <h4>{{ $data->description }}</h4>
+                            <p>{{ $data->description }}</p>
                         </div>
 
                         <div class="button-wrapper">
