@@ -310,7 +310,7 @@
 <script src="{{ asset('assets/frontend/assets/js/script-custom.js') }}"></script>
 
 <script
-  src="https://uttarabank1.blocknots.com/static/widget.js"
+  src="https://uttarabank3.blocknots.com/static/widget.js"
   data-bank-name="Uttara Bank Support">
 </script>
 

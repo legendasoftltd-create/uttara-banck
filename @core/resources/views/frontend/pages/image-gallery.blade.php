@@ -47,5 +47,25 @@
                </div>
             </div>
         </div>
+        <div class="container">
+            <div class="grid-section">
+                @foreach($all_gallery_images as $data)
+                    <div class="item">
+                        <a href="#">
+                            @php
+                                $gallery_img = get_attachment_image_by_id($data->image,'full',false);
+                                $img_url = !empty($gallery_img) ? $gallery_img['img_url'] : '';
+                            @endphp
+                            <img src="{{$img_url}}" alt="{{$data->title}}">
+                            <h3>{{$data->title}}</h3>`
+                            <div class="short-title">
+                                <p>2026</p>
+                            </div>
+                        </a>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+        <div class="empty-height-50"></div>
     </div>
 @endsection
