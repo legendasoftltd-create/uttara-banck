@@ -222,7 +222,6 @@
                     <li><a href="#">Contact</a></li>
                 </ul>
             </div>
-
             <div class="overlay" id="overlay"></div>
-            <!-- Navbar End-->
+        <!-- Navbar End-->
 </div>

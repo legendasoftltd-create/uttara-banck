@@ -58,6 +58,59 @@
             src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={{ get_static_option('google_adsense_publisher_id') }}"
             crossorigin="anonymous"></script>
     @endif
+
+
+    
+<style>
+    .mouse-pointer {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 999;
+        width: 20px;
+        aspect-ratio: 1;
+        background-color: rgb(0 0 0 / 25%);
+        border: 1px solid transparent;
+        border-radius: 100%;
+        pointer-events: none;
+
+        transform: translate3d(var(--mouseX, 0), var(--mouseY, 0), 0)
+            translate(-50%, -50%);
+
+        transition: 0.3s ease-out;
+        transition-property: transform, width, border, background-color;
+    }
+</style>
+<div class="mouse-pointer" aria-hidden="true"></div>
+
+<script>
+    const isReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const isTouch = window.matchMedia("(pointer: coarse)").matches;
+    const shouldRun = !isReducedMotion && !isTouch;
+
+    if (shouldRun) {
+    let mouseX = 0;
+    let mouseY = 0;
+
+    const pointer = document.querySelector(".mouse-pointer");
+    const coordinates = document.querySelector("#coordinates strong");
+
+    window.addEventListener("mousemove", (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+
+    });
+
+    function animate() {
+        pointer.style.setProperty("--mouseX", `${mouseX}px`);
+        pointer.style.setProperty("--mouseY", `${mouseY}px`);
+        requestAnimationFrame(animate);
+    }
+
+    animate();
+    }
+
+</script>
 </head>
 <body>
 @include('frontend.partials.navbar')

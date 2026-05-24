@@ -1,6 +1,7 @@
 <section class="breadcrumb-area breadcrumb-bg navbar-variant-{{get_static_option('navbar_variant')}}"
-    {!! render_background_image_markup_by_attachment_id(get_static_option('site_breadcrumb_bg')) !!}
+style="background: linear-gradient(90deg,rgba(0, 122, 68, 1) 0%, rgba(70, 176, 78, 1) 100%);";
 >
+<!-- {!! render_background_image_markup_by_attachment_id(get_static_option('site_breadcrumb_bg')) !!} -->
     <div class="container
 
          @if(
