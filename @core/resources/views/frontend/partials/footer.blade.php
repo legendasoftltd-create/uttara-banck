@@ -146,15 +146,10 @@
                                 href="#">Career</a>
                         </li>
                         <li>
-                            <a aria-label="Financial Literacy"
-                                class="text-[#637D92] sm:font-light hover:underline text-sm font-extralight sm:text-base sm:leading-[23px]"
-                                href="#">Financial
-                                Literacy</a>
+                            <a aria-label="Financial Literacy" class="text-[#637D92] sm:font-light hover:underline text-sm font-extralight sm:text-base sm:leading-[23px]" href="#">Financial Literacy</a>
                         </li>
                         <li>
-                            <a aria-label="CSR"
-                                class="text-[#637D92] sm:font-light hover:underline text-sm font-extralight sm:text-base sm:leading-[23px]"
-                                href="#">CSR</a>
+                            <a aria-label="CSR" class="text-[#637D92] sm:font-light hover:underline text-sm font-extralight sm:text-base sm:leading-[23px]" href="/useful-links"> Useful Link </a>
                         </li>
                     </ul>
                 </div>
@@ -169,7 +164,7 @@
                         <li>
                             <a aria-label="Investor Relations"
                                 class="text-[#637D92] sm:font-light hover:underline text-sm font-extralight sm:text-base sm:leading-[23px]"
-                                href="#">Investor Relations</a>
+                                href="/tender">Tender</a>
                         </li>
                         <li>
                             <a aria-label="Exchange Rates"
@@ -179,7 +174,7 @@
                         <li>
                             <a aria-label="Risk Based Capital"
                                 class="text-[#637D92] sm:font-light hover:underline text-sm font-extralight sm:text-base sm:leading-[23px]"
-                                href="#">Risk Based Capital</a>
+                                href="/case-study/category/20/Disclosures%20on%20Risk%20Based%20Capital">Risk Based Capital</a>
                         </li>
                     </ul>
                 </div>

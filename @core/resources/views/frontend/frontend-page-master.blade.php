@@ -41,7 +41,7 @@
                     </tbody>
                 </table>
                 <span style="padding-left: 70px;">
-                    <a href="#" target="_blank">View
+                    <a href="/service/exchange-rate" target="_blank">View
                         complete
                         list</a>
                 </span>
@@ -72,7 +72,7 @@
         style="line-height: 1; position: fixed; height: 160px; left: -187px; z-index: 99; top: 60%;transition: all 0.4s ease-in-out;">
         <a class="bankboooth" href="{{ route('frontend.locations') }}?tab=sub_branch" target="_blank"
             style="width: 29px; height: 160px; display: block; z-index: 99; outline: none; position: absolute; top: 0px; right: -29px; box-shadow: rgba(160, 192, 229, 0.55) 0px 0px 10px 0px; border-radius: 0 10px 10px 0;background: #FFF;"><span
-                style="color: #008649; margin-top: 73px; -webkit-transform: rotate(-90deg); -moz-transform: rotate(-90deg); -ms-transform: rotate(-90deg); -o-transform: rotate(-90deg); float: left; margin-left: -54px; letter-spacing: 2px; text-transform: uppercase; font-size: 14px; font-weight: 500; width: 140px;">Sub
+                style="color: #008649; margin-top: 67px; -webkit-transform: rotate(-90deg); -moz-transform: rotate(-90deg); -ms-transform: rotate(-90deg); -o-transform: rotate(-90deg); float: left; margin-left: -57px; letter-spacing: 2px; text-transform: uppercase; font-size: 14px; font-weight: 500; width: 140px;">Sub
                 Branchs</span> </a>
         <a style="border:none;" href="{{ route('frontend.locations') }}?tab=sub_branch" target="_blank">
             <img width="187" height="160"
@@ -80,4 +80,9 @@
         </a>
     </div>
 </div>
+
+
+
 @include('frontend.partials.footer')
+
+
