@@ -75,6 +75,7 @@ use Illuminate\Support\Str;
 use Svg\Tag\Image;
 use Symfony\Component\Process\Process;
 use App\Helpers\HomePageStaticSettings;
+use Carbon\Carbon;
 
 class FrontendController extends Controller
 {
@@ -1811,7 +1812,38 @@ ITEM;
             $all_contain_cat[] = $work->cat_id;
         }
         $all_category = ImageGalleryCategory::find($all_contain_cat);
-        return view('frontend.pages.image-gallery')->with(['all_gallery_images' => $all_gallery_images, 'all_category' => $all_category]);
+
+        $all_years = $all_gallery_images->pluck('publish_date')->filter()->map(fn($date) => Carbon::parse($date)->year)->unique()->sortDesc()->values();
+        
+
+        return view('frontend.pages.image-gallery')->with(['all_gallery_images' => $all_gallery_images, 'all_category' => $all_category, 'all_years' => $all_years]);
+    }
+
+
+
+    /* =========================
+    AJAX FILTER FUNCTION
+    ========================= */
+
+    public function image_gallery_filter(Request $request)
+    {
+        $query = ImageGallery::where('lang', get_user_lang());
+
+        // CATEGORY FILTER
+        if ($request->category) {
+            $query->where('cat_id', $request->category);
+        }
+
+        // YEAR FILTER
+        if ($request->year) {
+            $query->whereYear('publish_date', $request->year);
+        }
+
+        $all_gallery_images = $query->orderBy('id', 'DESC')->get();
+
+        return response()->json([
+            'html' => view('frontend.pages.gallery-items', compact('all_gallery_images'))->render()
+        ]);
     }
 
 
