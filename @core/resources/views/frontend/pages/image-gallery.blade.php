@@ -130,6 +130,45 @@
         font-weight: bold;
         cursor: pointer;
         line-height: 1;
+        z-index: 20;
+    }
+
+    .lightbox-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(255,255,255,0.15);
+        color: #fff;
+        border: none;
+        font-size: 32px;
+        padding: 18px 14px;
+        cursor: pointer;
+        z-index: 10;
+        border-radius: 6px;
+        transition: background 0.2s;
+        line-height: 1;
+    }
+    .lightbox-btn:hover {
+        background: rgba(255,255,255,0.35);
+    }
+    .lightbox-prev {
+        left: 16px;
+    }
+    .lightbox-next {
+        right: 16px;
+    }
+    .lightbox-counter {
+        position: absolute;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        color: #fff;
+        font-size: 15px;
+        background: rgba(0,0,0,0.5);
+        padding: 6px 18px;
+        border-radius: 20px;
+        user-select: none;
+        z-index: 20;
     }
 
     
@@ -140,7 +179,7 @@
 
 
     <div class="container ">
-        <div class="row gap-3 gallery-filter-row">
+        <div class="row gap-3">
             <div class="col-md-6 col-sm-6 mb-3 mb-sm-0">
                 
                 <div class="custom-select-wrapper" id="categoryDropdown">
@@ -195,10 +234,13 @@
 </div>
 
 
-<!-- LIGHTBOX OVERLAY (persists across AJAX) -->
+<!-- LIGHTBOX OVERLAY — infinite slider (persists across AJAX) -->
 <div class="lightbox-overlay" id="lightboxOverlay">
     <span class="lightbox-close" id="lightboxClose">&times;</span>
+    <button class="lightbox-btn lightbox-prev" id="lightboxPrev">&#10094;</button>
     <img id="lightboxImg" src="" alt="">
+    <button class="lightbox-btn lightbox-next" id="lightboxNext">&#10095;</button>
+    <div class="lightbox-counter" id="lightboxCounter"></div>
 </div>
 
 <!-- AJAX GALLERY -->
@@ -289,38 +331,71 @@
             loadGallery(page);
         });
 
-        // LIGHTBOX — close handlers
+        // LIGHTBOX — infinite-loop slider
         var overlay = document.getElementById('lightboxOverlay');
         var lightboxImg = document.getElementById('lightboxImg');
         var closeBtn = document.getElementById('lightboxClose');
+        var prevBtn = document.getElementById('lightboxPrev');
+        var nextBtn = document.getElementById('lightboxNext');
+        var counterEl = document.getElementById('lightboxCounter');
 
         function closeLightbox() {
             overlay.classList.remove('active');
             lightboxImg.src = '';
         }
 
+        function showSlide(index) {
+            if (!galleryImages.length) return;
+            galleryIndex = (index + galleryImages.length) % galleryImages.length;
+            lightboxImg.src = galleryImages[galleryIndex];
+            counterEl.textContent = (galleryIndex + 1) + ' / ' + galleryImages.length;
+            overlay.classList.add('active');
+        }
+
+        function prevSlide() { showSlide(galleryIndex - 1); }
+        function nextSlide() { showSlide(galleryIndex + 1); }
+
         if (closeBtn) closeBtn.addEventListener('click', closeLightbox);
         if (overlay) overlay.addEventListener('click', function(e) {
             if (e.target === overlay) closeLightbox();
         });
+        if (prevBtn) prevBtn.addEventListener('click', prevSlide);
+        if (nextBtn) nextBtn.addEventListener('click', nextSlide);
 
         document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') closeLightbox();
+            if (overlay.classList.contains('active')) {
+                if (e.key === 'Escape') closeLightbox();
+                if (e.key === 'ArrowLeft') prevSlide();
+                if (e.key === 'ArrowRight') nextSlide();
+            }
         });
 
     });
 
-    // LIGHTBOX — open on .test-popup-link click (event delegation survives AJAX)
+    // LIGHTBOX — open .test-popup-link (event delegation survives AJAX)
+    var galleryImages = [];
+    var galleryIndex = 0;
+
     document.addEventListener('click', function(e) {
         var link = e.target.closest('.test-popup-link');
         if (!link) return;
 
         e.preventDefault();
-        var imgUrl = link.getAttribute('href');
-        if (imgUrl && imgUrl !== '#') {
-            document.getElementById('lightboxImg').src = imgUrl;
-            document.getElementById('lightboxOverlay').classList.add('active');
-        }
+
+        var allLinks = document.querySelectorAll('#galleryWrapper .test-popup-link');
+        galleryImages = [];
+
+        allLinks.forEach(function(el, i) {
+            var href = el.getAttribute('href');
+            galleryImages.push(href);
+            if (el === link) galleryIndex = i;
+        });
+
+        if (!galleryImages.length) return;
+
+        document.getElementById('lightboxImg').src = galleryImages[galleryIndex];
+        document.getElementById('lightboxCounter').textContent = (galleryIndex + 1) + ' / ' + galleryImages.length;
+        document.getElementById('lightboxOverlay').classList.add('active');
     });
 
     function loadGallery(page) {

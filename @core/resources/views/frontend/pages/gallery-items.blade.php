@@ -61,6 +61,7 @@
                     <a href="{{ $img_url }}" class="test-popup-link">
                         <img src="{{ $img_url }}"
                             class="custom-image-height rounded-0"
+                            style="cursor: zoom-in;"
                             alt="{{ $data->title }}">
                     </a>
 
