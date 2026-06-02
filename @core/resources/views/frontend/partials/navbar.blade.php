@@ -122,10 +122,10 @@
                             <li><a href="{{ route('frontend.team.committee', ['committee' => 'audit-committee']) }}">Audit Committee</a></li>
                             <li><a href="{{ route('frontend.team.committee', ['committee' => 'risk-management-committee']) }}">Risk Management Committee</a></li>
                             <li><a href="{{ route('frontend.team.committee', ['committee' => 'senior-management']) }}">Senior Management</a></li>
-                            <li><a href="#">Employee Information</a></li>
-                            <li><a href="#">Shareholding Structure</a></li>
+                            <li><a href="{{route('frontend.dynamic.page','employee-information')}}">Employee Information</a></li>
+                            <li><a href="{{route('frontend.dynamic.page','shareholding-structure')}}">Shareholding Structure</a></li>
                             <li><a href="{{route('frontend.dynamic.page','government-securities-investment-window')}}">Government Securities Investment Window</a></li>
-                            <li><a href="#">Cash Dollar Transaction</a></li>
+                            <li><a href="{{route('frontend.dynamic.page','cash-dollar-transaction')}}">Cash Dollar Transaction</a></li>
                         </ul>
                     </li>
                     @foreach(get_product_category_on_menu() as $data)
@@ -205,7 +205,7 @@
                         </ul>
                     </li>
                     <li><a href="{{ route('frontend.locations') }}">Our Location</a></li>
-                    <li><a href="{{ route('frontend.dynamic.page', 'ibanking') }}">iBanking</a></li>
+                    <li><a href="https://ibanking.uttarabank-bd.com/iBankUltimus/LoginUI.aspx">iBanking</a></li>
                     <li><a href="https://play.google.com/store/apps/details?id=com.uttarabank.ublmobile">Uttara
                             eWallet</a></li>
                     <li><a href="#">Career</a></li>
