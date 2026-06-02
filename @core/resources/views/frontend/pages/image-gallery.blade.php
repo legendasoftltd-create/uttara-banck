@@ -12,18 +12,7 @@
 @endsection
 
 <style>
-    .gallery-filter-row {
-        padding: 0 75px;
-    }
-
-    @media (max-width: 991px) {
-        .gallery-filter-row {
-            padding: 0 5px;
-            ;
-        }
-    }
-
-
+    
     .custom-select-wrapper {
         position: relative;
         width: 100%;
@@ -113,24 +102,37 @@
         transition: all 0.2s ease;
     }
 
-    /* custom card style */
-    .custom-card-text {
-        color: #4a5c6a;
-        /* Slate blue/brownish text */
-        font-weight: 500;
-        line-height: 1.3;
+    .lightbox-overlay {
+        display: none;
+        position: fixed;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        background: rgba(0,0,0,0.9);
+        z-index: 99999;
+        justify-content: center;
+        align-items: center;
+        cursor: zoom-out;
+    }
+    .lightbox-overlay.active {
+        display: flex;
+    }
+    .lightbox-overlay img {
+        max-width: 90%;
+        max-height: 90%;
+        border-radius: 4px;
+        box-shadow: 0 0 30px rgba(0,0,0,0.5);
+    }
+    .lightbox-close {
+        position: absolute;
+        top: 20px; right: 30px;
+        color: #fff;
+        font-size: 40px;
+        font-weight: bold;
+        cursor: pointer;
+        line-height: 1;
     }
 
-    .year-badge-text {
-        color: #008b8b;
-        /* Teal color for the year */
-        font-size: 1.3rem;
-    }
-
-    .year-badge-bg {
-        background-color: #f4f4f4;
-        /* Slightly off-white to match the image */
-    }
+    
 </style>
 
 @section('content')
@@ -138,18 +140,9 @@
 
 
     <div class="container ">
-        <!-- style="padding:0px 75px;" -->
         <div class="row gap-3 gallery-filter-row">
             <div class="col-md-6 col-sm-6 mb-3 mb-sm-0">
-                <!-- <select id="categoryFilter" class="form-control">
-                <option value="">Select Category</option>
-                @foreach($all_category as $category)
-                    <option value="{{ $category->id }}">
-                        {{ $category->title }}
-                    </option>
-                @endforeach
-            </select> -->
-
+                
                 <div class="custom-select-wrapper" id="categoryDropdown">
                     <button class="custom-select-btn" onclick="toggleDropdown('categoryDropdown')">
                         <span class="custom-select-label">Select Category</span>
@@ -174,12 +167,7 @@
             </div>
 
             <div class="col-md-6 col-sm-6 mb-3 mb-sm-0 w-100">
-                <!-- <select id="yearFilter" class="form-control">
-                    <option value="">Select Year</option>
-                    @foreach($all_years as $year)
-                        <option value="{{ $year }}">{{ $year }}</option>
-                    @endforeach
-                </select> -->
+                
                 <div class="custom-select-wrapper" id="yearDropdown">
                     <button class="custom-select-btn" onclick="toggleDropdown('yearDropdown')">
                         <span class="custom-select-label">Select Year</span>
@@ -204,62 +192,18 @@
         </div>
     </div>
 
-    <!-- <div class="container">
-            <div class="grid-section">
-                @foreach($all_gallery_images as $data)
-                    <div class="item">
-                        <a href="#">
-                            @php
-                                $gallery_img = get_attachment_image_by_id($data->image,'full',false);
-                                $img_url = !empty($gallery_img) ? $gallery_img['img_url'] : '';
-                            @endphp
-                            <img src="{{$img_url}}" alt="{{$data->title}}">
-                            <h3>{{$data->title}}</h3>`
-                            
-                        </a>
-                    </div>
-                @endforeach
-            </div>
-        </div>
-        <div class="empty-height-50"></div> -->
-
 </div>
 
+
+<!-- LIGHTBOX OVERLAY (persists across AJAX) -->
+<div class="lightbox-overlay" id="lightboxOverlay">
+    <span class="lightbox-close" id="lightboxClose">&times;</span>
+    <img id="lightboxImg" src="" alt="">
+</div>
 
 <!-- AJAX GALLERY -->
 <div class="container mt-4">
-
-    <div class="row g-4">
-
-        <!-- Card 1 -->
-        <div class="col-lg-3 col-md-6">
-            <div class="card border-0 shadow-sm rounded-0 h-100">
-
-                <div class="position-relative">
-                    <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
-                        class="card-img-top rounded-0"
-                        alt="Team meeting">
-
-                    <div class="position-absolute rounded-circle year-badge-bg d-flex align-items-center justify-content-center shadow"
-                        style="width: 60px; height: 60px; bottom: -20px; right: 20px; z-index: 10;">
-                        <span class="year-badge-text">2019</span>
-                    </div>
-                </div>
-
-                <div class="card-body text-center pt-4 pb-4 px-4">
-                    <h4 class="card-title custom-card-text">
-                        Can curiosity may end shameless explained
-                    </h4>
-                </div>
-
-            </div>
-        </div>
-
-    </div>
-</div>
-
-<div class="container mt-4">
-    <div class="grid-section" id="galleryWrapper">
+    <div class="row g-4" id="galleryWrapper">
         @include('frontend.pages.gallery-items')
     </div>
 </div>
@@ -314,52 +258,6 @@
 </script>
 
 
-
-
-<script>
-    document.addEventListener("DOMContentLoaded", () => {
-
-        const dropdown = document.querySelector(".category-dropdown");
-        const chevron = document.getElementById("category-chevron");
-
-        window.showCategoryMenu = function(event) {
-            event.stopPropagation();
-            dropdown.classList.toggle("active");
-
-            if (chevron) {
-                chevron.classList.toggle("rotated");
-            }
-        };
-
-        // close when click outside
-        window.addEventListener("click", (event) => {
-            if (!event.target.closest(".category-dropdown")) {
-                dropdown.classList.remove("active");
-
-                if (chevron) {
-                    chevron.classList.remove("rotated");
-                }
-            }
-        });
-
-        // select item
-        document.querySelectorAll(".category-dropdown-link").forEach(item => {
-            item.addEventListener("click", function(e) {
-                e.preventDefault();
-
-                dropdown.querySelector("button").childNodes[0].textContent = this.textContent;
-
-                dropdown.classList.remove("active");
-                chevron.classList.remove("rotated");
-            });
-        });
-
-    });
-</script>
-
-
-
-
 <script>
     document.addEventListener("DOMContentLoaded", function() {
 
@@ -391,6 +289,38 @@
             loadGallery(page);
         });
 
+        // LIGHTBOX — close handlers
+        var overlay = document.getElementById('lightboxOverlay');
+        var lightboxImg = document.getElementById('lightboxImg');
+        var closeBtn = document.getElementById('lightboxClose');
+
+        function closeLightbox() {
+            overlay.classList.remove('active');
+            lightboxImg.src = '';
+        }
+
+        if (closeBtn) closeBtn.addEventListener('click', closeLightbox);
+        if (overlay) overlay.addEventListener('click', function(e) {
+            if (e.target === overlay) closeLightbox();
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeLightbox();
+        });
+
+    });
+
+    // LIGHTBOX — open on .test-popup-link click (event delegation survives AJAX)
+    document.addEventListener('click', function(e) {
+        var link = e.target.closest('.test-popup-link');
+        if (!link) return;
+
+        e.preventDefault();
+        var imgUrl = link.getAttribute('href');
+        if (imgUrl && imgUrl !== '#') {
+            document.getElementById('lightboxImg').src = imgUrl;
+            document.getElementById('lightboxOverlay').classList.add('active');
+        }
     });
 
     function loadGallery(page) {
@@ -405,7 +335,7 @@
         url.searchParams.append('category', category);
         url.searchParams.append('year', year);
 
-        document.getElementById('galleryWrapper').innerHTML = '<p>Loading...</p>';
+        document.getElementById('galleryWrapper').innerHTML = '<p class="col-12 text-center py-5">Loading...</p>';
 
         fetch(url)
             .then(function(res) {
@@ -416,7 +346,7 @@
             })
             .catch(function(err) {
                 console.error('Error:', err);
-                document.getElementById('galleryWrapper').innerHTML = '<p>Something went wrong.</p>';
+                document.getElementById('galleryWrapper').innerHTML = '<p class="col-12 text-center py-5">Something went wrong.</p>';
             });
     }
 </script>

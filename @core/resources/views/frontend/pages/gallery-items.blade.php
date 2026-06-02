@@ -1,34 +1,51 @@
+<style> 
+/* custom card style */
+    .card-height {
+    height: 100%;
+}
 
+.card {
+    height: 100%;
+}
 
-<!-- @if($all_gallery_images->isEmpty())
-    <div class="col-12 text-center py-5">
-        <p style="font-size: 18px; color: #888;">No data found</p>
-    </div>
-@else
-    @foreach($all_gallery_images as $data)
-        @php
-            $gallery_img = get_attachment_image_by_id($data->image, 'full', false);
-            $img_url = $gallery_img['img_url'] ?? '';
-        @endphp
+.custom-image-height {
+    height: 173px;
+    width: 100%;
+    object-fit: cover;
+}
 
-        <div class="item">
-            <a href="#">
-                <img src="{{ $img_url }}" alt="{{ $data->title }}">
-                <h3>{{ $data->title }}</h3>
+.custom-card-text {
+    color: #4a5c6a;
+    font-weight: 500;
+    line-height: 1.3;
+    
+    /* Max 3 lines */
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
 
-                <div class="short-title">
-                <p>{{ \Carbon\Carbon::parse($data->publish_date)->year ?? '' }}</p>
-            </div>
-            </a>
-        </div>
-    @endforeach
-@endif -->
+    overflow: hidden;
+    text-overflow: ellipsis;
 
+    /* Fixed height for 3 lines */
+    min-height: 62px;
+    max-height: 62px;
+}
+
+.year-badge-text {
+    color: #2e7d4f;
+    font-size: 1.3rem;
+}
+
+.year-badge-bg {
+    background-color: #f4f4f4;
+}
+</style>
 
 
 @if($all_gallery_images->isEmpty())
     <div class="col-12 text-center py-5">
-        <p style="font-size: 18px; color: #888;">No data found</p>
+        <p style="font-size: 18px; color: #888; ">No data found</p>
     </div>
 @else
     @foreach($all_gallery_images as $data)
@@ -37,15 +54,33 @@
             $img_url = $gallery_img['img_url'] ?? '';
         @endphp
 
-        <div class="item">
-            <a href="{{ $img_url }}" class="test-popup-link">
-                <img src="{{ $img_url }}" alt="{{ $data->title }}" >
-                <h3>{{ $data->title }}</h3>
-                <div class="short-title">
-                    <p>{{ \Carbon\Carbon::parse($data->publish_date)->year ?? '' }}</p>
+        <div class="col-lg-3 col-md-6 mb-4">
+            <div class="card border-0 shadow-sm rounded-0 h-100">
+
+                <div class="position-relative">
+                    <a href="{{ $img_url }}" class="test-popup-link">
+                        <img src="{{ $img_url }}"
+                            class="custom-image-height rounded-0"
+                            alt="{{ $data->title }}">
+                    </a>
+
+                    <div class="position-absolute rounded-circle year-badge-bg d-flex align-items-center justify-content-center shadow"
+                        style="width:60px;height:60px;bottom:-20px;right:20px;z-index:10;">
+                        <span class="year-badge-text">
+                            {{ \Carbon\Carbon::parse($data->publish_date)->year ?? '' }}
+                        </span>
+                    </div>
                 </div>
-            </a>
+
+                <div class="card-body text-center pt-4 pb-4 px-4 d-flex align-items-center">
+                    <h4 class="card-title custom-card-text w-100 mb-0">
+                        {{ $data->title }}
+                    </h4>
+                </div>
+
+            </div>
         </div>
+        
     @endforeach
 
     <div class="col-12 text-center mt-4">
@@ -55,73 +90,3 @@
     </div>
 @endif
 
-<style>
-    .lightbox-overlay {
-        display: none;
-        position: fixed;
-        top: 0; left: 0;
-        width: 100%; height: 100%;
-        background: rgba(0,0,0,0.9);
-        z-index: 99999;
-        justify-content: center;
-        align-items: center;
-        cursor: zoom-out;
-    }
-    .lightbox-overlay.active {
-        display: flex;
-    }
-    .lightbox-overlay img {
-        max-width: 90%;
-        max-height: 90%;
-        border-radius: 4px;
-        box-shadow: 0 0 30px rgba(0,0,0,0.5);
-    }
-    .lightbox-close {
-        position: absolute;
-        top: 20px; right: 30px;
-        color: #fff;
-        font-size: 40px;
-        font-weight: bold;
-        cursor: pointer;
-        line-height: 1;
-    }
-</style>
-
-<div class="lightbox-overlay" id="lightboxOverlay">
-    <span class="lightbox-close" id="lightboxClose">&times;</span>
-    <img id="lightboxImg" src="" alt="">
-</div>
-
-<script>
-    (function() {
-        var overlay = document.getElementById('lightboxOverlay');
-        var lightboxImg = document.getElementById('lightboxImg');
-        var closeBtn = document.getElementById('lightboxClose');
-
-        document.addEventListener('click', function(e) {
-            var link = e.target.closest('.test-popup-link');
-            if (link) {
-                e.preventDefault();
-                var imgUrl = link.getAttribute('href');
-                if (imgUrl && imgUrl !== '#') {
-                    lightboxImg.src = imgUrl;
-                    overlay.classList.add('active');
-                }
-            }
-        });
-
-        function closeLightbox() {
-            overlay.classList.remove('active');
-            lightboxImg.src = '';
-        }
-
-        if (closeBtn) closeBtn.addEventListener('click', closeLightbox);
-        if (overlay) overlay.addEventListener('click', function(e) {
-            if (e.target === overlay) closeLightbox();
-        });
-
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') closeLightbox();
-        });
-    })();
-</script>
