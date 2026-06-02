@@ -183,9 +183,9 @@
                                 <li class="{{active_menu('admin-home/gallery-page/category')}}">
                                     <a href="{{route('admin.gallery.category')}}" >{{__('Category')}}</a>
                                 </li>
-                                {{-- <li class="{{active_menu('admin-home/gallery-page/page-settings')}}">
+                                 <li class="{{active_menu('admin-home/gallery-page/page-settings')}}">
                                     <a href="{{route('admin.gallery.page.settings')}}" >{{__('Page Settings')}}</a>
-                                </li> --}}
+                                </li>
                             </ul>
                         </li>
                     @endif
