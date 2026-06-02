@@ -1829,17 +1829,19 @@ ITEM;
     {
         $query = ImageGallery::where('lang', get_user_lang());
 
-        // CATEGORY FILTER
         if ($request->category) {
             $query->where('cat_id', $request->category);
         }
 
-        // YEAR FILTER
         if ($request->year) {
             $query->whereYear('publish_date', $request->year);
         }
 
-        $all_gallery_images = $query->orderBy('id', 'DESC')->get();
+        $order = !empty(get_static_option('site_image_gallery_order')) ? get_static_option('site_image_gallery_order') : 'DESC';
+        $order_by = !empty(get_static_option('site_image_gallery_order_by')) ? get_static_option('site_image_gallery_order_by') : 'id';
+        $per_page = get_static_option('site_image_gallery_post_items') ?: 12;
+
+        $all_gallery_images = $query->orderBy($order_by, $order)->paginate($per_page)->appends($request->query());
 
         return response()->json([
             'html' => view('frontend.pages.gallery-items', compact('all_gallery_images'))->render()

@@ -47,6 +47,12 @@
             </a>
         </div>
     @endforeach
+
+    <div class="col-12 text-center mt-4">
+        <div class="blog-pagination" id="galleryPagination">
+            {{ $all_gallery_images->links() }}
+        </div>
+    </div>
 @endif
 
 <style>
