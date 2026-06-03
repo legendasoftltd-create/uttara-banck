@@ -749,6 +749,11 @@ ITEM;
         return view('frontend.frontend-home-demo')->with($blade_data);
     }
 
+    public function contact_form_submit(Request $request)
+    {
+        return redirect()->back();
+    }
+
 
     public function flutterwave_pay_get()
     {
