@@ -17,9 +17,9 @@
     {{$service_item->title}}
 @endsection
 @section('content')
-    <section class="content-section pt-4 mt-4">
+    <section class="content-section pt-4 mt-2">
         <div class="container content-box">
-        <h2 class="title">{{ $service_item->title }}</h2>
+        <!-- <h2 class="title">{{ $service_item->title }}</h2> -->
                 <br>
              {!! iFrameFilterInSummernoteAndRender($service_item->description) !!}
         </div>
