@@ -138,32 +138,189 @@
 @endsection
 @section('script')
     <script src="{{asset('assets/backend/js/summernote-bs4.js')}}"></script>
+    <script src="{{asset('assets/backend/js/bootstrap-tagsinput.js')}}"></script>
     <script src="{{asset('assets/backend/js/jquery.nice-select.min.js')}}"></script>
     <x-backend.auto-slug-js :url="route('admin.work.slug.check')" :type="'update'"/>
     <script>
         $(document).ready(function () {
+            var insertFileText = @json(__('Insert File'));
 
-            $('.summernote').summernote({
-                height: 250,   //set editable area's height
-                codemirror: { // codemirror options
-                    theme: 'monokai'
-                },
-                callbacks: {
-                    onChange: function(contents, $editable) {
-                        let finalContenat =  iFrameFilterInSummernote(contents);
-                        
-                        $(this).prev('input').val(finalContenat);
+            function syncClassicEditorContent(editor, contents) {
+                let finalContent = typeof iFrameFilterInSummernote === 'function' ?
+                    iFrameFilterInSummernote(contents) :
+                    contents;
+
+                $(editor).prev('input').val(finalContent);
+            }
+
+            var classicEditorContext = null;
+            var classicEditorNote = null;
+
+            function escapeClassicEditorHtml(text) {
+                return $('<div/>').text(text || '').html();
+            }
+
+            function classicEditorMediaMarkup(media) {
+                var title = escapeClassicEditorHtml(media.title || 'Download File');
+                var src = media.imgsrc || '';
+                var type = (media.filetype || '').toLowerCase();
+                var imageTypes = ['jpg', 'jpeg', 'png', 'webp', 'gif', 'svg'];
+                var videoTypes = ['mp4', 'webm', 'ogg', 'mov'];
+                var videoMime = type === 'mov' ? 'video/quicktime' : 'video/' + type;
+
+                if (imageTypes.indexOf(type) !== -1) {
+                    return '<p><img src="' + src + '" alt="' + title + '"></p>';
+                }
+
+                if (videoTypes.indexOf(type) !== -1) {
+                    return '<p><video controls style="max-width:100%;height:auto;"><source src="' + src + '" type="' +
+                        videoMime + '">' + title + '</video></p>';
+                }
+
+                return '<p><a href="' + src + '" target="_blank" rel="noopener">' + title + '</a></p>';
+            }
+
+            function insertClassicEditorMedia(markup) {
+                var note = classicEditorNote && classicEditorNote.length ?
+                    classicEditorNote :
+                    $('.summernote').first();
+
+                if (!note.length) {
+                    return false;
+                }
+
+                var oldContent = note.summernote('code') || '';
+
+                if (classicEditorContext) {
+                    try {
+                        classicEditorContext.invoke('editor.restoreRange');
+                        classicEditorContext.invoke('editor.pasteHTML', markup);
+                        classicEditorContext.invoke('editor.afterCommand');
+                    } catch (error) {
+
                     }
+                }
+
+                var newContent = note.summernote('code') || '';
+                if (newContent === oldContent) {
+                    note.summernote('code', oldContent + markup);
+                    newContent = note.summernote('code') || '';
+                }
+
+                syncClassicEditorContent(note, newContent);
+                return true;
+            }
+
+            $(document).on('click', '.media_upload_modal_submit_btn', function (e) {
+                if (!$('#media_upload_modal').is('[data-classic-editor-insert]')) {
+                    return;
+                }
+
+                e.preventDefault();
+                e.stopImmediatePropagation();
+
+                var selectedMedia = $('.media-uploader-image-list li.selected').first();
+                if (!selectedMedia.length) {
+                    selectedMedia = $('.media-uploader-image-list li').first();
+                }
+
+                if (!selectedMedia.length) {
+                    return;
+                }
+
+                if (insertClassicEditorMedia(classicEditorMediaMarkup(selectedMedia.data()))) {
+                    $('#media_upload_modal').removeAttr('data-classic-editor-insert').modal('hide');
                 }
             });
 
-            if($('.nice-select').length > 0){
-                $('.nice-select').niceSelect();
+            $('#media_upload_modal').on('hidden.bs.modal', function () {
+                $(this).removeAttr('data-classic-editor-insert');
+            });
+
+            function openClassicEditorMediaModal(context) {
+                classicEditorContext = context;
+                classicEditorNote = $(context.layoutInfo.note);
+                classicEditorContext.invoke('editor.saveRange');
+
+                var modal = $('#media_upload_modal');
+                modal.attr('data-classic-editor-insert', 'true');
+                modal.find('.modal-title').text(insertFileText);
+                modal.find('.media_upload_modal_submit_btn').text(insertFileText).show();
+                modal.modal('show');
+                modal.find('a[href="#media_library"]').tab('show');
+                $('#load_all_media_images').trigger('click');
             }
-            if($('.summernote').length > 0){
-                $('.summernote').each(function(index,value){
+
+            $('.summernote').summernote({
+                disableDragAndDrop: true,
+                height: 400,
+                codeviewFilter: false,
+                codeviewIframeFilter: false,
+                buttons: {
+                    classicfile: function (context) {
+                        var ui = $.summernote.ui;
+
+                        return ui.button({
+                            className: 'note-btn-classic-file',
+                            contents: '<i class="fas fa-paperclip"></i>',
+                            tooltip: insertFileText,
+                            click: function () {
+                                openClassicEditorMediaModal(context);
+                            }
+                        }).render();
+                    }
+                },
+                toolbar: [
+                    ['style', ['style']],
+                    ['font', ['bold', 'italic', 'underline', 'strikethrough', 'superscript', 'subscript',
+                        'clear'
+                    ]],
+                    ['fontname', ['fontname']],
+                    ['fontsize', ['fontsize']],
+                    ['color', ['color']],
+                    ['para', ['ul', 'ol', 'paragraph']],
+                    ['height', ['height']],
+                    ['table', ['table']],
+                    ['insert', ['link', 'picture', 'video', 'classicfile', 'hr']],
+                    ['history', ['undo', 'redo']],
+                    ['view', ['fullscreen', 'codeview', 'help']],
+                ],
+                styleTags: [
+                    'p',
+                    {
+                        title: 'Blockquote',
+                        tag: 'blockquote',
+                        className: 'blockquote',
+                        value: 'blockquote'
+                    },
+                    'pre', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'
+                ],
+                codemirror: {
+                    theme: 'default',
+                    mode: 'text/html',
+                    lineNumbers: true,
+                    lineWrapping: true
+                },
+                callbacks: {
+                    onChange: function (contents, $editable) {
+                        syncClassicEditorContent(this, contents);
+                    },
+                    onChangeCodeview: function (contents, $editable) {
+                        syncClassicEditorContent(this, contents);
+                    },
+                    onBlurCodeview: function (contents, $editable) {
+                        syncClassicEditorContent(this, contents);
+                    }
+                }
+            });
+            if ($('.summernote').length > 0) {
+                $('.summernote').each(function (index, value) {
                     $(this).summernote('code', $(this).data('content'));
                 });
+            }
+
+            if ($('.nice-select').length > 0) {
+                $('.nice-select').niceSelect();
             }
 
             $('.publish-date-picker').datepicker({
@@ -173,20 +330,36 @@
                 orientation: 'bottom'
             });
 
-            $(document).on('change','#language',function (e) {
+            $(document).on('click', '.note-btn-classic-file', function (e) {
+                if ($('#media_upload_modal').is('[data-classic-editor-insert]')) {
+                    return;
+                }
+
+                var note = $(this).closest('.note-editor').prev('.summernote');
+                var context = note.data('summernote');
+
+                if (!context) {
+                    return;
+                }
+
+                e.preventDefault();
+                openClassicEditorMediaModal(context);
+            });
+
+            $(document).on('change', '#language', function (e) {
                 e.preventDefault();
                 var selectedLang = $(this).val();
                 $.ajax({
-                    url : "{{route('admin.work.category.by.slug')}}",
+                    url: "{{route('admin.work.category.by.slug')}}",
                     type: "POST",
                     data: {
-                        _token : "{{csrf_token()}}",
+                        _token: "{{csrf_token()}}",
                         lang: selectedLang
                     },
-                    success:function (data) {
+                    success: function (data) {
                         $('#category').html('');
-                        $.each(data,function (index,value) {
-                            $('#category').append('<option value="'+value.id+'">'+value.name+'</option>');
+                        $.each(data, function (index, value) {
+                            $('#category').append('<option value="' + value.id + '">' + value.name + '</option>');
                             $('.nice-select').niceSelect('update');
                         });
                     }
@@ -195,6 +368,5 @@
         });
     </script>
     <script src="{{asset('assets/backend/js/dropzone.js')}}"></script>
-    <script src="{{asset('assets/backend/js/bootstrap-tagsinput.js')}}"></script>
     @include('backend.partials.media-upload.media-js')
 @endsection
