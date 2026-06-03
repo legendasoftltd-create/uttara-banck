@@ -192,10 +192,17 @@
                             <li><a href="{{ route('frontend.tender') }}">Tender</a></li>
                         </ul>
                     </li>
+
                     <li class="has-dropdown">
                         <a href="#" class="dropdown-toggle">Others</a>
                         <ul class="sub-menu">
-                            <li><a href="#">Interest Rate</a></li>
+                            <li class="has-dropdown">
+                                <a href="#" class="dropdown-toggle">Interest</a>
+                                <ul class="sub-menu">
+                                    <li><a href="#">Interest Rate for Loan Products</a></li>
+                                    <li><a href="#">Interest Rate Deposit Products</a></li>
+                                </ul>
+                            </li>
                             <li><a href="#">e-GP</a></li>
                             <li><a href="#">Eligible Capital</a></li>
                             <li><a href="#">Tax Return Notice</a></li>
@@ -204,6 +211,7 @@
                             <li><a href="#">Cautionary Notice</a></li>
                         </ul>
                     </li>
+
                     <li><a href="{{ route('frontend.locations') }}">Our Location</a></li>
                     <li><a href="https://ibanking.uttarabank-bd.com/iBankUltimus/LoginUI.aspx">iBanking</a></li>
                     <li><a href="https://play.google.com/store/apps/details?id=com.uttarabank.ublmobile">Uttara
@@ -223,5 +231,29 @@
                 </ul>
             </div>
             <div class="overlay" id="overlay"></div>
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    var sideMenu = document.getElementById('sideMenu');
+                    if (!sideMenu) return;
+
+                    sideMenu.querySelectorAll('.has-dropdown > .sub-menu').forEach(function (submenu) {
+                        submenu.style.display = 'none';
+                    });
+
+                    sideMenu.querySelectorAll('.dropdown-toggle').forEach(function (toggle) {
+                        toggle.addEventListener('click', function (event) {
+                            event.preventDefault();
+                            var parent = toggle.closest('.has-dropdown');
+                            if (!parent) return;
+
+                            var submenu = parent.querySelector(':scope > .sub-menu');
+                            if (!submenu) return;
+
+                            var isOpen = parent.classList.toggle('open');
+                            submenu.style.display = isOpen ? 'block' : 'none';
+                        });
+                    });
+                });
+            </script>
         <!-- Navbar End-->
 </div>
