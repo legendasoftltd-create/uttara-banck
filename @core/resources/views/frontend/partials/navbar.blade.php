@@ -208,7 +208,7 @@
                             <li><a href="https://uttaradev.blocknots.com/tax-return-notice">Tax Return Notice</a></li>
                             <li><a href="https://uttaradev.blocknots.com/code-of-conduct">Code of Conduct</a></li>
                             <li><a href="https://uttaradev.blocknots.com/financial-literacy">Financial Literacy</a></li>
-                            <li><a href="#">Cautionary Notice</a></li>
+                            <li><a href="https://uttaradev.blocknots.com/cautionary-notice">Cautionary Notice</a></li>
                         </ul>
                     </li>
 

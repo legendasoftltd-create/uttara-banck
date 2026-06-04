@@ -563,6 +563,7 @@ Route::group(['middleware' => ['setlang:frontend', 'globalVariable', 'maintains_
     Route::post('/request-estimate', 'FrontendFormController@send_estimate_message')->name('frontend.estimate.message');
     Route::get('/home/{id}', 'FrontendController@home_page_change')->name('frontend.homepage.demo');
     Route::post('/contact-submit', 'FrontendController@contact_form_submit')->name('contact-submit');
+    Route::get('/loan-calculator', 'FrontendController@loan_calculator')->name('loan.calculator');
 
 });
 

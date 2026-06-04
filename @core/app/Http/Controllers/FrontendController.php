@@ -754,6 +754,11 @@ ITEM;
         return redirect()->back();
     }
 
+    public function loan_calculator()
+    {
+        return view('frontend.pages.loan-calculator.loan-calculator');
+    }
+
 
     public function flutterwave_pay_get()
     {
