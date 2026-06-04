@@ -73,7 +73,7 @@
                         <td class="text-center">{{ $data->created_at->format('Y-m-d') }}</td>
                         <td>{{ $data->title }}</td>
                         @php $file_details = get_attachment_image_by_id($data->image, 'full'); @endphp
-                        <td class="text-center"><a href="{{ $file_details['img_url'] }}" class="btn btn-view"
+                        <td class="text-center"><a href="{{ !empty($file_details) ? ($file_details['img_url'] ?? '') : '' }}" class="btn btn-view"
                                 data-toggle="modal" data-target="#open-file-{{ $data->id }}">View</a></td>
                         <!-- Modal -->
                         <div class="modal fade" id="open-file-{{ $data->id }}" tabindex="-1" role="dialog"
@@ -88,13 +88,15 @@
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
-                                    <div class="modal-body">
-                                        <embed src="{{ $file_details['img_url'] }}" type="application/pdf" width="100%"
+                                    <div class="modal-body"> 
+                                        <embed src="{{ !empty($file_details) ? ($file_details['img_url'] ?? '') : '' }}" type="application/pdf" width="100%"
                                             height="600px">
+                                            
+                                        
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                        <a href="{{ $file_details['img_url'] }}" type="button" class="btn btn-view"
+                                        <a href="{{ !empty($file_details) ? ($file_details['img_url'] ?? '') : '' }}" type="button" class="btn btn-view"
                                             download>Save changes</a>
                                     </div>
                                 </div>

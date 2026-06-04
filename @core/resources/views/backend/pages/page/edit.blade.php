@@ -66,7 +66,7 @@
 
 
                             <div
-                                class="form-group classic-editor-wrapper @if(!empty($page_post->page_builder_status)) d-none @endif ">
+                                class="form-group classic-editor-wrapper">
                                 <label>{{__('Content')}}</label>
                                 <input type="hidden" name="page_content" value="{{$page_post->content}}">
                                 <div class="summernote"
@@ -129,9 +129,7 @@
 <x-backend.auto-slug-js :url="route('admin.page.slug.check')" :type="'update'" />
 <script>
     $(document).ready(function() {
-        var insertFileText = {
-            !!json_encode(__('Insert File')) !!
-        };
+        var insertFileText = {!! json_encode(__('Insert File')) !!};
 
         let page_builder = '{{$page_post->page_builder_status}}';
         let breadcrumb = '{{$page_post->breadcrumb_status}}';

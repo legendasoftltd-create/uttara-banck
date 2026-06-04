@@ -532,6 +532,17 @@ Route::group(['middleware' => ['setlang:frontend', 'globalVariable', 'maintains_
     Route::get('/' . $price_plan_page_slug . '/{id}', 'FrontendController@plan_order')->name('frontend.plan.order');
     Route::get('/' . $video_gallery_page_slug . '', 'FrontendController@video_gallery_page')->name('frontend.video.gallery');
 
+    
+    /*------------------------------------
+    IMAGE GALLERY ROUTES
+------------------------------------*/
+
+
+    Route::get('/' . $image_gallery_page_slug . '/filter', 'FrontendController@image_gallery_filter')
+        ->name('frontend.image.gallery.filter');
+
+    
+
     //user login
     Route::get('/login', 'Auth\LoginController@showLoginForm')->name('user.login');
     Route::post('/ajax-login', 'FrontendController@ajax_login')->name('user.ajax.login');
@@ -551,6 +562,9 @@ Route::group(['middleware' => ['setlang:frontend', 'globalVariable', 'maintains_
     Route::post('/request-quote', 'FrontendFormController@send_quote_message')->name('frontend.quote.message');
     Route::post('/request-estimate', 'FrontendFormController@send_estimate_message')->name('frontend.estimate.message');
     Route::get('/home/{id}', 'FrontendController@home_page_change')->name('frontend.homepage.demo');
+    Route::post('/contact-submit', 'FrontendController@contact_form_submit')->name('contact-submit');
+    Route::get('/loan-calculator', 'FrontendController@loan_calculator')->name('loan.calculator');
+
 });
 
 

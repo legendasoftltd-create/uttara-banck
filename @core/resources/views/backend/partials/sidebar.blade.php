@@ -183,9 +183,9 @@
                                 <li class="{{active_menu('admin-home/gallery-page/category')}}">
                                     <a href="{{route('admin.gallery.category')}}" >{{__('Category')}}</a>
                                 </li>
-                                {{-- <li class="{{active_menu('admin-home/gallery-page/page-settings')}}">
+                                 <li class="{{active_menu('admin-home/gallery-page/page-settings')}}">
                                     <a href="{{route('admin.gallery.page.settings')}}" >{{__('Page Settings')}}</a>
-                                </li> --}}
+                                </li>
                             </ul>
                         </li>
                     @endif
@@ -231,13 +231,13 @@
                         <a href="{{route('admin.faq')}}" aria-expanded="true"><i class="ti-control-forward"></i>
                             <span>{{__('Faq')}}</span></a>
                     </li>
-                    @endif
+                    @endif--}}
                     @if(check_page_permission_by_string('Brand Logos'))
                     <li class="main_dropdown {{active_menu('admin-home/brands')}}">
                         <a href="{{route('admin.brands')}}" aria-expanded="true"><i class="ti-control-forward"></i>
                             <span>{{__('Brand Logos')}}</span></a>
                     </li>
-                    @endif --}}
+                    @endif 
                     @if(check_page_permission_by_string('Team Members'))
                     <li class="main_dropdown {{active_menu('admin-home/team-member')}}">
                         <a href="{{route('admin.team.member')}}" aria-expanded="true"><i class="ti-control-forward"></i>
@@ -1759,16 +1759,16 @@
                                         href="{{route('admin.general.seo.settings')}}">{{__('SEO Settings')}}</a></li>
                             <li class="{{active_menu('admin-home/general-settings/scripts')}}"><a
                                         href="{{route('admin.general.scripts.settings')}}">{{__('Third Party Scripts')}}</a>
-                            </li>
+                            </li> 
                             <li class="{{active_menu('admin-home/general-settings/email-template')}}"><a
                                         href="{{route('admin.general.email.template')}}">{{__('Email Template')}}</a>
                             </li>
                             <li class="{{active_menu('admin-home/general-settings/email-settings')}}"><a
                                         href="{{route('admin.general.email.settings')}}">{{__('Email Messages Settings')}}</a>
-                            </li>
+                            </li> --}}
                             <li class="{{active_menu('admin-home/general-settings/smtp-settings')}}"><a
                                         href="{{route('admin.general.smtp.settings')}}">{{__('SMTP Settings')}}</a>
-                            </li> --}}
+                            </li>
                            {{-- <li class="{{active_menu('admin-home/general-settings/regenerate-image')}}"><a
                                        href="{{route('admin.general.regenerate.thumbnail')}}">{{__('Regenerate Media Image')}}</a>
                            </li> --}}
