@@ -199,15 +199,15 @@
                             <li class="has-dropdown">
                                 <a href="#" class="dropdown-toggle">Interest</a>
                                 <ul class="sub-menu">
-                                    <li><a href="#">Interest Rate for Loan Products</a></li>
-                                    <li><a href="#">Interest Rate Deposit Products</a></li>
+                                    <li><a href="https://uttaradev.blocknots.com/case-study/interest-rate-for-loan-products">Interest Rate for Loan Products</a></li>
+                                    <li><a href="https://uttaradev.blocknots.com/case-study/interest-rate-deposit-products">Interest Rate Deposit Products</a></li>
                                 </ul>
                             </li>
-                            <li><a href="#">e-GP</a></li>
-                            <li><a href="#">Eligible Capital</a></li>
-                            <li><a href="#">Tax Return Notice</a></li>
-                            <li><a href="#">Code of Conduct</a></li>
-                            <li><a href="#">Financial Literacy</a></li>
+                            <li><a href="https://uttaradev.blocknots.com/branches-of-uttara-bank-limited-enlisted-for-e-gp">e-GP</a></li>
+                            <li><a href="https://uttaradev.blocknots.com/eligible-capital">Eligible Capital</a></li>
+                            <li><a href="https://uttaradev.blocknots.com/tax-return-notice">Tax Return Notice</a></li>
+                            <li><a href="https://uttaradev.blocknots.com/code-of-conduct">Code of Conduct</a></li>
+                            <li><a href="https://uttaradev.blocknots.com/financial-literacy">Financial Literacy</a></li>
                             <li><a href="#">Cautionary Notice</a></li>
                         </ul>
                     </li>
