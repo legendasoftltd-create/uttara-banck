@@ -154,7 +154,7 @@
         color: #188c47;
     }
 
-    .loan-calculator-actions {
+    .deposit-calculator-actions {
         display: flex;
         gap: 10px;
         align-items: center;
@@ -243,7 +243,7 @@
                 </div>
 
                 <!-- Buttons -->
-                <div class="loan-calculator-actions">
+                <div class="deposit-calculator-actions">
                     <button
                         type="button"
                         id="calculateBtn"

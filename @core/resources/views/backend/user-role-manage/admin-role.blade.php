@@ -50,6 +50,7 @@
         "Support Tickets",
         "Email Templates",
         "Locations Manage",
+        "Exchange Rate Manage",
     );
 @endphp
 

@@ -1779,6 +1779,19 @@ Route::prefix('admin-home')->middleware(['setlang:backend'])->group(function () 
     });
 
     /*==============================================
+      EXCHANGE RATE ROUTES
+    ==============================================*/
+    Route::prefix('exchange-rate')->middleware(['adminPermissionCheck:Exchange Rate Manage'])->group(function () {
+        Route::get('/', 'ExchangeRateController@index')->name('admin.exchange.rate.all');
+        Route::get('/new', 'ExchangeRateController@create')->name('admin.exchange.rate.new');
+        Route::post('/new', 'ExchangeRateController@store')->name('admin.exchange.rate.store');
+        Route::get('/edit/{id}', 'ExchangeRateController@edit')->name('admin.exchange.rate.edit');
+        Route::post('/update/{id}', 'ExchangeRateController@update')->name('admin.exchange.rate.update');
+        Route::post('/delete/{id}', 'ExchangeRateController@delete')->name('admin.exchange.rate.delete');
+        Route::post('/bulk-action', 'ExchangeRateController@bulk_action')->name('admin.exchange.rate.bulk.action');
+    });
+
+    /*==============================================
       PAGES ROUTES
     ==============================================*/
     Route::prefix('page')->middleware(['adminPermissionCheck:Pages Manage'])->group(function () {

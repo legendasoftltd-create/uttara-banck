@@ -58,6 +58,7 @@
                         </ul>
                     </li>
                     @endif
+                    
                     @if(check_page_permission_by_string('Newsletter Manage'))
                     <li
                         class="main_dropdown @if(request()->is(['admin-home/newsletter/*','admin-home/newsletter'])) active @endif
@@ -633,6 +634,19 @@
                                     </ul>
                                 </li>
                             @endif
+
+                            
+                            @if(check_page_permission_by_string('exchange_rate') || check_page_permission_by_string('Exchange Rate Manage'))
+                                <li class="main_dropdown {{active_menu('admin-home/exchange-rate')}} @if(request()->is('admin-home/exchange-rate/*')) active @endif">
+                                    <a href="javascript:void(0)" aria-expanded="true"><i class="ti-money"></i> {{__('Exchange Rates')}}</a>
+                                    <ul class="collapse">
+                                        <li class="{{active_menu('admin-home/exchange-rate')}}"><a href="{{route('admin.exchange.rate.all')}}">{{__('All Exchange Rates')}}</a></li>
+                                        <li class="{{active_menu('admin-home/exchange-rate/new')}}"><a href="{{route('admin.exchange.rate.new')}}">{{__('Add New Exchange Rate')}}</a></li>
+                                    </ul>
+                                </li>
+                            @endif
+
+
                             @if(check_page_permission_by_string('Tender Manage'))
                                 <li class="main_dropdown {{active_menu('admin-home/tender')}} @if(request()->is('admin-home/tender/*')) active @endif">
                                     <a href="javascript:void(0)" aria-expanded="true"><i class="ti-file"></i> {{__('Tender')}}</a>

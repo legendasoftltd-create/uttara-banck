@@ -756,7 +756,7 @@ ITEM;
 
     public function loan_calculator()
     {
-        return view('frontend.pages.loan-calculator.loan-calculator');
+        return view('frontend.pages.deposit-calculator.deposit-calculator');
     }
 
 

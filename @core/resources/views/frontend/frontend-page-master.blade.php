@@ -48,7 +48,7 @@
             </div>
         </div>
         <!-- floating calculator widget -->
-        <a href="{{ route('loan.calculator') }}" class="calculator-widget">
+        <a href="{{ route('deposit.calculator') }}" class="calculator-widget">
             <div class="calc-tooltip">Deposit Calculator</div>
             <div class="calc-icon-container">
                 <img style="width: 35px;height: 50px;" src="{{ asset('assets/frontend/assets/images/icon/calculator.png') }}" alt="Calculator Icon" width="57"
