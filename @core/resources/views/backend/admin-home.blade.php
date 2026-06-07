@@ -24,6 +24,19 @@
                         </div>
                     </div>
                 @endif
+                    <div class="col-md-3 mt-5 mb-3">
+                        <div class="card text-dark mb-3">
+                            <div class="dsh-box-style">
+                                <div class="icon">
+                                    <i class="ti-eye"></i>
+                                </div>
+                                <div class="content">
+                                    <span class="total">{{$total_visitor}}</span>
+                                    <h4 class="title">{{__('Total Visitor')}}</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 @if(check_page_permission_by_string('News Manage'))
                     <div class="col-md-3 mt-md-5 mb-3">
                         <div class="card text-dark  mb-3">

@@ -124,6 +124,7 @@
                             <a class="text-[#012C60] font-medium" href="mailto:{{get_static_option('site_footer_contact_email')}}">{{get_static_option('site_footer_contact_email')}}</a>
                         </p>
                     @endif
+                    <p class="text-[#012C60] font-light md:text-base">{{__('Total Visitor')}}: {{number_format(\App\Visitor::count())}}</p>
                 </div>
                 <div class="footer-social mt-3" data-aos="fade-up" data-aos-duration="5000">
                     @foreach($all_social_item as $data)
