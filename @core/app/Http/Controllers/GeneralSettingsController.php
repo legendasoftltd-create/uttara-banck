@@ -252,6 +252,51 @@ class GeneralSettingsController extends Controller
         return redirect()->back()->with(['msg' => __('GDPR Cookie Settings Updated..'), 'type' => 'success']);
     }
 
+    public function footer_settings()
+    {
+        $all_languages = Language::all();
+        return view('backend.general-settings.footer-settings')->with(['all_languages' => $all_languages]);
+    }
+
+    public function update_footer_settings(Request $request)
+    {
+        $this->validate($request, [
+            'site_footer_contact_phone' => 'nullable|string|max:191',
+            'site_footer_contact_email' => 'nullable|string|max:191',
+        ]);
+
+        update_static_option('site_footer_contact_phone', $request->site_footer_contact_phone);
+        update_static_option('site_footer_contact_email', $request->site_footer_contact_email);
+
+        $all_language = Language::all();
+
+        $repeater_groups = ['footer_column_one_link_item', 'footer_column_two_link_item'];
+
+        foreach ($all_language as $lang) {
+            $this->validate($request, [
+                'site_' . $lang->slug . '_footer_address' => 'nullable|string',
+                'site_' . $lang->slug . '_footer_contact_label' => 'nullable|string',
+            ]);
+
+            update_static_option('site_' . $lang->slug . '_footer_address', $request->{'site_' . $lang->slug . '_footer_address'});
+            update_static_option('site_' . $lang->slug . '_footer_contact_label', $request->{'site_' . $lang->slug . '_footer_contact_label'});
+
+            foreach ($repeater_groups as $group) {
+                $title_field = $group . '_' . $lang->slug . '_title';
+                $value = $request->$title_field ?? [];
+                update_static_option($title_field, serialize($value));
+            }
+        }
+
+        foreach ($repeater_groups as $group) {
+            $url_field = $group . '_url';
+            $value = $request->$url_field ?? [];
+            update_static_option($url_field, serialize($value));
+        }
+
+        return redirect()->back()->with(['msg' => __('Footer Settings Updated..'), 'type' => 'success']);
+    }
+
     public function cache_settings()
     {
         return view('backend.general-settings.cache-settings');

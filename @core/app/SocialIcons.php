@@ -7,5 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 class SocialIcons extends Model
 {
     protected $table = 'social_icons';
-    protected $fillable = ['icon','url'];
+    protected $fillable = ['icon','name','url'];
 }

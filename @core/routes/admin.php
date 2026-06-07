@@ -2198,6 +2198,12 @@ Route::prefix('admin-home')->middleware(['setlang:backend'])->group(function () 
         Route::post('/gdpr-settings', 'GeneralSettingsController@update_gdpr_cookie_settings');
 
         /*----------------------------------------------------
+         FOOTER SETTINGS
+        ----------------------------------------------------*/
+        Route::get('/footer-settings', 'GeneralSettingsController@footer_settings')->name('admin.general.footer.settings');
+        Route::post('/footer-settings', 'GeneralSettingsController@update_footer_settings');
+
+        /*----------------------------------------------------
          UPDATE SETTINGS
         ----------------------------------------------------*/
         Route::get('/update-script', 'ScriptUpdateController@index')->name('admin.general.script.update');

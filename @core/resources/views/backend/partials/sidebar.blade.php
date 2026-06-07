@@ -1621,7 +1621,7 @@
                         <a href="javascript:void(0)" aria-expanded="true"><i class="ti-settings"></i>
                             <span>{{__('Appearance Settings')}}</span></a>
                         <ul class="collapse ">
-                            {{-- @if(check_page_permission_by_string('Topbar Settings'))
+                            @if(check_page_permission_by_string('Topbar Settings'))
                                 <li class="{{active_menu('admin-home/appearance-setting/topbar-settings')}}">
                                     <a href="{{route('admin.topbar.settings')}}"
                                        aria-expanded="true">
@@ -1630,7 +1630,7 @@
                                 </li>
                             @endif
 
-                            @if(check_page_permission_by_string('Home Variant'))
+                            {{-- @if(check_page_permission_by_string('Home Variant'))
                                 <li class="{{active_menu('admin-home/appearance-setting/navbar-variant/settings')}}">
                                     <a href="{{route('admin.navbar.settings')}}"
                                        aria-expanded="true">
@@ -1802,8 +1802,11 @@
                             </li>
                             <li class="{{active_menu('admin-home/general-settings/gdpr-settings')}}"><a
                                         href="{{route('admin.general.gdpr.settings')}}">{{__('GDPR Compliant Cookies Settings')}}</a>
+                            </li> --}}
+                            <li class="{{active_menu('admin-home/general-settings/footer-settings')}}"><a
+                                        href="{{route('admin.general.footer.settings')}}">{{__('Footer Settings')}}</a>
                             </li>
-                            <li class="{{active_menu('admin-home/general-settings/preloader-settings')}}"><a
+                            {{-- <li class="{{active_menu('admin-home/general-settings/preloader-settings')}}"><a
                                     href="{{route('admin.general.preloader.settings')}}">{{__('Preloader Settings')}}</a>
                             </li>
                             <li class="{{active_menu('admin-home/general-settings/popup-settings')}}"><a

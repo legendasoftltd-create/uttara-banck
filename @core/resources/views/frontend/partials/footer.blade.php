@@ -106,78 +106,63 @@
         <div class="footer-wrap">
             <div style="opacity: 1; transform: none; grid-column: span 3 / span 3;">
                 <h3 class="text-[#012C60] font-bold leading-4 text-base mb-4" data-aos="fade-up"
-                    data-aos-duration="2000">Address</h3>
+                    data-aos-duration="2000">{{__('Address')}}</h3>
                 <div data-aos="fade-up" data-aos-duration="2000"
                     class="text-sm font-extralight sm:text-base sm:leading-[23px] text-[#637D92]">
-                    <p class="font-light">Uttara Bank
-                        PLC Dhaka 1212</p>
-                    <p class="font-light mt-2">24/7 Call
-                        Center <a class="text-[#012C60] font-medium &quot;" href="tel:16645">16645</a></p>
+                    @if(!empty(get_static_option('site_'.get_user_lang().'_footer_address')))
+                        <p class="font-light">{!! nl2br(e(get_static_option('site_'.get_user_lang().'_footer_address'))) !!}</p>
+                    @endif
+                    @if(!empty(get_static_option('site_'.get_user_lang().'_footer_contact_label')) || !empty(get_static_option('site_footer_contact_phone')))
+                        <p class="font-light mt-2">{{get_static_option('site_'.get_user_lang().'_footer_contact_label')}}
+                            @if(!empty(get_static_option('site_footer_contact_phone')))
+                                <a class="text-[#012C60] font-medium" href="tel:{{get_static_option('site_footer_contact_phone')}}">{{get_static_option('site_footer_contact_phone')}}</a>
+                            @endif
+                        </p>
+                    @endif
+                    @if(!empty(get_static_option('site_footer_contact_email')))
+                        <p class="font-light mt-2">
+                            <a class="text-[#012C60] font-medium" href="mailto:{{get_static_option('site_footer_contact_email')}}">{{get_static_option('site_footer_contact_email')}}</a>
+                        </p>
+                    @endif
                 </div>
                 <div class="footer-social mt-3" data-aos="fade-up" data-aos-duration="5000">
-                    {{-- <a target="_blank" aria-label="social icon 1" href="https://www.facebook.com/UttaraBankPLC/">
-                        <img alt="social icon" loading="lazy" width="24" height="24" decoding="async"
-                            data-nimg="1" class style="color:transparent"
-                            src="https://brackweb.s3.ap-southeast-1.amazonaws.com/uploads/all/facebook683e92811d513.png">
-                    </a>
-                    <a target="_blank" aria-label="social icon 4" href="https://www.youtube.com/@uttarabankbdplc">
-                        <img alt="social icon" loading="lazy" width="24" height="24" decoding="async"
-                            data-nimg="1" class style="color:transparent"
-                            src="https://brackweb.s3.ap-southeast-1.amazonaws.com/uploads/all/youtube683e9326e1f06.png">
-                    </a> --}}
                     @foreach($all_social_item as $data)
-                                    <li><a href="{{$data->url}}" rel="canonical"><i class="{{$data->icon}}"></i></a></li>
+                                    <li><a href="{{$data->url}}" target="_blank" rel="noopener noreferrer canonical" aria-label="{{$data->name}}" title="{{$data->name}}"><i class="{{$data->icon}}"></i></a></li>
                                 @endforeach
                 </div>
             </div>
             <div class="footer-menu" style="opacity: 1; transform: none;">
-                <div data-aos="fade-up" data-aos-duration="3000">
-                    <!-- <h3 class="text-[#012C60] font-bold leading-4 text-base mb-4">Important Menu</h3> -->
-                    <ul class="space-y-2 p-0">
-                        <li>
-                            <a aria-label="Contact Us"
-                                class="text-[#637D92] sm:font-light hover:underline text-sm font-extralight sm:text-base sm:leading-[23px]"
-                                href="#">Contact
-                                Us</a>
-                        </li>
-                        <li>
-                            <a aria-label="Career"
-                                class="text-[#637D92] sm:font-light hover:underline text-sm font-extralight sm:text-base sm:leading-[23px]"
-                                href="#">Career</a>
-                        </li>
-                        <li>
-                            <a aria-label="Financial Literacy" class="text-[#637D92] sm:font-light hover:underline text-sm font-extralight sm:text-base sm:leading-[23px]" href="#">Financial Literacy</a>
-                        </li>
-                        <li>
-                            <a aria-label="CSR" class="text-[#637D92] sm:font-light hover:underline text-sm font-extralight sm:text-base sm:leading-[23px]" href="/useful-links"> Useful Link </a>
-                        </li>
-                    </ul>
-                </div>
-                <div data-aos="fade-up" data-aos-duration="4000">
-                    <!-- <h3 class="text-[#012C60] font-bold leading-4 text-base mb-4"> Footer Menu</h3> -->
-                    <ul class="space-y-2 p-0">
-                        <li>
-                            <a aria-label="About Us"
-                                class="text-[#637D92] sm:font-light hover:underline text-sm font-extralight sm:text-base sm:leading-[23px]"
-                                href="#">About Us</a>
-                        </li>
-                        <li>
-                            <a aria-label="Investor Relations"
-                                class="text-[#637D92] sm:font-light hover:underline text-sm font-extralight sm:text-base sm:leading-[23px]"
-                                href="/tender">Tender</a>
-                        </li>
-                        <li>
-                            <a aria-label="Exchange Rates"
-                                class="text-[#637D92] sm:font-light hover:underline text-sm font-extralight sm:text-base sm:leading-[23px]"
-                                href="/service/exchange-rate">Exchange Rates</a>
-                        </li>
-                        <li>
-                            <a aria-label="Risk Based Capital"
-                                class="text-[#637D92] sm:font-light hover:underline text-sm font-extralight sm:text-base sm:leading-[23px]"
-                                href="/case-study/category/20/Disclosures%20on%20Risk%20Based%20Capital">Risk Based Capital</a>
-                        </li>
-                    </ul>
-                </div>
+                @php
+                    $footer_link_columns = [];
+                    foreach (['footer_column_one_link_item', 'footer_column_two_link_item'] as $option_key) {
+                        $urls = get_static_option($option_key.'_url');
+                        $urls = !empty($urls) ? unserialize($urls, ['allowed_classes' => false]) : [];
+                        $titles = get_static_option($option_key.'_'.get_user_lang().'_title');
+                        $titles = !empty($titles) ? unserialize($titles, ['allowed_classes' => false]) : [];
+                        $links = [];
+                        foreach ($urls as $index => $url) {
+                            if (!empty($titles[$index]) && !empty($url)) {
+                                $links[] = ['title' => $titles[$index], 'url' => $url];
+                            }
+                        }
+                        $footer_link_columns[] = $links;
+                    }
+                @endphp
+                @foreach($footer_link_columns as $column_index => $links)
+                    @if(!empty($links))
+                        <div data-aos="fade-up" data-aos-duration="{{3000 + $column_index * 1000}}">
+                            <ul class="space-y-2 p-0">
+                                @foreach($links as $link)
+                                    <li>
+                                        <a aria-label="{{$link['title']}}"
+                                            class="text-[#637D92] sm:font-light hover:underline text-sm font-extralight sm:text-base sm:leading-[23px]"
+                                            href="{{$link['url']}}">{{$link['title']}}</a>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+                @endforeach
             </div>
             <div style="opacity: 1; transform: none;">
                 <div class="footer-subscribe" data-aos="fade-up" data-aos-duration="5000">

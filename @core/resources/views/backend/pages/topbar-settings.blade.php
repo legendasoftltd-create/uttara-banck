@@ -10,7 +10,7 @@
                 @include('backend/partials/message')
                 @include('backend/partials/error')
             </div>
-            <div class="col-lg-6 mt-t">
+            {{-- <div class="col-lg-6 mt-t">
                 <div class="card">
                     <div class="card-body">
                         <h4 class="header-title">{{__('Topbar Button Settings')}}</h4>
@@ -55,7 +55,7 @@
                         </form>
                     </div>
                 </div>
-            </div>
+            </div> --}}
             <div class="col-lg-6">
                 <div class="card">
                     <div class="card-body">
@@ -65,6 +65,7 @@
                             <thead>
                             <th>{{__('ID')}}</th>
                             <th>{{__('Icon')}}</th>
+                            <th>{{__('Name')}}</th>
                             <th>{{__('URL')}}</th>
                             <th>{{__('Action')}}</th>
                             </thead>
@@ -73,6 +74,7 @@
                                 <tr>
                                     <td>{{$data->id}}</td>
                                     <td><i class="{{$data->icon}}"></i></td>
+                                    <td>{{$data->name}}</td>
                                     <td>{{$data->url}}</td>
                                     <td>
                                         <x-delete-popover :url="route('admin.delete.social.item',$data->id)"/>
@@ -82,6 +84,7 @@
                                            class="btn btn-xs btn-primary btn-sm mb-3 mr-1 social_item_edit_btn"
                                            data-id="{{$data->id}}"
                                            data-url="{{$data->url}}"
+                                           data-name="{{$data->name}}"
                                            data-icon="{{$data->icon}}"
                                         >
                                             <i class="ti-pencil"></i>
@@ -190,6 +193,10 @@
                             <input type="hidden" class="form-control"  id="icon" value="fas fa-exclamation-triangle" name="icon">
                         </div>
                         <div class="form-group">
+                            <label for="social_item_name">{{__('Name')}}</label>
+                            <input type="text" name="name" id="social_item_name"  class="form-control" placeholder="{{__('e.g. Facebook')}}">
+                        </div>
+                        <div class="form-group">
                             <label for="social_item_link">{{__('URL')}}</label>
                             <input type="text" name="url" id="social_item_link"  class="form-control" >
                         </div>
@@ -231,6 +238,10 @@
                             <input type="hidden" class="form-control"  id="icon" value="fas fa-exclamation-triangle" name="icon">
                         </div>
                         <div class="form-group">
+                            <label for="social_item_edit_name">{{__('Name')}}</label>
+                            <input type="text" class="form-control"  id="social_item_edit_name" name="name" placeholder="{{__('e.g. Facebook')}}">
+                        </div>
+                        <div class="form-group">
                             <label for="social_item_edit_url">{{__('Url')}}</label>
                             <input type="text" class="form-control"  id="social_item_edit_url" name="url" placeholder="{{__('Url')}}">
                         </div>
@@ -256,10 +267,12 @@
                     var el = $(this);
                     var id = el.data('id');
                     var url = el.data('url');
+                    var name = el.data('name');
                     var icon = el.data('icon');
                     var form = $('#social_item_edit_modal');
                     form.find('#social_item_id').val(id);
                     form.find('#social_item_edit_icon').val(icon);
+                    form.find('#social_item_edit_name').val(name);
                     form.find('#social_item_edit_url').val(url);
                     form.find('.icp-dd').attr('data-selected',el.data('icon'));
                     form.find('.iconpicker-component i').attr('class',el.data('icon'));
