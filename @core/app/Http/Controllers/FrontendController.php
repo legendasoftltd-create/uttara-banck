@@ -15,6 +15,7 @@ use App\EventPaymentLogs;
 use App\Events;
 use App\EventsCategory;
 use App\Facades\InstagramFeed;
+use App\ExchangeRate;
 use App\Faq;
 use App\Feedback;
 use App\Helpers\LanguageHelper;
@@ -759,6 +760,12 @@ ITEM;
     public function loan_calculator()
     {
         return view('frontend.pages.deposit-calculator.deposit-calculator');
+    }
+
+    public function exrate()
+    {
+        $exchange_rate = ExchangeRate::where('status', 1)->latest()->first();
+        return view('frontend.pages.exrate', compact('exchange_rate'));
     }
 
 

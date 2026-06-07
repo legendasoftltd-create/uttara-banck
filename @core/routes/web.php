@@ -564,6 +564,7 @@ Route::group(['middleware' => ['setlang:frontend', 'globalVariable', 'maintains_
     Route::get('/home/{id}', 'FrontendController@home_page_change')->name('frontend.homepage.demo');
     Route::post('/contact-submit', 'FrontendController@contact_form_submit')->name('contact-submit');
     Route::get('/deposit-calculator', 'FrontendController@loan_calculator')->name('deposit.calculator');
+    Route::get('/exrate', 'FrontendController@exrate')->name('frontend.exrate');
 
 });
 

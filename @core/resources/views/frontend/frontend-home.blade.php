@@ -260,7 +260,7 @@
                             </tbody>
                         </table>
                         <span style="padding-left: 70px;">
-                            <a href="#" target="_blank">View
+                            <a href="{{ route('frontend.exrate') }}" target="_blank">View
                                 complete
                                 list</a>
                         </span>
