@@ -1,6 +1,6 @@
 @extends('backend.admin-master')
 @section('site-title')
-    {{__('Brand Settings')}}
+    {{__('Our Achievement')}}
 @endsection
 @section('style')
     <link rel="stylesheet" href="{{asset('assets/backend/css/dropzone.css')}}">
@@ -39,7 +39,7 @@
             <div class="col-lg-6 mt-5">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="header-title">{{__('All Brand Items')}}</h4>
+                        <h4 class="header-title">{{__('All Achievement Items')}}</h4>
                         <div class="bulk-delete-wrapper">
                             <div class="select-box-wrap">
                                 <select name="bulk_option" id="bulk_option">
@@ -127,7 +127,7 @@
             <div class="col-lg-6 mt-5">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="header-title">{{__('New Brand')}}</h4>
+                        <h4 class="header-title">{{__('New Achievement')}}</h4>
                         <form action="{{route('admin.brands')}}" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group">
@@ -147,7 +147,7 @@
                                 <div class="media-upload-btn-wrapper">
                                     <div class="img-wrap"></div>
                                     <input type="hidden" name="image">
-                                    <button type="button" class="btn btn-info media_upload_form_btn" data-btntitle="Select Brand File" data-modaltitle="Upload Brand File" data-toggle="modal" data-target="#media_upload_modal">
+                                    <button type="button" class="btn btn-info media_upload_form_btn" data-btntitle="Select Achievement File" data-modaltitle="Upload Achievement File" data-toggle="modal" data-target="#media_upload_modal">
                                         {{__('Upload File')}}
                                     </button>
                                 </div>
@@ -165,7 +165,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">{{__('Edit Brand Item')}}</h5>
+                    <h5 class="modal-title">{{__('Edit Achievement Item')}}</h5>
                     <button type="button" class="close" data-dismiss="modal"><span>×</span></button>
                 </div>
                 <form action="{{route('admin.brands.update')}}" id="brand_edit_modal_form"  method="post" enctype="multipart/form-data">
@@ -189,7 +189,7 @@
                             <div class="media-upload-btn-wrapper">
                                 <div class="img-wrap"></div>
                                 <input type="hidden" id="edit_image" name="image" value="">
-                                <button type="button" class="btn btn-info media_upload_form_btn" data-btntitle="Select Brand File" data-modaltitle="Upload Brand File" data-toggle="modal" data-target="#media_upload_modal">
+                                <button type="button" class="btn btn-info media_upload_form_btn" data-btntitle="Select Achievement File" data-modaltitle="Upload Achievement File" data-toggle="modal" data-target="#media_upload_modal">
                                     {{__('Upload File')}}
                                 </button>
                             </div>

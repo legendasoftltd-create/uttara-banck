@@ -1609,7 +1609,7 @@ Route::prefix('admin-home')->middleware(['setlang:backend'])->group(function () 
     /*==============================================
        BRAND LOGOS
     ==============================================*/
-    Route::prefix('brands')->middleware(['adminPermissionCheck:Brand Logos'])->group(function () {
+    Route::prefix('brands')->middleware(['adminPermissionCheck:Our Achievement'])->group(function () {
         //brand logos
         Route::get('/', 'BrandController@index')->name('admin.brands');
         Route::post('/', 'BrandController@store');

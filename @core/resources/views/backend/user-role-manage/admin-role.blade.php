@@ -38,7 +38,7 @@
         "Gallery Page",
         "404 Page Manage",
         "Faq",
-        "Brand Logos",
+        "Our Achievement",
         "Price Plan",
         "Team Members",
         "Testimonial",

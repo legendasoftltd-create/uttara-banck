@@ -233,10 +233,10 @@
                             <span>{{__('Faq')}}</span></a>
                     </li>
                     @endif--}}
-                    @if(check_page_permission_by_string('Brand Logos'))
+                    @if(check_page_permission_by_string('Our Achievement'))
                     <li class="main_dropdown {{active_menu('admin-home/brands')}}">
                         <a href="{{route('admin.brands')}}" aria-expanded="true"><i class="ti-control-forward"></i>
-                            <span>{{__('Brand Logos')}}</span></a>
+                            <span>{{__('Our Achievement')}}</span></a>
                     </li>
                     @endif 
                     @if(check_page_permission_by_string('Team Members'))
