@@ -43,7 +43,6 @@
             </div>
         </div>
     </div>
-        </div>
         <!-- floating calculator widget -->
         <a href="{{ route('deposit.calculator') }}" class="calculator-widget">
             <div class="calc-tooltip">Deposit Calculator</div>
@@ -52,7 +51,6 @@
                     height="24">
             </div>
         </a>
-    </div>
 </div>
 <div class="content">
     <div class="Robi-Ad" style="line-height: 1; position: fixed; height: 140px; left: -149px;">
