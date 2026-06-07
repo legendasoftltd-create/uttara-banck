@@ -9,8 +9,9 @@
             <div class="left-head"> <span class="rotate">Exchange&nbsp;Rates</span></div>
 
             <div class="con-fild ">
+                @php $items = $exchange_rate->items ?? []; @endphp
                 <p>
-                    Thu, Oct 23, 2025 11:13 AM
+                    {{ $exchange_rate ? \Carbon\Carbon::parse($exchange_rate->updated_at)->format('D, M d, Y h:i A') : '' }}
                 </p>
                 <table class="table">
                     <thead>
@@ -21,23 +22,17 @@
                         </tr>
                     </thead>
                     <tbody>
-
+                        @forelse($items as $item)
                         <tr>
-                            <td><b>USD</b></td>
-                            <td>121.7500</td>
-                            <td>122.7500</td>
+                            <td><b>{{ $item['currency_name'] ?? '' }}</b></td>
+                            <td>{{ number_format($item['buying'] ?? 0, 2) }}</td>
+                            <td>{{ number_format($item['selling'] ?? 0, 2) }}</td>
                         </tr>
+                        @empty
                         <tr>
-                            <td><b>EUR</b></td>
-                            <td>140.6230</td>
-                            <td>143.1983</td>
+                            <td colspan="3" class="text-muted">{{__('No rates available')}}</td>
                         </tr>
-                        <tr>
-                            <td><b>GBP</b></td>
-                            <td>161.7171</td>
-                            <td>164.6996</td>
-                        </tr>
-
+                        @endforelse
                     </tbody>
                 </table>
                 <span style="padding-left: 70px;">
@@ -46,6 +41,8 @@
                         list</a>
                 </span>
             </div>
+        </div>
+    </div>
         </div>
         <!-- floating calculator widget -->
         <a href="{{ route('deposit.calculator') }}" class="calculator-widget">

@@ -125,6 +125,7 @@ class FrontendController extends Controller
         $categories = ProductCategory::all();
         $add_query = Advertisement::select('id','type','image','slot','status','redirect_url','embed_code','title')->where('status',1)->inRandomOrder()->get();
         $all_recent_blogs = Blog::where(['lang' => $lang,'status' => 'publish'])->orderBy('id', 'desc')->take(get_static_option('blog_page_recent_post_widget_item'))->get();
+        $exchange_rate = \App\ExchangeRate::where('status', 1)->latest()->first();
 
         $blade_data = [
             'static_field_data' => $static_field_data,
@@ -147,6 +148,7 @@ class FrontendController extends Controller
             'categories' => $categories,
             'add_query' => $add_query,
             'all_recent_blogs' => $all_recent_blogs,
+            'exchange_rate' => $exchange_rate,
         ];
 
         // if (in_array($home_page_variant,['10','12','16']) ){
