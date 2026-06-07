@@ -190,7 +190,7 @@
                         <div data-aos="fade-up" data-aos-duration="500" class="information-card">
                             <h3 class="h3">Important Information</h3>
                             <ul>
-                                @foreach ($all_work_category as $data)
+                                @foreach ($all_work_category->take(8) as $data)
                                     <hr style="margin-top: .5rem; margin-bottom: .5rem;">
                                     <a href="{{ route('frontend.works.category', ['id' => $data->id, 'any' => $data->name]) }}"
                                         target="_blank">
@@ -206,16 +206,18 @@
                                 <h3 class="h3">Bank Downloads</h3>
                             </a>
                             <ul>
-                                @forelse($chunk as $category)
+                                @forelse($all_download_categories->take(8) as $category)
                                     <hr style="margin-top: .5rem; margin-bottom: .5rem;">
-                                    {{-- @php
-                                                    $firstFile = is_array($download->files) ? ($download->files[0] ?? null) : null;
-                                                @endphp --}}
+
                                     <a href="{{ route('frontend.bank.downloads.category', ['id' => $category->id, 'any' => $category->title]) }}"
                                         target="_blank">
-                                        <li><i class="fa-regular fa-circle-dot"></i>
-                                            {{ $category->title }}</li>
+
+                                        <li>
+                                            <i class="fa-regular fa-circle-dot"></i>
+                                            {{ $category->title }}
+                                        </li>
                                     </a>
+
                                 @empty
                                     <li>{{ __('No downloads found') }}</li>
                                 @endforelse
