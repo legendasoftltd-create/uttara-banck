@@ -7,11 +7,13 @@ use App\Helpers\CartHelper;
 use App\Helpers\EmailTemplateHelper;
 use App\Helpers\InstagramFeedHelper;
 use App\Helpers\WishlistHelper;
+use App\ExchangeRate;
 use Illuminate\Http\Response;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\View;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -52,5 +54,10 @@ class AppServiceProvider extends ServiceProvider
         if (get_static_option('site_force_ssl_redirection') === 'on'){
             URL::forceScheme('https');
         }
+
+        View::composer('frontend.frontend-page-master', function ($view) {
+            $exchange_rate = ExchangeRate::where('status', 1)->latest()->first();
+            $view->with('exchange_rate', $exchange_rate);
+        });
     }
 }

@@ -15,6 +15,7 @@ use App\EventPaymentLogs;
 use App\Events;
 use App\EventsCategory;
 use App\Facades\InstagramFeed;
+use App\ExchangeRate;
 use App\Faq;
 use App\Feedback;
 use App\Helpers\LanguageHelper;
@@ -125,6 +126,7 @@ class FrontendController extends Controller
         $categories = ProductCategory::all();
         $add_query = Advertisement::select('id','type','image','slot','status','redirect_url','embed_code','title')->where('status',1)->inRandomOrder()->get();
         $all_recent_blogs = Blog::where(['lang' => $lang,'status' => 'publish'])->orderBy('id', 'desc')->take(get_static_option('blog_page_recent_post_widget_item'))->get();
+        $exchange_rate = \App\ExchangeRate::where('status', 1)->latest()->first();
 
         $blade_data = [
             'static_field_data' => $static_field_data,
@@ -147,6 +149,7 @@ class FrontendController extends Controller
             'categories' => $categories,
             'add_query' => $add_query,
             'all_recent_blogs' => $all_recent_blogs,
+            'exchange_rate' => $exchange_rate,
         ];
 
         // if (in_array($home_page_variant,['10','12','16']) ){
@@ -756,7 +759,13 @@ ITEM;
 
     public function loan_calculator()
     {
-        return view('frontend.pages.loan-calculator.loan-calculator');
+        return view('frontend.pages.deposit-calculator.deposit-calculator');
+    }
+
+    public function exrate()
+    {
+        $exchange_rate = ExchangeRate::where('status', 1)->latest()->first();
+        return view('frontend.pages.exrate', compact('exchange_rate'));
     }
 
 
