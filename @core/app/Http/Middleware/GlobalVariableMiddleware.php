@@ -8,6 +8,7 @@ use App\Language;
 use App\Menu;
 use App\SocialIcons;
 use App\StaticOption;
+use App\Visitor;
 use App\Widgets;
 use Closure;
 
@@ -22,6 +23,11 @@ class GlobalVariableMiddleware
      */
     public function handle($request, Closure $next)
     {
+        Visitor::firstOrCreate([
+            'ip_address' => $request->ip(),
+            'visit_date' => now()->toDateString(),
+        ]);
+
         $lang = LanguageHelper::user_lang_slug();
         $all_social_item = SocialIcons::all();
         $all_usefull_links = Menu::find(get_static_option('useful_link_'.get_user_lang().'_widget_menu_id'));

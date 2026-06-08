@@ -34,6 +34,7 @@ use App\PricePlan;
 use App\SocialIcons;
 use App\TeamMember;
 use App\Testimonial;
+use App\Visitor;
 use App\Works;
 use App\User;
 use Illuminate\Http\Request;
@@ -81,6 +82,8 @@ class AdminDashboardController extends Controller
         
         $total_appointments = Appointment::count();
         $total_appointment_booking = AppointmentBooking::where('payment_status' ,'complete')->count();
+
+        $total_visitor = Visitor::count();
         
          
         //recent 5 order of product order
@@ -112,6 +115,7 @@ class AdminDashboardController extends Controller
             'total_courses_enroll' => $total_courses_enroll,
             'total_appointments' => $total_appointments,
             'total_appointment_booking' => $total_appointment_booking,
+            'total_visitor' => $total_visitor,
         ]);
     }
     

@@ -48,10 +48,11 @@ class TopBarController extends Controller
     public function new_social_item(Request $request){
         $this->validate($request,[
            'icon' => 'required|string',
+           'name' => 'nullable|string',
            'url' => 'required|string',
         ]);
 
-        SocialIcons::create($request->all());
+        SocialIcons::create($request->only(['icon', 'name', 'url']));
 
         return redirect()->back()->with([
             'msg' => __('New Social Item Added...'),
@@ -61,11 +62,13 @@ class TopBarController extends Controller
     public function update_social_item(Request $request){
         $this->validate($request,[
            'icon' => 'required|string',
+           'name' => 'nullable|string',
            'url' => 'required|string',
         ]);
 
         SocialIcons::find($request->id)->update([
             'icon' => $request->icon,
+            'name' => $request->name,
             'url' => $request->url,
         ]);
 

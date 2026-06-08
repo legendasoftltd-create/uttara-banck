@@ -44,6 +44,9 @@ use App\ProductRatings;
 use App\Products;
 use App\ProductShipping;
 use App\ProductSubCategory;
+use App\Complaint;
+use App\ComplaintCellMember;
+use App\Location;
 use App\Quote;
 use App\ServiceCategory;
 use App\Services;
@@ -1106,6 +1109,25 @@ ITEM;
         return view('frontend.pages.contact-page')->with([
             'all_contact_info' => $all_contact_info
         ]);
+    }
+
+    public function complain_page()
+    {
+        $central_members = ComplaintCellMember::where('section', 'central')->orderBy('sort_order')->get();
+        $zonal_members = ComplaintCellMember::where('section', 'zonal')->orderBy('sort_order')->get()->groupBy('zone_name');
+        $all_divisions = Location::whereNotNull('division')->where('division', '!=', '')->distinct()->orderBy('division')->pluck('division');
+
+        return view('frontend.pages.complain-page')->with([
+            'central_members' => $central_members,
+            'zonal_members' => $zonal_members,
+            'all_divisions' => $all_divisions,
+        ]);
+    }
+
+    public function get_branches_by_division($division)
+    {
+        $branches = Location::where('division', $division)->where('status', 1)->orderBy('name')->get(['id', 'name']);
+        return response()->json($branches);
     }
 
     public function plan_order($id)

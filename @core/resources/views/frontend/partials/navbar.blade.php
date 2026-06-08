@@ -217,7 +217,7 @@
                     <li><a href="https://play.google.com/store/apps/details?id=com.uttarabank.ublmobile">Uttara
                             eWallet</a></li>
                     <li><a href="#">Career</a></li>
-                    <li><a href="#">Complain</a></li>
+                    <li><a href="{{ route('frontend.complain') }}">Complain</a></li>
                     <li><a href="{{ route('frontend.dynamic.page', 'warning-against-illegal-forex-trading/dealing') }}">Warning against illegal forex trading/dealing</a></li>
                     <li><a href="{{ route('frontend.dynamic.page', 'sanchayapatra') }}">Sanchayapatra</a></li>
                     <li><a href="#">Unclaimed Deposit List</a></li>
