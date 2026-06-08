@@ -17,8 +17,9 @@
      {{$work_item->title}}
 @endsection
 @section('content')
-
-{!! iFrameFilterInSummernoteAndRender($work_item->description) !!}
+<div class="container py-3">
+    {!! iFrameFilterInSummernoteAndRender($work_item->description) !!}
+</div>
 
 @endsection
 

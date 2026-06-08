@@ -277,6 +277,13 @@
                         height="24">
                 </div>
             </a>
+            <a href="{{ route('emi.calculator') }}" class="calculator-widget" style="top: calc(55% + 70px);">
+                <div class="calc-tooltip">EMI Calculator</div>
+                <div class="calc-icon-container">
+                    <img style="width: 35px;height: 50px;" src="{{ asset('assets/frontend/assets/images/icon/emi-calculator.png') }}" alt="EMI Calculator" width="57"
+                        height="24">
+                </div>
+            </a>
         </div>
         <div class="content">
             <div class="Robi-Ad" style="line-height: 1; position: fixed; height: 140px; left: -149px;">

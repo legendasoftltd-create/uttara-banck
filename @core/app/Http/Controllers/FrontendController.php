@@ -765,6 +765,11 @@ ITEM;
         return view('frontend.pages.deposit-calculator.deposit-calculator');
     }
 
+    public function emi_calculator()
+    {
+        return view('frontend.pages.emi-calculator.emi-calculator');
+    }
+
     public function exrate()
     {
         $exchange_rate = ExchangeRate::where('status', 1)->latest()->first();
