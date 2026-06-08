@@ -175,7 +175,7 @@
                     <li class="has-dropdown">
                         <a href="#" class="dropdown-toggle">Schedule of Charges</a>
                         <ul class="sub-menu">
-                            <li><a href="#">Inland Transaction</a></li>
+                            <li><a href="https://uttaradev.blocknots.com/case-study/inland-transaction">Inland Transaction</a></li>
                             <li><a href="#">Foreign Exchange Transaction</a></li>
                         </ul>
                     </li>
@@ -222,12 +222,12 @@
                     <li><a href="{{ route('frontend.dynamic.page', 'sanchayapatra') }}">Sanchayapatra</a></li>
                     <li><a href="#">Unclaimed Deposit List</a></li>
                     <li><a href="#">Financial Literacy</a></li>
-                    <li><a href="#">Digital Banking</a></li>
+                    <li><a href="https://uttaradev.blocknots.com/digital-banking">Digital Banking</a></li>
                     <li><a href="#">Unclaimed Dividend</a></li>
                     <li><a href="{{ route('frontend.dynamic.page', "citizen's-charter") }}">Citizen's Charter</a></li>
                     <li><a href="{{ route('frontend.dynamic.page', 'fdi-help-desk') }}">FDI Help Desk</a></li>
-                    <li><a href="#">Lending Interest Rate</a></li>
-                    <li><a href="#">Contact</a></li>
+                    <li><a href="https://uttaradev.blocknots.com/lending-interest-rate">Lending Interest Rate</a></li>
+                    <li><a href="{{ route('frontend.dynamic.page', 'contact-us') }}">Contact</a></li>
                 </ul>
             </div>
             <div class="overlay" id="overlay"></div>
