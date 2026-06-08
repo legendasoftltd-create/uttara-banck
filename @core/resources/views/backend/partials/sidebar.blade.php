@@ -233,9 +233,9 @@
                             <span>{{__('Faq')}}</span></a>
                     </li>
                     @endif--}}
-                    @if(check_page_permission_by_string('Our Achievement'))
-                    <li class="main_dropdown {{active_menu('admin-home/brands')}}">
-                        <a href="{{route('admin.brands')}}" aria-expanded="true"><i class="ti-control-forward"></i>
+                    @if(check_page_permission_by_string('Our Achievement Manage'))
+                    <li class="main_dropdown {{active_menu('admin-home/achievements')}}">
+                        <a href="{{route('admin.achievements')}}" aria-expanded="true"><i class="ti-control-forward"></i>
                             <span>{{__('Our Achievement')}}</span></a>
                     </li>
                     @endif 
@@ -286,6 +286,37 @@
                         <a href="javascript:void(0)" aria-expanded="true"><i class="ti-settings"></i>
                             <span>{{__('All Modules')}}</span></a>
                         <ul class="collapse ">
+                            @if(check_page_permission_by_string('Job Post Manage') && !empty(get_static_option('job_module_status')))
+                                <li
+                                    class="main_dropdown
+                                    @if(request()->is(['admin-home/jobs/*','admin-home/jobs'])) active @endif
+                                    ">
+                                    <a href="javascript:void(0)" aria-expanded="true">
+                                        {{__('Career Manage')}}</a>
+                                    <ul class="collapse">
+                                        <li class="{{active_menu('admin-home/jobs/category')}}"><a
+                                                    href="{{route('admin.jobs.category.all')}}">{{__('Category')}}</a></li>
+                                        <li class="{{active_menu('admin-home/new-jobs')}}"><a
+                                                    href="{{route('admin.jobs.new')}}">{{__('Add New Job')}}</a></li>
+                                        <li class="{{active_menu('admin-home/jobs')}}"><a
+                                                    href="{{route('admin.jobs.all')}}">{{__('All Jobs')}}</a></li>
+                                        <li class="{{active_menu('admin-home/jobs/page-settings')}}"><a
+                                                    href="{{route('admin.jobs.page.settings')}}">{{__('Job Page Settings')}}</a></li>
+                                        <li class="{{active_menu('admin-home/jobs/single-page-settings')}}"><a
+                                                    href="{{route('admin.jobs.single.page.settings')}}">{{__('Job Single Page Settings')}}</a></li>
+                                        {{-- <li class="{{active_menu('admin-home/jobs/success-page-settings')}}">
+                                            <a href="{{route('admin.jobs.success.page.settings')}}">{{__('Job Success Page Settings')}}</a>
+                                        </li>
+                                        <li class="{{active_menu('admin-home/jobs/cancel-page-settings')}}">
+                                            <a href="{{route('admin.jobs.cancel.page.settings')}}">{{__('Job Cancel Page Settings')}}</a>
+                                        </li>
+                                        <li class="{{active_menu('admin-home/jobs/applicant')}}"><a
+                                                    href="{{route('admin.jobs.applicant')}}">{{__('All Applicant')}}</a></li>
+                                        <li class="{{active_menu('admin-home/jobs/applicant/report')}}"><a
+                                                    href="{{route('admin.jobs.applicant.report')}}">{{__('Applicant Report')}}</a></li> --}}
+                                    </ul>
+                                </li>
+                            @endif
                             {{-- @if(check_page_permission_by_string('Courses Manage')  && !empty(get_static_option('course_module_status')))
                                 <li class="main_dropdown @if(request()->is('admin-home/courses/*')) active @endif ">
                                     <a href="javascript:void(0)" aria-expanded="true">
@@ -399,37 +430,7 @@
                                     </ul>
                                 </li>
                             @endif
-                            @if(check_page_permission_by_string('Job Post Manage') && !empty(get_static_option('job_module_status')))
-                                <li
-                                    class="main_dropdown
-                                    @if(request()->is(['admin-home/jobs/*','admin-home/jobs'])) active @endif
-                                    ">
-                                    <a href="javascript:void(0)" aria-expanded="true">
-                                        {{__('Job Post Manage')}}</a>
-                                    <ul class="collapse">
-                                        <li class="{{active_menu('admin-home/jobs')}}"><a
-                                                    href="{{route('admin.jobs.all')}}">{{__('All Jobs')}}</a></li>
-                                        <li class="{{active_menu('admin-home/jobs/category')}}"><a
-                                                    href="{{route('admin.jobs.category.all')}}">{{__('Category')}}</a></li>
-                                        <li class="{{active_menu('admin-home/new-jobs')}}"><a
-                                                    href="{{route('admin.jobs.new')}}">{{__('Add New Job')}}</a></li>
-                                        <li class="{{active_menu('admin-home/jobs/page-settings')}}"><a
-                                                    href="{{route('admin.jobs.page.settings')}}">{{__('Job Page Settings')}}</a></li>
-                                        <li class="{{active_menu('admin-home/jobs/single-page-settings')}}"><a
-                                                    href="{{route('admin.jobs.single.page.settings')}}">{{__('Job Single Page Settings')}}</a></li>
-                                        <li class="{{active_menu('admin-home/jobs/success-page-settings')}}">
-                                            <a href="{{route('admin.jobs.success.page.settings')}}">{{__('Job Success Page Settings')}}</a>
-                                        </li>
-                                        <li class="{{active_menu('admin-home/jobs/cancel-page-settings')}}">
-                                            <a href="{{route('admin.jobs.cancel.page.settings')}}">{{__('Job Cancel Page Settings')}}</a>
-                                        </li>
-                                        <li class="{{active_menu('admin-home/jobs/applicant')}}"><a
-                                                    href="{{route('admin.jobs.applicant')}}">{{__('All Applicant')}}</a></li>
-                                        <li class="{{active_menu('admin-home/jobs/applicant/report')}}"><a
-                                                    href="{{route('admin.jobs.applicant.report')}}">{{__('Applicant Report')}}</a></li>
-                                    </ul>
-                                </li>
-                            @endif
+                            
                             @if(check_page_permission_by_string('Events Manage') && !empty(get_static_option('events_module_status'))) 
                                     <li class="main_dropdown
                                     @if(request()->is(['admin-home/events/*','admin-home/events'])) active @endif
@@ -641,6 +642,11 @@
                                         <li class="{{active_menu('admin-home/complaint/cell-settings')}}"><a href="{{route('admin.complaint.cell.settings')}}">{{__('Complaint Cell Settings')}}</a></li>
                                         <li class="{{active_menu('admin-home/complaint/all')}}"><a href="{{route('admin.complaints.all')}}">{{__('All Complaints')}}</a></li>
                                     </ul>
+                                </li>
+                            @endif
+                            @if(check_page_permission_by_string('Audit Log Manage'))
+                                <li class="{{active_menu('admin-home/audit-logs')}}">
+                                    <a href="{{route('admin.audit.logs.all')}}"><i class="ti-shield"></i> {{__('Audit Trail')}}</a>
                                 </li>
                             @endif
 

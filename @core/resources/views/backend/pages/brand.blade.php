@@ -59,9 +59,11 @@
                             </th>
                             <th>{{__('ID')}}</th>
                             <th>{{__('Title')}}</th>
+                            <th>{{__('Description')}}</th>
                             <th>{{__('Slug')}}</th>
                             <th>{{__('Url')}}</th>
                             <th>{{__('File')}}</th>
+                            <th>{{__('Thumbnail')}}</th>
                             <th>{{__('Action')}}</th>
                             </thead>
                             <tbody>
@@ -74,6 +76,7 @@
                                     </td>
                                     <td>{{$data->id}}</td>
                                     <td>{{$data->title}}</td>
+                                    <td>{{\Illuminate\Support\Str::limit($data->description, 60)}}</td>
                                     <td>{{$data->slug}}</td>
                                     <td>{{$data->url}}</td>
                                     <td>
@@ -101,17 +104,36 @@
                                         @endif
                                     </td>
                                     <td>
-                                        <x-delete-popover :url="route('admin.brands.delete',$data->id)"/>
+                                        @php
+                                            $brand_thumb = get_attachment_image_by_id($data->thumbnail,null,true);
+                                            $thumb_url = '';
+                                        @endphp
+                                        @if (!empty($brand_thumb))
+                                            <div class="attachment-preview brand-thumbnail-preview">
+                                                <div class="thumbnail">
+                                                    <div class="centered">
+                                                        <img class="avatar user-thumb" src="{{$brand_thumb['img_url']}}" alt="">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            @php $thumb_url = $brand_thumb['img_url']; @endphp
+                                        @endif
+                                    </td>
+                                    <td>
+                                        <x-delete-popover :url="route('admin.achievements.delete',$data->id)"/>
                                         <a href="#"
                                            data-toggle="modal"
                                            data-target="#brand_item_edit_modal"
                                            class="btn btn-xs btn-primary btn-sm mb-3 mr-1 brand_edit_btn"
                                            data-id="{{$data->id}}"
                                            data-title="{{$data->title}}"
+                                           data-description="{{$data->description}}"
                                            data-slug="{{$data->slug}}"
                                            data-url="{{$data->url}}"
                                            data-imageid="{{$data->image}}"
                                            data-image="{{$img_url}}"
+                                           data-thumbnailid="{{$data->thumbnail}}"
+                                           data-thumbnail="{{$thumb_url}}"
                                         >
                                             <i class="ti-pencil"></i>
                                         </a>
@@ -128,11 +150,15 @@
                 <div class="card">
                     <div class="card-body">
                         <h4 class="header-title">{{__('New Achievement')}}</h4>
-                        <form action="{{route('admin.brands')}}" method="post" enctype="multipart/form-data">
+                        <form action="{{route('admin.achievements')}}" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group">
                                 <label for="title">{{__('Title')}}</label>
                                 <input type="text" class="form-control"  id="title"  name="title" placeholder="{{__('Title')}}">
+                            </div>
+                            <div class="form-group">
+                                <label for="description">{{__('Description')}}</label>
+                                <textarea class="form-control" id="description" name="description" rows="3" placeholder="{{__('Description')}}"></textarea>
                             </div>
                             <div class="form-group">
                                 <label for="slug">{{__('Slug')}}</label>
@@ -153,6 +179,17 @@
                                 </div>
                                 <small>{{__('You can upload image, PDF, document, Excel, zip, or presentation files')}}</small>
                             </div>
+                            <div class="form-group">
+                                <label for="thumbnail">{{__('Thumbnail')}}</label>
+                                <div class="media-upload-btn-wrapper">
+                                    <div class="img-wrap"></div>
+                                    <input type="hidden" name="thumbnail">
+                                    <button type="button" class="btn btn-info media_upload_form_btn" data-btntitle="Select Thumbnail Image" data-modaltitle="Upload Thumbnail Image" data-toggle="modal" data-target="#media_upload_modal">
+                                        {{__('Upload Thumbnail')}}
+                                    </button>
+                                </div>
+                                <small>{{__('Recommended: a small preview image shown alongside the achievement')}}</small>
+                            </div>
                             <button type="submit" class="btn btn-primary mt-4 pr-4 pl-4">{{__('Add New')}}</button>
                         </form>
                     </div>
@@ -168,13 +205,17 @@
                     <h5 class="modal-title">{{__('Edit Achievement Item')}}</h5>
                     <button type="button" class="close" data-dismiss="modal"><span>×</span></button>
                 </div>
-                <form action="{{route('admin.brands.update')}}" id="brand_edit_modal_form"  method="post" enctype="multipart/form-data">
+                <form action="{{route('admin.achievements.update')}}" id="brand_edit_modal_form"  method="post" enctype="multipart/form-data">
                     <div class="modal-body">
                         @csrf
                         <input type="hidden" class="form-control" name="id"  id="brand_id" >
                         <div class="form-group">
                             <label for="edit_title">{{__('Title')}}</label>
                             <input type="text" class="form-control"  id="edit_title"  name="title" placeholder="{{__('Title')}}">
+                        </div>
+                        <div class="form-group">
+                            <label for="edit_description">{{__('Description')}}</label>
+                            <textarea class="form-control" id="edit_description" name="description" rows="3" placeholder="{{__('Description')}}"></textarea>
                         </div>
                         <div class="form-group">
                             <label for="edit_slug">{{__('Slug')}}</label>
@@ -194,6 +235,17 @@
                                 </button>
                             </div>
                             <small>{{__('You can upload image, PDF, document, Excel, zip, or presentation files')}}</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit_thumbnail">{{__('Thumbnail')}}</label>
+                            <div class="media-upload-btn-wrapper">
+                                <div class="img-wrap"></div>
+                                <input type="hidden" id="edit_thumbnail" name="thumbnail" value="">
+                                <button type="button" class="btn btn-info media_upload_form_btn" data-btntitle="Select Thumbnail Image" data-modaltitle="Upload Thumbnail Image" data-toggle="modal" data-target="#media_upload_modal">
+                                    {{__('Upload Thumbnail')}}
+                                </button>
+                            </div>
+                            <small>{{__('Recommended: a small preview image shown alongside the achievement')}}</small>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -238,7 +290,7 @@
 
                 $.ajax({
                     type: 'POST',
-                    url: "{{route('admin.brands.slug.check')}}",
+                    url: "{{route('admin.achievements.slug.check')}}",
                     data: {
                         _token: "{{csrf_token()}}",
                         type: type,
@@ -271,7 +323,7 @@
                     $(this).text('{{__('Deleting...')}}');
                     $.ajax({
                         'type' : "POST",
-                        'url' : "{{route('admin.brands.bulk.action')}}",
+                        'url' : "{{route('admin.achievements.bulk.action')}}",
                         'data' : {
                             _token: "{{csrf_token()}}",
                             ids: allIds
@@ -306,12 +358,18 @@
                 var imageid = el.data('imageid');
                 var extension = image ? image.split('.').pop().toLowerCase() : '';
                 var filePreview = '<div class="attachment-preview"><div class="thumbnail"><div class="centered">';
+                var thumbnail = el.data('thumbnail');
+                var thumbnailid = el.data('thumbnailid');
 
                 form.find('#brand_id').val(id);
                 form.find('#edit_title').val(title);
+                form.find('#edit_description').val(el.data('description'));
                 form.find('#edit_slug').val(slug);
                 form.find('#edit_url').val(el.data('url'));
 
+                var fileWrapper = form.find('#edit_image').closest('.media-upload-btn-wrapper');
+                fileWrapper.find('.img-wrap').html('');
+                fileWrapper.find('.media_upload_form_btn').text('Upload File');
                 if(imageid != ''){
                     if (['jpg','jpeg','png','webp','gif','svg'].includes(extension)) {
                         filePreview += '<img class="avatar user-thumb" src="'+image+'" >';
@@ -319,10 +377,19 @@
                         filePreview += '<i class="fas fa-file file-icon"></i><span class="file-name">'+(extension ? extension.toUpperCase() : 'FILE')+'</span>';
                     }
                     filePreview += '</div></div></div>';
-                    form.find('.media-upload-btn-wrapper .img-wrap').html(filePreview);
-                    form.find('.media-upload-btn-wrapper input').val(imageid);
-                    form.find('.media-upload-btn-wrapper .media_upload_form_btn').text('Change File');
+                    fileWrapper.find('.img-wrap').html(filePreview);
+                    fileWrapper.find('.media_upload_form_btn').text('Change File');
                 }
+                fileWrapper.find('input[type="hidden"]').val(imageid);
+
+                var thumbWrapper = form.find('#edit_thumbnail').closest('.media-upload-btn-wrapper');
+                thumbWrapper.find('.img-wrap').html('');
+                thumbWrapper.find('.media_upload_form_btn').text('Upload Thumbnail');
+                if(thumbnailid != ''){
+                    thumbWrapper.find('.img-wrap').html('<div class="attachment-preview"><div class="thumbnail"><div class="centered"><img class="avatar user-thumb" src="'+thumbnail+'" ></div></div></div>');
+                    thumbWrapper.find('.media_upload_form_btn').text('Change Thumbnail');
+                }
+                thumbWrapper.find('input[type="hidden"]').val(thumbnailid);
             });
         });
     </script>

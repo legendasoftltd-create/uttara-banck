@@ -117,6 +117,38 @@
                                         <div class="summernote" data-content='{{$job_post->other_benefits}}'></div>
                                     </div>
                                     <div class="form-group">
+                                        <label for="attachment">{{__('Attachment')}}</label>
+                                        @php
+                                            $job_attachment = get_attachment_image_by_id($job_post->attachment,null,true);
+                                            $job_attachment_file = \App\MediaUpload::find($job_post->attachment);
+                                            $job_attachment_extension = !empty($job_attachment_file) ? strtolower(pathinfo($job_attachment_file->path, PATHINFO_EXTENSION)) : '';
+                                            $job_attachment_is_image = in_array($job_attachment_extension, ['jpg','jpeg','png','webp','gif','svg']);
+                                        @endphp
+                                        <div class="media-upload-btn-wrapper">
+                                            <div class="img-wrap">
+                                                @if(!empty($job_attachment))
+                                                    <div class="attachment-preview">
+                                                        <div class="thumbnail">
+                                                            <div class="centered">
+                                                                @if($job_attachment_is_image)
+                                                                    <img class="avatar user-thumb" src="{{$job_attachment['img_url']}}" alt="">
+                                                                @else
+                                                                    <i class="fas fa-file file-icon"></i>
+                                                                    <span class="file-name">{{strtoupper($job_attachment_extension ?: 'FILE')}}</span>
+                                                                @endif
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                @endif
+                                            </div>
+                                            <input type="hidden" name="attachment" value="{{$job_post->attachment}}">
+                                            <button type="button" class="btn btn-info media_upload_form_btn" data-btntitle="Select Attachment" data-modaltitle="Upload Job Attachment" data-toggle="modal" data-target="#media_upload_modal">
+                                                {{!empty($job_post->attachment) ? __('Change Attachment') : __('Upload Attachment')}}
+                                            </button>
+                                        </div>
+                                        <small>{{__('You can upload an image, PDF, document, spreadsheet, or other file related to this job post')}}</small>
+                                    </div>
+                                    <div class="form-group">
                                         <label for="salary">{{__('Salary')}}</label>
                                         <input type="text" class="form-control"  id="salary" name="salary" value="{{$job_post->salary}}" placeholder="{{__('Salary')}}">
                                     </div>

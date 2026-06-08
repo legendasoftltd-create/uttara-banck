@@ -69,11 +69,28 @@ function update_static_option($key, $value)
     if ($static_option === null){
         $static_option = StaticOption::query();
     }
+
+    $previous = StaticOption::where('option_name', $key)->value('option_value');
+
     $static_option->updateOrCreate(['option_name' => $key],[
         'option_name' => $key,
         'option_value' => $value
     ]);
     \Illuminate\Support\Facades\Cache::forget($key);
+
+    // checklist 3.d — configuration changes (settings, API keys, gateway credentials)
+    // values for option names that look sensitive are masked before storage in the trail
+    $sensitive = (bool) preg_match('/secret|password|token|key|credential/i', $key);
+    audit_log('config.changed', [
+        'level' => 'warning',
+        'meta' => [
+            'option_name' => $key,
+            'previous_value' => $sensitive ? \App\Services\AuditLogger::REDACTED_VALUE : $previous,
+            'new_value' => $sensitive ? \App\Services\AuditLogger::REDACTED_VALUE : $value,
+        ],
+        'description' => 'Configuration option "' . $key . '" was changed',
+    ]);
+
     return true;
 }
 
@@ -2864,4 +2881,14 @@ function important_info(){
     $informations = WorksCategory::orderBy('id','desc')->get();
 
     return $informations;
+}
+
+/**
+ * Write an entry to the audit trail. Thin wrapper around AuditLogger so
+ * any controller/listener/middleware can log with one call:
+ *   audit_log('admin.login', ['description' => 'Admin logged in']);
+ */
+function audit_log(string $action, array $options = [])
+{
+    return \App\Services\AuditLogger::log($action, $options);
 }

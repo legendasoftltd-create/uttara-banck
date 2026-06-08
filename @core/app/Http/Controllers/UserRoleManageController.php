@@ -66,8 +66,22 @@ class UserRoleManageController extends Controller
         if (!empty($request->password) && !empty($request->password_confirmation)){
             $data['password'] = Hash::make($request->password);
         }
-        Admin::find($request->user_id)->update($data);
 
+        $admin = Admin::find($request->user_id);
+        $previous_role = $admin->role;
+
+        $admin->update($data);
+
+        if ($previous_role != $request->role) {
+            audit_log('admin.privilege_change', [
+                'level' => 'warning',
+                'subject_type' => Admin::class,
+                'subject_id' => $admin->id,
+                'before' => ['role' => $previous_role, 'role_name' => optional(AdminRole::find($previous_role))->name],
+                'after' => ['role' => $request->role, 'role_name' => optional(AdminRole::find($request->role))->name],
+                'description' => 'Privilege change for admin "' . $admin->username . '"',
+            ]);
+        }
 
         return redirect()->back()->with(['msg' => __('User Details Updated'),'type' =>'success' ]);
     }
@@ -86,6 +100,14 @@ class UserRoleManageController extends Controller
         $user = Admin::findOrFail($request->ch_user_id);
         $user->password = Hash::make($request->password);
         $user->save();
+
+        audit_log('admin.password_changed', [
+            'level' => 'warning',
+            'subject_type' => Admin::class,
+            'subject_id' => $user->id,
+            'description' => 'Password changed for admin "' . $user->username . '" by ' . (auth('admin')->user()->username ?? 'unknown'),
+        ]);
+
         return redirect()->back()->with(['msg'=> __('Password Change Success..'),'type'=> 'success']);
 
     }

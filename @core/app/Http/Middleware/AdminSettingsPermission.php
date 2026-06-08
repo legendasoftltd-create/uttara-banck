@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Services\AuditLogger;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 
@@ -28,6 +29,14 @@ class AdminSettingsPermission
                 return $next($request);
             }
         }
+
+        // checklist 3.b — record access attempts to permission-restricted areas
+        AuditLogger::log('access.denied', [
+            'level' => 'warning',
+            'meta' => ['required_permission' => $param],
+            'description' => 'Denied access to a restricted area requiring "' . $param . '" permission',
+        ]);
+
         return redirect()->route('admin.home');
     }
 }

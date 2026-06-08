@@ -115,6 +115,17 @@
                                         <div class="summernote" ></div>
                                     </div>
                                     <div class="form-group">
+                                        <label for="attachment">{{__('Attachment')}}</label>
+                                        <div class="media-upload-btn-wrapper">
+                                            <div class="img-wrap"></div>
+                                            <input type="hidden" name="attachment">
+                                            <button type="button" class="btn btn-info media_upload_form_btn" data-btntitle="Select Attachment" data-modaltitle="Upload Job Attachment" data-toggle="modal" data-target="#media_upload_modal">
+                                                {{__('Upload Attachment')}}
+                                            </button>
+                                        </div>
+                                        <small>{{__('You can upload an image, PDF, document, spreadsheet, or other file related to this job post')}}</small>
+                                    </div>
+                                    <div class="form-group">
                                         <label for="salary">{{__('Salary')}}</label>
                                         <input type="text" class="form-control"  id="salary" name="salary" value="{{old('salary')}}" placeholder="{{__('Salary')}}">
                                     </div>
