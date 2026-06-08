@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Complaint;
 use App\EventAttendance;
 use App\Events;
 use App\Facades\EmailTemplate;
@@ -11,6 +12,7 @@ use App\Helpers\LegendaSoftHelpers;
 use App\JobApplicant;
 use App\Jobs;
 use App\Mail\BasicMail;
+use App\Mail\ComplaintMail;
 use App\Mail\ContactMessage;
 use App\Mail\CustomFormBuilderMail;
 use App\Mail\FeedbackMessage;
@@ -286,6 +288,57 @@ class FrontendFormController extends Controller
             return redirect()->back()->with(LegendaSoftHelpers::item_delete($e->getMessage()));
         }
         return redirect()->back()->with(['msg' => $success_message, 'type' => 'success']);
+    }
+
+    public function complain_submit(Request $request)
+    {
+        $this->validate($request, [
+            'concerned_division' => 'nullable|string|max:191',
+            'concerned_branch' => 'nullable|string|max:191',
+            'full_name' => 'required|string|max:191',
+            'address' => 'nullable|string|max:191',
+            'mobile' => 'required|string|max:50',
+            'email' => 'nullable|email|max:191',
+            'has_account' => 'nullable',
+            'nature_of_complain' => 'nullable|string|max:191',
+            'amount_involved' => 'nullable|string|max:191',
+            'details' => 'required|string',
+            'suggestion' => 'nullable|string',
+        ]);
+
+        $google_captcha_result = google_captcha_check($request->captcha_token);
+        if (!$google_captcha_result['success']) {
+            return redirect()->back()->with(['msg' => __('google recaptcha error'), 'type' => 'danger']);
+        }
+
+        $complaint = Complaint::create([
+            'concerned_division' => $request->concerned_division,
+            'concerned_branch' => $request->concerned_branch,
+            'full_name' => $request->full_name,
+            'address' => $request->address,
+            'mobile' => $request->mobile,
+            'email' => $request->email,
+            'has_account' => $request->has('has_account'),
+            'nature_of_complain' => $request->nature_of_complain,
+            'amount_involved' => $request->amount_involved,
+            'details' => $request->details,
+            'suggestion' => $request->suggestion,
+            'status' => 'pending',
+        ]);
+
+        $complaint_email = get_static_option('complaint_cell_email');
+        $send_to = !empty($complaint_email) ? $complaint_email : get_static_option('site_global_email');
+
+        try {
+            Mail::to($send_to)->send(new ComplaintMail(
+                $complaint,
+                __('New Complaint Submitted on').' '.get_static_option('site_'.get_default_language().'_title')
+            ));
+        } catch (\Exception $e) {
+            return redirect()->back()->with(LegendaSoftHelpers::item_delete($e->getMessage()));
+        }
+
+        return redirect()->back()->with(['msg' => __('Your complaint has been submitted. We will get back to you soon.'), 'type' => 'success']);
     }
 
     public function custom_form_builder_message(Request $request)

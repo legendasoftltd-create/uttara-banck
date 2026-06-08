@@ -528,6 +528,9 @@ Route::group(['middleware' => ['setlang:frontend', 'globalVariable', 'maintains_
     Route::get('/' . $feedback_page_slug, 'FrontendController@feedback_page')->name('frontend.feedback');
     Route::get('/' . $clients_feedback_page_slug, 'FrontendController@clients_feedback_page')->name('frontend.clients.feedback');
     Route::post('/' . $clients_feedback_page_slug . '/submit', 'FrontendFormController@clients_feedback_store')->name('frontend.clients.feedback.store');
+    $complain_page_slug = get_static_option('complain_page_slug') ?? 'complain';
+    Route::get('/' . $complain_page_slug, 'FrontendController@complain_page')->name('frontend.complain');
+    Route::get('/' . $complain_page_slug . '/branches/{division}', 'FrontendController@get_branches_by_division')->name('frontend.complain.branches');
     Route::get('/' . $image_gallery_page_slug . '', 'FrontendController@image_gallery_page')->name('frontend.image.gallery');
     Route::get('/' . $price_plan_page_slug . '/{id}', 'FrontendController@plan_order')->name('frontend.plan.order');
     Route::get('/' . $video_gallery_page_slug . '', 'FrontendController@video_gallery_page')->name('frontend.video.gallery');
@@ -624,6 +627,7 @@ Route::group(['middleware' => ['setlang:frontend', 'globalVariable', 'HtmlMinifi
     Route::get('/lang', 'FrontendController@lang_change')->name('frontend.langchange');
     Route::post('/subscribe-newsletter', 'FrontendController@subscribe_newsletter')->name('frontend.subscribe.newsletter');
     Route::post('/contact-message', 'FrontendFormController@send_contact_message')->name('frontend.contact.message');
+    Route::post('/complain-submit', 'FrontendFormController@complain_submit')->name('frontend.complain.submit');
     Route::post('/place-order', 'FrontendFormController@send_order_message')->name('frontend.order.message');
 });
 

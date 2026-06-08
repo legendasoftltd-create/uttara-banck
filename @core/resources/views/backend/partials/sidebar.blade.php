@@ -634,6 +634,15 @@
                                     </ul>
                                 </li>
                             @endif
+                            @if(check_page_permission_by_string('Complaint Manage'))
+                                <li class="main_dropdown {{active_menu('admin-home/complaint')}} @if(request()->is('admin-home/complaint/*')) active @endif">
+                                    <a href="javascript:void(0)" aria-expanded="true"><i class="ti-comment-alt"></i> {{__('Complaint')}}</a>
+                                    <ul class="collapse">
+                                        <li class="{{active_menu('admin-home/complaint/cell-settings')}}"><a href="{{route('admin.complaint.cell.settings')}}">{{__('Complaint Cell Settings')}}</a></li>
+                                        <li class="{{active_menu('admin-home/complaint/all')}}"><a href="{{route('admin.complaints.all')}}">{{__('All Complaints')}}</a></li>
+                                    </ul>
+                                </li>
+                            @endif
 
                             
                             @if(check_page_permission_by_string('exchange_rate') || check_page_permission_by_string('Exchange Rate Manage'))

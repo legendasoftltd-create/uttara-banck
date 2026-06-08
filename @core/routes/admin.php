@@ -1779,6 +1779,20 @@ Route::prefix('admin-home')->middleware(['setlang:backend'])->group(function () 
     });
 
     /*==============================================
+      COMPLAINT ROUTES
+    ==============================================*/
+    Route::prefix('complaint')->middleware(['adminPermissionCheck:Complaint Manage'])->group(function () {
+        Route::get('/cell-settings', 'ComplaintCellController@complaint_cell_settings')->name('admin.complaint.cell.settings');
+        Route::post('/cell-settings/info', 'ComplaintCellController@update_complaint_cell_info')->name('admin.complaint.cell.info.update');
+        Route::post('/cell-settings/new-member', 'ComplaintCellController@new_member')->name('admin.complaint.cell.member.new');
+        Route::post('/cell-settings/update-member', 'ComplaintCellController@update_member')->name('admin.complaint.cell.member.update');
+        Route::post('/cell-settings/delete-member/{id}', 'ComplaintCellController@delete_member')->name('admin.complaint.cell.member.delete');
+        Route::get('/all', 'ComplaintController@all_complaints')->name('admin.complaints.all');
+        Route::post('/status-change', 'ComplaintController@status_change')->name('admin.complaints.status.change');
+        Route::post('/delete/{id}', 'ComplaintController@delete_complaint')->name('admin.complaints.delete');
+    });
+
+    /*==============================================
       EXCHANGE RATE ROUTES
     ==============================================*/
     Route::prefix('exchange-rate')->middleware(['adminPermissionCheck:Exchange Rate Manage'])->group(function () {
