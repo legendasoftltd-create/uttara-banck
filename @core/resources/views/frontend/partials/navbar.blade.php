@@ -176,7 +176,7 @@
                         <a href="#" class="dropdown-toggle">Schedule of Charges</a>
                         <ul class="sub-menu">
                             <li><a href="https://uttaradev.blocknots.com/case-study/inland-transaction">Inland Transaction</a></li>
-                            <li><a href="#">Foreign Exchange Transaction</a></li>
+                            <li><a href="https://uttaradev.blocknots.com/case-study/foreign-exchange-transaction">Foreign Exchange Transaction</a></li>
                         </ul>
                     </li>
                     <li class="has-dropdown">
@@ -203,12 +203,12 @@
                                     <li><a href="https://uttaradev.blocknots.com/case-study/interest-rate-deposit-products">Interest Rate Deposit Products</a></li>
                                 </ul>
                             </li>
-                            <li><a href="https://uttaradev.blocknots.com/branches-of-uttara-bank-limited-enlisted-for-e-gp">e-GP</a></li>
-                            <li><a href="https://uttaradev.blocknots.com/eligible-capital">Eligible Capital</a></li>
-                            <li><a href="https://uttaradev.blocknots.com/tax-return-notice">Tax Return Notice</a></li>
-                            <li><a href="https://uttaradev.blocknots.com/code-of-conduct">Code of Conduct</a></li>
-                            <li><a href="https://uttaradev.blocknots.com/financial-literacy">Financial Literacy</a></li>
-                            <li><a href="https://uttaradev.blocknots.com/cautionary-notice">Cautionary Notice</a></li>
+                            <li><a href="{{ route('frontend.dynamic.page', 'branches-of-uttara-bank-limited-enlisted-for-e-gp') }}">e-GP</a></li>
+                            <li><a href="{{ route('frontend.dynamic.page', 'eligible-capital') }}">Eligible Capital</a></li>
+                            <li><a href="{{ route('frontend.dynamic.page', 'tax-return-notice') }}">Tax Return Notice</a></li>
+                            <li><a href="{{ route('frontend.dynamic.page', 'code-of-conduct') }}">Code of Conduct</a></li>
+                            <li><a href="{{ route('frontend.dynamic.page', 'financial-literacy') }}">Financial Literacy</a></li>
+                            <li><a href="{{ route('frontend.dynamic.page', 'cautionary-notice') }}">Cautionary Notice</a></li>
                         </ul>
                     </li>
 
@@ -226,7 +226,7 @@
                     <li><a href="#">Unclaimed Dividend</a></li>
                     <li><a href="{{ route('frontend.dynamic.page', "citizen's-charter") }}">Citizen's Charter</a></li>
                     <li><a href="{{ route('frontend.dynamic.page', 'fdi-help-desk') }}">FDI Help Desk</a></li>
-                    <li><a href="https://uttaradev.blocknots.com/lending-interest-rate">Lending Interest Rate</a></li>
+                    <li><a href="{{ route('frontend.dynamic.page', 'lending-interest-rate') }}">Lending Interest Rate</a></li>
                     <li><a href="{{ route('frontend.dynamic.page', 'contact-us') }}">Contact</a></li>
                 </ul>
             </div>
