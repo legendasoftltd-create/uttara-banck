@@ -57,6 +57,16 @@ class MediaUploadController extends Controller
                 );
             }
 
+            // checklist 1.a — capture file uploads with name + extension
+            audit_log('file.uploaded', [
+                'level' => 'info',
+                'meta' => [
+                    'file_name' => $image_name_with_ext,
+                    'extension' => $image_extenstion,
+                    'stored_as' => $image_db,
+                ],
+                'description' => 'File uploaded: ' . $image_name_with_ext,
+            ]);
 
         }
     }
@@ -131,6 +141,17 @@ class MediaUploadController extends Controller
         if (file_exists('assets/uploads/media-uploader/thumb-'.$get_image_details->path)){
             unlink('assets/uploads/media-uploader/thumb-'.$get_image_details->path);
         }
+
+        audit_log('file.deleted', [
+            'level' => 'warning',
+            'meta' => [
+                'file_name' => $get_image_details->title,
+                'extension' => pathinfo($get_image_details->path, PATHINFO_EXTENSION),
+                'stored_as' => $get_image_details->path,
+            ],
+            'description' => 'File deleted: ' . $get_image_details->title,
+        ]);
+
         MediaUpload::find($request->img_id)->delete();
 
         return redirect()->back();

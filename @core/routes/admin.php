@@ -1609,14 +1609,14 @@ Route::prefix('admin-home')->middleware(['setlang:backend'])->group(function () 
     /*==============================================
        BRAND LOGOS
     ==============================================*/
-    Route::prefix('brands')->middleware(['adminPermissionCheck:Our Achievement'])->group(function () {
+    Route::prefix('achievements')->middleware(['adminPermissionCheck:Our Achievement Manage'])->group(function () {
         //brand logos
-        Route::get('/', 'BrandController@index')->name('admin.brands');
+        Route::get('/', 'BrandController@index')->name('admin.achievements');
         Route::post('/', 'BrandController@store');
-        Route::post('/slug-check', 'BrandController@slug_check')->name('admin.brands.slug.check');
-        Route::post('/update', 'BrandController@update')->name('admin.brands.update');
-        Route::post('/delete/{id}', 'BrandController@delete')->name('admin.brands.delete');
-        Route::post('/bulk-action', 'BrandController@bulk_action')->name('admin.brands.bulk.action');
+        Route::post('/slug-check', 'BrandController@slug_check')->name('admin.achievements.slug.check');
+        Route::post('/update', 'BrandController@update')->name('admin.achievements.update');
+        Route::post('/delete/{id}', 'BrandController@delete')->name('admin.achievements.delete');
+        Route::post('/bulk-action', 'BrandController@bulk_action')->name('admin.achievements.bulk.action');
     });
 
     /*==============================================
@@ -1790,6 +1790,14 @@ Route::prefix('admin-home')->middleware(['setlang:backend'])->group(function () 
         Route::get('/all', 'ComplaintController@all_complaints')->name('admin.complaints.all');
         Route::post('/status-change', 'ComplaintController@status_change')->name('admin.complaints.status.change');
         Route::post('/delete/{id}', 'ComplaintController@delete_complaint')->name('admin.complaints.delete');
+    });
+
+    /*==============================================
+      AUDIT TRAIL ROUTES
+    ==============================================*/
+    Route::prefix('audit-logs')->middleware(['adminPermissionCheck:Audit Log Manage'])->group(function () {
+        Route::get('/', 'AuditLogController@all')->name('admin.audit.logs.all');
+        Route::get('/{id}', 'AuditLogController@show')->name('admin.audit.logs.show');
     });
 
     /*==============================================

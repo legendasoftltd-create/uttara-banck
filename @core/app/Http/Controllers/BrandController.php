@@ -24,15 +24,19 @@ class BrandController extends Controller
 
         $this->validate($request,[
             'title' => 'required|string|max:191',
+            'description' => 'nullable|string',
             'slug' => 'nullable|string|max:191',
             'image' => 'nullable|string|max:191',
+            'thumbnail' => 'nullable|string|max:191',
             'url' => 'nullable|string|max:191',
         ]);
 
         Brand::create([
             'title' => $request->title,
+            'description' => $request->description,
             'slug' => $this->prepareSlug($request->slug, $request->title),
             'image' => $request->image,
+            'thumbnail' => $request->thumbnail,
             'url' => $request->url,
         ]);
 
@@ -44,15 +48,19 @@ class BrandController extends Controller
         $this->validate($request,[
             'id' => 'required|integer|exists:brands,id',
             'title' => 'required|string|max:191',
+            'description' => 'nullable|string',
             'slug' => 'nullable|string|max:191',
             'image' => 'nullable|string|max:191',
+            'thumbnail' => 'nullable|string|max:191',
             'url' => 'nullable|string|max:191',
         ]);
 
         Brand::find($request->id)->update([
             'title' => $request->title,
+            'description' => $request->description,
             'slug' => $this->prepareSlug($request->slug, $request->title, $request->id),
             'image' => $request->image,
+            'thumbnail' => $request->thumbnail,
             'url' => $request->url,
         ]);
 

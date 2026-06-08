@@ -21,6 +21,7 @@ class Jobs extends Model
         'job_location',
         'salary',
         'other_benefits',
+        'attachment',
         'email',
         'deadline',
         'meta_tags',

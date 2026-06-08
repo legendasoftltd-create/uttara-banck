@@ -89,6 +89,14 @@
                                 @endif
                             @endif
                         </div>
+                        @php
+                            $job_attachment = get_attachment_image_by_id($job->attachment,null,true);
+                        @endphp
+                        @if(!empty($job_attachment))
+                            <div class="job-attachment margin-top-30">
+                                <a class="btn-boxed style-01" href="{{$job_attachment['img_url']}}" target="_blank" download>{{__('Download Attachment')}}</a>
+                            </div>
+                        @endif
                     </div>
                 </div>
                 <div class="col-lg-4">

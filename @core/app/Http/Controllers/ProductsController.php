@@ -263,6 +263,18 @@ class ProductsController extends Controller
             $file = new Filesystem();
 
             $file->copy($temp_file, 'assets/uploads/downloadable/' . Str::slug($product_details->title) . '.zip');
+
+            audit_log('file.downloaded', [
+                'level' => 'info',
+                'subject_type' => Products::class,
+                'subject_id' => $product_details->id,
+                'meta' => [
+                    'file_name' => $product_details->downloadable_file,
+                    'extension' => pathinfo($product_details->downloadable_file, PATHINFO_EXTENSION),
+                ],
+                'description' => 'Downloadable file fetched for product "' . $product_details->title . '"',
+            ]);
+
             return response()->download('assets/uploads/downloadable/' . Str::slug($product_details->title) . '.zip')->deleteFileAfterSend(true);
         }
         return redirect()->route('admin.home');
