@@ -1039,6 +1039,14 @@ ITEM;
         return view('frontend.pages.brand.brand-single')->with(['brand' => $brand]);
     }
 
+    public function achievement_page()
+    {
+        $all_achievements = Brand::orderBy('id', 'desc')->paginate(10);
+        return view('frontend.pages.achievement')->with([
+            'all_achievements' => $all_achievements
+        ]);
+    }
+
     public function service_page()
     {
         $default_lang = Language::where('default', 1)->first();

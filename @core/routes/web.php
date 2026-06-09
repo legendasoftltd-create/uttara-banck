@@ -569,6 +569,7 @@ Route::group(['middleware' => ['setlang:frontend', 'globalVariable', 'maintains_
     Route::get('/deposit-calculator', 'FrontendController@loan_calculator')->name('deposit.calculator');
     Route::get('/emi-calculator', 'FrontendController@emi_calculator')->name('emi.calculator');
     Route::get('/exrate', 'FrontendController@exrate')->name('frontend.exrate');
+    Route::get('/achievement', 'FrontendController@achievement_page')->name('frontend.achievement');
 
 });
 

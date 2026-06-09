@@ -1,5 +1,6 @@
 <?php
 
+use App\Brand;
 use App\CourseCoupon;
 use App\Language;
 use App\Menu;
@@ -2881,6 +2882,12 @@ function important_info(){
     $informations = WorksCategory::orderBy('id','desc')->get();
 
     return $informations;
+}
+
+function achivement(){
+    $achivements = Brand::orderBy('id','desc')->get();
+
+    return $achivements;
 }
 
 /**
