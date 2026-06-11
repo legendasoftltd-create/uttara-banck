@@ -17,9 +17,22 @@
      {{$work_item->title}}
 @endsection
 @section('content')
-<div class="container py-3">
-    {!! iFrameFilterInSummernoteAndRender($work_item->description) !!}
-</div>
+<section class="content-section pt-4 mt-2">
+    <div class="container content-box">
+        {!! iFrameFilterInSummernoteAndRender($work_item->description) !!}
+
+        @php
+            $file_details = get_attachment_image_by_id($work_item->image, 'full');
+            $url = $file_details['img_url'] ?? '';
+            $extension = strtolower(pathinfo(parse_url($url, PHP_URL_PATH), PATHINFO_EXTENSION));
+        @endphp
+
+        @if(in_array($extension, ['jpg', 'jpeg', 'png', 'gif', 'webp']))
+            <img src="{{ $url }}" class="img-fluid w-100" alt="">
+        @elseif($extension === 'pdf')
+            <embed src="{{ $url }}" type="application/pdf" width="100%" height="600px">
+        @endif
+    </div>
+</section>
 
 @endsection
-
