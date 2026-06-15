@@ -15,38 +15,43 @@
 <style>
     .tender-page-section { padding: 50px 0 80px; }
 
-    /* ── Chevron breadcrumb year tabs ── */
-    .tender-year-nav {
+    /* ── Filter bar ── */
+    .year-filter-bar {
         display: flex;
-        list-style: none;
-        padding: 0;
-        margin: 0 0 30px 0;
-        flex-wrap: wrap;
-        gap: 2px;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 10px;
+        margin-bottom: 18px;
     }
-    .tender-year-nav li a {
-        display: block;
-        padding: 10px 30px 10px 40px;
-        background: #888;
-        color: #fff;
+    .year-filter-label {
         font-size: 14px;
-        font-weight: 700;
-        text-decoration: none;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 50%, calc(100% - 14px) 100%, 0 100%, 14px 50%);
-        transition: background 0.2s;
+        font-weight: 600;
+        color: #333;
         white-space: nowrap;
     }
-    .tender-year-nav li:first-child a {
-        clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 50%, calc(100% - 14px) 100%, 0 100%);
-        padding-left: 22px;
+    .year-filter-select {
+        padding: 7px 32px 7px 12px;
+        font-size: 14px;
+        font-weight: 600;
+        color: #008649;
+        border: 2px solid #008649;
+        border-radius: 6px;
+        background: #fff;
+        cursor: pointer;
+        appearance: none;
+        -webkit-appearance: none;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23008649' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 10px center;
+        outline: none;
+        transition: border-color 0.2s;
     }
-    .tender-year-nav li a:hover { background: #555; }
-    .tender-year-nav li a.active { background: #008649; color: #fff; }
+    .year-filter-select:focus { border-color: #005a30; }
 
     /* ── Table ── */
     .tender-table-wrap { overflow-x: auto; }
+    .tender-table-wrap .btn-cell { display: flex; gap: 6px; justify-content: center; flex-wrap: wrap; }
+    .tender-table-wrap .btn-cell a.btn { width: auto; min-width: 80px; }
 
     .tender-empty { text-align: center; padding: 40px; color: #777; font-size: 15px; }
 </style>
@@ -66,23 +71,16 @@
             </div>
         </div>
 
-        {{-- ── Year chevron tabs ── --}}
-        <ul class="tender-year-nav">
-            @foreach($tab_years as $yr)
-            <li>
-                <a href="{{ url()->current() }}?year={{ $yr }}"
-                   class="{{ $active_year == $yr ? 'active' : '' }}">
-                    {{ $yr }}
-                </a>
-            </li>
-            @endforeach
-            <li>
-                <a href="{{ url()->current() }}?year=archive"
-                   class="{{ $active_year === 'archive' ? 'active' : '' }}">
-                    Archive
-                </a>
-            </li>
-        </ul>
+        {{-- ── Filter dropdown ── --}}
+        <div class="year-filter-bar">
+            <span class="year-filter-label">Filter:</span>
+            <select class="year-filter-select" onchange="window.location.href='{{ url()->current() }}?year='+this.value">
+                @foreach($tab_years as $yr)
+                <option value="{{ $yr }}" {{ $active_year == $yr ? 'selected' : '' }}>{{ $yr }}</option>
+                @endforeach
+                <option value="archive" {{ $active_year === 'archive' ? 'selected' : '' }}>Archive</option>
+            </select>
+        </div>
 
         {{-- ── Tender table ── --}}
         @if($all_tenders->isEmpty())
@@ -113,10 +111,12 @@
                             {{ $tender->expiry_date ? \Carbon\Carbon::parse($tender->expiry_date)->format('F d, Y') : '-' }}
                         </td>
                         <td class="text-center">
-                            <a href="#" class="btn btn-view"
-                               data-toggle="modal"
-                               data-target="#tenderModal{{ $tender->id }}">View</a>
-                            <a href="{{ $tender->file }}" class="btn btn-view" download>Download</a>
+                            <div class="btn-cell">
+                                <a href="#" class="btn btn-view"
+                                   data-toggle="modal"
+                                   data-target="#tenderModal{{ $tender->id }}">View</a>
+                                <a href="{{ $tender->file }}" class="btn btn-view" download>Download</a>
+                            </div>
                         </td>
                     </tr>
                     @endforeach

@@ -15,199 +15,47 @@
 
 @section('style')
 <style>
-    /* ── Page wrapper ── */
-    .auction-page-section {
-        padding: 50px 0 80px;
-    }
+    .auction-page-section { padding: 50px 0 80px; }
 
-    /* ── Chevron / breadcrumb year tabs ── */
-    .auction-year-nav {
+    /* ── Filter bar ── */
+    .year-filter-bar {
         display: flex;
-        list-style: none;
-        padding: 0;
-        margin: 0 0 30px 0;
-        flex-wrap: wrap;
-    }
-
-    .auction-year-nav li {
-        position: relative;
-    }
-
-    .auction-year-nav li a {
-        display: block;
-        padding: 10px 30px 10px 40px;
-        background: #555;
-        color: #fff;
-        font-size: 14px;
-        font-weight: 700;
-        text-decoration: none;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 50%, calc(100% - 14px) 100%, 0 100%, 14px 50%);
-        transition: background 0.2s;
-        white-space: nowrap;
-        margin-right: 2px;
-    }
-
-    .auction-year-nav li:first-child a {
-        clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 50%, calc(100% - 14px) 100%, 0 100%);
-        padding-left: 22px;
-    }
-
-    .auction-year-nav li a:hover {
-        background: #333;
-        color: #fff;
-    }
-
-    .auction-year-nav li a.active {
-        background: #222;
-        color: #fff;
-    }
-
-    /* ── Header row ── */
-    .auction-list-header {
-        display: flex;
+        align-items: center;
         justify-content: flex-end;
-        padding: 6px 50px 6px 16px;
-        margin-bottom: 2px;
+        gap: 10px;
+        margin-bottom: 18px;
     }
-
-    .auction-list-header span {
-        color: #e00;
+    .year-filter-label {
         font-size: 14px;
-        font-weight: 700;
-    }
-
-    /* ── Notice rows ── */
-    .auction-list {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-    }
-
-    .auction-list-item {
-        border-bottom: 1px solid #e5e5e5;
-    }
-
-    .auction-list-item:last-child {
-        border-bottom: none;
-    }
-
-    .auction-row-trigger {
-        display: flex;
-        align-items: center;
-        padding: 10px 8px 10px 0;
-        cursor: pointer;
-        gap: 8px;
-    }
-
-    .auction-row-trigger:hover .auction-notice-link {
-        text-decoration: underline;
-    }
-
-    .auction-notice-link {
-        flex: 1;
-        color: #2e7d32;
-        font-size: 14px;
-        font-weight: 500;
-        text-decoration: none;
-    }
-
-    .auction-expiry-date {
-        min-width: 130px;
-        text-align: right;
-        color: #2e7d32;
-        font-size: 13px;
-        font-weight: 500;
-        white-space: nowrap;
-        padding-right: 10px;
-    }
-
-    .auction-expiry-date.no-date {
-        color: #777;
-    }
-
-    .auction-toggle-btn {
-        width: 28px;
-        height: 28px;
-        border-radius: 50%;
-        background: #2e7d32;
-        border: none;
-        color: #fff;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-shrink: 0;
-        cursor: pointer;
-        transition: background 0.2s;
-        font-size: 13px;
-    }
-
-    .auction-toggle-btn:hover {
-        background: #1b5e20;
-    }
-
-    .auction-toggle-btn .chevron-icon {
-        display: inline-block;
-        transition: transform 0.25s;
-    }
-
-    .auction-toggle-btn.open .chevron-icon {
-        transform: rotate(180deg);
-    }
-
-    /* ── Accordion content ── */
-    .auction-accordion-body {
-        display: none;
-        padding: 16px 10px 20px;
-        border-top: 1px solid #e5e5e5;
-        background: #fafafa;
-    }
-
-    .auction-accordion-body.show {
-        display: block;
-    }
-
-    .auction-notice-image {
-        text-align: center;
-        margin-bottom: 16px;
-    }
-
-    .auction-notice-image img {
-        max-width: 100%;
-        height: auto;
-        border: 1px solid #ccc;
-    }
-
-    .auction-notice-text {
-        font-size: 14px;
-        line-height: 1.8;
-        color: #333;
-    }
-
-    .auction-read-more {
-        margin-top: 12px;
-        text-align: right;
-    }
-
-    .auction-read-more a {
-        color: #2e7d32;
-        font-size: 13px;
         font-weight: 600;
-        text-decoration: none;
+        color: #333;
+        white-space: nowrap;
     }
+    .year-filter-select {
+        padding: 7px 32px 7px 12px;
+        font-size: 14px;
+        font-weight: 600;
+        color: #008649;
+        border: 2px solid #008649;
+        border-radius: 6px;
+        background: #fff;
+        cursor: pointer;
+        appearance: none;
+        -webkit-appearance: none;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23008649' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 10px center;
+        outline: none;
+        transition: border-color 0.2s;
+    }
+    .year-filter-select:focus { border-color: #005a30; }
 
-    .auction-read-more a:hover {
-        text-decoration: underline;
-    }
+    /* ── Table ── */
+    .auction-table-wrap { overflow-x: auto; }
+    .auction-table-wrap .btn-cell { display: flex; gap: 6px; justify-content: center; flex-wrap: wrap; }
+    .auction-table-wrap .btn-cell a.btn { width: auto; min-width: 80px; }
 
-    /* ── Empty state ── */
-    .auction-empty {
-        text-align: center;
-        padding: 40px;
-        color: #777;
-        font-size: 15px;
-    }
+    .auction-empty { text-align: center; padding: 40px; color: #777; font-size: 15px; }
 </style>
 @endsection
 
@@ -215,207 +63,116 @@
 <section class="auction-page-section">
     <div class="container">
         <div class="empty-height-50"></div>
-        {{-- Page heading --}}
+
         <div class="row mb-4">
             <div class="col-12 text-center">
                 <h2 style="color:#006837; font-weight:500;">
-                    {{ get_static_option('auction_page_title') ?? __('Auction') }}
+                    {{ get_static_option('auction_page_title') ?? __('Auction Notice') }}
                 </h2>
                 <div class="title-seperator"></div>
             </div>
         </div>
-        <div style="position: relative;">
-            <div class="auction-dropdown">
-                <button type="button" onclick="showMenu(event)" class="auction-dropdown-button">
-                    Select
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" id="auction-chevron" class="auction-chevron-icon">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
-                    </svg>
-                </button>
-                <div class="auction-dropdown-content">
-                    <a href="#" class="auction-dropdown-link">2026</a>
-                    <a href="#" class="auction-dropdown-link">2025</a>
-                    <a href="#" class="auction-dropdown-link">2024</a>
-                </div>
-            </div>
-            @if($all_auctions->isEmpty())
-            <div class="auction-empty">{{ __('No auction notices found.') }}</div>
-            @else
-            <div style="overflow-x: auto;">
-                <table width="100%" class="auction-table" cellspacing="0" cellpadding="5" bordercolor="#DDDDDD" border="1" align="center" style="border-collapse: collapse; max-width:1230px;">
-                    <thead>
-                        <tr bgcolor="#008649">
-                            <th class="text-center">
-                                <font
-                                    color="#ffffff"><b>Sl
-                                        No.</b></font>
-                            </th>
-                            <th class="text-center">
-                                <font
-                                    color="#ffffff"><b>Title</b></font>
-                            </th>
-                            <th class="text-center">
-                                <font
-                                    color="#ffffff"><b>Entry
-                                        Date</b></font>
-                            </th>
-                            <th class="text-center">
-                                <font
-                                    color="#ffffff"><b>Expiry
-                                        Date</b></font>
-                            </th>
-                            <th class="text-center">
-                                <font
-                                    color="#ffffff"><b>View</b></font>
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($all_auctions as $key => $auction)
-                        <tr>
-                            <td class="text-center">{{$key + 1}}</td>
-                            <td>{{ __('Auction') }} ({{ \Carbon\Carbon::parse($auction->notice_date)->format('F, d, Y') }})</td>
-                            <td class="text-center">{{ \Carbon\Carbon::parse($auction->notice_date)->format('F, d, Y') }}</td>
-                            <td class="text-center">{{ $auction->expiry_date ? \Carbon\Carbon::parse($auction->expiry_date)->format('F, d, Y') : '-' }}</td>
-                            <td class="text-center">
-                                <a href="assets/pdf/8_461_Snatak-Bangla-Chotogolpo.pdf" class="btn btn-view" data-toggle="modal" data-target="#exampleModalCenter">View</a>
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-            @endif
+
+        {{-- ── Filter dropdown ── --}}
+        <div class="year-filter-bar">
+            <span class="year-filter-label">Filter:</span>
+            <select class="year-filter-select" onchange="window.location.href='{{ url()->current() }}?year='+this.value">
+                @foreach($tab_years as $yr)
+                <option value="{{ $yr }}" {{ $active_year == $yr ? 'selected' : '' }}>{{ $yr }}</option>
+                @endforeach
+                <option value="archive" {{ $active_year === 'archive' ? 'selected' : '' }}>Archive</option>
+            </select>
         </div>
 
-        <!-- Modal -->
+        {{-- ── Auction table ── --}}
+        @if($all_auctions->isEmpty())
+            <div class="auction-empty">{{ __('No auction notices found.') }}</div>
+        @else
+        <div class="auction-table-wrap">
+            <table width="100%" class="auction-table" cellspacing="0" cellpadding="5"
+                   bordercolor="#DDDDDD" border="1" align="center"
+                   style="border-collapse: collapse; max-width:1230px;">
+                <thead>
+                    <tr bgcolor="#008649">
+                        <th class="text-center"><font color="#ffffff"><b>Sl No.</b></font></th>
+                        <th class="text-center"><font color="#ffffff"><b>Title</b></font></th>
+                        <th class="text-center"><font color="#ffffff"><b>Entry Date</b></font></th>
+                        <th class="text-center"><font color="#ffffff"><b>Expiry Date</b></font></th>
+                        <th class="text-center"><font color="#ffffff"><b>View</b></font></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($all_auctions as $key => $auction)
+                    <tr>
+                        <td class="text-center">{{ $key + 1 }}</td>
+                        <td>{{ $auction->title }}</td>
+                        <td class="text-center">
+                            {{ $auction->notice_date ? \Carbon\Carbon::parse($auction->notice_date)->format('F d, Y') : '-' }}
+                        </td>
+                        <td class="text-center">
+                            {{ $auction->expiry_date ? \Carbon\Carbon::parse($auction->expiry_date)->format('F d, Y') : '-' }}
+                        </td>
+                        <td class="text-center">
+                            @if($auction->image)
+                            @php $auctionFile = get_attachment_image_by_id($auction->image); @endphp
+                            <div class="btn-cell">
+                                <a href="#" class="btn btn-view"
+                                   data-toggle="modal"
+                                   data-target="#auctionModal{{ $auction->id }}">View</a>
+                                <a href="{{ $auctionFile['img_url'] ?? '#' }}" class="btn btn-view" download>Download</a>
+                            </div>
+                            @endif
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+
+        {{-- ── Per-auction modals ── --}}
         @foreach($all_auctions as $auction)
-        <div class="modal fade" id="exampleModalCenter" tabindex="-1"
-            role="dialog" aria-labelledby="exampleModalCenterTitle"
-            aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered"
-                role="document" style="max-width: 100%;">
-                <div class="modal-content"
-                    style="background-color: #FFF; width: 100%; margin: 0 auto;">
+        @if($auction->image)
+        @php
+            $auctionFile = get_attachment_image_by_id($auction->image);
+            $auctionUrl  = $auctionFile['img_url'] ?? '';
+            $auctionPath = $auctionFile['path'] ?? '';
+            $auctionExt  = strtolower(pathinfo($auctionPath, PATHINFO_EXTENSION));
+        @endphp
+        <div class="modal fade" id="auctionModal{{ $auction->id }}" tabindex="-1"
+             role="dialog" aria-labelledby="auctionModalLabel{{ $auction->id }}" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document" style="max-width:90%;">
+                <div class="modal-content" style="width:100%; margin:0 auto;">
                     <div class="modal-header">
-                        <h5 class="modal-title"
-                            id="exampleModalCenterTitle">{{$auction->title}}</h5>
-                        <button type="button" class="close"
-                            data-dismiss="modal" aria-label="Close">
+                        <h5 class="modal-title" id="auctionModalLabel{{ $auction->id }}">
+                            {{ $auction->title }}
+                        </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body scroll-modal-body">
-                        @if($auction->image)
-                        {!! render_image_markup_by_attachment_id($auction->image) !!}
+                        @if($auctionExt === 'pdf')
+                            <iframe src="{{ $auctionUrl }}" width="100%" height="600px" style="border:none;"></iframe>
+                        @else
+                            <div style="text-align:center; padding:16px;">
+                                {!! render_image_markup_by_attachment_id($auction->image) !!}
+                            </div>
                         @endif
                     </div>
-                    
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary"
-                        data-dismiss="modal">Close</button>
-                        @if($auction->image)
-                        <a href="{{ get_attachment_image_by_id($auction->image)['img_url'] }}"
-                        type="button" class="btn btn-view"
-                        download>Save changes</a>
-                        @endif
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <a href="{{ $auctionUrl }}" class="btn btn-view" download>Download</a>
                     </div>
                 </div>
             </div>
         </div>
-        @endforeach
-
-        {{-- Year tabs (chevron breadcrumb style) --}}
-        <!-- @if(!empty($tab_years))
-        <ul class="auction-year-nav">
-            @foreach($tab_years as $yr)
-            <li>
-                <a href="{{ route('frontend.auction') }}?year={{ $yr }}"
-                    class="{{ (string)$active_year === (string)$yr && $selected_year !== 'archive' ? 'active' : '' }}">
-                    {{ $yr }}
-                </a>
-            </li>
-            @endforeach
-            <li>
-                <a href="{{ route('frontend.auction') }}?year=archive"
-                    class="{{ $selected_year === 'archive' ? 'active' : '' }}">
-                    {{ __('ARCHIVE') }}
-                </a>
-            </li>
-        </ul>
         @endif
-
-        {{-- Expiry Date column header --}}
-        <div class="auction-list-header">
-            <span>{{ __('Expiry Date') }}</span>
-        </div>
-
-        {{-- Notice list --}}
-        @if($all_auctions->isEmpty())
-        <div class="auction-empty">{{ __('No auction notices found.') }}</div>
-        @else
-        <ul class="auction-list">
-            @foreach($all_auctions as $auction)
-            <li class="auction-list-item">
-                {{-- Trigger row --}}
-                <div class="auction-row-trigger" onclick="toggleAuction({{ $auction->id }})">
-                    <span class="auction-notice-link">
-                        {{ __('Auction') }} ({{ \Carbon\Carbon::parse($auction->notice_date)->format('F, d, Y') }})
-                    </span>
-                    <span class="auction-expiry-date {{ $auction->expiry_date ? '' : 'no-date' }}">
-                        {{ $auction->expiry_date ? \Carbon\Carbon::parse($auction->expiry_date)->format('F, d, Y') : '-' }}
-                    </span>
-                    <button class="auction-toggle-btn" id="btn-{{ $auction->id }}" aria-label="Toggle">
-                        <span class="chevron-icon">&#8964;</span>
-                    </button>
-                </div>
-
-                {{-- Accordion body --}}
-                <div class="auction-accordion-body" id="body-{{ $auction->id }}">
-                    @if($auction->image)
-                    <div class="auction-notice-image">
-                        {!! render_image_markup_by_attachment_id($auction->image) !!}
-                    </div>
-                    @endif
-                    @if($auction->description)
-                    <div class="auction-notice-text">
-                        {!! $auction->description !!}
-                    </div>
-                    @endif
-                    <div class="auction-read-more">
-                        <a href="{{ route('frontend.auction.single', $auction->slug) }}">
-                            {{ __('View Full Auction Notice') }} &rarr;
-                        </a>
-                    </div>
-                </div>
-            </li>
-            @endforeach
-        </ul>
-        @endif -->
+        @endforeach
+        @endif
 
     </div>
 </section>
 @endsection
 
 @section('script')
-<script>
-    function toggleAuction(id) {
-        var body = document.getElementById('body-' + id);
-        var btn = document.getElementById('btn-' + id);
-        if (!body) return;
-        var isOpen = body.classList.contains('show');
-        // Close all open ones first
-        document.querySelectorAll('.auction-accordion-body.show').forEach(function(el) {
-            el.classList.remove('show');
-        });
-        document.querySelectorAll('.auction-toggle-btn.open').forEach(function(el) {
-            el.classList.remove('open');
-        });
-        // Open clicked one if it was closed
-        if (!isOpen) {
-            body.classList.add('show');
-            btn.classList.add('open');
-        }
-    }
-</script>
 @endsection
