@@ -223,7 +223,7 @@
                         $allow = [
                             'Unclaimed Deposit List',
                             'Financial Literacy',
-                            'Unclaimed Dividend',
+                            'Unclaimed Divident',
                             'Monthly Position of Agri Loan', 
                             'Price Sensitive Information'
                         ];
