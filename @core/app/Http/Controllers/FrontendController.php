@@ -765,6 +765,11 @@ ITEM;
         return view('frontend.pages.deposit-calculator.deposit-calculator');
     }
 
+    public function emi_calculator()
+    {
+        return view('frontend.pages.emi-calculator.emi-calculator');
+    }
+
     public function exrate()
     {
         $exchange_rate = ExchangeRate::where('status', 1)->latest()->first();
@@ -1032,6 +1037,14 @@ ITEM;
     {
         $brand = Brand::where('slug', $slug)->first();
         return view('frontend.pages.brand.brand-single')->with(['brand' => $brand]);
+    }
+
+    public function achievement_page()
+    {
+        $all_achievements = Brand::orderBy('id', 'desc')->paginate(10);
+        return view('frontend.pages.achievement')->with([
+            'all_achievements' => $all_achievements
+        ]);
     }
 
     public function service_page()

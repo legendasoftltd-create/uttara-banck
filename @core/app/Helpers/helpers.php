@@ -1,5 +1,6 @@
 <?php
 
+use App\Brand;
 use App\CourseCoupon;
 use App\Language;
 use App\Menu;
@@ -2883,6 +2884,12 @@ function important_info(){
     return $informations;
 }
 
+function achivement(){
+    $achivements = Brand::orderBy('id','desc')->get();
+
+    return $achivements;
+}
+
 /**
  * Write an entry to the audit trail. Thin wrapper around AuditLogger so
  * any controller/listener/middleware can log with one call:
@@ -2891,4 +2898,10 @@ function important_info(){
 function audit_log(string $action, array $options = [])
 {
     return \App\Services\AuditLogger::log($action, $options);
+}
+
+function uncla_menu(){
+    $uncla_menus= WorksCategory::where('id', 25)->first();
+
+    return $uncla_menus;
 }

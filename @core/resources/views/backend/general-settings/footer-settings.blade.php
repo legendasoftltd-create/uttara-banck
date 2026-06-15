@@ -108,47 +108,56 @@
 
 @section('script')
     <script>
-        $(document).on('click', '.footer-link-group .all-field-wrap .action-wrap .add', function (e) {
+        var footerCloneCounter = Date.now();
+
+        $(document).on('click', '.footer-link-group .action-wrap .add', function (e) {
             e.preventDefault();
             var el = $(this);
             var group = el.closest('.footer-link-group');
             var groupKey = group.data('group');
             var wrapper = el.closest('.iconbox-repeater-wrapper');
             var list = group.find('.repeater-list');
-            var containerLength = list.find('.all-field-wrap').length;
+
+            footerCloneCounter++;
+            var uid = groupKey + '_' + footerCloneCounter;
 
             var clonedData = wrapper.clone();
             clonedData.find('input[type="text"]').val('');
-            clonedData.find('.nav-tabs').attr('id', 'myTab_' + groupKey + '_' + containerLength);
-            clonedData.find('.tab-content').first().attr('id', 'myTabContent_' + groupKey + '_' + containerLength);
-            clonedData.find('.tab-pane').each(function () {
+
+            clonedData.find('.nav-tabs').attr('id', 'myTab_' + uid);
+            clonedData.find('.tab-content').first().attr('id', 'myTabContent_' + uid);
+
+            clonedData.find('.tab-pane').each(function (i) {
                 var pane = $(this);
-                var oldId = pane.attr('id');
-                pane.attr('id', oldId + '_clone' + containerLength);
+                var baseId = pane.attr('id').replace(/_clone_\d+$/, '').replace(/_\d+$/, '');
+                pane.attr('id', baseId + '_clone_' + footerCloneCounter);
+                pane.removeClass('show active');
+                if (i === 0) pane.addClass('show active');
             });
-            clonedData.find('.nav-link').each(function () {
+
+            clonedData.find('.nav-link').each(function (i) {
                 var link = $(this);
                 var oldHref = link.attr('href');
                 if (oldHref) {
-                    link.attr('href', oldHref + '_clone' + containerLength);
+                    var baseHref = oldHref.replace(/_clone_\d+$/, '').replace(/_\d+$/, '');
+                    link.attr('href', baseHref + '_clone_' + footerCloneCounter);
                 }
+                link.removeClass('active');
+                if (i === 0) link.addClass('active');
             });
 
             list.append(clonedData);
-
-            if (containerLength > 0) {
-                list.find('.remove').show(300);
-            }
+            list.find('.remove').show(300);
         });
 
-        $(document).on('click', '.footer-link-group .all-field-wrap .action-wrap .remove', function (e) {
+        $(document).on('click', '.footer-link-group .action-wrap .remove', function (e) {
             e.preventDefault();
             var el = $(this);
             var group = el.closest('.footer-link-group');
             var wrapper = el.closest('.iconbox-repeater-wrapper');
             var list = group.find('.repeater-list');
 
-            if (list.find('.all-field-wrap').length > 1) {
+            if (list.find('.iconbox-repeater-wrapper').length > 1) {
                 wrapper.hide(300, function () {
                     wrapper.remove();
                 });

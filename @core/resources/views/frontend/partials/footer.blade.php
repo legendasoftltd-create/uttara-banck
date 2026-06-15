@@ -4,6 +4,8 @@
 @endphp
 @if (!in_array(Route::currentRouteName(), ['frontend.course.lesson', 'frontend.course.lesson.start']))
 
+
+
 <footer class="footer-area home-variant-{{$home_page_variant}}
 @if ((request()->routeIs('homepage') || request()->routeIs('frontend.homepage.demo')) && $home_page_variant == '17' && filter_static_option_value('home_page_call_to_action_section_status', $static_field_data))
    has-top-padding
@@ -167,28 +169,48 @@
             </div>
             <div style="opacity: 1; transform: none;">
                 <div class="footer-subscribe" data-aos="fade-up" data-aos-duration="5000">
-                    <h3>Subscribe Newsletter</h3>
-                    <form>
-                        <input id="email" type="email" placeholder="Enter your email address">
-                        <button type="submit">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="none"
-                                viewBox="0 0 67 67">
-                                <circle cx="33.209" cy="33.518" r="28.084" fill="#008649"></circle>
-                                <circle cx="33.209" cy="33.518" r="30.584" stroke="#008649"
-                                    stroke-opacity="0.2" stroke-width="5"></circle>
-                                <g clip-path="url(#footerRightCircle_svg__a)">
-                                    <path fill="#fff"
-                                        d="m44.754 33.792-6.884-6.938a.814.814 0 0 0-1.155 1.145l5.508 5.554H22.244a.813.813 0 0 0-.814.815c0 .45.363.814.814.814h19.979l-5.508 5.554a.814.814 0 0 0 1.155 1.146l6.884-6.94a.82.82 0 0 0 0-1.15">
-                                    </path>
-                                </g>
-                                <defs>
-                                    <clippath id="footerRightCircle_svg__a">
-                                        <path fill="#fff" d="M21.43 22.585h23.559v23.559h-23.56z"></path>
-                                    </clippath>
-                                </defs>
-                            </svg>
-                        </button>
-                    </form>
+                    <style>
+                        .achievementSlider { overflow: hidden; width: 100%; }
+                        .achievementSlider .swiper-wrapper { margin: 0; }
+                        .achievementSlider .swiper-slide { width: 130px !important; margin: 0 10px 0 0 !important; flex-shrink: 0; display: flex; gap: 10px; align-items: center; justify-content: center; }
+                        .achievementSlider .swiper-slide img { max-width: 100%; max-height: 60px; object-fit: contain; }
+                    </style>
+                    <a href="{{ route('frontend.achievement') }}">> 
+                        <<h3>Our Achivement </h3>
+                        <div class="swiper achievementSlider mt-4">
+                            <div class="swiper-wrapper">
+                                @foreach(achivement() as $brand)
+                                    <div class="swiper-slide">
+                                        {!! render_image_markup_by_attachment_id($brand->thumbnail, 'max-h-16 object-contain') !!}
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                    </a>
+                    <div class="mt-3"> 
+                        <h3>Subscribe Newsletter</h3>
+                        <form>
+                            <input id="email" type="email" placeholder="Enter your email address">
+                            <button type="submit">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="none"
+                                    viewBox="0 0 67 67">
+                                    <circle cx="33.209" cy="33.518" r="28.084" fill="#008649"></circle>
+                                    <circle cx="33.209" cy="33.518" r="30.584" stroke="#008649"
+                                        stroke-opacity="0.2" stroke-width="5"></circle>
+                                    <g clip-path="url(#footerRightCircle_svg__a)">
+                                        <path fill="#fff"
+                                            d="m44.754 33.792-6.884-6.938a.814.814 0 0 0-1.155 1.145l5.508 5.554H22.244a.813.813 0 0 0-.814.815c0 .45.363.814.814.814h19.979l-5.508 5.554a.814.814 0 0 0 1.155 1.146l6.884-6.94a.82.82 0 0 0 0-1.15">
+                                        </path>
+                                    </g>
+                                    <defs>
+                                        <clippath id="footerRightCircle_svg__a">
+                                            <path fill="#fff" d="M21.43 22.585h23.559v23.559h-23.56z"></path>
+                                        </clippath>
+                                    </defs>
+                                </svg>
+                            </button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
@@ -563,6 +585,17 @@
 
     });
 
+
+    var achievementSwiper = new Swiper(".achievementSlider", {
+        slidesPerView: 'auto',
+        spaceBetween: 0,
+        loop: false,
+        speed: 800,
+        autoplay: {
+            delay: 3000,
+            disableOnInteraction: false
+        }
+    });
 
     var swiper = new Swiper(".moreSlider", {
         slidesPerView: 5,
