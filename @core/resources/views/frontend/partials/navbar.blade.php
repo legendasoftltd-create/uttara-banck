@@ -222,10 +222,9 @@
                      @php
                         $allow = [
                             'Unclaimed Deposit List',
-                            'Financial Literacy',
                             'Unclaimed Divident',
                             'Monthly Position of Agri Loan', 
-                            'Price Sensitive Information'
+                            'Price Sensitive Information',
                         ];
                     @endphp
                     @foreach (important_info() as $info)
