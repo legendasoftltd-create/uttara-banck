@@ -221,10 +221,10 @@
                     <li><a href="{{ route('frontend.dynamic.page', 'sanchayapatra') }}">Sanchayapatra</a></li>
                      @php
                         $allow = [
+                            'Price sensitive Information',
                             'Unclaimed Deposit List',
                             'Unclaimed Divident',
-                            'Monthly Position of Agri Loan', 
-                            'Price Sensitive Information',
+                            'Monthly Position of Agri Loan',
                         ];
                     @endphp
                     @foreach (important_info() as $info)
