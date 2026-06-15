@@ -107,8 +107,8 @@
         </div>
         <div class="footer-wrap">
             <div style="opacity: 1; transform: none; grid-column: span 4 / span 3;">
-                <h3 class="text-[#012C60] font-bold leading-4 text-base mb-4" data-aos="fade-up"
-                    data-aos-duration="2000">{{__('Address')}}</h3>
+                <!-- <h3 class="text-[#012C60] font-bold leading-4 text-base mb-4" data-aos="fade-up"
+                    data-aos-duration="2000">{{__('Address')}}</h3> -->
                 <div data-aos="fade-up" data-aos-duration="2000"
                     class="text-sm font-extralight sm:text-base sm:leading-[23px] text-[#637D92]">
                     @if(!empty(get_static_option('site_'.get_user_lang().'_footer_address')))
