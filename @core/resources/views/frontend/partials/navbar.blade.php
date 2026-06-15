@@ -214,16 +214,30 @@
 
                     <li><a href="{{ route('frontend.locations') }}">Our Location</a></li>
                     <li><a href="https://ibanking.uttarabank-bd.com/iBankUltimus/LoginUI.aspx">iBanking</a></li>
-                    <li><a href="https://play.google.com/store/apps/details?id=com.uttarabank.ublmobile">Uttara
-                            eWallet</a></li>
-                    <li><a href="#">Career</a></li>
+                    <li><a href="https://play.google.com/store/apps/details?id=com.uttarabank.ublmobile">Uttara eWallet</a></li>
+                    <li><a href="{{ route('frontend.jobs') }}">Career</a></li>
                     <li><a href="{{ route('frontend.complain') }}">Complain</a></li>
                     <li><a href="{{ route('frontend.dynamic.page', 'warning-against-illegal-forex-trading/dealing') }}">Warning against illegal forex trading/dealing</a></li>
                     <li><a href="{{ route('frontend.dynamic.page', 'sanchayapatra') }}">Sanchayapatra</a></li>
-                    <li><a href="#">Unclaimed Deposit List</a></li>
-                    <li><a href="#">Financial Literacy</a></li>
+                     @php
+                        $allow = [
+                            'Unclaimed Deposit List',
+                            'Financial Literacy',
+                            'Unclaimed Dividend',
+                            'Monthly Position of Agri Loan', 
+                            'Price Sensitive Information'
+                        ];
+                    @endphp
+                    @foreach (important_info() as $info)
+                        @if(in_array($info->name, $allow))
+                            <li>
+                                <a href="{{ route('frontend.works.category', ['id' => $info->id, 'any' => $info->name]) }}">
+                                    {{ $info->name }}
+                                </a>
+                            </li>
+                        @endif
+                    @endforeach
                     <li><a href="https://uttaradev.blocknots.com/digital-banking">Digital Banking</a></li>
-                    <li><a href="#">Unclaimed Dividend</a></li>
                     <li><a href="{{ route('frontend.dynamic.page', "citizen's-charter") }}">Citizen's Charter</a></li>
                     <li><a href="{{ route('frontend.dynamic.page', 'fdi-help-desk') }}">FDI Help Desk</a></li>
                     <li><a href="{{ route('frontend.dynamic.page', 'lending-interest-rate') }}">Lending Interest Rate</a></li>

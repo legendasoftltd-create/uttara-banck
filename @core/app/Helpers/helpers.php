@@ -2899,3 +2899,9 @@ function audit_log(string $action, array $options = [])
 {
     return \App\Services\AuditLogger::log($action, $options);
 }
+
+function uncla_menu(){
+    $uncla_menus= WorksCategory::where('id', 25)->first();
+
+    return $uncla_menus;
+}
