@@ -88,9 +88,20 @@
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
-                                    <div class="modal-body"> 
-                                        <embed src="{{ !empty($file_details) ? ($file_details['img_url'] ?? '') : '' }}" type="application/pdf" width="100%"
-                                            height="600px">
+                                    <div class="modal-body" style="max-height: 80vh; overflow-y: auto;"> 
+                                        {{-- <embed src="{{ !empty($file_details) ? ($file_details['img_url'] ?? '') : '' }}" type="application/pdf" width="100%"
+                                            height="600px"> --}}
+
+                                            @php
+                                                $url = $file_details['img_url'] ?? '';
+                                                $extension = strtolower(pathinfo(parse_url($url, PHP_URL_PATH), PATHINFO_EXTENSION));
+                                            @endphp
+
+                                            @if(in_array($extension, ['jpg', 'jpeg', 'png', 'gif', 'webp']))
+                                                <img src="{{ $url }}" class="img-fluid w-100" alt="">
+                                            @elseif($extension === 'pdf')
+                                                <embed src="{{ $url }}" type="application/pdf" width="100%" height="600px">
+                                            @endif
                                             
                                         
                                     </div>
