@@ -4347,7 +4347,7 @@ html.monochrome {
     border: none;
     border: 1px solid #4f8c65;
     background: transparent;
-    color: #012C60;
+    color: #ffffff;
     border-radius: 4px;
 }
 
@@ -8239,4 +8239,41 @@ Download Page Design CSS Starts Here
         z-index: 99999;
         text-decoration: none !important;
     }
+}
+
+
+
+.white-placeholder::placeholder {
+    color: #ffffff;
+    opacity: 1;
+}
+
+/* Chrome, Safari, Opera */
+.white-placeholder::-webkit-input-placeholder {
+    color: #ffffff;
+    opacity: 1;
+}
+
+/* Firefox */
+.white-placeholder::-moz-placeholder {
+    color: #ffffff;
+    opacity: 1;
+}
+
+/* Older Firefox */
+.white-placeholder:-moz-placeholder {
+    color: #ffffff;
+    opacity: 1;
+}
+
+/* Internet Explorer 10-11 */
+.white-placeholder:-ms-input-placeholder {
+    color: #ffffff;
+    opacity: 1;
+}
+
+/* Microsoft Edge */
+.white-placeholder::-ms-input-placeholder {
+    color: #ffffff;
+    opacity: 1;
 }

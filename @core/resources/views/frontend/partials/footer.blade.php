@@ -107,27 +107,62 @@
         </div>
         <div class="footer-wrap">
             <div style="opacity: 1; transform: none; grid-column: span 4 / span 3;">
-                <!-- <h3 class="text-[#012C60] font-bold leading-4 text-base mb-4" data-aos="fade-up"
-                    data-aos-duration="2000">{{__('Address')}}</h3> -->
-                <div data-aos="fade-up" data-aos-duration="2000"
+                    <!-- <h3 class="text-[#012C60] font-bold leading-4 text-base mb-4" data-aos="fade-up"
+                        data-aos-duration="2000">{{__('Address')}}</h3> -->
+                    <div data-aos="fade-up" data-aos-duration="2000"
                     class="text-sm font-extralight sm:text-base sm:leading-[23px] text-[#637D92]">
+
                     @if(!empty(get_static_option('site_'.get_user_lang().'_footer_address')))
-                        <p class="font-light">{!! nl2br(e(get_static_option('site_'.get_user_lang().'_footer_address'))) !!}</p>
+                        <p class="font-light">
+                            <span style="font-weight:800;">
+                                Address:
+                            </span>
+                            {!! nl2br(e(get_static_option('site_'.get_user_lang().'_footer_address'))) !!}
+                        </p>
                     @endif
+
                     @if(!empty(get_static_option('site_'.get_user_lang().'_footer_contact_label')) || !empty(get_static_option('site_footer_contact_phone')))
-                        <p class="font-light mt-2">{{get_static_option('site_'.get_user_lang().'_footer_contact_label')}}
-                            @if(!empty(get_static_option('site_footer_contact_phone')))
-                                <a class="text-[#012C60] font-medium" href="tel:{{get_static_option('site_footer_contact_phone')}}">{{get_static_option('site_footer_contact_phone')}}</a>
-                            @endif
-                        </p>
-                    @endif
-                    @if(!empty(get_static_option('site_footer_contact_email')))
                         <p class="font-light mt-2">
-                            <a class="text-[#012C60] font-medium" href="mailto:{{get_static_option('site_footer_contact_email')}}">{{get_static_option('site_footer_contact_email')}}</a>
+
+                            @if(!empty(get_static_option('site_'.get_user_lang().'_footer_contact_label')))
+                                <span style="font-weight:800;">
+                                    {{get_static_option('site_'.get_user_lang().'_footer_contact_label')}}
+                                </span>
+                            @endif
+
+                            @if(!empty(get_static_option('site_footer_contact_phone')))
+                                <a class="text-[#012C60]" style="font-weight:300;"
+                                href="tel:{{get_static_option('site_footer_contact_phone')}}">
+                                    {{get_static_option('site_footer_contact_phone')}}
+                                </a>
+                            @endif
+
                         </p>
                     @endif
-                    <p class="text-[#012C60] font-light md:text-base">{{__('Total Visitor')}}: {{number_format(\App\Visitor::count())}}</p>
+
+                    @if(!empty(get_static_option('site_footer_contact_email')))
+                        <p class=" mt-2">
+                            <span style="font-weight:700;">
+                                Email:
+                            </span>
+
+                            <a class="text-[#012C60] text-sm font-extralight" style="font-weight:300;"
+                            href="mailto:{{get_static_option('site_footer_contact_email')}}">
+                                {{get_static_option('site_footer_contact_email')}}
+                            </a>
+                        </p>
+                    @endif
+
+                    <p class="text-[#012C60] ">
+                        <span style="font-weight:700;">
+                            {{__('Total Visitor')}}:
+                        </span>
+
+                        {{number_format(\App\Visitor::count())}}
+                    </p>
+
                 </div>
+
                 <div class="footer-social mt-3" data-aos="fade-up" data-aos-duration="5000">
                     @foreach($all_social_item as $data)
                                     <li><a href="{{$data->url}}" target="_blank" rel="noopener noreferrer canonical" aria-label="{{$data->name}}" title="{{$data->name}}"><i class="{{$data->icon}}"></i></a></li>
@@ -175,8 +210,8 @@
                         .achievementSlider .swiper-slide { width: 130px !important; margin: 0 10px 0 0 !important; flex-shrink: 0; display: flex; gap: 10px; align-items: center; justify-content: center; }
                         .achievementSlider .swiper-slide img { max-width: 100%; max-height: 60px; object-fit: contain; }
                     </style>
-                    <a href="{{ route('frontend.achievement') }}">> 
-                        <<h3>Our Achivement </h3>
+                    <a href="{{ route('frontend.achievement') }}">
+                        <h3>Our Achivement </h3>
                         <div class="swiper achievementSlider mt-4">
                             <div class="swiper-wrapper">
                                 @foreach(achivement() as $brand)
@@ -190,7 +225,7 @@
                     <div class="mt-3"> 
                         <h3>Subscribe Newsletter</h3>
                         <form>
-                            <input id="email" type="email" placeholder="Enter your email address">
+                            <input id="email" type="email" placeholder="Enter your email address" class="white-placeholder">
                             <button type="submit">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="none"
                                     viewBox="0 0 67 67">
