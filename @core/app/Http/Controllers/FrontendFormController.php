@@ -326,16 +326,27 @@ class FrontendFormController extends Controller
             'status' => 'pending',
         ]);
 
-        $complaint_email = get_static_option('complaint_cell_email');
-        $send_to = !empty($complaint_email) ? $complaint_email : get_static_option('site_global_email');
+        $admin_email = env('APP_COMPLAIN_MAIL') ?: (get_static_option('complaint_cell_email') ?: get_static_option('site_global_email'));
 
         try {
-            Mail::to($send_to)->send(new ComplaintMail(
+            Mail::to($admin_email)->send(new ComplaintMail(
                 $complaint,
                 __('New Complaint Submitted on').' '.get_static_option('site_'.get_default_language().'_title')
             ));
         } catch (\Exception $e) {
             return redirect()->back()->with(LegendaSoftHelpers::item_delete($e->getMessage()));
+        }
+
+        if ($complaint->email) {
+            try {
+                Mail::to($complaint->email)->send(new ComplaintMail(
+                    $complaint,
+                    __('Your Complaint Confirmation - Uttara Bank PLC'),
+                    'mail.complaint-confirmation'
+                ));
+            } catch (\Exception $e) {
+                // silent fail for user confirmation
+            }
         }
 
         return redirect()->back()->with(['msg' => __('Your complaint has been submitted. We will get back to you soon.'), 'type' => 'success']);

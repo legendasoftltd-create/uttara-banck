@@ -13,27 +13,19 @@ class ComplaintMail extends Mailable
     use Queueable, SerializesModels;
     public $complaint;
     public $subject;
+    public $view;
 
-    /**
-     * Create a new message instance.
-     *
-     * @return void
-     */
-    public function __construct(Complaint $complaint, $subject)
+    public function __construct(Complaint $complaint, $subject, $view = 'mail.complaint')
     {
         $this->complaint = $complaint;
         $this->subject = $subject;
+        $this->view = $view;
     }
 
-    /**
-     * Build the message.
-     *
-     * @return $this
-     */
     public function build()
     {
         return $this->from(get_static_option('site_global_email'), get_static_option('site_'.get_default_language().'_title'))
             ->subject($this->subject)
-            ->view('mail.complaint');
+            ->view($this->view);
     }
 }

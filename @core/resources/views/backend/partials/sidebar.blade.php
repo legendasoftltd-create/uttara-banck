@@ -1786,15 +1786,18 @@
                             </li>
                             <li class="{{active_menu('admin-home/general-settings/seo-settings')}}"><a
                                         href="{{route('admin.general.seo.settings')}}">{{__('SEO Settings')}}</a></li>
-                            <li class="{{active_menu('admin-home/general-settings/scripts')}}"><a
-                                        href="{{route('admin.general.scripts.settings')}}">{{__('Third Party Scripts')}}</a>
-                            </li> 
+                            
                             <li class="{{active_menu('admin-home/general-settings/email-template')}}"><a
                                         href="{{route('admin.general.email.template')}}">{{__('Email Template')}}</a>
                             </li>
                             <li class="{{active_menu('admin-home/general-settings/email-settings')}}"><a
                                         href="{{route('admin.general.email.settings')}}">{{__('Email Messages Settings')}}</a>
                             </li> --}}
+                            
+                            <li class="{{active_menu('admin-home/general-settings/scripts')}}"><a
+                                        href="{{route('admin.general.scripts.settings')}}">{{__('Third Party Scripts')}}</a>
+                            </li> 
+
                             <li class="{{active_menu('admin-home/general-settings/smtp-settings')}}"><a
                                         href="{{route('admin.general.smtp.settings')}}">{{__('SMTP Settings')}}</a>
                             </li>
