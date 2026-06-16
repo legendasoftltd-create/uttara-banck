@@ -111,6 +111,7 @@
     }
 
 </script>
+    @yield('style')
 </head>
 <body>
 @include('frontend.partials.navbar')

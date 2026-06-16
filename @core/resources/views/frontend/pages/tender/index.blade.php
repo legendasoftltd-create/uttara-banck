@@ -20,33 +20,48 @@
         display: flex;
         align-items: center;
         justify-content: flex-end;
-        gap: 10px;
-        margin-bottom: 18px;
+        gap: 12px;
+        margin: 0 auto 25px;
+        max-width: 1230px;
+        width: 100%;
     }
     .year-filter-label {
-        font-size: 14px;
+        font-size: 15px;
         font-weight: 600;
-        color: #333;
+        color: #333333;
         white-space: nowrap;
     }
     .year-filter-select {
-        padding: 7px 32px 7px 12px;
-        font-size: 14px;
+        width: auto;
+        min-width: 160px;
+        padding: 8px 36px 8px 16px;
+        font-size: 15px;
         font-weight: 600;
         color: #008649;
         border: 2px solid #008649;
-        border-radius: 6px;
-        background: #fff;
+        border-radius: 4px;
+        background-color: transparent;
         cursor: pointer;
         appearance: none;
         -webkit-appearance: none;
         background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23008649' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
         background-repeat: no-repeat;
-        background-position: right 10px center;
+        background-position: right 14px center;
         outline: none;
-        transition: border-color 0.2s;
+        box-shadow: none;
+        transition: all 0.2s ease;
     }
-    .year-filter-select:focus { border-color: #005a30; }
+    .year-filter-select:focus {
+        border-color: #005a30;
+        color: #005a30;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23005a30' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
+    }
+    .year-filter-select option {
+        background: #ffffff;
+        color: #333333;
+        font-weight: 500;
+        padding: 12px;
+    }
 
     /* ── Table ── */
     .tender-table-wrap { overflow-x: auto; }
@@ -73,7 +88,7 @@
 
         {{-- ── Filter dropdown ── --}}
         <div class="year-filter-bar">
-            <span class="year-filter-label">Filter:</span>
+            <span class="year-filter-label">Filter by Year:</span>
             <select class="year-filter-select" onchange="window.location.href='{{ url()->current() }}?year='+this.value">
                 @foreach($tab_years as $yr)
                 <option value="{{ $yr }}" {{ $active_year == $yr ? 'selected' : '' }}>{{ $yr }}</option>
