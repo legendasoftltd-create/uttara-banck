@@ -1051,7 +1051,7 @@ ITEM;
     {
         $default_lang = Language::where('default', 1)->first();
         $lang = !empty(session()->get('lang')) ? session()->get('lang') : $default_lang->slug;
-        $all_services = Services::where('lang', $lang)->orderBy('sr_order', 'asc')->paginate(get_static_option('service_page_service_items'));
+        $all_services = Services::where('status', 'publish')->where('lang', $lang)->orderBy('sr_order', 'asc')->paginate(get_static_option('service_page_service_items'));
         return view('frontend.pages.service.services')->with(['all_services' => $all_services]);
     }
 
@@ -1061,7 +1061,7 @@ ITEM;
        
         $lang = !empty(session()->get('lang')) ? session()->get('lang') : $default_lang->slug;
          
-        $all_work = Works::where(['lang' => $lang])->orderBy('id', 'desc')->paginate(12);
+        $all_work = Works::where('status', 'publish')->where(['lang' => $lang])->orderBy('id', 'desc')->paginate(12);
         
         $all_contain_cat = [];
         foreach ($all_work as $work) {
