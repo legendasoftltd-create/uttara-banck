@@ -21,22 +21,22 @@ class ServiceController extends Controller
     public function index()
     {
         $all_services = Services::where(['status' => 'publish'])->get()->groupBy('lang');
-        $service_category = ServiceCategory::where(['status' => 'publish', 'lang' => get_default_language()])->get();
+        $service_category = ServiceCategory::where(['lang' => get_default_language()])->get();
         return view('backend.pages.service.index')->with(['all_services' => $all_services, 'service_category' => $service_category]);
     }
 
     public function new_service()
     {
-        $service_category = ServiceCategory::where(['status' => 'publish', 'lang' => get_default_language()])->get();
-        $price_plans = PricePlan::where(['status' => 'publish', 'lang' => get_default_language()])->get();
+        $service_category = ServiceCategory::where(['lang' => get_default_language()])->get();
+        $price_plans = PricePlan::where(['lang' => get_default_language()])->get();
         return view('backend.pages.service.new-service')->with(['service_category' => $service_category,'price_plans' => $price_plans]);
     }
 
     public function edit_service($id)
     {
         $service = Services::find($id);
-        $service_category = ServiceCategory::where(['status' => 'publish', 'lang' => $service->lang])->get();
-        $price_plans = PricePlan::where(['status' => 'publish', 'lang' =>  $service->lang])->get();
+        $service_category = ServiceCategory::where(['lang' => $service->lang])->get();
+        $price_plans = PricePlan::where(['lang' =>  $service->lang])->get();
 
         return view('backend.pages.service.edit-service')->with(['service_category' => $service_category,'service' => $service,'price_plans' => $price_plans]);
     }
