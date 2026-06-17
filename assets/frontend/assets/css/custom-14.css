@@ -6871,7 +6871,7 @@ select:focus {
 
 .management-comete .img-box {
     width: 100%;
-    aspect-ratio: 1/1.1;
+    /* aspect-ratio: 1/1.1; */
     border-radius: 8px;
     overflow: hidden;
     margin-bottom: 10px;
@@ -6883,6 +6883,7 @@ select:focus {
 .management-comete .img-box img {
     width: 250px;
     height: auto;
+    padding-top: 20px !important;
 }
 
 .management-comete .card h3 {
