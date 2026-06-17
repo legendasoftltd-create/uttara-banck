@@ -54,6 +54,7 @@
                                            data-mobile="{{$data->mobile}}"
                                            data-email="{{$data->email}}"
                                            data-has_account="{{$data->has_account ? __('Yes') : __('No')}}"
+                                           data-account_number="{{$data->account_number}}"
                                            data-nature="{{$data->nature_of_complain}}"
                                            data-amount="{{$data->amount_involved}}"
                                            data-details="{{$data->details}}"
@@ -94,6 +95,7 @@
                         <tr><th>{{__('Mobile/Phone')}}</th><td id="vc_mobile"></td></tr>
                         <tr><th>{{__('Email')}}</th><td id="vc_email"></td></tr>
                         <tr><th>{{__('Has Account with Uttara Bank?')}}</th><td id="vc_has_account"></td></tr>
+                        <tr id="vc_account_number_row"><th>{{__('Account/Card Number')}}</th><td id="vc_account_number"></td></tr>
                         <tr><th>{{__('Nature of Complain')}}</th><td id="vc_nature"></td></tr>
                         <tr><th>{{__('Amount Involved')}}</th><td id="vc_amount"></td></tr>
                         <tr><th>{{__('Details of Complaint')}}</th><td id="vc_details" style="white-space: pre-line;"></td></tr>
@@ -134,7 +136,15 @@
                     $('#vc_address').text(el.data('address'));
                     $('#vc_mobile').text(el.data('mobile'));
                     $('#vc_email').text(el.data('email'));
-                    $('#vc_has_account').text(el.data('has_account'));
+                    var hasAccount = el.data('has_account');
+                    $('#vc_has_account').text(hasAccount);
+                    if (hasAccount === 'Yes') {
+                        $('#vc_account_number_row').show();
+                        $('#vc_account_number').text(el.data('account_number'));
+                    } else {
+                        $('#vc_account_number_row').hide();
+                        $('#vc_account_number').text('');
+                    }
                     $('#vc_nature').text(el.data('nature'));
                     $('#vc_amount').text(el.data('amount'));
                     $('#vc_details').text(el.data('details'));

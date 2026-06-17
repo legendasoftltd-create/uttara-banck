@@ -1137,6 +1137,14 @@ ITEM;
         ]);
     }
 
+    public function send_complaint_page()
+    {
+        $all_divisions = Location::whereNotNull('division')->where('division', '!=', '')->distinct()->orderBy('division')->pluck('division');
+        return view('frontend.pages.send-complaint')->with([
+            'all_divisions' => $all_divisions,
+        ]);
+    }
+
     public function get_branches_by_division($division)
     {
         $branches = Location::where('division', $division)->where('status', 1)->orderBy('name')->get(['id', 'name']);

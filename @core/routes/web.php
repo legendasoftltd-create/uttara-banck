@@ -531,6 +531,7 @@ Route::group(['middleware' => ['setlang:frontend', 'globalVariable', 'maintains_
     $complain_page_slug = get_static_option('complain_page_slug') ?? 'complain';
     Route::get('/' . $complain_page_slug, 'FrontendController@complain_page')->name('frontend.complain');
     Route::get('/' . $complain_page_slug . '/branches/{division}', 'FrontendController@get_branches_by_division')->name('frontend.complain.branches');
+    Route::get('/' . $complain_page_slug . '/send-complaint', 'FrontendController@send_complaint_page')->name('frontend.complain.send');
     Route::get('/' . $image_gallery_page_slug . '', 'FrontendController@image_gallery_page')->name('frontend.image.gallery');
     Route::get('/' . $price_plan_page_slug . '/{id}', 'FrontendController@plan_order')->name('frontend.plan.order');
     Route::get('/' . $video_gallery_page_slug . '', 'FrontendController@video_gallery_page')->name('frontend.video.gallery');
