@@ -222,7 +222,7 @@
                             </div>
                         </div>
                     </a>
-                    <div class="mt-3"> 
+                    <!-- <div class="mt-3"> 
                         <h3>Subscribe Newsletter</h3>
                         <form>
                             <input id="email" type="email" placeholder="Enter your email address" class="white-placeholder">
@@ -245,7 +245,7 @@
                                 </svg>
                             </button>
                         </form>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>

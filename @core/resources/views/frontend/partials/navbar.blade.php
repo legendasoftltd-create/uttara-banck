@@ -225,6 +225,7 @@
                             'Unclaimed Deposit List',
                             'Unclaimed Divident',
                             'Monthly Position of Agri Loan',
+                            'National Integrity Strategy'
                         ];
                     @endphp
                     @foreach (important_info() as $info)
