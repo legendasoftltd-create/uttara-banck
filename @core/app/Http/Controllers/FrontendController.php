@@ -99,9 +99,9 @@ class FrontendController extends Controller
         $all_header_slider = HeaderSlider::where('lang', $lang)->get();
         $all_counterup = Counterup::where('lang', $lang)->get();
         $all_key_features = KeyFeatures::where('lang', $lang)->get();
-        $all_service = Services::where(['lang' => $lang, 'status' => 'publish'])->orderBy('sr_order', 'ASC')->take(10)->get();
-        $all_testimonial = Testimonial::where(['lang' => $lang, 'status' => 'publish'])->orderBy('id', 'desc')->get();
-        $all_price_plan = PricePlan::where(['lang' => $lang, 'status' => 'publish'])->orderBy('id', 'desc')->take(get_static_option('home_page_01_price_plan_section_items'))->get();
+        $all_service = Services::where('status', 'publish')->where(['lang' => $lang, 'status' => 'publish'])->orderBy('sr_order', 'ASC')->take(10)->get();
+        $all_testimonial = Testimonial::where('status', 'publish')->where(['lang' => $lang, 'status' => 'publish'])->orderBy('id', 'desc')->get();
+        $all_price_plan = PricePlan::where('status', 'publish')->where(['lang' => $lang, 'status' => 'publish'])->orderBy('id', 'desc')->take(get_static_option('home_page_01_price_plan_section_items'))->get();
         $all_team_members = TeamMember::where('lang', $lang)->orderBy('id', 'desc')->take(get_static_option('home_page_01_team_member_items'))->get();
         $all_brand_logo = Brand::all();
 
@@ -110,10 +110,10 @@ class FrontendController extends Controller
             'lang' => $lang,
             'status' => 'publish',
         ])->orderBy('publish_date', 'desc')->take(8)->get();
-        $all_work = Works::where(['lang' => $lang, 'status' => 'publish'])->orderBy('id', 'desc')->take(get_static_option('home_page_01_case_study_items'))->get();
-        $all_blog = Blog::where(['lang' => $lang, 'status' => 'publish'])->orderBy('id', 'desc')->take(6)->get();
+        $all_work = Works::where('status', 'publish')->where(['lang' => $lang, 'status' => 'publish'])->orderBy('id', 'desc')->take(get_static_option('home_page_01_case_study_items'))->get();
+        $all_blog = Blog::where('status', 'publish')->where(['lang' => $lang, 'status' => 'publish'])->orderBy('id', 'desc')->take(6)->get();
         $all_contact_info = ContactInfoItem::where(['lang' => $lang])->orderBy('id', 'desc')->get();
-        $all_service_category = ServiceCategory::where(['lang' => $lang, 'status' => 'publish'])->orderBy('id', 'desc')->take(get_static_option('home_page_01_service_area_items'))->get();
+        $all_service_category = ServiceCategory::where('status', 'publish')->where(['lang' => $lang, 'status' => 'publish'])->orderBy('id', 'desc')->take(get_static_option('home_page_01_service_area_items'))->get();
         $all_contain_cat = $all_work->map(function ($index) { return $index->categories_id; });
         $works_cat_ids = [];
         foreach($all_contain_cat as $k=>$v){
@@ -123,12 +123,12 @@ class FrontendController extends Controller
                 }
             }
         }
-        $all_work_category = WorksCategory::get();
-        $latest_products = Products::where(['lang' => $lang, 'status' => 'publish'])->orderBy('id', 'DESC')->take(get_static_option('home_page_products_area_items'))->get();
+        $all_work_category = WorksCategory::where(['lang' => $lang, 'status' => 'publish'])->orderBy('id', 'ASC')->get();
+        $latest_products = Products::where('status', 'publish')->where(['lang' => $lang, 'status' => 'publish'])->orderBy('id', 'DESC')->take(get_static_option('home_page_products_area_items'))->get();
         // $all_products = Products::where(['status' => 'publish', 'category_id' => $id])->orderBy('id', 'desc')->paginate(get_static_option('product_post_items'));
-        $categories = ProductCategory::all();
+        $categories = ProductCategory::where('status', 'publish')->where(['lang' => $lang, 'status' => 'publish'])->orderBy('id', 'ASC')->get();
         $add_query = Advertisement::select('id','type','image','slot','status','redirect_url','embed_code','title')->where('status',1)->inRandomOrder()->get();
-        $all_recent_blogs = Blog::where(['lang' => $lang,'status' => 'publish'])->orderBy('id', 'desc')->take(get_static_option('blog_page_recent_post_widget_item'))->get();
+        $all_recent_blogs = Blog::where('status', 'publish')->where(['lang' => $lang,'status' => 'publish'])->orderBy('id', 'desc')->take(get_static_option('blog_page_recent_post_widget_item'))->get();
         $exchange_rate = \App\ExchangeRate::where('status', 1)->latest()->first();
 
         $blade_data = [
@@ -978,7 +978,7 @@ ITEM;
     {
         $default_lang = Language::where('default', 1)->first();
         $lang = !empty(session()->get('lang')) ? session()->get('lang') : $default_lang->slug;
-        $service_item = Services::where('slug', $slug)->first();
+        $service_item = Services::where('status', 'publish')->where('slug', $slug)->first();
         if (empty($service_item)){
             abort(404);
         }
@@ -995,13 +995,13 @@ ITEM;
         if(empty($category_name)){
             abort('404');
         }
-        $service_item = Services::where(['categories_id' => $id, 'lang' => $lang])->paginate(6);
+        $service_item = Services::where('status', 'publish')->where(['categories_id' => $id, 'lang' => $lang])->paginate(6);
         return view('frontend.pages.service.service-category')->with(['service_items' => $service_item, 'category_name' => $category_name]);
     }
 
     public function work_single_page($slug)
     {
-        $work_item = Works::where('slug', $slug)->first();
+        $work_item = Works::where('status', 'publish')->where('slug', $slug)->first();
         if (empty($work_item)){
             abort(404);
         }
@@ -1051,7 +1051,7 @@ ITEM;
     {
         $default_lang = Language::where('default', 1)->first();
         $lang = !empty(session()->get('lang')) ? session()->get('lang') : $default_lang->slug;
-        $all_services = Services::where('lang', $lang)->orderBy('sr_order', 'asc')->paginate(get_static_option('service_page_service_items'));
+        $all_services = Services::where('status', 'publish')->where('lang', $lang)->orderBy('sr_order', 'asc')->paginate(get_static_option('service_page_service_items'));
         return view('frontend.pages.service.services')->with(['all_services' => $all_services]);
     }
 
@@ -1061,7 +1061,7 @@ ITEM;
        
         $lang = !empty(session()->get('lang')) ? session()->get('lang') : $default_lang->slug;
          
-        $all_work = Works::where(['lang' => $lang])->orderBy('id', 'desc')->paginate(12);
+        $all_work = Works::where('status', 'publish')->where(['lang' => $lang])->orderBy('id', 'desc')->paginate(12);
         
         $all_contain_cat = [];
         foreach ($all_work as $work) {
