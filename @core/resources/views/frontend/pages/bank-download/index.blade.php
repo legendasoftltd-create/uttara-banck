@@ -19,6 +19,122 @@
     ) !!}
 @endsection
 
+@section('style')
+    <style>
+        /* Table General Styling */
+        .download-pages table {
+            border: 1px solid #e5e7eb !important;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .download-pages table thead tr {
+            background-color: #008649 !important;
+        }
+        .download-pages table th {
+            padding: 14px 16px !important;
+            font-size: 15px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border: none !important;
+        }
+        .download-pages table td {
+            padding: 12px 16px !important;
+            border: 1px solid #f3f4f6 !important;
+            font-size: 15px;
+            vertical-align: middle;
+        }
+
+        /* Parent category row */
+        tr.dropdown-parent {
+            background-color: #ffffff !important;
+            font-weight: 700;
+            color: #111827;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        tr.dropdown-parent:hover {
+            background-color: #f9fafb !important;
+        }
+        tr.dropdown-parent td:nth-child(2) {
+            position: relative;
+            padding-right: 40px !important;
+            color: #0f172a;
+        }
+        /* Dropdown arrow on parent */
+        tr.dropdown-parent td:nth-child(2)::after {
+            content: "\f107"; /* FontAwesome Down Angle */
+            font-family: "Font Awesome 5 Free";
+            font-weight: 900;
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 16px;
+            color: #94a3b8;
+            transition: all 0.3s ease;
+        }
+        tr.dropdown-parent.dropdown-open {
+            background-color: #f0fdf4 !important; /* soft green hint when open */
+        }
+        tr.dropdown-parent.dropdown-open td:nth-child(2) {
+            color: #008649;
+        }
+        tr.dropdown-parent.dropdown-open td:nth-child(2)::after {
+            transform: translateY(-50%) rotate(-180deg);
+            color: #008649;
+        }
+
+        /* Child row styling (nested menu look) */
+        tr.dropdown-child {
+            background-color: #f8fafc !important; /* Slate grey background for contrast */
+            border-left: 3px solid #008649 !important;
+        }
+        tr.dropdown-child td {
+            border: 1px solid #e2e8f0 !important;
+        }
+        tr.dropdown-child td:nth-child(2) {
+            padding-left: 45px !important;
+            position: relative;
+            color: #475569;
+            font-weight: 500;
+        }
+        /* Sub-item connector line/arrow */
+        tr.dropdown-child td:nth-child(2)::before {
+            content: "↳";
+            position: absolute;
+            left: 22px;
+            top: 48%;
+            transform: translateY(-50%);
+            color: #008649;
+            font-weight: 700;
+            font-size: 16px;
+        }
+
+        /* View Button Resizing */
+        .download-pages table .btn-view {
+            padding: 5px 14px !important;
+            font-size: 12px !important;
+            font-weight: 600 !important;
+            border-radius: 4px !important;
+            border: 1px solid #008649 !important;
+            background-color: transparent !important;
+            color: #008649 !important;
+            width: auto !important;
+            min-width: 65px;
+            box-shadow: none !important;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: all 0.2s ease;
+            display: inline-block;
+        }
+        .download-pages table .btn-view:hover {
+            background-color: #008649 !important;
+            color: #ffffff !important;
+        }
+    </style>
+@endsection
+
 @php
     if (!function_exists('bank_download_first_file')) {
         function bank_download_first_file($download)
