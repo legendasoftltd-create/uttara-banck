@@ -39,7 +39,7 @@
                         </div>
                         <div class="entry-content">
                             <ul class="post-meta">
-                                <li><i class="fas fa-calendar-alt"></i> {{ date_format($blog_post->created_at,'d M Y')}}</li>
+                                <li><i class="fas fa-calendar-alt"></i> {{ date_format($blog_post->published_at,'d M Y')}}</li>
                                 <li><i class="fas fa-user"></i> {{ $blog_post->author}}</li>
                                 <li>
                                     <div class="cats">
@@ -120,7 +120,7 @@
                         <article class="article-body">
                         <header class="article-header">
                             <div class="meta-info">
-                                <span class="clock-icon">🕒</span> Published on: {{ $blog_post->created_at->format(' d F, Y') }}
+                                <span class="clock-icon">🕒</span> Published on: {{ $blog_post->published_at->format(' d F, Y') }}
                             </div>
                             <h1>{{ $blog_post->title }}</h1>
                         </header>
@@ -146,7 +146,7 @@
                                                 <img src="{{ $image_details['img_url'] ?? ""}}" alt="{{ __($data->title) }}" width="300px">
                                                 <div class="side-card-info">
                                                     <h3>{{ $data->title }}</h3>
-                                                    <span class="time">🕒 {{ $data->created_at->format('d F, Y') }}</span>
+                                                    <span class="time">🕒 {{ $data->published_at->format('d F, Y') }}</span>
                                                 </div>
                                             </a>
                                         </div>
@@ -183,7 +183,7 @@
                                     <a href="{{route('frontend.news.single',$data->slug)}}">
                                         <h3>{{ $data->title }}</h3>
                                     </a>
-                                    <p class="news-time">{{ timeAgo($data->created_at) }}</p>
+                                    <p class="news-time">{{ timeAgo($data->published_at) }}</p>
                                 </div>
                             </article>
                         @endforeach

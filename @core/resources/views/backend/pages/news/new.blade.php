@@ -62,6 +62,10 @@
                                         <input type="text" class="form-control"  id="slug"  value="{{old('slug')}}"  name="slug" placeholder="{{__('Slug')}}">
                                     </div>
                                     <div class="form-group">
+                                        <label for="published_at">{{__('Publish Date')}}</label>
+                                        <input type="date" class="form-control" id="published_at" name="published_at" value="{{old('published_at')}}">
+                                    </div>
+                                    <div class="form-group">
                                         <label for="title">{{__('Excerpt')}}</label>
                                         <textarea name="excerpt" id="excerpt" class="form-control max-height-150" cols="30" rows="10"></textarea>
                                     </div>

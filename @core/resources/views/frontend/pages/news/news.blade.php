@@ -47,7 +47,7 @@
                                     <h2>{{ $recent_last_blogs->title }}</h2>
                                 </a>
                                     <p>{{ $recent_last_blogs->excerpt }}</p>
-                                <p class="news-time">{{ timeAgo($recent_last_blogs->created_at) }}</p>
+                                <p class="news-time">{{ timeAgo($recent_last_blogs->published_at) }}</p>
                             </div>
                         @endif
                     </article>
@@ -59,7 +59,7 @@
                                     <a href="{{route('frontend.news.single',$data->slug)}}">
                                         <h3>{{ $data->title }}</h3>
                                     </a>
-                                    <p class="news-time">{{ timeAgo($data->created_at) }}</p>
+                                    <p class="news-time">{{ timeAgo($data->published_at) }}</p>
                                 </div>
                                 <div class="side-img-wrapper">
                                     <a href="{{route('frontend.news.single',$data->slug)}}">
@@ -84,7 +84,7 @@
                                 <a href="{{route('frontend.news.single',$data->slug)}}">
                                     <h3>{{ $data->title }}</h3>
                                 </a>
-                                <p class="news-time">{{ timeAgo($data->created_at) }}</p>
+                                <p class="news-time">{{ timeAgo($data->published_at) }}</p>
                             </div>
                         </article>
                     @endforeach

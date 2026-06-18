@@ -413,7 +413,7 @@
                                     <ul class="post-meta">
                                         <li>
                                             <a href="{{route('frontend.news.single', $data->slug)}}"><i
-                                                    class="far fa-clock"></i> {{date_format($data->created_at,'d M Y')}}
+                                                    class="far fa-clock"></i> {{date_format($data->published_at,'d M Y')}}
                                             </a></li>
                                         <li>
                                             <div class="cats"><i class="fas fa-tags"></i>{!! get_blog_category_by_id($data->blog_categories_id,'link') !!}</div>
