@@ -213,12 +213,12 @@
                     </li>
 
                     <li><a href="{{ route('frontend.locations') }}">Our Location</a></li>
-                    <li><a href="https://ibanking.uttarabank-bd.com/iBankUltimus/LoginUI.aspx">iBanking</a></li>
-                    <li><a href="https://play.google.com/store/apps/details?id=com.uttarabank.ublmobile">Uttara eWallet</a></li>
+                    <li><a href="https://ibanking.uttarabank-bd.com/iBankUltimus/LoginUI.aspx" target="_blank">iBanking</a></li>
+                    <li><a href="https://play.google.com/store/apps/details?id=com.uttarabank.ublmobile" target="_blank">Uttara eWallet</a></li>
                     <li><a href="{{ route('frontend.jobs') }}">Career</a></li>
                     <li><a href="{{ route('frontend.complain') }}">Complain</a></li>
-                    <li><a href="{{ route('frontend.dynamic.page', 'warning-against-illegal-forex-trading/dealing') }}">Warning against illegal forex trading/dealing</a></li>
-                    <li><a href="{{ route('frontend.dynamic.page', 'sanchayapatra') }}">Sanchayapatra</a></li>
+                    <li><a href="{{ route('frontend.dynamic.page', 'warning-against-illegal-forex-tradingdealing') }}">Warning against illegal forex trading/dealing</a></li>
+                    <li><a href="https://nationalsavings.gov.bd" target="_blank">Sanchayapatra</a></li>
                      @php
                         $allow = [
                             'Price sensitive Information',
