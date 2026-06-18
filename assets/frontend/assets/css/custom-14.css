@@ -5028,7 +5028,7 @@ html.monochrome {
 /* Modal Content Box */
 .modal-content {
     position: relative;
-    width: 90%;
+    /* width: 90%; */
     max-width: 800px;
     background: #000;
     border-radius: 8px;
@@ -8226,7 +8226,7 @@ Download Page Design CSS Starts Here
         position: relative;
         z-index: 2;
         left: -41px;
-        margin-top: 10px;
+        margin-top: 90px;
     }
     .calculator-widget {
         position: fixed;

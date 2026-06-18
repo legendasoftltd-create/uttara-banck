@@ -1877,6 +1877,17 @@ Route::prefix('admin-home')->middleware(['setlang:backend'])->group(function () 
     });
 
     /*==============================================
+       VISITOR MANAGE ROUTES
+    ==============================================*/
+    Route::prefix('visitors')->group(function () {
+        Route::get('/', 'VisitorManageController@index')->name('admin.visitors');
+        Route::post('/settings', 'VisitorManageController@update_settings')->name('admin.visitors.settings');
+        Route::post('/delete/{id}', 'VisitorManageController@delete')->name('admin.visitors.delete');
+        Route::post('/bulk-action', 'VisitorManageController@bulk_action')->name('admin.visitors.bulk.action');
+        Route::post('/clear-all', 'VisitorManageController@clear_all')->name('admin.visitors.clear.all');
+    });
+
+    /*==============================================
         TESTIMONIAL ROUTES
      ==============================================*/
     Route::prefix('testimonial')->middleware(['adminPermissionCheck:Testimonial'])->group(function () {

@@ -233,6 +233,10 @@
                             <span>{{__('Faq')}}</span></a>
                     </li>
                     @endif
+                    <li class="main_dropdown {{active_menu('admin-home/visitors')}}">
+                        <a href="{{route('admin.visitors')}}" aria-expanded="true"><i class="ti-user"></i>
+                            <span>{{__('Visitor Log')}}</span></a>
+                    </li>
                     @if(check_page_permission_by_string('Our Achievement Manage'))
                     <li class="main_dropdown {{active_menu('admin-home/achievements')}}">
                         <a href="{{route('admin.achievements')}}" aria-expanded="true"><i class="ti-control-forward"></i>

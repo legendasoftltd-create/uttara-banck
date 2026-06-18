@@ -153,13 +153,14 @@
                         </p>
                     @endif
 
+                    @if(get_static_option('show_visitor_count') === 'on')
                     <p class="text-[#012C60] ">
                         <span style="font-weight:700;">
                             {{__('Total Visitor')}}:
                         </span>
-
-                        {{number_format(\App\Visitor::count())}}
+                        {{number_format(\App\Visitor::count() + (int)(get_static_option('manual_visitor_count') ?? 0))}}
                     </p>
+                    @endif
 
                 </div>
 
