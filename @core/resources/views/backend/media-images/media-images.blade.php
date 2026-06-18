@@ -1,6 +1,6 @@
 @extends('backend.admin-master')
 @section('site-title')
-    {{__('Media Images Settings')}}
+    {{__('Media  Settings')}}
 @endsection
 @section('style')
     <link rel="stylesheet" href="{{asset('assets/backend/css/dropzone.css')}}">
@@ -50,8 +50,8 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="media-image-header">
-                            <h2>{{__('Media Images')}}</h2>
-                            <a href="#" class="btn btn-info" data-toggle="modal" data-target="#media_image_upload_modal">{{__('Add New Image')}}</a>
+                            <h2>{{__('Media ')}}</h2>
+                            <a href="#" class="btn btn-info" data-toggle="modal" data-target="#media_image_upload_modal">{{__('Add New Media')}}</a>
                         </div>
                     </div>
                 </div>

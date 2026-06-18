@@ -227,12 +227,12 @@
                             </ul>
                         </li>
                     @endif --}}
-                    {{-- @if(check_page_permission_by_string('Faq'))
+                     @if(check_page_permission_by_string('Faq'))
                     <li class="main_dropdown {{active_menu('admin-home/faq')}}">
                         <a href="{{route('admin.faq')}}" aria-expanded="true"><i class="ti-control-forward"></i>
                             <span>{{__('Faq')}}</span></a>
                     </li>
-                    @endif--}}
+                    @endif
                     @if(check_page_permission_by_string('Our Achievement Manage'))
                     <li class="main_dropdown {{active_menu('admin-home/achievements')}}">
                         <a href="{{route('admin.achievements')}}" aria-expanded="true"><i class="ti-control-forward"></i>
@@ -1759,12 +1759,14 @@
                                         </a>
                                     </li>
                                 @endif
-                                <li class="main_dropdown {{active_menu('admin-home/media-upload/page')}}">
+                                 --}}
+
+                                 <li class="main_dropdown {{active_menu('admin-home/media-upload/page')}}">
                                     <a href="{{route('admin.upload.media.images.page')}}"
                                        aria-expanded="true">
-                                        {{__('Media Images Manage')}}
+                                        {{__('Media  Manage')}}
                                     </a>
-                                </li> --}}
+                                </li>
                         </ul>
                     </li>
                     @if(check_page_permission_by_string('General Settings'))

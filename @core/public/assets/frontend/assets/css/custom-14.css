@@ -4301,7 +4301,7 @@ html.monochrome {
 .footer-social {
     display: flex;
     justify-content: flex-start;
-    gap: 0.5rem;
+    gap: 1rem;
     align-items: center;
     margin-bottom: 2rem;
 }

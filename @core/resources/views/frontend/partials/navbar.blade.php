@@ -242,6 +242,7 @@
                     <li><a href="{{ route('frontend.dynamic.page', 'fdi-help-desk') }}">FDI Help Desk</a></li>
                     <li><a href="{{ route('frontend.dynamic.page', 'lending-interest-rate') }}">Lending Interest Rate</a></li>
                     <li><a href="{{ route('frontend.dynamic.page', 'contact-us') }}">Contact</a></li>
+                    <li><a href="{{ route('frontend.dynamic.page', 'faq') }}">Faq</a></li>
                 </ul>
             </div>
             <div class="overlay" id="overlay"></div>
