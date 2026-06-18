@@ -120,7 +120,7 @@
                         <article class="article-body">
                         <header class="article-header">
                             <div class="meta-info">
-                                <span class="clock-icon">🕒</span> Published on: {{ $blog_post->published_at->format(' d F, Y') }}
+                                <span class="clock-icon">🕒</span> Published on: {{ ($blog_post->published_at ?? $blog_post->created_at)->format(' d F, Y') }}
                             </div>
                             <h1>{{ $blog_post->title }}</h1>
                         </header>
@@ -146,7 +146,7 @@
                                                 <img src="{{ $image_details['img_url'] ?? ""}}" alt="{{ __($data->title) }}" width="300px">
                                                 <div class="side-card-info">
                                                     <h3>{{ $data->title }}</h3>
-                                                    <span class="time">🕒 {{ $data->published_at->format('d F, Y') }}</span>
+                                                    <span class="time">🕒 {{ ($data->published_at ?? $data->created_at)->format('d F, Y') }}</span>
                                                 </div>
                                             </a>
                                         </div>
