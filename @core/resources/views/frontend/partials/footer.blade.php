@@ -178,10 +178,12 @@
                         $urls = !empty($urls) ? unserialize($urls, ['allowed_classes' => false]) : [];
                         $titles = get_static_option($option_key.'_'.get_user_lang().'_title');
                         $titles = !empty($titles) ? unserialize($titles, ['allowed_classes' => false]) : [];
+                        $icons = get_static_option($option_key.'_icon');
+                        $icons = !empty($icons) ? unserialize($icons, ['allowed_classes' => false]) : [];
                         $links = [];
                         foreach ($urls as $index => $url) {
                             if (!empty($titles[$index]) && !empty($url)) {
-                                $links[] = ['title' => $titles[$index], 'url' => $url];
+                                $links[] = ['title' => $titles[$index], 'url' => $url, 'icon' => $icons[$index] ?? ''];
                             }
                         }
                         $footer_link_columns[] = $links;
@@ -194,8 +196,12 @@
                                 @foreach($links as $link)
                                     <li>
                                         <a aria-label="{{$link['title']}}"
-                                            class="text-[#637D92] sm:font-light hover:underline text-sm font-extralight sm:text-base sm:leading-[23px]"
-                                            href="{{$link['url']}}">{{$link['title']}}</a>
+                                            class="text-[#637D92] sm:font-light hover:underline text-sm font-extralight sm:text-base sm:leading-[23px] inline-flex items-center gap-2"
+                                            href="{{$link['url']}}">
+                                            @if(!empty($link['icon']))
+                                                <i class="{{$link['icon']}}" style="color:#ffffff;"></i>
+                                            @endif
+                                            {{$link['title']}}</a>
                                     </li>
                                 @endforeach
                             </ul>

@@ -57,6 +57,8 @@
                                     $option_key = 'footer_column_'.($group_key == 'one' ? 'one' : 'two').'_link_item';
                                     $all_url_fields = get_static_option($option_key.'_url');
                                     $all_url_fields = !empty($all_url_fields) ? unserialize($all_url_fields,['allowed_classes' => false]) : [''];
+                                    $all_icon_fields = get_static_option($option_key.'_icon');
+                                    $all_icon_fields = !empty($all_icon_fields) ? unserialize($all_icon_fields,['allowed_classes' => false]) : [];
                                 @endphp
                                 <div class="repeater-list">
                                     @foreach($all_url_fields as $index => $url_field)
@@ -85,6 +87,28 @@
                                                     <div class="form-group">
                                                         <label>{{__('Link URL')}}</label>
                                                         <input type="text" name="{{$option_key}}_url[]" class="form-control" value="{{$url_field}}" placeholder="{{__('e.g. /about-us or https://example.com')}}">
+                                                    </div>
+                                                    <div class="form-group icon-picker-wrapper">
+                                                        @php
+                                                            $icon_field = $all_icon_fields[$index] ?? '';
+                                                            $icon_preview_class = $icon_field ?: 'far fa-square';
+                                                        @endphp
+                                                        <label class="d-block">{{__('Icon')}} <small class="text-muted">({{__('optional, leave empty to hide')}})</small></label>
+                                                        <div class="btn-group">
+                                                            <button type="button" class="btn btn-primary iconpicker-component">
+                                                                <i class="{{$icon_preview_class}}"></i>
+                                                            </button>
+                                                            <button type="button" class="icp icp-dd btn btn-primary dropdown-toggle"
+                                                                    data-selected="{{$icon_field}}" data-toggle="dropdown">
+                                                                <span class="caret"></span>
+                                                                <span class="sr-only">Toggle Dropdown</span>
+                                                            </button>
+                                                            <div class="dropdown-menu"></div>
+                                                            <button type="button" class="btn btn-light icon-clear-btn" title="{{__('Remove Icon')}}">
+                                                                <i class="ti-trash"></i>
+                                                            </button>
+                                                        </div>
+                                                        <input type="hidden" class="form-control" value="{{$icon_field}}" name="{{$option_key}}_icon[]">
                                                     </div>
                                                 </div>
                                             </div>
@@ -123,6 +147,10 @@
 
             var clonedData = wrapper.clone();
             clonedData.find('input[type="text"]').val('');
+            clonedData.find('.icon-picker-wrapper input[type="hidden"]').val('');
+            clonedData.find('.icon-picker-wrapper .icp-dd').attr('data-selected', '');
+            clonedData.find('.icon-picker-wrapper .iconpicker-component i').attr('class', 'far fa-square');
+            clonedData.find('.icon-picker-wrapper .iconpicker-popover').remove();
 
             clonedData.find('.nav-tabs').attr('id', 'myTab_' + uid);
             clonedData.find('.tab-content').first().attr('id', 'myTabContent_' + uid);
@@ -148,6 +176,24 @@
 
             list.append(clonedData);
             list.find('.remove').show(300);
+            clonedData.find('.icp-dd').iconpicker();
+        });
+
+        $('.icp-dd').iconpicker();
+        $('body').on('iconpickerSelected', '.icp-dd', function (e) {
+            var selectedIcon = e.iconpickerValue;
+            var wrapper = $(this).closest('.icon-picker-wrapper');
+            wrapper.find('input[type="hidden"]').val(selectedIcon);
+            wrapper.find('.iconpicker-component i').attr('class', selectedIcon);
+            $('body .dropdown-menu.iconpicker-container').removeClass('show');
+        });
+
+        $(document).on('click', '.icon-clear-btn', function (e) {
+            e.preventDefault();
+            var wrapper = $(this).closest('.icon-picker-wrapper');
+            wrapper.find('input[type="hidden"]').val('');
+            wrapper.find('.iconpicker-component i').attr('class', 'far fa-square');
+            wrapper.find('.icp-dd').attr('data-selected', '');
         });
 
         $(document).on('click', '.footer-link-group .action-wrap .remove', function (e) {
