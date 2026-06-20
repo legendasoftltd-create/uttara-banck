@@ -1243,7 +1243,8 @@ function ratings_markup($ratings, $type = '')
 }
 
 function get_product_category_on_menu(){
-   $allCategory = \App\ProductCategory::get();
+
+   $allCategory = \App\ProductCategory::where('status', 'publish')->get();
 
    return $allCategory;
 }
