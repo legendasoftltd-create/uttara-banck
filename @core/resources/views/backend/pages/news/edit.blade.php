@@ -60,6 +60,10 @@
                                         <input type="text" class="form-control"  id="slug" value="{{$blog_post->slug}}"  name="slug" placeholder="{{__('Slug')}}">
                                     </div>
                                     <div class="form-group">
+                                        <label for="published_at">{{__('Publish Date')}}</label>
+                                        <input type="date" class="form-control" id="published_at" name="published_at" value="{{$blog_post->published_at ? \Illuminate\Support\Carbon::parse($blog_post->published_at)->format('Y-m-d') : ''}}">
+                                    </div>
+                                    <div class="form-group">
                                         <label for="title">{{__('Excerpt')}}</label>
                                         <textarea name="excerpt" id="excerpt" class="form-control max-height-150" cols="30" rows="10">{{$blog_post->excerpt}}</textarea>
                                     </div>

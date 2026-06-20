@@ -5,7 +5,7 @@
     <div class="content">
         <ul class="post-meta">
             <li><a href="{{route('frontend.news.single',$blog->slug)}}"><i class="fa fa-user"></i> {{$blog->author}}</a></li>
-            <li><a href="{{route('frontend.news.single',$blog->slug)}}"><i class="far fa-clock"></i> {{date_format($blog->created_at,'d M y')}}</a></li>
+            <li><a href="{{route('frontend.news.single',$blog->slug)}}"><i class="far fa-clock"></i> {{date_format($blog->published_at,'d M y')}}</a></li>
             <li>
                 <div class="cats"><i class="fas fa-microchip"></i>
                     {!! get_blog_category_by_id($blog->blog_categories_id,'link') !!}

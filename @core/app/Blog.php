@@ -10,7 +10,7 @@ use Spatie\Feed\FeedItem;
 class Blog extends Model implements Feedable
 {
     protected $table = 'blogs';
-    protected $fillable = ['title','lang','status','author','slug','meta_description','meta_tags','excerpt','content','blog_categories_id','tags','image','user_id','breaking_news','video_url'];
+    protected $fillable = ['title','lang','status','author','slug','meta_description','meta_tags','excerpt','content','blog_categories_id','tags','image','user_id','breaking_news','video_url','published_at'];
 
     public function category(){
         return $this->belongsTo('App\BlogCategory','blog_categories_id');
@@ -21,7 +21,8 @@ class Blog extends Model implements Feedable
 
     protected $casts = [
       'breaking_news' => 'integer',
-      'user_id' => 'integer'
+      'user_id' => 'integer',
+      'published_at' => 'datetime'
     ];
 
     public function toFeedItem() : FeedItem
@@ -30,7 +31,7 @@ class Blog extends Model implements Feedable
             'id' => $this->id,
             'title' => $this->title,
             'summary' => $this->excerpt,
-            'updated' => $this->updated_at,
+            'updated' => $this->published_at,
             'link' => route('frontend.news.single',$this->slug),
             'authorName' => $this->author,
         ]);

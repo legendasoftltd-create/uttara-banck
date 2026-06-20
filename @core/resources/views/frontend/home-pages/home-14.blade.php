@@ -339,8 +339,8 @@
                                     <div class="thumb">
                                         {!! render_image_markup_by_attachment_id($data->image,'thumb') !!}
                                         <div class="time-wrap">
-                                            <span class="date">{{date_format($data->created_at,'d')}}</span>
-                                            <span class="month">{{date_format($data->created_at,'M')}}</span>
+                                            <span class="date">{{date_format($data->published_at,'d')}}</span>
+                                            <span class="month">{{date_format($data->published_at,'M')}}</span>
                                         </div>
                                     </div>
                                     <div class="content">

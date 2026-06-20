@@ -20,7 +20,7 @@ class ServiceController extends Controller
 
     public function index()
     {
-        $all_services = Services::where(['status' => 'publish'])->get()->groupBy('lang');
+        $all_services = Services::get()->groupBy('lang');
         $service_category = ServiceCategory::where(['lang' => get_default_language()])->get();
         return view('backend.pages.service.index')->with(['all_services' => $all_services, 'service_category' => $service_category]);
     }

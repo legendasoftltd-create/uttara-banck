@@ -101,7 +101,7 @@
                                     <div class="banner-contents">
                                         <div class="tag-title-contents padding-bottom-20">
                                             {!! get_blog_category_by_id($slider_item->blog_categories_id,'link','tag-title') !!}
-                                            <span class="banner-dates"> {{$slider_item->created_at->format('d M Y')}}</span>
+                                            <span class="banner-dates"> {{($slider_item->published_at ?? $slider_item->created_at)->format('d M Y')}}</span>
                                         </div>
                                         <h2 class="banner-title"><a href="#">{{$slider_item->title}}</a></h2>
                                         <div class="btn-wrapper">
@@ -218,7 +218,7 @@
                         <div class="sports-contents">
                             <div class="tag-title-contents padding-bottom-10">
                                 {!! get_blog_category_by_id($sport_news->blog_categories_id,'link','tag-title') !!}
-                                <span class="banner-dates"> {{$sport_news->created_at->format('d M Y')}}</span>
+                                <span class="banner-dates"> {{($sport_news->published_at ?? $sport_news->created_at)->format('d M Y')}}</span>
                             </div>
                             <h4 class="sports-title"> <a href="{{route('frontend.news.single',$sport_news->slug)}}">{{$sport_news->title}}</a> </h4>
                         </div>
@@ -246,7 +246,7 @@
                         {!! render_image_markup_by_attachment_id($hot_news->image,'grid') !!}
                     </div>
                     <div class="topics-contents">
-                        <span class="global-dates mb-3">  {{$hot_news->created_at->format('d M Y')}}</span>
+                        <span class="global-dates mb-3">  {{($hot_news->published_at ?? $hot_news->created_at)->format('d M Y')}}</span>
                         <div class="tag-title-contents padding-bottom-10">
                             {!! get_blog_category_by_id($hot_news->blog_categories_id,'link','tag-title') !!}
                         </div>

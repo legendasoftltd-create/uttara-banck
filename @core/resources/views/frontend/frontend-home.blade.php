@@ -160,7 +160,7 @@
                                                     </g>
                                             </svg>
                                             <small class="mt-1"
-                                                style="color: #9B5DE5;">{{ timeAgo($blog->created_at) }}</small>
+                                                style="color: #9B5DE5;">{{ timeAgo($blog->published_at) }}</small>
                                         </div>
                                     </div>
                                 </div>
