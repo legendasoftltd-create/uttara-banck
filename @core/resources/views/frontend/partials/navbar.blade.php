@@ -175,8 +175,8 @@
                     <li class="has-dropdown">
                         <a href="#" class="dropdown-toggle">Schedule of Charges</a>
                         <ul class="sub-menu">
-                            <li><a href="https://uttaradev.blocknots.com/case-study/inland-transaction">Inland Transaction</a></li>
-                            <li><a href="https://uttaradev.blocknots.com/case-study/foreign-exchange-transaction">Foreign Exchange Transaction</a></li>
+                            <li><a href="https://uttaradev.blocknots.com/important-information/inland-transaction">Inland Transaction</a></li>
+                            <li><a href="https://uttaradev.blocknots.com/important-information/foreign-exchange-transaction">Foreign Exchange Transaction</a></li>
                         </ul>
                     </li>
                     <li class="has-dropdown">
