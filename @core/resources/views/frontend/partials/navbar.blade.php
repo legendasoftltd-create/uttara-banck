@@ -199,8 +199,8 @@
                             <li class="has-dropdown">
                                 <a href="#" class="dropdown-toggle">Interest</a>
                                 <ul class="sub-menu">
-                                    <li><a href="https://uttaradev.blocknots.com/case-study/interest-rate-for-loan-products">Interest Rate for Loan Products</a></li>
-                                    <li><a href="https://uttaradev.blocknots.com/case-study/interest-rate-deposit-products">Interest Rate Deposit Products</a></li>
+                                    <li><a href="https://uttaradev.blocknots.com/important-information/interest-rate-for-loan-products">Interest Rate for Loan Products</a></li>
+                                    <li><a href="https://uttaradev.blocknots.com/important-information/interest-rate-deposit-products">Interest Rate Deposit Products</a></li>
                                 </ul>
                             </li>
                             <li><a href="{{ route('frontend.dynamic.page', 'branches-of-uttara-bank-limited-enlisted-for-e-gp') }}">e-GP</a></li>
