@@ -64,6 +64,7 @@
                                             <th>{{__('Name')}}</th>
                                             <th>{{__('Type')}}</th>
                                             <th>{{__('Created At')}}</th>
+                                            <th>{{__('Status')}}</th>
                                             <th>{{__('Action')}}</th>
                                             </thead>
                                             <tbody>
@@ -78,6 +79,13 @@
                                                     <td>{{$data->name}}</td>
                                                     <td>{{ucwords(str_replace('_',' ',$data->type))}}</td>
                                                     <td>{{date("d - M - Y", strtotime($data->created_at))}}</td>
+                                                    <td>
+                                                        @if($data->status == 'publish' || empty($data->status))
+                                                            <span class="alert alert-success d-inline-block py-1 px-2">{{__('Publish')}}</span>
+                                                        @else
+                                                            <span class="alert alert-warning d-inline-block py-1 px-2">{{__('Draft')}}</span>
+                                                        @endif
+                                                    </td>
                                                     <td>
                                                         <x-delete-popover :url="route('admin.popup.builder.delete',$data->id)"/>
                                                         <a class="btn btn-primary btn-xs mb-3 mr-1" href="{{route('admin.popup.builder.edit',$data->id)}}">

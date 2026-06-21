@@ -31,6 +31,7 @@ class PopupBuilderController extends Controller
             'button_link' => 'nullable|string',
             'background_image' => 'nullable|string',
             'image' => 'nullable|string',
+            'status' => 'nullable|string',
         ]);
         PopupBuilder::create([
             'lang' => $request->lang,
@@ -44,6 +45,7 @@ class PopupBuilderController extends Controller
             'button_link' => $request->button_link,
             'background_image' => $request->background_image,
             'only_image' => $request->image,
+            'status' => $request->status ?? 'publish',
         ]);
         return redirect()->back()->with(['msg' => __('New Popup Added') , 'type' => 'success']);
     }
@@ -77,6 +79,7 @@ class PopupBuilderController extends Controller
             'button_link' => 'nullable|string',
             'background_image' => 'nullable|string',
             'image' => 'nullable|string',
+            'status' => 'nullable|string',
         ]);
         PopupBuilder::find($id)->update([
             'lang' => $request->lang,
@@ -90,6 +93,7 @@ class PopupBuilderController extends Controller
             'button_link' => $request->button_link,
             'background_image' => $request->background_image,
             'only_image' => $request->image,
+            'status' => $request->status,
         ]);
         return redirect()->back()->with(['msg' => __('Popup Update Success') , 'type' => 'success']);
     }
@@ -107,6 +111,7 @@ class PopupBuilderController extends Controller
             'button_link' => $popup_details->button_link,
             'background_image' => $popup_details->background_image,
             'only_image' => $popup_details->only_image,
+            'status' => 'draft',
         ]);
         return redirect()->back()->with(['msg' => __('Popup Clone Success') , 'type' => 'success']);
     }
