@@ -292,6 +292,10 @@ class GeneralSettingsController extends Controller
             $url_field = $group . '_url';
             $value = $request->$url_field ?? [];
             update_static_option($url_field, serialize($value));
+
+            $icon_field = $group . '_icon';
+            $icon_value = $request->$icon_field ?? [];
+            update_static_option($icon_field, serialize($icon_value));
         }
 
         return redirect()->back()->with(['msg' => __('Footer Settings Updated..'), 'type' => 'success']);
