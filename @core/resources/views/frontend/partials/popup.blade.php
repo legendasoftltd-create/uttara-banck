@@ -121,21 +121,21 @@
                                         @php
                                             $bolg_image_details = get_attachment_image_by_id($data->only_image, 'full');
                                         @endphp
-                                        <img class="d-block w-100 rounded" src="{{$bolg_image_details['img_url']}}" alt="slider 02">
+                                        <img class="d-block w-100 rounded" src="{{ $bolg_image_details['img_url'] ?? '' }}" alt="slider 02">
                                     </div>
                                 @elseif($popup_type === 'promotion')
                                     <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
                                         @php
                                             $bolg_image_details = get_attachment_image_by_id($data->only_image, 'full');
                                         @endphp
-                                        <img class="d-block w-100 rounded" src="{{$bolg_image_details['img_url']}}" alt="slider 02">
+                                        <img class="d-block w-100 rounded" src="{{ $bolg_image_details['img_url'] ?? '' }}" alt="slider 02">
                                     </div>
                                 @else
                                     <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
                                         @php
                                             $bolg_image_details = get_attachment_image_by_id($data->only_image, 'full');
                                         @endphp
-                                        <img class="d-block w-100 rounded" src="{{$bolg_image_details['img_url']}}" alt="slider 02">
+                                        <img class="d-block w-100 rounded" src="{{ $bolg_image_details['img_url'] ?? '' }}" alt="slider 02">
                                     </div>
                                 @endif
                             @endforeach

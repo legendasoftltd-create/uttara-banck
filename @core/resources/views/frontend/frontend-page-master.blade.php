@@ -1,6 +1,9 @@
 @include('frontend.partials.header')
 {{-- @include('frontend.partials.navbar-variant.navbar-'.get_static_option('navbar_variant')) --}}
 @include('frontend.partials.breadcrumb')
+@if(isset($all_header_slider) && $all_header_slider->count() > 0)
+    @include('frontend.partials.slide')
+@endif
 @yield('content')
 
 <div id="sticky-container">

@@ -96,7 +96,9 @@ class FrontendController extends Controller
             return view('frontend.frontend-home')->with([ 'static_field_data' => $static_field_data]);
         }
 
-        $all_header_slider = HeaderSlider::where('lang', $lang)->get();
+        $all_header_slider = HeaderSlider::where('lang', $lang)->where(function($q) {
+            $q->where('page_type', 'home')->orWhereNull('page_type');
+        })->get();
         $all_counterup = Counterup::where('lang', $lang)->get();
         $all_key_features = KeyFeatures::where('lang', $lang)->get();
         $all_service = Services::where('status', 'publish')->where(['lang' => $lang, 'status' => 'publish'])->orderBy('sr_order', 'ASC')->take(10)->get();
@@ -516,7 +518,9 @@ ITEM;
             abort(404);
         }
         $lang = LanguageHelper::user_lang_slug();
-        $all_header_slider = HeaderSlider::where('lang', $lang)->get();
+        $all_header_slider = HeaderSlider::where('lang', $lang)->where(function($q) {
+            $q->where('page_type', 'home')->orWhereNull('page_type');
+        })->get();
         $all_counterup = Counterup::where('lang', $lang)->get();
         $all_key_features = KeyFeatures::where('lang', $lang)->get();
         $all_service = Services::where(['lang' => $lang, 'status' => 'publish'])->orderBy('sr_order', 'ASC')->take(get_static_option('home_page_01_service_area_items'))->get();
@@ -1106,7 +1110,11 @@ ITEM;
         $default_lang = Language::where('default', 1)->first();
         $lang = !empty(session()->get('lang')) ? session()->get('lang') : $default_lang->slug;
         $all_services = Services::where('status', 'publish')->where('lang', $lang)->orderBy('sr_order', 'asc')->paginate(get_static_option('service_page_service_items'));
-        return view('frontend.pages.service.services')->with(['all_services' => $all_services]);
+        $all_header_slider = HeaderSlider::where(['lang' => $lang, 'page_type' => 'service'])->get();
+        return view('frontend.pages.service.services')->with([
+            'all_services' => $all_services,
+            'all_header_slider' => $all_header_slider,
+        ]);
     }
 
     public function work_page()
@@ -1509,14 +1517,18 @@ ITEM;
 
     public function products_category($id, $any)
     {
+        $default_lang = Language::where('default', 1)->first();
+        $lang = !empty(session()->get('lang')) ? session()->get('lang') : $default_lang->slug;
         $all_products = Products::where(['status' => 'publish', 'category_id' => $id])->orderBy('id', 'desc')->paginate(get_static_option('product_post_items'));
         $category_name = ProductCategory::find($id)->title;
         if (empty($category_name)){
             abort(404);
         }
+        $all_header_slider = HeaderSlider::where(['lang' => $lang, 'page_type' => 'product_category', 'category_id' => $id])->get();
         return view('frontend.pages.products.product-category')->with([
             'all_products' => $all_products,
             'category_name' => $category_name,
+            'all_header_slider' => $all_header_slider,
         ]);
     }public function products_subcategory($id, $any)
     {

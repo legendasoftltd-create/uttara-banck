@@ -75,6 +75,7 @@
                                        <th>{{__('Image')}}</th>
                                        <th>{{__('Title')}}</th>
                                        <th>{{__('Description')}}</th>
+                                       <th>{{__('Display Page')}}</th>
                                        <th>{{__('Action')}}</th>
                                        </thead>
                                        <tbody>
@@ -105,6 +106,15 @@
                                                </td>
                                                <td>{{$data->title}}</td>
                                                <td>{{$data->description}}</td>
+                                               <td>
+                                                   @if($data->page_type == 'home' || empty($data->page_type))
+                                                       {{__('Home Page')}}
+                                                   @elseif($data->page_type == 'service')
+                                                       {{__('Services Page')}}
+                                                   @elseif($data->page_type == 'product_category')
+                                                       {{__('Category:')}} {{optional($data->category)->title ?? $data->category_id}}
+                                                   @endif
+                                               </td>
                                                <td>
                                                    <a tabindex="0" class="btn btn-xs btn-danger btn-sm mb-3 mr-1"
                                                       role="button"
@@ -139,6 +149,8 @@
                                                       data-video_btn_status="{{$data->video_btn_status}}"
                                                       data-video_btn_text="{{$data->video_btn_text}}"
                                                       data-video_btn_url="{{$data->video_btn_url}}"
+                                                      data-page_type="{{$data->page_type ?? 'home'}}"
+                                                      data-category_id="{{$data->category_id}}"
                                                    >
                                                        <i class="ti-pencil"></i>
                                                    </a>
@@ -211,6 +223,24 @@
                             <div class="form-group">
                                 <label for="video_btn_url">{{__('Video Button URL')}}</label>
                                 <input type="text" class="form-control"  id="video_btn_url"  name="video_btn_url" placeholder="{{__('Video URL')}}">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="page_type">{{__('Display On Page')}}</label>
+                                <select name="page_type" class="form-control page_type">
+                                    <option value="home">{{__('Home Page')}}</option>
+                                    <option value="service">{{__('Services Page')}}</option>
+                                    <option value="product_category">{{__('Product Category Page')}}</option>
+                                </select>
+                            </div>
+                            <div class="form-group category_id_wrapper d-none">
+                                <label for="category_id">{{__('Product Category')}}</label>
+                                <select name="category_id" class="form-control">
+                                    <option value="">{{__('Select Category')}}</option>
+                                    @foreach($all_categories as $cat)
+                                        <option value="{{$cat->id}}">{{$cat->title}}</option>
+                                    @endforeach
+                                </select>
                             </div>
 
                             <div class="form-group">
@@ -294,6 +324,24 @@
                             <input type="text" class="form-control"  id="edit_video_btn_url"  name="video_btn_url" placeholder="{{__('Video URL')}}">
                         </div>
                         <div class="form-group">
+                            <label for="edit_page_type">{{__('Display On Page')}}</label>
+                            <select name="page_type" id="edit_page_type" class="form-control page_type">
+                                <option value="home">{{__('Home Page')}}</option>
+                                <option value="service">{{__('Services Page')}}</option>
+                                <option value="product_category">{{__('Product Category Page')}}</option>
+                            </select>
+                        </div>
+                        <div class="form-group category_id_wrapper d-none">
+                            <label for="edit_category_id">{{__('Product Category')}}</label>
+                            <select name="category_id" id="edit_category_id" class="form-control">
+                                <option value="">{{__('Select Category')}}</option>
+                                @foreach($all_categories as $cat)
+                                    <option value="{{$cat->id}}">{{$cat->title}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="form-group">
                             <div class="media-upload-btn-wrapper">
                                 <div class="img-wrap"></div>
                                 <input type="hidden" id="edit_image" name="image" value="">
@@ -358,6 +406,16 @@
                 }
             });
 
+            $(document).on('change', '.page_type', function() {
+                var el = $(this);
+                if (el.val() == 'product_category') {
+                    el.closest('form').find('.category_id_wrapper').removeClass('d-none');
+                } else {
+                    el.closest('form').find('.category_id_wrapper').addClass('d-none');
+                    el.closest('form').find('select[name="category_id"]').val('');
+                }
+            });
+
             $(document).on('click','.header_slider_edit_btn',function(){
                 var el = $(this);
                 var id = el.data('id');
@@ -376,6 +434,11 @@
                 form.find('#edit_video_btn_text').val(el.data('video_btn_text'));
                 form.find('#edit_video_btn_url').val(el.data('video_btn_url'));
                 form.find('#edit_language option[value='+el.data("lang")+']').attr('selected',true);//lang
+
+                var page_type = el.data('page_type');
+                var category_id = el.data('category_id');
+                form.find('#edit_page_type').val(page_type).trigger('change');
+                form.find('#edit_category_id').val(category_id);
 
                 if(imageid != ''){
                     form.find('.media-upload-btn-wrapper .img-wrap').html('<div class="attachment-preview"><div class="thumbnail"><div class="centered"><img class="avatar user-thumb" src="'+image+'" > </div></div></div>');
