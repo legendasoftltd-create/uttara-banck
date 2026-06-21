@@ -17,7 +17,12 @@ class HeaderSliderController extends Controller
 
         $all_header_slider = HeaderSlider::all()->groupBy('lang');
         $all_language = Language::all();
-        return view('backend.pages.home.header')->with(['all_header_slider' => $all_header_slider,'all_languages' => $all_language]);
+        $all_categories = \App\ProductCategory::where('status', 'publish')->get();
+        return view('backend.pages.home.header')->with([
+            'all_header_slider' => $all_header_slider,
+            'all_languages' => $all_language,
+            'all_categories' => $all_categories
+        ]);
     }
 
     public function store(Request $request){
@@ -32,7 +37,9 @@ class HeaderSliderController extends Controller
             'video_btn_status' => 'nullable|string|max:191',
             'description' => 'nullable|string',
             'image' => 'nullable|string|max:191',
-            'lang' => 'required|string|max:191'
+            'lang' => 'required|string|max:191',
+            'page_type' => 'nullable|string|max:191',
+            'category_id' => 'nullable|integer',
         ]);
 
         HeaderSlider::create([
@@ -47,6 +54,8 @@ class HeaderSliderController extends Controller
             'video_btn_text' => $request->video_btn_text,
             'video_btn_url' => $request->video_btn_url,
             'video_btn_status' => $request->video_btn_status,
+            'page_type' => $request->page_type ?? 'home',
+            'category_id' => $request->category_id,
         ]);
 
         return redirect()->back()->with(['msg' => __('New Header Slider Added...'),'type' => 'success']);
@@ -66,6 +75,8 @@ class HeaderSliderController extends Controller
             'video_btn_text' => 'nullable|string|max:191',
             'video_btn_url' => 'nullable|string|max:191',
             'video_btn_status' => 'nullable|string|max:191',
+            'page_type' => 'nullable|string|max:191',
+            'category_id' => 'nullable|integer',
         ]);
 
         HeaderSlider::find($request->id)->update([
@@ -80,6 +91,8 @@ class HeaderSliderController extends Controller
             'video_btn_text' => $request->video_btn_text,
             'video_btn_url' => $request->video_btn_url,
             'video_btn_status' => $request->video_btn_status,
+            'page_type' => $request->page_type ?? 'home',
+            'category_id' => $request->category_id,
         ]);
 
         return redirect()->back()->with(['msg' => __('Header Slider Updated...'),'type' => 'success']);
