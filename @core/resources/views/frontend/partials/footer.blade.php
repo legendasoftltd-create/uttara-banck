@@ -259,7 +259,7 @@
     </div>
     <div class=" py-2">
         <hr>
-        <p class="text-[#012C60] text-center font-light md:text-base">{!! get_footer_copyright_text() !!}</p>
+         <p style="color:#ffffff" class="text-center font-light md:text-base">{!! get_footer_copyright_text() !!}</p>
     </div>
 </footer>
 

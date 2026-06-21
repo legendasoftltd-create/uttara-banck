@@ -4243,8 +4243,8 @@ html.monochrome {
 .footer-wrap {
     display: grid;
     grid-template-columns: repeat(12, minmax(0, 1fr));
-    padding-top: 1.5rem;
-    padding-bottom: 1.5rem;
+    /* padding-top: 1.5rem;
+    padding-bottom: 1.5rem; */
     gap: 2rem;
     position: relative;
     z-index: 99;
