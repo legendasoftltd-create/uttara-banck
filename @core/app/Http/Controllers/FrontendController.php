@@ -782,19 +782,73 @@ ITEM;
         return redirect_404_page();
     }
 
-    public function blog_page()
+    public function blog_page(Request $request)
     {
         $default_lang = Language::where('default', 1)->first();
         $lang = !empty(session()->get('lang')) ? session()->get('lang') : $default_lang->slug;
-        $recent_last_blogs = Blog::where(['lang' => $lang,'status' => 'publish'])->orderBy('id', 'desc')->first();
-        $recent_last_blogs_skip_last = Blog::where(['lang' => $lang,'status' => 'publish'])->orderBy('id', 'desc')->skip(1)->take(4)->get();
-        $excludeIds = Blog::where(['lang' => $lang, 'status' => 'publish'])->orderBy('id', 'desc')->take(5)->pluck('id');   
-        $all_blogs = Blog::where(['lang'=> $lang , 'status' => 'publish'])->whereNotIn('id', $excludeIds)->orderBy('id', 'desc')->skip(5)->paginate(12);
+
+        // Fetch years that have published blogs
+        $available_years = Blog::where(['lang' => $lang, 'status' => 'publish'])
+            ->whereNotNull('published_at')
+            ->selectRaw('YEAR(published_at) as year')
+            ->distinct()
+            ->orderBy('year', 'desc')
+            ->pluck('year')
+            ->toArray();
+
+        if (empty($available_years)) {
+            $available_years = Blog::where(['lang' => $lang, 'status' => 'publish'])
+                ->selectRaw('YEAR(created_at) as year')
+                ->distinct()
+                ->orderBy('year', 'desc')
+                ->pluck('year')
+                ->toArray();
+        }
+
+        $selected_year = $request->get('year');
+        $selected_month = $request->get('month');
+
+        $query = Blog::where(['lang' => $lang, 'status' => 'publish']);
+
+        if (!empty($selected_year)) {
+            $query->where(function($q) use ($selected_year) {
+                $q->whereYear('published_at', $selected_year)
+                  ->orWhere(function($sq) use ($selected_year) {
+                      $sq->whereNull('published_at')->whereYear('created_at', $selected_year);
+                  });
+            });
+        }
+
+        if (!empty($selected_month)) {
+            $query->where(function($q) use ($selected_month) {
+                $q->whereMonth('published_at', $selected_month)
+                  ->orWhere(function($sq) use ($selected_month) {
+                      $sq->whereNull('published_at')->whereMonth('created_at', $selected_month);
+                  });
+            });
+        }
+
+        $is_filtered = !empty($selected_year) || !empty($selected_month);
+
+        if ($is_filtered) {
+            $all_blogs = $query->orderBy('id', 'desc')->paginate(12);
+            $recent_last_blogs = null;
+            $recent_last_blogs_skip_last = collect([]);
+        } else {
+            $recent_last_blogs = Blog::where(['lang' => $lang, 'status' => 'publish'])->orderBy('id', 'desc')->first();
+            $recent_last_blogs_skip_last = Blog::where(['lang' => $lang, 'status' => 'publish'])->orderBy('id', 'desc')->skip(1)->take(4)->get();
+            $excludeIds = Blog::where(['lang' => $lang, 'status' => 'publish'])->orderBy('id', 'desc')->take(5)->pluck('id');
+            $all_blogs = Blog::where(['lang' => $lang, 'status' => 'publish'])->whereNotIn('id', $excludeIds)->orderBy('id', 'desc')->paginate(12);
+        }
 
         return view('frontend.pages.news.news')->with([
             'all_blogs' => $all_blogs,
             'recent_last_blogs' => $recent_last_blogs,
             'recent_last_blogs_skip_last' => $recent_last_blogs_skip_last,
+            'available_years' => $available_years,
+            'selected_year' => $selected_year,
+            'selected_month' => $selected_month,
+            'is_filtered' => $is_filtered,
         ]);
     }
 

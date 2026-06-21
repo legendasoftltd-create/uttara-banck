@@ -86,14 +86,39 @@
             </div>
         </div>
 
-        {{-- ── Filter dropdown ── --}}
+        @php
+            $months = [
+                '01' => __('January'),
+                '02' => __('February'),
+                '03' => __('March'),
+                '04' => __('April'),
+                '05' => __('May'),
+                '06' => __('June'),
+                '07' => __('July'),
+                '08' => __('August'),
+                '09' => __('September'),
+                '10' => __('October'),
+                '11' => __('November'),
+                '12' => __('December')
+            ];
+        @endphp
+
+        {{-- ── Filter dropdowns ── --}}
         <div class="year-filter-bar">
-            <span class="year-filter-label">Filter by Year:</span>
-            <select class="year-filter-select" onchange="window.location.href='{{ url()->current() }}?year='+this.value">
+            <span class="year-filter-label">{{ __('Filter by Year:') }}</span>
+            <select id="filter_year_select" class="year-filter-select" onchange="filterTenders()">
                 @foreach($tab_years as $yr)
                 <option value="{{ $yr }}" {{ $active_year == $yr ? 'selected' : '' }}>{{ $yr }}</option>
                 @endforeach
                 <option value="archive" {{ $active_year === 'archive' ? 'selected' : '' }}>Archive</option>
+            </select>
+
+            <span class="year-filter-label ml-md-3">{{ __('Filter by Month:') }}</span>
+            <select id="filter_month_select" class="year-filter-select" onchange="filterTenders()">
+                <option value="">{{ __('All Months') }}</option>
+                @foreach($months as $num => $name)
+                <option value="{{ $num }}" {{ $selected_month == $num ? 'selected' : '' }}>{{ $name }}</option>
+                @endforeach
             </select>
         </div>
 
@@ -183,5 +208,19 @@
 </section>
 @endsection
 
-@section('script')
+@section('scripts')
+<script>
+function filterTenders() {
+    var year = document.getElementById('filter_year_select').value;
+    var month = document.getElementById('filter_month_select').value;
+    var url = '{{ url()->current() }}?';
+    if(year) {
+        url += 'year=' + year + '&';
+    }
+    if(month) {
+        url += 'month=' + month + '&';
+    }
+    window.location.href = url.replace(/&$/, '').replace(/\?$/, '');
+}
+</script>
 @endsection

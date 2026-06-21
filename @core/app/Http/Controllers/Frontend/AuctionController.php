@@ -15,6 +15,7 @@ class AuctionController extends Controller
     {
         $lang = LanguageHelper::user_lang_slug();
         $year = $request->get('year');
+        $month = $request->get('month');
 
         $query = Auction::where(['status' => 'publish', 'lang' => $lang])
             ->orderBy('notice_date', 'desc');
@@ -40,6 +41,10 @@ class AuctionController extends Controller
             }
         }
 
+        if ($month) {
+            $query->whereMonth('notice_date', $month);
+        }
+
         $all_auctions = $query->get();
         $active_year  = $year ?: ($tab_years[0] ?? date('Y'));
 
@@ -48,6 +53,7 @@ class AuctionController extends Controller
             'tab_years'     => $tab_years,
             'active_year'   => $active_year,
             'selected_year' => $year,
+            'selected_month' => $month,
         ]);
     }
 

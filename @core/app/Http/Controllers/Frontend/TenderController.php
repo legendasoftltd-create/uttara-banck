@@ -15,6 +15,7 @@ class TenderController extends Controller
     {
         $lang = LanguageHelper::user_lang_slug();
         $year = $request->get('year');
+        $month = $request->get('month');
 
         $all_years = Tender::where(['status' => 'publish', 'lang' => $lang])
             ->selectRaw('YEAR(notice_date) as year')
@@ -40,6 +41,10 @@ class TenderController extends Controller
             }
         }
 
+        if ($month) {
+            $query->whereMonth('notice_date', $month);
+        }
+
         $all_tenders = $query->get();
         $active_year = $year ?: ($tab_years[0] ?? date('Y'));
 
@@ -48,6 +53,7 @@ class TenderController extends Controller
             'tab_years'    => $tab_years,
             'active_year'  => $active_year,
             'selected_year'=> $year,
+            'selected_month'=> $month,
         ]);
     }
 
