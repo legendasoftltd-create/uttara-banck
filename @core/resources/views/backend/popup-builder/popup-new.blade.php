@@ -96,6 +96,12 @@
                                             </button>
                                         </div>
                                         <small>{{__('Recommended image size 700x400')}}</small>
+                                    <div class="form-group">
+                                        <label for="status"><strong>{{__('Status')}}</strong></label>
+                                        <select name="status" id="status" class="form-control">
+                                            <option value="publish">{{__('Publish')}}</option>
+                                            <option value="draft">{{__('Draft')}}</option>
+                                        </select>
                                     </div>
                                     <button type="submit" class="btn btn-primary mt-4 pr-4 pl-4">{{__('Add New Popup')}}</button>
                                 </div>

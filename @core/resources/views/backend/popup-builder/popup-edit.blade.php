@@ -125,6 +125,13 @@
                                         </div>
                                         <small>{{__('Recommended image size 350x350')}}</small>
                                     </div>
+                                    <div class="form-group">
+                                        <label for="status"><strong>{{__('Status')}}</strong></label>
+                                        <select name="status" id="status" class="form-control">
+                                            <option @if($popup->status == 'publish') selected @endif value="publish">{{__('Publish')}}</option>
+                                            <option @if($popup->status == 'draft') selected @endif value="draft">{{__('Draft')}}</option>
+                                        </select>
+                                    </div>
                                     <button type="submit" class="btn btn-primary mt-4 pr-4 pl-4">{{__('Update Popup')}}</button>
                                 </div>
                             </div>

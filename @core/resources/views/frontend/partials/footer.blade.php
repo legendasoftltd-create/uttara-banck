@@ -555,7 +555,7 @@
 
         var invalidHashes = ['#retail', '#sme', '#wholesale'];
 
-        if (!invalidHashes.includes(hash)) {
+        if (!invalidHashes.includes(hash) && $("#whats-news-3").length > 0 && $("#whats-news-3 .carousel-item").length > 0) {
             $("#whats-news-3").modal("show");
         }
 
