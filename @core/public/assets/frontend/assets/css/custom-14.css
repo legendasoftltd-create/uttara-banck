@@ -2766,7 +2766,7 @@ Foreign Exchange Rate
     margin: 0px;
     position: fixed;
     right: -262px;
-    top: 40%;
+    top: 50%;
     transform: translateY(-50%);
     width: 291px;
     z-index: 99;
@@ -3933,7 +3933,7 @@ html.monochrome {
     }
 
     .sticky .head-stk {
-        height: 0px;
+        height: 190px;
     }
 
     .carousel-control-next,
@@ -4037,7 +4037,7 @@ html.monochrome {
     }
 
     .sticky .head-stk {
-        height: 0px;
+        height: 190px;
     }
 
     .carousel-control-next,
@@ -8146,6 +8146,111 @@ Download Page Design CSS Starts Here
     width: 100%;
     height: auto;
 }
+
+/* Complain Sticky Widget Styles */
+.sticky-complain .complain-stk {
+    list-style-type: none;
+    padding: 0px;
+    margin: 20px 0px 1px 0px; /* Increased gap to 20px */
+    -webkit-transition: all 0.25s ease-in-out;
+    -moz-transition: all 0.25s ease-in-out;
+    -o-transition: all 0.25s ease-in-out;
+    transition: all 0.25s ease-in-out;
+    cursor: pointer;
+}
+
+.sticky-complain a {
+    text-decoration: none !important;
+    outline: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    display: block;
+}
+
+.sticky-complain a:hover,
+.sticky-complain a:active,
+.sticky-complain a:focus {
+    text-decoration: none !important;
+    border: none !important;
+}
+
+.sticky-complain .complain-stk:hover {
+    margin-left: -212px;
+}
+
+.sticky-complain .complain-stk .left-head-complain {
+    float: left;
+    /* margin-right: 5px; */
+    box-shadow: rgba(160, 192, 229, 0.55) 0px 0px 10px 0px;
+    height: 160px;
+    width: 29px;
+    border-radius: 10px 0 0 10px;
+    background-color: #FFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sticky-complain .complain-stk .con-fild-complain {
+    padding: 10px;
+    margin: 0px;
+    height: 160px;
+    background: #ffffff;
+    box-shadow: rgba(160, 192, 229, 0.55) 0px 0px 10px 0px;
+    /* border-radius: 10px 0px 0px 10px; */
+    /* display: flex;
+    align-items: center;
+    justify-content: center; */
+}
+
+.sticky-complain .complain-stk .con-fild-complain img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.rotate-complain {
+    color: #008649 !important;
+    -webkit-transform: rotate(-90deg);
+    -moz-transform: rotate(-90deg);
+    -ms-transform: rotate(-90deg);
+    -o-transform: rotate(-90deg);
+    transform: rotate(-90deg);
+    display: block;
+    white-space: nowrap;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+
+@media (max-width: 767px) {
+    /* Main container ke force kore show koranor jonno */
+    .sticky-complain {
+        display: block !important; 
+        z-index: 9999 !important; /* Sob kichur upore rakhbe */
+    }
+
+    .sticky-complain .complain-stk {
+        height: 160px !important;
+        display: flex !important; /* Agere comment kora chilo, eta open kore dilam */
+        align-items: center; 
+    }
+    
+    .sticky-complain .complain-stk .left-head-complain {
+        height: 160px !important;
+        display: flex !important;
+    }
+
+    /* Mobile a tap/touch korle jeno slide hoye beriye ase */
+    .sticky-complain .complain-stk:hover,
+    .sticky-complain .complain-stk:active,
+    .sticky-complain .complain-stk:focus {
+        margin-left: -212px !important; 
+    }
+}
+
 
 
 

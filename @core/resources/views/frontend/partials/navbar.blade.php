@@ -241,10 +241,15 @@
                     <li><a href="{{ route('frontend.dynamic.page', "citizen's-charter") }}">Citizen's Charter</a></li>
                     <li><a href="{{ route('frontend.dynamic.page', 'fdi-help-desk') }}">FDI Help Desk</a></li>
                     <li><a href="{{ route('frontend.dynamic.page', 'lending-interest-rate') }}">Lending Interest Rate</a></li>
+                    <li class="has-dropdown">
+                        <a href="#" class="dropdown-toggle">Calculator</a>
+                        <ul class="sub-menu">
+                            <li><a href="{{ route('frontend.dynamic.page', 'deposit-calculator') }}">Deposit Calculator</a></li>
+                            <li><a href="{{ route('frontend.dynamic.page', 'emi-calculator') }}">EMI Calculator</a></li>
+                        </ul>
+                    </li>
                     <li><a href="{{ route('frontend.dynamic.page', 'contact-us') }}">Contact</a></li>
                     <li><a href="{{ route('frontend.dynamic.page', 'faq') }}">Faq</a></li>
-                    <li><a href="{{ route('frontend.dynamic.page', 'deposit-calculator') }}">Deposit Calculator</a></li>
-                    <li><a href="{{ route('frontend.dynamic.page', 'emi-calculator') }}">EMI Calculator</a></li>
                 </ul>
             </div>
             <div class="overlay" id="overlay"></div>
