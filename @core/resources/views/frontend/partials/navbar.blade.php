@@ -66,7 +66,7 @@
             </nav>
 
             <div class="right-menu">
-                <div class="search-box">
+                <!-- <div class="search-box">
                     <div class="search-icon" id="searchBtn">
                         <svg width="18" height="18" viewBox="0 0 24 24">
                             <circle cx="11" cy="11" r="7" stroke="black" stroke-width="2"
@@ -76,7 +76,7 @@
                         </svg>
                     </div>
                     <input type="text" placeholder="Search..." id="searchInput">
-                </div>
+                </div> -->
                 <div class="phone">
                     <a href="to:16645"> ☎ 16645 </a>
                 </div>
