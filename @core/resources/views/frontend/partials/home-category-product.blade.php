@@ -1,3 +1,14 @@
+<style>
+@media (max-width: 767px) {
+    .custom-height-for-mobile-deposit {
+        height: 370px !important;
+        object-fit: contain !important;.
+        object-position: center !important;
+        width: 100% !important;
+    }
+}
+</style>
+
 @if ($category->title == 'Loan')
     <section class="container">
         <div class="swiper loanSlider">
@@ -22,17 +33,17 @@
     </section>
 @endif
 @if ($category->title == 'Deposit')
-    <section class="carousel-3D-swiper-section container" style="position: relative;">
+    <section class="carousel-3D-swiper-section container "  style="position: relative;">
         <div class="carousel-3D-swiper-section container">
             <div class="carousel-3D-swiper">
-                <div class="swiper-wrapper" style="max-width: 1230px;">
+                <div class="swiper-wrapper custom-height-for-mobile-deposit" style="max-width: 1230px;">
                     @foreach (get_category_products($category->id) as $product)
                         <div class="swiper-slide">
                             <div class="image-wrapper aspect-video">
                                 @php
                                     $image_details = get_attachment_image_by_id($product->image, 'full');
                                 @endphp
-                                <img src="{{ $image_details['img_url'] ?? '' }}" alt="{{ $product->title }}">
+                                <img class="custom-height-for-mobile-deposit" src="{{ $image_details['img_url'] ?? '' }}" alt="{{ $product->title }}">
                             </div>
                             <div class="details">
                                 <p>{{ $product->title }}</p>
