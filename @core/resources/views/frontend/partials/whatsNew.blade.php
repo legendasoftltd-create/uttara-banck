@@ -14,7 +14,7 @@
                     @php
                         $bolg_image_details = get_attachment_image_by_id($data->image, 'full');
                     @endphp
-                    <div class="carousel-item active col-md-3">
+                    <div class="carousel-item active col-md-3 mt-4">
                         <div class="overflow-hidden">
                             {{-- {!! render_background_image_markup_by_attachment_id($data->image,'large') !!} --}}
                             <img class="img-fluid mx-auto d-block zoom" src="{{ $bolg_image_details['img_url'] ?? '' }}"
