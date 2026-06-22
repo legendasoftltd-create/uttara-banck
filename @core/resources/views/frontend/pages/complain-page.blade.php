@@ -17,6 +17,114 @@
             font-family: 'Outfit', 'Inter', sans-serif;
             color: #334155;
         }
+
+        /* Redesigned Complaint Info Card CSS */
+        .complaint-info-card-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            margin-bottom: 40px;
+        }
+
+        .complaint-info-card {
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            border-top: 5px solid #008649; /* Bank green theme */
+            width: 100%;
+            max-width: 580px;
+            padding: 35px;
+            box-sizing: border-box;
+            text-align: left;
+        }
+
+        .complaint-info-card .info-card-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #1e293b;
+            text-align: center;
+            margin: 0 0 20px 0;
+            letter-spacing: 1px;
+        }
+
+        .complaint-info-card .info-card-divider {
+            height: 1px;
+            background-color: #e2e8f0;
+            width: 80%;
+            margin: 0 auto 25px auto;
+        }
+
+        .complaint-info-card .info-card-body {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .complaint-info-card .info-item-row {
+            display: flex;
+            align-items: center;
+            padding: 15px 0;
+            position: relative;
+        }
+
+        .complaint-info-card .info-item-row:not(:last-child) {
+            border-bottom: 1px dotted #cbd5e1;
+        }
+
+        .complaint-info-card .info-icon-circle {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background-color: #eff6ff; /* light blue bg */
+            color: #008649; /* bank theme green */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 20px;
+            flex-shrink: 0;
+        }
+
+        .complaint-info-card .info-texts {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .complaint-info-card .info-label {
+            font-size: 11px;
+            font-weight: 600;
+            color: #64748b;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+
+        .complaint-info-card .info-value {
+            font-size: 15px;
+            font-weight: 600;
+            color: #1e293b;
+            word-break: break-all;
+        }
+
+        .complaint-info-card .link-value {
+            color: #0f172a;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .complaint-info-card .link-value:hover {
+            color: #008649;
+        }
+
+        @media (max-width: 575px) {
+            .complaint-info-card {
+                padding: 20px;
+            }
+            .complaint-info-card .info-icon-circle {
+                margin-right: 15px;
+            }
+            .complaint-info-card .info-value {
+                font-size: 14px;
+            }
+        }
         
         .complaint-section-title {
             font-size: 24px;
@@ -196,7 +304,9 @@
             border-left: 4px solid #006227;
             padding: 20px;
             display: flex;
-            align-items: flex-start;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
             transition: all 0.3s ease;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
         }
@@ -238,6 +348,8 @@
             line-height: 1.4;
             border-top: 1px solid #f1f5f9;
             padding-top: 6px;
+            text-align: center;
+            width: 100%;
         }
 
         /* Complaint Form Container */
@@ -349,18 +461,63 @@
             {{-- Central Customer Service & Complaint Management Cell --}}
             <div class="central-cell-container">
                 <h4 class="complaint-section-title text-center">{{__('Central Customer Service & Complaint Management Cell')}}</h4>
-                <div class="mb-4">
-                    <p style="font-size: 14px; line-height: 1.6;">
-                        <strong>{{get_static_option('complaint_cell_bank_name')}}</strong><br>
-                        @if(!empty(get_static_option('complaint_cell_email')))
-                            {{__('Email')}}: <a href="mailto:{{get_static_option('complaint_cell_email')}}" style="color: #006227; font-weight: 600;">{{get_static_option('complaint_cell_email')}}</a><br>
-                        @endif
-                        @if(!empty(get_static_option('complaint_cell_phone')))
-                            {{ __('Phone') }}: <a href="tel:{{ get_static_option('complaint_cell_phone') }}" style="color: #006227; font-weight: 600;">
-                                 {{ get_static_option('complaint_cell_phone') }}
-                            </a>
-                        @endif
-                    </p>
+                <div class="complaint-info-card-wrapper">
+                    <div class="complaint-info-card">
+                        <h4 class="info-card-title">{{ __('COMPLAINT CELL') }}</h4>
+                        <div class="info-card-divider"></div>
+                        
+                        <div class="info-card-body">
+                            <!-- Bank Name -->
+                            <div class="info-item-row">
+                                <div class="info-icon-circle">
+                                    <!-- Bank Icon SVG -->
+                                    <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                                        <path d="M4 10h3v7H4zm6.5 0h3v7h-3zM2 19h20v3H2zm15-9h3v7h-3zm-5-9L2 6v2h20V6z"/>
+                                    </svg>
+                                </div>
+                                <div class="info-texts">
+                                    <span class="info-label">{{ __('BANK NAME') }}</span>
+                                    <span class="info-value">{{ get_static_option('complaint_cell_bank_name') }}</span>
+                                </div>
+                            </div>
+                            
+                            <!-- Email -->
+                            @if(!empty(get_static_option('complaint_cell_email')))
+                                <div class="info-item-row">
+                                    <div class="info-icon-circle">
+                                        <!-- Email Icon SVG -->
+                                        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                                            <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                                        </svg>
+                                    </div>
+                                    <div class="info-texts">
+                                        <span class="info-label">{{ __('EMAIL OF COMPLAIN CELL') }}</span>
+                                        <a href="mailto:{{ get_static_option('complaint_cell_email') }}" class="info-value link-value">
+                                            {{ get_static_option('complaint_cell_email') }}
+                                        </a>
+                                    </div>
+                                </div>
+                            @endif
+                            
+                            <!-- Phone -->
+                            @if(!empty(get_static_option('complaint_cell_phone')))
+                                <div class="info-item-row">
+                                    <div class="info-icon-circle">
+                                        <!-- Phone Icon SVG -->
+                                        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                                            <path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.57-.35-.11-.74-.03-1.01.24l-1.57 1.58c-2.83-1.44-5.15-3.75-6.59-6.59l1.58-1.57c.27-.27.35-.66.24-1.01-0.38-1.11-.58-2.3-.58-3.53 0-.55-.45-1-1-1H4.48C3.93 3 3.5 3.44 3.5 4c0 9.39 7.61 17 17 17 0 .55.44 1 1 1h3.51c.55 0 .99-.44.99-1v-5.62c0-.55-.44-1-1-1z"/>
+                                        </svg>
+                                    </div>
+                                    <div class="info-texts">
+                                        <span class="info-label">{{ __('PHONE NO OF COMPLAIN CELL') }}</span>
+                                        <a href="tel:{{ get_static_option('complaint_cell_phone') }}" class="info-value link-value">
+                                            {{ get_static_option('complaint_cell_phone') }}
+                                        </a>
+                                    </div>
+                                </div>
+                            @endif
+                        </div>
+                    </div>
                 </div>
                 
                 <div class="central-grid">
@@ -436,7 +593,7 @@
 
                 @if($zonal_members->count())
                     <!-- Quick scroll links -->
-                    <ul class="nav zonal-tabs-list zonal-quick-links" style="border-bottom: none; margin-bottom: 30px;">
+                    <ul class="nav zonal-tabs-list zonal-quick-links" style="border-bottom: none; margin-bottom: 10px;">
                         @foreach($zonal_members as $zone_name => $members)
                             <li class="nav-item zonal-tab-item">
                                 <a class="nav-link zonal-tab-link" href="#zone-{{$loop->index}}">
@@ -527,9 +684,7 @@
                 <div class="col-lg-12 text-center">
                     <div style="background: #ffffff; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.03); border: 1px solid #e2e8f0; padding: 40px;">
                         <h4 style="font-size: 22px; font-weight: 700; color: #0f172a; margin-bottom: 15px;">{{ __('Have any complaints or feedback?') }}</h4>
-                        <p class="text-muted mb-4" style="max-width: 600px; margin: 0 auto 24px auto; font-size: 14px; line-height: 1.6;">
-                            {{ __('Uttara Bank PLC is committed to providing premium customer service. If you have any complaint or feedback regarding our services, please click below to submit your complaint.') }}
-                        </p>
+                        
                         <a href="{{ route('frontend.complain.send') }}" class="btn-submit-complaint" style="display: inline-block; width: auto; padding: 12px 40px; text-decoration: none;">
                             {{ __('Send Complaint') }}
                         </a>
