@@ -190,21 +190,21 @@
         }
 
         .member-name {
-            font-size: 15px;
+            font-size: 17px;
             font-weight: 700;
             color: #0f172a;
             margin-bottom: 4px;
         }
 
         .member-designation {
-            font-size: 12px;
+            font-size: 14px;
             font-weight: 600;
             color: #475569;
             margin-bottom: 2px;
         }
 
         .member-position {
-            font-size: 11px;
+            font-size: 13px;
             font-weight: 500;
             color: #006227;
             background-color: rgba(0, 98, 39, 0.08);
@@ -215,7 +215,7 @@
         }
 
         .member-contacts {
-            font-size: 12px;
+            font-size: 13px;
             color: #64748b;
             line-height: 1.5;
             text-align: left;
@@ -322,28 +322,28 @@
         }
 
         .zonal-member-name {
-            font-size: 14px;
+            font-size: 17px;
             font-weight: 700;
             color: #0f172a;
             margin-bottom: 2px;
         }
 
         .zonal-member-designation {
-            font-size: 11px;
+            font-size: 15px;
             font-weight: 600;
             color: #006227;
             margin-bottom: 2px;
         }
 
         .zonal-member-position {
-            font-size: 11px;
+            font-size: 14px;
             font-weight: 500;
             color: #64748b;
             margin-bottom: 8px;
         }
 
         .zonal-member-contacts {
-            font-size: 11px;
+            font-size: 13px;
             color: #475569;
             line-height: 1.4;
             border-top: 1px solid #f1f5f9;
@@ -463,8 +463,8 @@
                 <h4 class="complaint-section-title text-center">{{__('Central Customer Service & Complaint Management Cell')}}</h4>
                 <div class="complaint-info-card-wrapper">
                     <div class="complaint-info-card">
-                        <h4 class="info-card-title">{{ __('COMPLAINT CELL') }}</h4>
-                        <div class="info-card-divider"></div>
+                        <!-- <h4 class="info-card-title">{{ __('COMPLAINT CELL') }}</h4> -->
+                        <!-- <div class="info-card-divider"></div> -->
                         
                         <div class="info-card-body">
                             <!-- Bank Name -->
@@ -595,7 +595,7 @@
                     <!-- Quick scroll links -->
                     <ul class="nav zonal-tabs-list zonal-quick-links" style="border-bottom: none; margin-bottom: 10px;">
                         @foreach($zonal_members as $zone_name => $members)
-                            <li class="nav-item zonal-tab-item">
+                            <li class="p-2 zonal-tab-item">
                                 <a class="nav-link zonal-tab-link" href="#zone-{{$loop->index}}">
                                     {{ str_replace(' Zone', '', $zone_name) }}
                                 </a>
@@ -673,23 +673,22 @@
                                 </div>
                             </div>
                         @endforeach
+
+                        {{-- Send Complaint Call to Action --}}
+                        <div class="row justify-content-center mt-5">
+                            <div class="col-lg-12 text-center">
+                                <div style=" padding: 40px;">
+                                    <a href="{{ route('frontend.complain.send') }}" class="btn-submit-complaint" style="display: inline-block; width: auto; padding: 12px 40px; text-decoration: none;">
+                                        {{ __('Send Complaint') }}
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 @else
                     <p class="text-muted text-center py-4">{{__('No information available')}}</p>
                 @endif
-            </div>
-
-            {{-- Send Complaint Call to Action --}}
-            <div class="row justify-content-center mt-5">
-                <div class="col-lg-12 text-center">
-                    <div style="background: #ffffff; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.03); border: 1px solid #e2e8f0; padding: 40px;">
-                        <h4 style="font-size: 22px; font-weight: 700; color: #0f172a; margin-bottom: 15px;">{{ __('Have any complaints or feedback?') }}</h4>
-                        
-                        <a href="{{ route('frontend.complain.send') }}" class="btn-submit-complaint" style="display: inline-block; width: auto; padding: 12px 40px; text-decoration: none;">
-                            {{ __('Send Complaint') }}
-                        </a>
-                    </div>
-                </div>
             </div>
 
         </div>

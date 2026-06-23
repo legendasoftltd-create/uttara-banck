@@ -119,11 +119,13 @@
     </style>
 
     <div class="complaint-page-wrapper padding-bottom-120 padding-top-80">
-        <div class="container">
+        <div class="container" style="padding: 80px">
             <div class="row justify-content-center">
                 <div class="col-lg-10">
                     <div class="complaint-form-container">
-                        <h4 class="form-main-title">{{__('Submit Your Complaint')}}</h4>
+
+                        <h2 class="form-main-title" style="color:red">{{__('In Case of Fauilure of Entry Please email to: bccsd.ccscmc@uttarabank-bd.com')}}</h4>
+                        <!-- <h4 class="form-main-title">{{__('Submit Your Complaint')}}</h4> -->
                         
                         @include('backend.partials.message')
                         @include('backend.partials.error')
@@ -161,7 +163,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="full_name">{{__('Full Name')}} *</label>
+                                        <label for="full_name">{{__('Full Name')}} <span style="color:red">*</span></label>
                                         <input type="text" name="full_name" id="full_name" class="form-control" placeholder="{{__('Enter your full name')}}" required>
                                     </div>
                                 </div>
@@ -173,7 +175,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="mobile">{{__('Mobile/Phone')}} *</label>
+                                        <label for="mobile">{{__('Mobile/Phone')}} <span style="color:red">*</span></label>
                                         <input type="text" name="mobile" id="mobile" class="form-control" placeholder="{{__('Enter your phone number')}}" required>
                                     </div>
                                 </div>
@@ -191,7 +193,7 @@
                                 </div>
                                 <div class="col-md-12" id="account_number_wrapper" style="display: none; transition: all 0.3s ease;">
                                     <div class="form-group">
-                                        <label for="account_number">{{__('Account Number/Credit Card Number')}} *</label>
+                                        <label for="account_number">{{__('Account Number/Credit Card Number')}} <span style="color:red">*</span></label>
                                         <input type="text" name="account_number" id="account_number" class="form-control" placeholder="{{__('Enter Account or Credit Card Number')}}">
                                     </div>
                                 </div>
@@ -236,7 +238,7 @@
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label for="details">{{__('Details of Complaint')}} *</label>
+                                        <label for="details">{{__('Details of Complaint')}} <span style="color:red">*</span></label>
                                         <textarea name="details" id="details" class="form-control" rows="5" placeholder="{{__('Explain details of your complaint here...')}}" required></textarea>
                                     </div>
                                 </div>
