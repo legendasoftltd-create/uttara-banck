@@ -49,7 +49,7 @@
     /* Extra large devices: 6 columns */
     @media (min-width: 1200px) {
         .management-comete .row.four-grid {
-            grid-template-columns: repeat(6, minmax(0, 1fr));
+            grid-template-columns: repeat(5, minmax(0, 1fr));
             gap: 20px;
         }
         .management-comete .row.four-grid .card {
