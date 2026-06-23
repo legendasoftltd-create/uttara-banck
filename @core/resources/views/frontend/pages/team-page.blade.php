@@ -11,6 +11,55 @@
     {!! render_og_meta_image_by_attachment_id(get_static_option('team_page_'.$user_select_lang_slug.'_meta_image')) !!}
 @endsection
 
+@section('style')
+<style>
+    /* Base style (Mobile / Small devices: 1 column) */
+    .management-comete .row.four-grid {
+        display: grid;
+        grid-template-columns: repeat(1, minmax(0, 1fr));
+        gap: 20px;
+        justify-content: center;
+    }
+    
+    .management-comete .row.four-grid .card {
+        width: 100% !important;
+        max-width: 260px !important;
+        margin: 0 auto;
+    }
+    
+    /* Make all images under management-comete fully responsive */
+    .management-comete .img-box img {
+        width: 100% !important;
+        max-width: 250px;
+        height: auto;
+        object-fit: cover;
+    }
+
+    /* Medium devices: 3 columns */
+    @media (min-width: 768px) {
+        .management-comete .row.four-grid {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 15px;
+        }
+        .management-comete .row.four-grid .card {
+            max-width: 100% !important;
+        }
+    }
+
+    /* Extra large devices: 6 columns */
+    @media (min-width: 1200px) {
+        .management-comete .row.four-grid {
+            grid-template-columns: repeat(6, minmax(0, 1fr));
+            gap: 20px;
+        }
+        .management-comete .row.four-grid .card {
+            max-width: 100% !important;
+        }
+    }
+</style>
+@endsection
+
+
 @section('content')
 
 <div class="container management-comete mt-4">
