@@ -325,20 +325,26 @@ const sideMenu = document.getElementById("sideMenu");
 const closeMenu = document.getElementById("closeMenu");
 const overlay = document.getElementById("overlay");
 
-menuBtn.onclick = () => {
-  sideMenu.classList.add("active");
-  overlay.classList.add("active");
-};
+if (menuBtn && sideMenu && overlay) {
+  menuBtn.onclick = () => {
+    sideMenu.classList.add("active");
+    overlay.classList.add("active");
+  };
+}
 
-closeMenu.onclick = () => {
-  sideMenu.classList.remove("active");
-  overlay.classList.remove("active");
-};
+if (closeMenu && sideMenu && overlay) {
+  closeMenu.onclick = () => {
+    sideMenu.classList.remove("active");
+    overlay.classList.remove("active");
+  };
+}
 
-overlay.onclick = () => {
-  sideMenu.classList.remove("active");
-  overlay.classList.remove("active");
-};
+if (overlay && sideMenu) {
+  overlay.onclick = () => {
+    sideMenu.classList.remove("active");
+    overlay.classList.remove("active");
+  };
+}
 
 // Dropdown toggle
 const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
@@ -346,16 +352,20 @@ dropdownToggles.forEach(toggle => {
     toggle.addEventListener('click', (e) => {
         e.preventDefault();
         const parent = toggle.parentElement;
-        parent.classList.toggle('active');
+        if (parent) {
+            parent.classList.toggle('active');
+        }
     });
 });
 
 const searchBtn = document.getElementById("searchBtn");
 const searchBox = document.querySelector(".search-box");
 
-searchBtn.onclick = () => {
-  searchBox.classList.toggle("active");
-};
+if (searchBtn && searchBox) {
+  searchBtn.onclick = () => {
+    searchBox.classList.toggle("active");
+  };
+}
 
 const data = window.locationData || null;
 const tabs = document.querySelectorAll(".tab");
