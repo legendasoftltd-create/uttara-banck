@@ -5030,7 +5030,7 @@ html.monochrome {
     position: relative;
     /* width: 90%; */
     max-width: 800px;
-    background: #000;
+    background: #ffffff;
     border-radius: 8px;
     margin: auto;
 }
