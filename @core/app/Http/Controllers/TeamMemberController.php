@@ -44,6 +44,7 @@ class TeamMemberController extends Controller
             'icon_one_url'   => 'nullable|string|max:191',
             'icon_two_url'   => 'nullable|string|max:191',
             'icon_three_url' => 'nullable|string|max:191',
+            'order_by'    => 'nullable|integer',
         ]);
         TeamMember::create($request->all());
 
@@ -65,6 +66,7 @@ class TeamMemberController extends Controller
             'icon_one_url'   => 'nullable|string|max:191',
             'icon_two_url'   => 'nullable|string|max:191',
             'icon_three_url' => 'nullable|string|max:191',
+            'order_by'    => 'nullable|integer',
         ]);
         TeamMember::find($request->id)->update($request->all());
 

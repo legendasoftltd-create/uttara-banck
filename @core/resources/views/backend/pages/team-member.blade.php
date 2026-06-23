@@ -76,6 +76,7 @@
                                         <th>{{__('Name')}}</th>
                                         <th>{{__('Designation')}}</th>
                                         <th>{{__('Type')}}</th>
+                                        <th>{{__('Order By')}}</th>
                                         <th>{{__('Action')}}</th>
                                         </thead>
                                         <tbody>
@@ -110,6 +111,7 @@
                                                 <span class="badge badge-info mr-1">{{$team_types[$t] ?? $t}}</span>
                                             @endforeach
                                         </td>
+                                                <td>{{$data->order_by ?? 0}}</td>
                                                 <td>
                                                     <x-delete-popover :url="route('admin.team.member.delete',$data->id)"/>
                                                     <a href="#"
@@ -131,6 +133,7 @@
                                                        data-iconOneUrl="{{$data->icon_one_url}}"
                                                        data-iconTwoUrl="{{$data->icon_two_url}}"
                                                        data-iconThreeUrl="{{$data->icon_three_url}}"
+                                                       data-order_by="{{$data->order_by}}"
                                                     >
                                                         <i class="ti-pencil"></i>
                                                     </a>
@@ -186,6 +189,15 @@
                                 <small class="text-muted">
                                     <a href="{{route('admin.designation')}}" target="_blank">{{__('+ Manage Designations')}}</a>
                                 </small>
+                            </div>
+                            <div class="form-group">
+                                <label for="order_by">{{__('Order By')}}</label>
+                                <select name="order_by" id="order_by" class="form-control">
+                                    <option value="">{{__('-- Select Order --')}}</option>
+                                    @for($o = 1; $o <= 100; $o++)
+                                        <option value="{{$o}}">{{$o}}</option>
+                                    @endfor
+                                </select>
                             </div>
                             <div class="form-group">
                                 <label for="description">{{__('Description')}}</label>
@@ -306,6 +318,15 @@
                                 @foreach($all_designations as $desig)
                                     <option value="{{$desig->name}}">{{$desig->name}}</option>
                                 @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit_order_by">{{__('Order By')}}</label>
+                            <select name="order_by" id="edit_order_by" class="form-control">
+                                <option value="">{{__('-- Select Order --')}}</option>
+                                @for($o = 1; $o <= 100; $o++)
+                                    <option value="{{$o}}">{{$o}}</option>
+                                @endfor
                             </select>
                         </div>
                         <div class="form-group">
@@ -458,6 +479,7 @@
                 $.each(selectedTypes, function(i, val) {
                     form.find('.edit-type-checkbox[value="' + val + '"]').prop('checked', true);
                 });
+                form.find('#edit_order_by').val(el.data('order_by'));
                 form.find('#edit_description').val(el.data('description'));
                 form.find('#edit_icon_one').val(el.data('iconone'));
                 form.find('#edit_icon_two').val(el.data('icontwo'));
