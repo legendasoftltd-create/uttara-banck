@@ -149,7 +149,7 @@ class TenderController extends Controller
 
         $this->deleteFile($existing);
 
-        $dir = public_path(self::UPLOAD_DIR);
+        $dir = public_path(base_path('../' . self::UPLOAD_DIR));
         if (!file_exists($dir)) {
             mkdir($dir, 0777, true);
         }
@@ -164,7 +164,7 @@ class TenderController extends Controller
     private function deleteFile($filename)
     {
         if ($filename) {
-            $path = public_path(self::UPLOAD_DIR . '/' . $filename);
+            $path = base_path('../' . self::UPLOAD_DIR . '/' . $filename);
             if (file_exists($path)) {
                 unlink($path);
             }

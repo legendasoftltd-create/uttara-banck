@@ -155,7 +155,7 @@
                                 <a href="#" class="btn btn-view"
                                    data-toggle="modal"
                                    data-target="#tenderModal{{ $tender->id }}">View</a>
-                                <a href="{{ $tender->file }}" class="btn btn-view" download>Download</a>
+                                <a href="{{ asset('assets/uploads/tenders/' . $tender->file) }}" class="btn btn-view" download>Download</a>
                             </div>
                         </td>
                     </tr>
@@ -182,11 +182,11 @@
                         @if($tender->file)
                             @php $ext = strtolower(pathinfo($tender->file, PATHINFO_EXTENSION)); @endphp
                             @if($ext === 'pdf')
-                                <iframe src="{{ asset('assets/uploads/tenders/' . basename($tender->file)) }}"
+                                <iframe src="{{ asset('assets/uploads/tenders/' .$tender->file) }}"
                                         width="100%" height="600px" style="border:none;"></iframe>
                             @else
                                 <div style="text-align:center; padding:16px;">
-                                    <img src="{{ $tender->file }}" alt="{{ $tender->title }}"
+                                    <img src="{{ asset('assets/uploads/tenders/' . $tender->file) }}" alt="{{ $tender->title }}"
                                          style="max-width:100%; border:1px solid #ccc;">
                                 </div>
                             @endif
@@ -195,7 +195,7 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         @if($tender->file)
-                            <a href="{{ $tender->file }}" class="btn btn-view" download>Download</a>
+                            <a href="{{ asset('assets/uploads/tenders/' . $tender->file) }}" class="btn btn-view" download>Download</a>
                         @endif
                     </div>
                 </div>
