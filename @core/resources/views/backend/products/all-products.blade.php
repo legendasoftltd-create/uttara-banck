@@ -63,9 +63,9 @@
                                             <th>{{__('ID')}}</th>
                                             <th>{{__('Title')}}</th>
                                             <th>{{__('Image')}}</th>
-                                            <th>{{__('Price')}}</th>
+                                            <!-- <th>{{__('Price')}}</th> -->
                                             <th>{{__('Category/Subcategory')}}</th>
-                                            <th>{{__('Sales')}}</th>
+                                            <!-- <th>{{__('Sales')}}</th> -->
                                             <th>{{__('Status')}}</th>
                                             <th>{{__('Action')}}</th>
                                             </thead>
@@ -95,11 +95,11 @@
                                                            @endif
                                                        </div>
                                                     </td>
-                                                    <td><del>{{amount_with_currency_symbol($data->regular_price)}}</del> <span>{{amount_with_currency_symbol($data->sale_price)}}</span></td>
+                                                    <!-- <td><del>{{amount_with_currency_symbol($data->regular_price)}}</del> <span>{{amount_with_currency_symbol($data->sale_price)}}</span></td> -->
                                                     <td>{{get_product_category_by_id($data->category_id)}} @if(!is_null($data->subcategory)) -> {{optional($data->subcategory)->title}}  @endif </td>
-                                                    <td>
+                                                    <!-- <td>
                                                         {{$data->sales}}
-                                                    </td>
+                                                    </td> -->
                                                     <td>
                                                         @if($data->status == 'draft')
                                                             <span class="alert alert-warning" >{{__('Draft')}}</span>
