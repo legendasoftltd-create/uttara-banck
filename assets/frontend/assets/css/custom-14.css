@@ -4615,6 +4615,44 @@ html.monochrome {
 .side-menu.active > ul > li:nth-child(10) { transition-delay: 1.00s; }
 .side-menu.active > ul > li:nth-child(11) { transition-delay: 1.10s; }
 .side-menu.active > ul > li:nth-child(12) { transition-delay: 1.20s; }
+.side-menu.active > ul > li:nth-child(13) { transition-delay: 1.30s; }
+.side-menu.active > ul > li:nth-child(14) { transition-delay: 1.40s; }
+.side-menu.active > ul > li:nth-child(15) { transition-delay: 1.50s; }
+.side-menu.active > ul > li:nth-child(16) { transition-delay: 1.60s; }
+.side-menu.active > ul > li:nth-child(17) { transition-delay: 1.70s; }
+.side-menu.active > ul > li:nth-child(18) { transition-delay: 1.80s; }
+.side-menu.active > ul > li:nth-child(19) { transition-delay: 1.90s; }
+.side-menu.active > ul > li:nth-child(20) { transition-delay: 2.00s; }
+.side-menu.active > ul > li:nth-child(21) { transition-delay: 2.10s; }
+.side-menu.active > ul > li:nth-child(22) { transition-delay: 2.20s; }
+.side-menu.active > ul > li:nth-child(23) { transition-delay: 2.30s; }
+.side-menu.active > ul > li:nth-child(24) { transition-delay: 2.40s; }
+.side-menu.active > ul > li:nth-child(25) { transition-delay: 2.50s; }
+.side-menu.active > ul > li:nth-child(26) { transition-delay: 2.60s; }
+.side-menu.active > ul > li:nth-child(27) { transition-delay: 2.70s; }
+.side-menu.active > ul > li:nth-child(28) { transition-delay: 2.80s; }
+.side-menu.active > ul > li:nth-child(29) { transition-delay: 2.90s; }
+.side-menu.active > ul > li:nth-child(30) { transition-delay: 3.00s; }
+.side-menu.active > ul > li:nth-child(31) { transition-delay: 3.10s; }
+.side-menu.active > ul > li:nth-child(32) { transition-delay: 3.20s; }
+.side-menu.active > ul > li:nth-child(33) { transition-delay: 3.30s; }
+.side-menu.active > ul > li:nth-child(34) { transition-delay: 3.40s; }
+.side-menu.active > ul > li:nth-child(35) { transition-delay: 3.50s; }
+.side-menu.active > ul > li:nth-child(36) { transition-delay: 3.60s; }
+.side-menu.active > ul > li:nth-child(37) { transition-delay: 3.70s; }
+.side-menu.active > ul > li:nth-child(38) { transition-delay: 3.80s; }
+.side-menu.active > ul > li:nth-child(39) { transition-delay: 3.90s; }
+.side-menu.active > ul > li:nth-child(40) { transition-delay: 4.00s; }
+.side-menu.active > ul > li:nth-child(41) { transition-delay: 4.10s; }
+.side-menu.active > ul > li:nth-child(42) { transition-delay: 4.20s; }
+.side-menu.active > ul > li:nth-child(43) { transition-delay: 4.30s; }
+.side-menu.active > ul > li:nth-child(44) { transition-delay: 4.40s; }
+.side-menu.active > ul > li:nth-child(45) { transition-delay: 4.50s; }
+.side-menu.active > ul > li:nth-child(46) { transition-delay: 4.60s; }
+.side-menu.active > ul > li:nth-child(47) { transition-delay: 4.70s; }
+.side-menu.active > ul > li:nth-child(48) { transition-delay: 4.80s; }
+.side-menu.active > ul > li:nth-child(49) { transition-delay: 4.90s; }
+.side-menu.active > ul > li:nth-child(50) { transition-delay: 5.00s; }
 
 .side-menu a {
     text-decoration: none;
