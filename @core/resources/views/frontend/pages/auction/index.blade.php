@@ -26,6 +26,7 @@
         margin: 0 auto 25px;
         max-width: 1230px;
         width: 100%;
+        flex-wrap: wrap;
     }
     .year-filter-label {
         font-size: 15px;

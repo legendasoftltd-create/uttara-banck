@@ -2,54 +2,45 @@
 @section('site-title')
     {{__('Dashboard')}}
 @endsection
+@section('style')
+    <link rel="stylesheet" href="{{asset('assets/backend/css/admin-dashboard-modern.css')}}">
+@endsection
 @section('content')
 
-    <div class="main-content-inner">
-        <div class="row">
+    <div class="main-content-inner modern-dashboard">
+        <div class="row mt-5">
             <div class="col-lg-12">
-                <div class="row">
+                <div class="dashboard-stats-grid">
                  @if(check_page_permission('admin_manage'))
-                    <div class="col-md-3 mt-5 mb-3">
-                        <div class="card text-dark mb-3">
-                            <div class="dsh-box-style">
-                                <a href="{{route('admin.new.user')}}" class="add-new"><i class="ti-plus"></i></a>
-                                <div class="icon">
-                                    <i class="ti-user"></i>
-                                </div>
-                                <div class="content">
-                                    <span class="total">{{$total_admin}}</span>
-                                    <h4 class="title">{{__('Total Admin')}}</h4>
-                                </div>
-                            </div>
+                    <div class="stat-card stat-card--violet">
+                        <a href="{{route('admin.new.user')}}" class="stat-card-add"><i class="ti-plus"></i></a>
+                        <div class="stat-card-icon">
+                            <i class="ti-user"></i>
+                        </div>
+                        <div class="stat-card-info">
+                            <span class="stat-card-number">{{$total_admin}}</span>
+                            <h4 class="stat-card-title">{{__('Total Admin')}}</h4>
                         </div>
                     </div>
                 @endif
-                    <div class="col-md-3 mt-5 mb-3">
-                        <div class="card text-dark mb-3">
-                            <div class="dsh-box-style">
-                                <div class="icon">
-                                    <i class="ti-eye"></i>
-                                </div>
-                                <div class="content">
-                                    <span class="total">{{$total_visitor}}</span>
-                                    <h4 class="title">{{__('Total Visitor')}}</h4>
-                                </div>
-                            </div>
+                    <div class="stat-card stat-card--blue">
+                        <div class="stat-card-icon">
+                            <i class="ti-eye"></i>
+                        </div>
+                        <div class="stat-card-info">
+                            <span class="stat-card-number">{{$total_visitor}}</span>
+                            <h4 class="stat-card-title">{{__('Total Visitor')}}</h4>
                         </div>
                     </div>
                 @if(check_page_permission_by_string('News Manage'))
-                    <div class="col-md-3 mt-md-5 mb-3">
-                        <div class="card text-dark  mb-3">
-                            <div class="dsh-box-style">
-                                <a href="{{route('admin.news.new')}}" class="add-new"><i class="ti-plus"></i></a>
-                                <div class="icon">
-                                    <i class="ti-comments"></i>
-                                </div>
-                                <div class="content">
-                                    <span class="total">{{$blog_count}}</span>
-                                    <h4 class="title">{{__('Total News')}}</h4>
-                                </div>
-                            </div>
+                    <div class="stat-card stat-card--pink">
+                        <a href="{{route('admin.news.new')}}" class="stat-card-add"><i class="ti-plus"></i></a>
+                        <div class="stat-card-icon">
+                            <i class="ti-comments"></i>
+                        </div>
+                        <div class="stat-card-info">
+                            <span class="stat-card-number">{{$blog_count}}</span>
+                            <h4 class="stat-card-title">{{__('Total News')}}</h4>
                         </div>
                     </div>
                  @endif
@@ -130,18 +121,14 @@
                         </div>
                     @endif --}}
                     @if(check_page_permission_by_string('Products Manage') && !empty(get_static_option('product_module_status')))
-                    <div class="col-md-3 mt-md-5 mb-3">
-                        <div class="card text-dark  mb-3">
-                            <div class="dsh-box-style">
-                                <a href="{{route('admin.products.new')}}" class="add-new"><i class="ti-plus"></i></a>
-                                <div class="icon">
-                                    <i class="ti-package"></i>
-                                </div>
-                                <div class="content">
-                                    <span class="total">{{$total_products}}</span>
-                                    <h4 class="title">{{__('Total Products')}}</h4>
-                                </div>
-                            </div>
+                    <div class="stat-card stat-card--orange">
+                        <a href="{{route('admin.products.new')}}" class="stat-card-add"><i class="ti-plus"></i></a>
+                        <div class="stat-card-icon">
+                            <i class="ti-package"></i>
+                        </div>
+                        <div class="stat-card-info">
+                            <span class="stat-card-number">{{$total_products}}</span>
+                            <h4 class="stat-card-title">{{__('Total Products')}}</h4>
                         </div>
                     </div>
                     {{-- <div class="col-md-3 mt-md-5 mb-3">
@@ -160,18 +147,14 @@
                     </div> --}}
                     @endif
                     @if(check_page_permission_by_string('Services'))
-                    <div class="col-md-3 mt-md-5 mb-3">
-                        <div class="card text-dark  mb-3">
-                            <div class="dsh-box-style">
-                                <a href="{{route('admin.services.new')}}" class="add-new"><i class="ti-plus"></i></a>
-                                <div class="icon">
-                                    <i class="ti-blackboard"></i>
-                                </div>
-                                <div class="content">
-                                    <span class="total">{{$total_services}}</span>
-                                    <h4 class="title">{{__('Total Services')}}</h4>
-                                </div>
-                            </div>
+                    <div class="stat-card stat-card--teal">
+                        <a href="{{route('admin.services.new')}}" class="stat-card-add"><i class="ti-plus"></i></a>
+                        <div class="stat-card-icon">
+                            <i class="ti-blackboard"></i>
+                        </div>
+                        <div class="stat-card-info">
+                            <span class="stat-card-number">{{$total_services}}</span>
+                            <h4 class="stat-card-title">{{__('Total Services')}}</h4>
                         </div>
                     </div>
                     @endif

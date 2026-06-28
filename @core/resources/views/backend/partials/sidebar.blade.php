@@ -1,4 +1,265 @@
 @php $home_page_variant = get_static_option('home_page_variant');@endphp
+<style>
+/* Modern Admin Sidebar Styling */
+.sidebar-menu {
+    background: #0f172a !important; /* Dark Slate Blue/Black */
+    box-shadow: 4px 0 25px rgba(0, 0, 0, 0.15) !important;
+}
+
+.sidebar-header {
+    background: #ffffffff !important;
+    border-bottom: 1px solid #1e293b !important;
+    padding: 24px !important;
+}
+
+.main-menu {
+    padding: 15px 0 0 0 !important;
+    height: calc(100% - 100px) !important;
+}
+
+/* Custom Scrollbar for modern feel */
+.menu-inner::-webkit-scrollbar {
+    width: 6px;
+}
+.menu-inner::-webkit-scrollbar-track {
+    background: transparent;
+}
+.menu-inner::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+}
+.menu-inner::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.25);
+}
+
+/* Metismenu items styling */
+.metismenu {
+    padding: 0 12px 30px 12px !important;
+}
+
+.metismenu li {
+    margin: 4px 0 !important;
+}
+
+.metismenu li a {
+    color: #94a3b8 !important; /* Slate 400 */
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    padding: 12px 16px !important;
+    border-radius: 8px !important;
+    display: flex !important;
+    align-items: center !important;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    text-decoration: none !important;
+}
+
+.metismenu li a i {
+    color: #64748b !important; /* Slate 500 */
+    font-size: 16px !important;
+    margin-right: 12px !important;
+    transition: all 0.25s ease !important;
+    width: 20px !important;
+    text-align: center !important;
+}
+
+/* Hover State */
+.metismenu li a:hover {
+    color: #f8fafc !important; /* Slate 50 */
+    background: rgba(255, 255, 255, 0.05) !important;
+}
+
+.metismenu li a:hover i {
+    color: #3faa4d !important; /* Hover icon color */
+}
+
+/* Active Menu Item Style */
+.metismenu li.active > a {
+    color: #ffffff !important;
+    background: rgba(63, 170, 77, 0.12) !important;
+    border-left: 4px solid #3faa4d !important;
+    border-radius: 0 8px 8px 0 !important;
+    font-weight: 600 !important;
+}
+
+.metismenu li.active > a i {
+    color: #3faa4d !important;
+}
+
+/* If it is a leaf active item (no submenu / not dropdown parent) */
+.metismenu li.active:not(.main_dropdown) > a {
+    background: #3faa4d !important;
+    color: #ffffff !important;
+    border-left: none !important;
+    border-radius: 8px !important;
+    box-shadow: 0 4px 12px rgba(63, 170, 77, 0.3) !important;
+}
+
+.metismenu li.active:not(.main_dropdown) > a i {
+    color: #ffffff !important;
+}
+
+/* Caret/Arrow indicator custom styling */
+.metismenu li a:after {
+    color: #64748b !important;
+    font-size: 14px !important;
+    right: 16px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+}
+
+.metismenu li.active > a:after {
+    color: #ffffff !important;
+}
+
+/* Dropdown/Sub-menus container */
+.metismenu li ul {
+    background: rgba(0, 0, 0, 0.15) !important;
+    border-radius: 8px !important;
+    margin: 4px 0 !important;
+    padding: 6px 0 6px 12px !important;
+    border-left: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+/* Dropdown/Sub-menu links styling */
+.metismenu li ul li a {
+    padding: 8px 16px 8px 24px !important;
+    font-size: 13px !important;
+    color: #94a3b8 !important;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    border-radius: 6px !important;
+}
+
+.metismenu li ul li a:hover {
+    color: #ffffff !important;
+    background: rgba(255, 255, 255, 0.03) !important;
+}
+
+.metismenu li ul li.active > a {
+    color: #3faa4d !important;
+    background: rgba(63, 170, 77, 0.12) !important;
+    font-weight: 600 !important;
+}
+
+.metismenu li ul li.active > a i {
+    color: #3faa4d !important;
+}
+
+/* Arrow position for child items */
+.metismenu li li a:after {
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+}
+
+/* ==========================================================
+   Mobile/Tablet responsive layouts & toggler styling
+   ========================================================== */
+@media (max-width: 991px) {
+    /* Fixed Sidebar width on mobile drawer style */
+    .sidebar-menu {
+        width: 280px !important;
+        left: 0 !important;
+        transform: translateX(0) !important;
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    }
+
+    /* Hide sidebar by sliding it out when collapsed */
+    .page-container.sbar_collapsed .sidebar-menu {
+        transform: translateX(-100%) !important;
+    }
+
+    /* Fixed positioned Hamburger/Close Button */
+    .nav-btn {
+        position: fixed !important;
+        left: 15px !important;
+        top: 15px !important;
+        z-index: 9999 !important;
+        background: #3faa4d !important; /* Brand green */
+        border-radius: 8px !important;
+        width: 40px !important;
+        height: 40px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        align-items: center !important;
+        padding: 0 !important;
+        box-shadow: 0 4px 12px rgba(63, 170, 77, 0.3) !important;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+        cursor: pointer !important;
+    }
+
+    .nav-btn span {
+        width: 20px !important;
+        height: 2px !important;
+        background: #ffffff !important;
+        margin: 2px 0 !important;
+        display: block !important;
+        transition: all 0.3s ease !important;
+    }
+
+    /* Shift toggle button outside the drawer when open and style it as an X close button */
+    .page-container:not(.sbar_collapsed) .nav-btn {
+        left: 295px !important; /* 280px drawer width + 15px margin */
+        background: #ef4444 !important; /* Modern Red Color */
+        box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3) !important;
+    }
+
+    .page-container:not(.sbar_collapsed) .nav-btn span:nth-child(1) {
+        transform: rotate(45deg) translate(4px, 4px) !important;
+    }
+
+    .page-container:not(.sbar_collapsed) .nav-btn span:nth-child(2) {
+        opacity: 0 !important;
+    }
+
+    .page-container:not(.sbar_collapsed) .nav-btn span:nth-child(3) {
+        transform: rotate(-45deg) translate(4px, -4px) !important;
+    }
+
+    /* Reset page containers defaults on mobile */
+    .page-container {
+        padding-left: 0 !important;
+    }
+
+    .main-content {
+        width: 100% !important;
+        padding-top: 60px !important; /* Make space for top bar mobile toggler */
+    }
+
+    /* Full screen modern glass-morphism overlay backdrop */
+    .page-container:not(.sbar_collapsed)::after {
+        content: "" !important;
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+        background: rgba(15, 23, 42, 0.6) !important;
+        -webkit-backdrop-filter: blur(4px) !important;
+        backdrop-filter: blur(4px) !important;
+        z-index: 90 !important;
+        transition: opacity 0.3s ease !important;
+    }
+}
+</style>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Backdrop click-to-close handler for mobile sidebar
+    document.addEventListener('click', function(e) {
+        if (window.innerWidth <= 991) {
+            var container = document.querySelector('.page-container');
+            if (container && !container.classList.contains('sbar_collapsed')) {
+                // If clicked outside sidebar and outside the toggler button, close the sidebar
+                if (!e.target.closest('.sidebar-menu') && !e.target.closest('.nav-btn')) {
+                    container.classList.add('sbar_collapsed');
+                    document.body.classList.add('sidebar_collapsed');
+                }
+            }
+        }
+    });
+});
+</script>
 <div class="sidebar-menu">
     <div class="sidebar-header">
         <div class="logo" style="max-height: 50px;">
