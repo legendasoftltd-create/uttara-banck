@@ -63,6 +63,13 @@
                     </div>
                 @endforeach
             </section>
+            <div class="row mt-4">
+                <div class="col-lg-12 text-center">
+                    <nav class="pagination-wrapper" aria-label="Page navigation">
+                        {{$all_products->links()}}
+                    </nav>
+                </div>
+            </div>
         <div class="empty-height-50"></div>
         </div>
     </div>
