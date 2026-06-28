@@ -70,8 +70,8 @@
                                         <th>{{__('ID')}}</th>
                                         <th>{{__('Title')}}</th>
                                         <th>{{__('Image')}}</th>
-                                        <th>{{__('Author')}}</th>
-                                        <th>{{__('Category')}}</th>
+                                        <!-- <th>{{__('Author')}}</th>
+                                        <th>{{__('Category')}}</th> -->
                                         <th>{{__('Status')}}</th>
                                         <th>{{__('Date')}}</th>
                                         <th>{{__('Action')}}</th>
@@ -100,12 +100,12 @@
                                                         </div>
                                                     @endif
                                                 </td>
-                                                <td>{{$data->author}}</td>
+                                                <!-- <td>{{$data->author}}</td>
                                                 <td>
                                                 @if(!empty($data->blog_categories_id))
                                                         {{get_blog_category_by_id($data->blog_categories_id)}}
                                                 @endif
-                                                </td>
+                                                </td> -->
                                                 <td>
                                                     @if($data->status == 'draft')
                                                         <span class="alert alert-warning" style="margin-top: 20px;display: inline-block;">{{__('Draft')}}</span>
