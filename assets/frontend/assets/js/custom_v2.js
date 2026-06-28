@@ -327,8 +327,9 @@ const overlay = document.getElementById("overlay");
 
 if (menuBtn && sideMenu && overlay) {
   menuBtn.onclick = () => {
-    sideMenu.classList.add("active");
-    overlay.classList.add("active");
+    sideMenu.classList.toggle("active");
+    overlay.classList.toggle("active");
+    menuBtn.classList.toggle("active");
   };
 }
 
@@ -336,6 +337,7 @@ if (closeMenu && sideMenu && overlay) {
   closeMenu.onclick = () => {
     sideMenu.classList.remove("active");
     overlay.classList.remove("active");
+    menuBtn.classList.remove("active");
   };
 }
 
@@ -343,6 +345,7 @@ if (overlay && sideMenu) {
   overlay.onclick = () => {
     sideMenu.classList.remove("active");
     overlay.classList.remove("active");
+    menuBtn.classList.remove("active");
   };
 }
 
