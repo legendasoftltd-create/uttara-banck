@@ -96,7 +96,7 @@
                                 <label for="meta_description">{{__('Meta Description')}}</label>
                                 <textarea name="meta_description"  class="form-control" rows="5" id="meta_description"></textarea>
                             </div>
-                            {{-- <div class="form-group">
+                            <div class="form-group">
                                 <label for="category">{{__('Category')}}</label>
                                 <select name="categories_id" id="category" class="form-control">
                                     <option value="">{{__('Select Category')}}</option>
@@ -105,7 +105,7 @@
                                     @endforeach
                                 </select>
                                 <span class="info-text">{{__('select language to get category by language')}}</span>
-                            </div> --}}
+                            </div>
                             {{-- <div class="form-group">
                                 <label for="price_plan">{{__('Price Plans')}}</label>
                                 <select name="price_plan[]" multiple class="form-control nice-select wide" id="price_plan_select"> </select>

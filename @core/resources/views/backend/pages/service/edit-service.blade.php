@@ -120,8 +120,8 @@
                 <textarea name="meta_description" class="form-control" rows="5"
                     id="meta_description">{{$service->meta_description}}</textarea>
             </div>
-            {{-- <div class="form-group">
-                                <label for="category">{{__('Category')}}</label>
+             <div class="form-group">
+            <label for="category">{{__('Category')}}</label>
             <select name="categories_id" id="category" class="form-control">
                 <option value="">{{__('Select Category')}}</option>
                 @foreach($service_category as $data)
@@ -129,7 +129,7 @@
                 </option>
                 @endforeach
             </select>
-        </div> --}}
+        </div>
         {{-- <div class="form-group">
                                 <label for="price_plan">{{__('Price Plans')}}</label>
         <select name="price_plan[]" multiple class="form-control nice-select wide" id="price_plan_select">
