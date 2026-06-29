@@ -73,6 +73,7 @@
                                         {{-- <th>{{__('Icon')}}</th> --}}
                                         {{-- <th>{{__('Category')}}</th> --}}
                                         {{-- <th>{{__('Sorting Order')}}</th> --}}
+                                        <th>{{__('Category')}}</th>
                                         <th>{{__('Date')}}</th>
                                         <th>{{__('Action')}}</th>
                                         </thead>
@@ -118,7 +119,7 @@
                                                     @endif
                                                 </td> --}}
                                                 <td>{{get_service_category_by_id($data->categories_id)}}</td>
-                                                <td>{{$data->sr_order}}</td>
+                                                <!-- <td>{{$data->sr_order}}</td> -->
                                                 <td>{{date_format($data->created_at,'d M Y')}}</td>
                                                 <td>
                                                      <x-delete-popover :url="route('admin.services.delete',$data->id)"/>
