@@ -503,269 +503,6 @@ ITEM;
         return $output;
 }
 
-    public function home_page_change($id)
-    {
-
-        $whitelist = array(
-            '127.0.0.1',
-            '::1',
-        );
-        $remote_addr = url('/');
-        preg_match('/xgenious/',$remote_addr,$match);
-        if(!in_array($remote_addr, $whitelist) && empty($match)){
-            return $match;
-        }
-
-        $home_page_variant = $id;
-        if(!in_array($id,['01','02','03','04','05','06','07','08','09','10','11','12','13','14','15','16','17','18','19','20','21'])){
-            abort(404);
-        }
-        $lang = LanguageHelper::user_lang_slug();
-        $all_header_slider = HeaderSlider::where('lang', $lang)->where(function($q) {
-            $q->where('page_type', 'home')->orWhereNull('page_type');
-        })->get();
-        $all_counterup = Counterup::where('lang', $lang)->get();
-        $all_key_features = KeyFeatures::where('lang', $lang)->get();
-        $all_service = Services::where(['lang' => $lang, 'status' => 'publish'])->orderBy('sr_order', 'ASC')->take(get_static_option('home_page_01_service_area_items'))->get();
-        $all_testimonial = Testimonial::where(['lang' => $lang, 'status' => 'publish'])->orderBy('id', 'desc')->get();
-        $all_price_plan = PricePlan::where(['lang' => $lang, 'status' => 'publish'])->orderBy('id', 'desc')->take(get_static_option('home_page_01_price_plan_section_items'))->get();
-        $all_team_members = TeamMember::where('lang', $lang)
-            ->orderByRaw('CASE WHEN order_by IS NULL OR order_by = 0 THEN 999999 ELSE order_by END ASC')
-            ->orderBy('id', 'asc')
-            ->take(get_static_option('home_page_01_team_member_items'))
-            ->get();
-        $all_brand_logo = Brand::all();
-        $all_work = Works::where(['lang' => $lang, 'status' => 'publish'])->orderBy('id', 'desc')->take(get_static_option('home_page_01_case_study_items'))->get();
-        $all_blog = Blog::where(['lang' => $lang, 'status' => 'publish'])->orderBy('id', 'desc')->take(6)->get();
-        $all_contact_info = ContactInfoItem::where(['lang' => $lang])->orderBy('id', 'desc')->get();
-        $all_service_category = ServiceCategory::where(['lang' => $lang, 'status' => 'publish'])->orderBy('id', 'desc')->take(get_static_option('home_page_01_service_area_items'))->get();
-        $all_contain_cat = $all_work->map(function ($index) { return $index->categories_id; });
-        $works_cat_ids = [];
-        foreach($all_contain_cat as $k=>$v){
-            foreach($v as $key=>$value){
-                if(!in_array($value, $works_cat_ids)){
-                    $works_cat_ids[]=$value;
-                }
-            }
-        }
-        $all_work_category = WorksCategory::find($works_cat_ids);
-        //make a function to call all static option by home page
-        $static_field_data = StaticOption::whereIn('option_name', HomePageStaticSettings::get_home_field($home_page_variant))->get()->mapWithKeys(function ($item) {
-            return [$item->option_name => $item->option_value];
-        })->toArray();
-
-
-        $blade_data = [
-            'home_page' => $id,
-            'static_field_data' => $static_field_data,
-            'all_header_slider' => $all_header_slider,
-            'all_counterup' => $all_counterup,
-            'all_key_features' => $all_key_features,
-            'all_service' => $all_service,
-            'all_testimonial' => $all_testimonial,
-            'all_blog' => $all_blog,
-            'all_price_plan' => $all_price_plan,
-            'all_team_members' => $all_team_members,
-            'all_brand_logo' => $all_brand_logo,
-            'all_work_category' => $all_work_category,
-            'all_work' => $all_work,
-            'all_service_category' => $all_service_category,
-            'all_contact_info' => $all_contact_info,
-        ];
-
-        if (in_array($home_page_variant,['10','12','16']) ){
-            //appointment module for home page 10,12,16
-            $appointment_query = Appointment::query();
-            $appointment_query->with('lang_front');
-            $feature_product_list = get_static_option('home_page_' . $home_page_variant . '_appointment_section_category') ?? '';
-            $feature_product_list = unserialize($feature_product_list, ['class' => false]);
-            if (is_array($feature_product_list) && count($feature_product_list) > 0) {
-                $appointment_query->whereIn('categories_id', $feature_product_list);
-            }
-            $appointments = $appointment_query->get();
-            $blade_data['appointments'] = $appointments;
-
-        }
-
-        if ($home_page_variant == '13'){
-            //popular donation cause
-            $popular_cause_query = Donation::query();
-            $popular_cause_list = get_static_option('home_page_13_' . $lang . '_popular_cause_popular_cause_list') ??  serialize([]);
-            $popular_cause_list = unserialize($popular_cause_list, ['class' => false]);
-            $popular_cause_items = get_static_option('home_page_13_popular_cause_popular_cause_items') ?? '';
-            $popular_cause_order = get_static_option('home_page_13_popular_cause_popular_cause_order') ?? 'asc';
-            $popular_cause_orderby = get_static_option('home_page_13_popular_cause_popular_cause_orderby') ?? 'id';
-
-
-            if (count($popular_cause_list) > 0) {
-                $popular_cause_query->whereIn('id', $popular_cause_list);
-            }
-            $popular_causes = $popular_cause_query->where('lang', $lang)->orderBy($popular_cause_orderby, $popular_cause_order)->take($popular_cause_items)->get();
-            $blade_data['popular_causes'] = $popular_causes;
-        }
-
-        if (in_array($home_page_variant,['13','15','17','18'])){
-            $all_events = Events::where(['lang' => $lang, 'status' => 'publish'])->orderBy('id', 'DESC')->take(get_static_option('home_page_01_event_area_items'))->get();
-            $latest_products = Products::where(['lang' => $lang, 'status' => 'publish'])->orderBy('id', 'DESC')->take(get_static_option('home_page_products_area_items'))->get();
-            $blade_data['all_events'] = $all_events;
-            $blade_data['latest_products'] = $latest_products;
-        }
-        if (in_array($home_page_variant,['15','18'])){
-            $product_query = Products::query();
-            $feature_product_list = get_static_option('home_page_15_' . $lang . '_featured_product_area_items') ??  serialize([]);
-            $feature_product_list = unserialize($feature_product_list, ['class' => false]);
-            if (count($feature_product_list) > 0) {
-                $product_query->whereIn('id', $feature_product_list);
-            }
-            $featured_products = $product_query->where('lang', $lang)->get();
-
-            //best selling product
-            $top_selling_products = Products::where(['lang' => $lang, 'status' => 'publish'])->orderBy('sales', 'desc')->take(get_static_option('home_page_15_top_selling_product_area_items'))->get();
-            $blade_data['featured_products'] = $featured_products;
-            $blade_data['top_selling_products'] = $top_selling_products;
-        }
-
-
-        if (in_array($home_page_variant,['17'])){
-            //courses category
-            $all_courses_category = CoursesCategory::where(['status' => 'publish'])->get();
-            //
-            $featured_courses_ids = unserialize(get_static_option('featured_courses_ids'), ['class' => false]); //fetch featured courses from db by admin selected ids;
-            $featured_courses = Course::with('lang_front')->whereIn('id', $featured_courses_ids)->get(); //fetch featured courses from db by admin selected ids;
-            //
-            $latest_courses = Course::with('lang_front')->get()->take(get_static_option('course_home_page_all_course_area_items')); //get all latest course items, limit by admin given limit;
-
-            $blade_data['latest_courses'] = $latest_courses;
-            $blade_data['featured_courses'] = $featured_courses;
-            $blade_data['all_courses_category'] = $all_courses_category;
-        }
-
-        if (in_array($home_page_variant,['18'])){
-            //product categories
-            $product_categories = ProductCategory::where(['lang' => $lang, 'status' => 'publish'])->get();
-            $blade_data['product_categories'] = $product_categories;
-        }
-        
-        
-        
-        if (in_array($home_page_variant,['19'])){
-            //hot deal section products
-             $selected_products = json_decode(get_static_option('home_page_19_'.get_user_lang().'_todays_deal_products')) ?? [];
-             $hot_deal_pro = Products::with("ratings")
-                 ->withCount('ratings')
-                 ->whereIn('id',$selected_products)->where(['lang' => $lang, 'status' => 'publish'])->get();
-             $blade_data['all_hot_deal_products'] = $hot_deal_pro;
-
-            //store area section products
-            $selected_categories = json_decode(get_static_option('home19_store_section_'.get_user_lang().'_categories')) ?? [];
-            $store_area_categories = ProductCategory::whereIn('id',$selected_categories)->where(['lang' => $lang, 'status' => 'publish'])->take(get_static_option('home19_store_section_category_items'))->get();
-            $blade_data['all_store_area_categories'] = $store_area_categories;
-
-            //Popular section products
-            $selected_popular_products = json_decode(get_static_option('home_page_19_'.get_user_lang().'_popular_area_products')) ?? [];
-            $all_popular_products = Products::with("ratings")
-                ->withCount('ratings')
-                ->whereIn('id',$selected_popular_products)->where(['lang' => $lang, 'status' => 'publish'])->get();
-                 $blade_data['all_popular_products'] = $all_popular_products;
-
-             //Instagram Section
-            $post_items = get_static_option('home_page_19_instagram_area_item_show');
-            $instagram_data = Cache::remember('instagram_feed',now()->addDay(2),function () use($post_items) {
-                $insta_data = InstagramFeed::fetch($post_items);
-                return $insta_data ?? [];
-            });
-
-            if (!$instagram_data) {
-                //return '';
-            }
-            $blade_data['all_instagram_data'] = $instagram_data;
-            $pro_cat = ProductCategory::with('subcategory')->where(['lang' => $lang, 'status' => 'publish'])->get();
-            $blade_data['product_categories_for_sidebar'] = $pro_cat;
-        }
-        
-        
-        
-         if ($home_page_variant == '20'){
-            $breaking_news =  Blog::where(['lang' => $lang, 'status' => 'publish','breaking_news' => 1])->orderBy('id', 'desc')->take(12)->get();
-            $blade_data['breaking_news'] = $breaking_news;
-            $blade_data['header_slider_item'] =  Blog::where(['lang' => $lang, 'status' => 'publish'])->orderBy('id', 'desc')->take(get_static_option('home20_header_section_items',5))->get();
-
-           //advertisement code top section
-            $advertisement_type = get_static_option('home_page_newspaper_advertisement_type');
-            $advertisement_size = get_static_option('home_page_newspaper_advertisement_size');
-            $add_query = Advertisement::select('id','type','image','slot','status','redirect_url','embed_code','title');
-            if (!empty($advertisement_type)){
-                $add_query = $add_query->where('type',$advertisement_type);
-            }
-            if (!empty($advertisement_size)){
-                $add_query = $add_query->where('size',$advertisement_size);
-            }
-            $add = $add_query->where('status',1)->inRandomOrder()->first();
-            $blade_data['add_id'] = $add->id;
-
-            $image_markup = render_image_markup_by_attachment_id($add->image,null,'full');
-            $redirect_url = $add->redirect_url;
-            $slot = $add->slot;
-            $embed_code = $add->embed_code;
-
-            $blade_data['advertisement_markup'] = '';
-            if ($add->type === 'image'){
-                $blade_data['advertisement_markup'].= '<a href="'.$redirect_url.'">'.$image_markup.'</a>';
-            }elseif($add->type === 'google_adsense'){
-                $blade_data['advertisement_markup'].= $this->script_add($slot);
-            }else{
-                $blade_data['advertisement_markup'].= '<div>'.$embed_code.'</div>';
-            }
-           //advertisement code top section
-
-
-            //advertisement code bottom section
-            $advertisement_type = get_static_option('home_page_newspaper_advertisement_type_bottom');
-            $advertisement_size = get_static_option('home_page_newspaper_advertisement_size_bottom');
-            $add_query = Advertisement::select('id','type','image','slot','status','redirect_url','embed_code','title');
-            if (!empty($advertisement_type)){
-                $add_query = $add_query->where('type',$advertisement_type);
-            }
-            if (!empty($advertisement_size)){
-                $add_query = $add_query->where('size',$advertisement_size);
-            }
-            $add = $add_query->where('status',1)->inRandomOrder()->first();
-            $blade_data['add_id'] = $add->id;
-
-            $image_markup = render_image_markup_by_attachment_id($add->image,null,'full');
-            $redirect_url = $add->redirect_url;
-            $slot = $add->slot;
-            $embed_code = $add->embed_code;
-
-            $blade_data['advertisement_markup_bottom'] = '';
-            if ($add->type === 'image'){
-                $blade_data['advertisement_markup_bottom'].= '<a href="'.$redirect_url.'">'.$image_markup.'</a>';
-            }elseif($add->type === 'google_adsense'){
-                $blade_data['advertisement_markup_bottom'].= $this->script_add($slot);
-            }else{
-                $blade_data['advertisement_markup_bottom'].= '<div>'.$embed_code.'</div>';
-            }
-            //advertisement code bottom section
-
-            $popular_categories_id = json_decode(get_static_option('home20_popular_news_section_'.$lang.'_categories'));
-            $popular_categories = BlogCategory::where(['status' => 'publish','lang' => $lang])->whereIn('id',$popular_categories_id)->get();
-            $blade_data['popular_categories'] = $popular_categories;
-            $video_news_items = Blog::where(['status' => 'publish','lang' => $lang])->whereNotNull('video_url')->take(get_static_option('home20_video_news_section_items',4))->get();
-            $blade_data['video_news_items'] = $video_news_items;
-
-            $sport_news_categories_id = json_decode(get_static_option('home20_sports_news_section_'.$lang.'_categories'));
-            $sports_news_item = Blog::where(['status' => 'publish','lang' => $lang])->whereIn('blog_categories_id',$sport_news_categories_id)->take(get_static_option('home20_sports_news_section_items',5))->get();
-            $blade_data['sports_news_item'] = $sports_news_item;
-
-            $hot_news_categories_id = json_decode(get_static_option('home20_hot_news_section_'.$lang.'_categories'));
-            $hot_news_item = Blog::where(['status' => 'publish','lang' => $lang])->whereIn('blog_categories_id',$hot_news_categories_id)->take(get_static_option('home20_hot_news_section_items',5))->get();
-            $blade_data['hot_news_item'] = $hot_news_item;
-        }
-
-
-        return view('frontend.frontend-home-demo')->with($blade_data);
-    }
-
     public function contact_form_submit(Request $request)
     {
         return redirect()->back();
@@ -785,12 +522,6 @@ ITEM;
     {
         $exchange_rate = ExchangeRate::where('status', 1)->latest()->first();
         return view('frontend.pages.exrate', compact('exchange_rate'));
-    }
-
-
-    public function flutterwave_pay_get()
-    {
-        return redirect_404_page();
     }
 
     public function blog_page(Request $request)
@@ -1227,21 +958,6 @@ ITEM;
         return response()->json($branches);
     }
 
-    public function plan_order($id)
-    {
-        $order_details = PricePlan::findOrFail($id);
-
-        return view('frontend.pages.package.order-page')->with([
-            'order_details' => $order_details
-        ]);
-    }
-
-
-    public function static_payment_cancel_page()
-    {
-        return view('frontend.payment.static-payment-cancel');
-    }
-
 
     public function subscribe_newsletter(Request $request)
     {
@@ -1270,68 +986,6 @@ ITEM;
 
         return view('frontend.pages.work.work-category')->with(['all_work' => $all_works, 'category_name' => $category_name]);
 
-    }
-
-
-    public function order_confirm($id)
-    {
-        $order_details = Order::findOrFail($id);
-        return view('frontend.payment.order-confirm')->with(['order_details' => $order_details]);
-    }
-
-    public function booking_confirm($id)
-    {
-        $attendance_details = EventAttendance::findOrFail($id);
-        return view('frontend.payment.booking-confirm')->with(['attendance_details' => $attendance_details]);
-    }
-
-    public function event_payment_success($id)
-    {
-        $extract_id = substr($id, 6);
-        $extract_id = substr($extract_id, 0, -6);
-        $attendance_details = EventAttendance::find($extract_id);
-        if (empty($attendance_details)) {
-            return view('frontend.pages.404');
-        }
-        $payment_log = EventPaymentLogs::where('attendance_id', $attendance_details->id)->first();
-        $event_details = Events::find($attendance_details->event_id);
-
-        return view('frontend.pages.events.attendance-success')->with([
-            'attendance_details' => $attendance_details,
-            'payment_log' => $payment_log,
-            'event_details' => $event_details,
-        ]);
-    }
-
-    public function event_payment_cancel($id)
-    {
-        $attendance_details = EventAttendance::findOrFail($id);
-        return view('frontend.pages.events.attendance-cancel')->with(['attendance_details' => $attendance_details]);
-    }
-
-    public function order_payment_success($id)
-    {
-        $extract_id = substr($id, 6);
-        $extract_id = substr($extract_id, 0, -6);
-        $order_details = Order::findOrFail($extract_id);
-
-        if (empty($order_details)) {
-            return view('frontend.pages.404');
-        }
-        $package_details = PricePlan::find($order_details->package_id);
-        $payment_details = PaymentLogs::where('order_id', $extract_id)->first();
-        return view('frontend.payment.payment-success')->with(
-            [
-                'order_details' => $order_details,
-                'package_details' => $package_details,
-                'payment_details' => $payment_details,
-            ]);
-    }
-
-    public function order_payment_cancel($id)
-    {
-        $order_details = Order::findOrFail($id);
-        return view('frontend.payment.payment-cancel')->with(['order_details' => $order_details]);
     }
 
     //jobs
@@ -1399,14 +1053,6 @@ ITEM;
         ]);
     }
 
-    public function jobs_apply($id)
-    {
-        $job = Jobs::findOrFail($id);
-
-        return view('frontend.pages.jobs.jobs-apply')->with([
-            'job' => $job
-        ]);
-    }
 
     //products
     public function products(Request $request)
@@ -1508,7 +1154,9 @@ ITEM;
             'category_name' => $category_name,
             'all_header_slider' => $all_header_slider,
         ]);
-    }public function products_subcategory($id, $any)
+    }
+    
+    public function products_subcategory($id, $any)
     {
         $all_products = Products::where(['status' => 'publish', 'subcategory_id' => $id])->orderBy('id', 'desc')->paginate(get_static_option('product_post_items'));
         $category_name = ProductSubCategory::find($id)->title;
@@ -1519,73 +1167,6 @@ ITEM;
             'all_products' => $all_products,
             'category_name' => $category_name,
         ]);
-    }
-
-    public function products_cart()
-    {
-        $all_cart_items = get_cart_items();
-        $all_shipping = ProductShipping::where(['lang' => get_default_language(), 'status' => 'publish'])->orderBy('order', 'ASC')->get();
-        return view('frontend.pages.products.product-cart')->with([
-            'all_cart_items' => $all_cart_items,
-            'all_shipping' => $all_shipping,
-        ]);
-    }
-
-    public function products_wishlist()
-    {
-        $all_cart_items = get_cart_items();
-        $all_shipping = ProductShipping::where(['lang' => get_default_language(), 'status' => 'publish'])->orderBy('order', 'ASC')->get();
-        return view('frontend.pages.products.product-wishlist')->with([
-            'all_cart_items' => $all_cart_items,
-            'all_shipping' => $all_shipping,
-        ]);
-    }
-
-    public function product_checkout()
-    {
-        return view('frontend.pages.products.product-checkout');
-    }
-
-    public function product_payment_success($id)
-    {
-        $extract_id = substr($id, 6);
-        $extract_id = substr($extract_id, 0, -6);
-        $order_details = ProductOrder::find($extract_id);
-        if (empty($order_details)) {
-            return redirect_404_page();
-        }
-        return view('frontend.pages.products.product-success')->with(['order_details' => $order_details]);
-    }
-
-    public function product_payment_cancel($id)
-    {
-        $order_details = ProductOrder::find($id);
-        if (empty($order_details)) {
-            return redirect_404_page();
-        }
-        return view('frontend.pages.products.product-cancel')->with(['order_details' => $order_details]);
-    }
-
-    public function product_ratings(Request $request)
-    {
-        $this->validate($request, [
-            'product_id' => 'required',
-            'ratings' => 'required',
-            'ratings_message' => 'nullable|string'
-        ]);
-
-        $existing_rating = ProductRatings::where(['product_id' => $request->product_id, 'user_id' => auth()->user()->id])->first();
-        if (!empty($existing_rating)) {
-            return redirect()->back()->with(['msg' => __('You have already rated this product'), 'type' => 'danger']);
-        }
-        ProductRatings::create([
-            'ratings' => $request->ratings,
-            'message' => $request->ratings_message,
-            'product_id' => $request->product_id,
-            'user_id' => auth()->user()->id
-        ]);
-
-        return redirect()->back()->with(['msg' => __('Thanks for your rating'), 'type' => 'success']);
     }
 
     //events
@@ -1662,119 +1243,6 @@ ITEM;
         ]);
     }
 
-    public function showUserForgetPasswordForm()
-    {
-        return view('frontend.user.forget-password');
-    }
-
-    public function sendUserForgetPasswordMail(Request $request)
-    {
-        $this->validate($request, [
-            'username' => 'required|string:max:191'
-        ]);
-        $user_info = User::where('username', $request->username)->orWhere('email', $request->username)->first();
-        if (!empty($user_info)) {
-            $token_id = Str::random(30);
-            $existing_token = DB::table('password_resets')->where('email', $user_info->email)->delete();
-            DB::table('password_resets')->insert(['email' => $user_info->email, 'token' => $token_id]);
-
-
-            //fetch email tempalte content from admin panel
-            $message_body = get_static_option('user_reset_password_' . LanguageHelper::default_slug() . '_message');
-            $reset_url = '<a class="btn" href="' . route('user.reset.password', ['user' => $user_info->username, 'token' => $token_id]) . '">' . __("Reset Password") . '</a>'."\n";
-            $message = str_replace(
-                [
-                    '@username',
-                    '@name',
-                    '@reset_url'
-                ],
-                [
-                    $user_info->username,
-                    $user_info->name,
-                    $reset_url
-                ], $message_body);
-
-            $data = [
-                'username' => $user_info->username,
-                'message_content' => $message
-            ];
-
-            try {
-                Mail::to($user_info->email)->send(new AdminResetEmail($data));
-            }catch (\Exception $e){
-                return back()->with(LegendaSoftHelpers::item_delete($e->getMessage()));
-            }
-
-            return redirect()->back()->with([
-                'msg' => __('Check Your Mail For Reset Password Link'),
-                'type' => 'success'
-            ]);
-        }
-        return redirect()->back()->with([
-            'msg' => __('Your Username or Email Is Wrong!!!'),
-            'type' => 'danger'
-        ]);
-    }
-
-    public function showUserResetPasswordForm($username, $token)
-    {
-        return view('frontend.user.reset-password')->with([
-            'username' => $username,
-            'token' => $token
-        ]);
-    }
-
-    public function UserResetPassword(Request $request)
-    {
-        $this->validate($request, [
-            'token' => 'required',
-            'username' => 'required',
-            'password' => 'required|string|min:8|confirmed'
-        ]);
-        $user_info = User::where('username', $request->username)->first();
-        $user = User::findOrFail($user_info->id);
-        $token_iinfo = DB::table('password_resets')->where(['email' => $user_info->email, 'token' => $request->token])->first();
-        if (!is_null($token_iinfo)) {
-            $user->password = Hash::make($request->password);
-            $user->save();
-            return redirect()->route('user.login')->with(['msg' => __('Password Changed Successfully'), 'type' => 'success']);
-        }
-
-        return redirect()->back()->with(['msg' => __('Somethings Going Wrong! Please Try Again'), 'type' => 'danger']);
-    }
-
-    public function generate_invoice(Request $request)
-    {
-        $order_details = ProductOrder::find($request->order_id);
-        if (empty($order_details)) {
-            return redirect_404_page();
-        }
-        $pdf = PDF::loadView('backend.products.pdf.order', ['order_details' => $order_details]);
-        return $pdf->download('product-order-invoice.pdf');
-    }
-
-    public function generate_event_invoice(Request $request)
-    {
-        $attendance_details = EventAttendance::find($request->id);
-        if (empty($attendance_details)) {
-            return redirect_404_page();
-        }
-        $payment_log = EventPaymentLogs::where(['attendance_id' => $request->id])->first();
-        $pdf = PDF::loadView('invoice.event-attendance', ['attendance_details' => $attendance_details, 'payment_log' => $payment_log]);
-        return $pdf->download('event-attendance-invoice.pdf');
-    }
-
-    public function generate_package_invoice(Request $request)
-    {
-        $payment_details = PaymentLogs::where(['order_id' => $request->id])->first();
-        $order_details = Order::where(['id' => $request->id])->first();
-        if (empty($order_details)) {
-            return redirect_404_page();
-        }
-        $pdf = PDF::loadView('invoice.package-order', ['order_details' => $order_details, 'payment_details' => $payment_details]);
-        return $pdf->download('package-invoice.pdf');
-    }
-
     public function testimonials()
     {
         $default_lang = Language::where('default', 1)->first();
@@ -1783,16 +1251,6 @@ ITEM;
         return view('frontend.pages.testimonial-page')->with(['all_testimonials' => $all_testimonials]);
     }
 
-    public function feedback_page()
-    {
-        return view('frontend.pages.feedback-page');
-    }
-
-    public function clients_feedback_page()
-    {
-        $all_feedback = Feedback::all();
-        return view('frontend.pages.clients-feedback')->with(['all_feedback' => $all_feedback]);
-    }
     public function video_gallery_page()
     {
         $order =  get_static_option('site_video_gallery_order') ?? 'DESC';
@@ -1874,30 +1332,6 @@ ITEM;
         ]);
     }
 
-    public function job_payment_cancel($id)
-    {
-        $extract_id = substr($id, 6);
-        $extract_id = substr($extract_id, 0, -6);
-        $applicant_details = JobApplicant::find($extract_id);
-        $job_details = Jobs::find($applicant_details->jobs_id);
-        if (empty($applicant_details)) {
-            return redirect_404_page();
-        }
-        return view('frontend.pages.jobs.job-cancel')->with(['applicant_details' => $applicant_details, 'job_details' => $job_details]);
-    }
-
-    public function job_payment_success($id)
-    {
-        $extract_id = substr($id, 6);
-        $extract_id = substr($extract_id, 0, -6);
-        $applicant_details = JobApplicant::find($extract_id);
-        if (empty($applicant_details)) {
-            return redirect_404_page();
-        }
-        $job_details = Jobs::find($applicant_details->jobs_id);
-        return view('frontend.pages.jobs.job-success')->with(['applicant_details' => $applicant_details, 'job_details' => $job_details]);
-    }
-
     public function subscriber_verify(Request $request){
         Newsletter::where('token',$request->token)->update([
             'verified' => 1
@@ -1918,17 +1352,5 @@ ITEM;
         }
 
         return back()->with(['msg' => __('file download success'),'type' => 'success']);
-    }
-
-    public function home_advertisement_click_store(Request $request)
-    {
-        Advertisement::where('id',$request->id)->increment('click');
-        return response()->json('success');
-    }
-
-    public function home_advertisement_impression_store(Request $request)
-    {
-        Advertisement::where('id',$request->id)->increment('impression');
-        return response()->json('success');
     }
 }//end class
