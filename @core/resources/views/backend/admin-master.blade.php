@@ -76,7 +76,7 @@
                     <ul class="notification-area pull-right">
                         <li id="full-view"><i class="ti-fullscreen"></i></li>
                         <li id="full-view-exit"><i class="ti-zoom-out"></i></li>
-                        <li><a class="btn btn-primary rounded-circle" target="_blank" href="{{url('/')}}" style="width: 40px; height: 40px; display: inline-flex; align-items: center; justify-content: center; padding: 0;"><i class="fa fa-globe" style="font-size: 20px;"></i></a></li>
+                        <li><a class="btn btn-primary rounded-circle" target="_blank" href="{{url('/')}}" style="width: 40px; height: 40px; display: inline-flex; align-items: center; justify-content: center; padding: 0; background-color: #3faa4d; border: 0px;"><i class="fa fa-globe" style="font-size: 20px;"></i></a></li>
                     </ul>
                 </div>
             </div>
