@@ -76,7 +76,7 @@
                     <ul class="notification-area pull-right">
                         <li id="full-view"><i class="ti-fullscreen"></i></li>
                         <li id="full-view-exit"><i class="ti-zoom-out"></i></li>
-                        <li><a class="btn btn-primary" target="_blank" href="{{url('/')}}">{{__('View Site')}}</a></li>
+                        <li><a class="btn btn-primary rounded-circle" target="_blank" href="{{url('/')}}" style="width: 40px; height: 40px; display: inline-flex; align-items: center; justify-content: center; padding: 0;"><i class="fa fa-globe" style="font-size: 20px;"></i></a></li>
                     </ul>
                 </div>
             </div>
@@ -127,7 +127,7 @@
             <p>
                 {!! get_footer_copyright_text() !!}
             </p>
-            <p>v-{{get_static_option('site_script_version','3.5.0')}}</p>
+             <!-- <p>v-{{get_static_option('site_script_version','3.5.0')}}</p> -->
         </div>
     </footer>
 
