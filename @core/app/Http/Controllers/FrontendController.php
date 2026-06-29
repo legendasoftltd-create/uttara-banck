@@ -9,7 +9,6 @@ use App\ContactInfoItem;
 use App\Course;
 use App\CoursesCategory;
 use App\Donation;
-use App\DonationLogs;
 use App\EventAttendance;
 use App\EventPaymentLogs;
 use App\Events;
@@ -25,8 +24,6 @@ use App\ImageGalleryCategory;
 use App\JobApplicant;
 use App\Jobs;
 use App\JobsCategory;
-use App\Knowledgebase;
-use App\KnowledgebaseTopic;
 use App\Language;
 use App\Mail\AdminResetEmail;
 use App\Mail\CallBack;
@@ -111,6 +108,8 @@ class FrontendController extends Controller
             ->get();
         $all_brand_logo = Brand::all();
 
+
+            
         $all_download_categories = BankDownloadCategory::where('lang', get_default_language())->get();
         $all_bank_downloads = BankDownload::where([
             'lang' => $lang,
@@ -1244,11 +1243,6 @@ ITEM;
     }
 
 
-    public function request_quote()
-    {
-        return view('frontend.pages.quote-page');
-    }
-
     public function subscribe_newsletter(Request $request)
     {
         $this->validate($request, [
@@ -1278,14 +1272,6 @@ ITEM;
 
     }
 
-
-    public function price_plan_page()
-    {
-        $default_lang = Language::where('default', 1)->first();
-        $lang = !empty(session()->get('lang')) ? session()->get('lang') : $default_lang->slug;
-        $all_price_plan = PricePlan::where(['lang' => $lang])->get()->groupBy('categories_id');
-        return view('frontend.pages.price-plan')->with(['all_price_plan' => $all_price_plan]);
-    }
 
     public function order_confirm($id)
     {
@@ -1346,29 +1332,6 @@ ITEM;
     {
         $order_details = Order::findOrFail($id);
         return view('frontend.payment.payment-cancel')->with(['order_details' => $order_details]);
-    }
-
-    //donation
-    public function donations()
-    {
-        $all_donations = Donation::where(['status' => 'publish', 'lang' => get_user_lang()])->orderBy('id', 'desc')->paginate(get_static_option('donor_page_post_items'));
-
-        return view('frontend.pages.donations.donation')->with([
-            'all_donations' => $all_donations
-        ]);
-    }
-
-    public function donations_single($slug)
-    {
-        $donation = Donation::where('slug', $slug)->first();
-        if (empty($donation)) {
-            return redirect_404_page();
-        }
-        $all_donations = DonationLogs::where(['status' => 'complete', 'donation_id' => $donation->id])->orderBy('id', 'desc')->paginate(5);
-        return view('frontend.pages.donations.donation-single')->with([
-            'all_donations' => $all_donations,
-            'donation' => $donation,
-        ]);
     }
 
     //jobs
@@ -1699,81 +1662,6 @@ ITEM;
         ]);
     }
 
-    //knowledgebase
-    public function knowledgebase()
-    {
-        $default_lang = Language::where('default', 1)->first();
-        $lang = !empty(session()->get('lang')) ? session()->get('lang') : $default_lang->slug;
-        $all_knowledgebase = Knowledgebase::where(['status' => 'publish', 'lang' => $lang])->paginate(get_static_option('site_knoeledgebase_post_items'))->groupby('topic_id');
-        $all_knowledgebase_category = KnowledgebaseTopic::where(['status' => 'publish', 'lang' => $lang])->get();
-        $popular_articles = Knowledgebase::where(['status' => 'publish', 'lang' => $lang])->orderBy('views', 'desc')->get()->take(5);
-        return view('frontend.pages.knowledgebase.knowledgebase')->with([
-            'all_knowledgebase' => $all_knowledgebase,
-            'popular_articles' => $popular_articles,
-            'all_knowledgebase_category' => $all_knowledgebase_category,
-        ]);
-    }
-
-    public function knowledgebase_category($id, $any)
-    {
-        $default_lang = Language::where('default', 1)->first();
-        $lang = !empty(session()->get('lang')) ? session()->get('lang') : $default_lang->slug;
-
-        $all_knowledgebase = Knowledgebase::where(['status' => 'publish', 'lang' => $lang, 'topic_id' => $id])->orderBy('views', 'desc')->paginate(get_static_option('site_knowledgebase_post_items'));
-
-        if (empty($all_knowledgebase)){
-            abort(404);
-        }
-        $all_knowledgebase_category = KnowledgebaseTopic::where(['status' => 'publish', 'lang' => $lang])->get();
-        $popular_articles = Knowledgebase::where(['status' => 'publish', 'lang' => $lang])->orderBy('views', 'desc')->get()->take(5);
-        $category_name = KnowledgebaseTopic::find($id)->title;
-        return view('frontend.pages.knowledgebase.knowledgebase-category')->with([
-            'all_knowledgebase' => $all_knowledgebase,
-            'all_knowledgebase_category' => $all_knowledgebase_category,
-            'popular_articles' => $popular_articles,
-            'category_name' => $category_name,
-        ]);
-    }
-
-    public function knowledgebase_search(Request $request)
-    {
-        $default_lang = Language::where('default', 1)->first();
-        $lang = !empty(session()->get('lang')) ? session()->get('lang') : $default_lang->slug;
-
-        $all_knowledgebase = Knowledgebase::where(['status' => 'publish', 'lang' => $lang])->where('title', 'LIKE', '%' . $request->search . '%')->orderBy('views', 'desc')->paginate(get_static_option('site_knowledgebase_post_items'));
-        $all_knowledgebase_category = KnowledgebaseTopic::where(['status' => 'publish', 'lang' => $lang])->get();
-        $popular_articles = Knowledgebase::where(['status' => 'publish', 'lang' => $lang])->orderBy('views', 'desc')->get()->take(5);
-        $search_term = $request->search;
-
-        return view('frontend.pages.knowledgebase.knowledgebase-search')->with([
-            'all_knowledgebase' => $all_knowledgebase,
-            'all_knowledgebase_category' => $all_knowledgebase_category,
-            'popular_articles' => $popular_articles,
-            'search_term' => $search_term,
-        ]);
-    }
-
-    public function knowledgebase_single($slug)
-    {
-        $knowledgebase = Knowledgebase::where('slug', $slug)->first();
-        if (empty($knowledgebase)) {
-            return redirect_404_page();
-        }
-        $old_views = is_null($knowledgebase->views) ? 0 : $knowledgebase->views + 1;
-        Knowledgebase::find($knowledgebase->id)->update(['views' => $old_views]);
-        $default_lang = Language::where('default', 1)->first();
-        $lang = !empty(session()->get('lang')) ? session()->get('lang') : $default_lang->slug;
-
-        $all_knowledgebase_category = KnowledgebaseTopic::where(['status' => 'publish', 'lang' => $lang])->get();
-        $popular_articles = Knowledgebase::where(['status' => 'publish', 'lang' => $lang])->orderBy('views', 'desc')->get()->take(5);
-        return view('frontend.pages.knowledgebase.knowledgebase-single')->with([
-            'knowledgebase' => $knowledgebase,
-            'all_knowledgebase_category' => $all_knowledgebase_category,
-            'popular_articles' => $popular_articles,
-        ]);
-    }
-
-
     public function showUserForgetPasswordForm()
     {
         return view('frontend.user.forget-password');
@@ -1855,27 +1743,6 @@ ITEM;
         return redirect()->back()->with(['msg' => __('Somethings Going Wrong! Please Try Again'), 'type' => 'danger']);
     }
 
-    public function donation_payment_success($id)
-    {
-        $extract_id = substr($id, 6);
-        $extract_id = substr($extract_id, 0, -6);
-        $donation_logs = DonationLogs::find($extract_id);
-        if (empty($donation_logs)) {
-            return redirect_404_page();
-        }
-        $donation = Donation::find($donation_logs->donation_id);
-        return view('frontend.pages.donations.donation-success')->with(['donation_logs' => $donation_logs, 'donation' => $donation]);
-    }
-
-    public function donation_payment_cancel($id)
-    {
-        $donation_logs = DonationLogs::find($id);
-        if (empty($donation_logs)) {
-            return redirect_404_page();
-        }
-        return view('frontend.pages.donations.donation-cancel')->with(['donation_logs' => $donation_logs]);
-    }
-
     public function generate_invoice(Request $request)
     {
         $order_details = ProductOrder::find($request->order_id);
@@ -1884,16 +1751,6 @@ ITEM;
         }
         $pdf = PDF::loadView('backend.products.pdf.order', ['order_details' => $order_details]);
         return $pdf->download('product-order-invoice.pdf');
-    }
-
-    public function generate_donation_invoice(Request $request)
-    {
-        $donation_details = DonationLogs::find($request->id);
-        if (empty($donation_details)) {
-            return redirect_404_page();
-        }
-        $pdf = PDF::loadView('invoice.donation', ['donation_details' => $donation_details]);
-        return $pdf->download('donation-invoice.pdf');
     }
 
     public function generate_event_invoice(Request $request)
@@ -2047,13 +1904,6 @@ ITEM;
         ]);
         return view('frontend.thankyou');
     }
-    public function donor_list()
-    {
-        $all_donation_log = DonationLogs::where('status', 'complete')->get();
-        return view('frontend.pages.donor-list')->with(['all_donation_log' => $all_donation_log]);
-    }
-
-
     public function product_download(Request $request,$id){
         $product_details = Products::find($id);
         if (!is_null($product_details)){
