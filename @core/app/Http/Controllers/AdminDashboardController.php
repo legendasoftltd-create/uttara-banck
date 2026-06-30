@@ -60,32 +60,17 @@ class AdminDashboardController extends Controller
 
         $all_blogs = Blog::where('lang', $default_lang)->count();
         $total_admin = Admin::count();
-        $total_testimonial = Testimonial::where('lang', $default_lang)->count();
-        $total_team_member = TeamMember::where('lang', $default_lang)->count();
-        $total_counterup = Counterup::where('lang', $default_lang)->count();
-        $total_price_plan = PricePlan::where('lang', $default_lang)->count();
         $total_services = Services::where('lang', $default_lang)->count();
-        $total_key_features = KeyFeatures::where('lang', $default_lang)->count();
         $total_works = Works::where('lang', $default_lang)->count();
         $total_jobs = Jobs::where('lang', $default_lang)->count();
-        $total_events = Events::where('lang', $default_lang)->count();
         $total_donations = 0;
         $total_products = Products::where('lang', $default_lang)->count();
-        $total_Faq = Faq::where('lang', $default_lang)->count();
-        $total_brand = Brand::all()->count();
-        $total_product_order = \App\ProductOrder::all()->count();
-        $total_donated_log = 0;
-        $total_event_attendance = EventAttendance::where('status','complete')->count();
-
         $total_courses = 0;
         $total_courses_enroll = 0;
-        
         $total_appointments = 0;
         $total_appointment_booking = 0;
-
         $total_visitor = Visitor::count();
         
-         
         //recent 5 order of product order
         $product_recent_order = \App\ProductOrder::orderBy('id','desc')->take(5)->get();
         $package_recent_order = collect();
@@ -97,24 +82,11 @@ class AdminDashboardController extends Controller
         return view('backend.admin-home')->with([
             'blog_count' => $all_blogs,
             'total_admin' => $total_admin,
-            'total_price_plan' => $total_price_plan,
             'total_works' => $total_works,
             'total_services' => $total_services,
             'total_jobs' => $total_jobs,
-            'total_events' => $total_events,
             'total_donations' => $total_donations,
             'total_products' => $total_products,
-            'total_donated_log' => $total_donated_log,
-            'total_product_order' => $total_product_order,
-            'total_event_attendance' => $total_event_attendance,
-            'product_recent_order' => $product_recent_order,
-            'package_recent_order' => $package_recent_order,
-            'event_attendance_recent_order' => $event_attendance_recent_order,
-            'donation_recent' => $donation_recent,
-            'total_courses' => $total_courses,
-            'total_courses_enroll' => $total_courses_enroll,
-            'total_appointments' => $total_appointments,
-            'total_appointment_booking' => $total_appointment_booking,
             'total_visitor' => $total_visitor,
         ]);
     }

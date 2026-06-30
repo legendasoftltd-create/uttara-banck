@@ -642,7 +642,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                     <ul class="collapse">
                                         <li class="{{active_menu('admin-home/auction')}}"><a href="{{route('admin.auction.all')}}">{{__('All Auctions')}}</a></li>
                                         <li class="{{active_menu('admin-home/auction/new')}}"><a href="{{route('admin.auction.new')}}">{{__('Add New Auction')}}</a></li>
-                                        <li class="{{active_menu('admin-home/auction/page-settings')}}"><a href="{{route('admin.auction.page.settings')}}">{{__('Page Settings')}}</a></li>
+                                        <li class="{{active_menu('admin-home/auction/page-settings')}}"><a href="{{route('admin.auction.page.settings')}}">{{__('Auction Page Settings')}}</a></li>
                                     </ul>
                                 </li>
                             @endif
@@ -652,7 +652,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                     <ul class="collapse">
                                         <li class="{{active_menu('admin-home/notice')}}"><a href="{{route('admin.notice.all')}}">{{__('All Notices')}}</a></li>
                                         <li class="{{active_menu('admin-home/notice/new')}}"><a href="{{route('admin.notice.new')}}">{{__('Add New Notice')}}</a></li>
-                                        <li class="{{active_menu('admin-home/notice/page-settings')}}"><a href="{{route('admin.notice.page.settings')}}">{{__('Page Settings')}}</a></li>
+                                        <li class="{{active_menu('admin-home/notice/page-settings')}}"><a href="{{route('admin.notice.page.settings')}}">{{__('Notice Page Settings')}}</a></li>
                                     </ul>
                                 </li>
                             @endif
@@ -688,7 +688,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                     <ul class="collapse">
                                         <li class="{{active_menu('admin-home/tender')}}"><a href="{{route('admin.tender.all')}}">{{__('All Tenders')}}</a></li>
                                         <li class="{{active_menu('admin-home/tender/new')}}"><a href="{{route('admin.tender.new')}}">{{__('Add New Tender')}}</a></li>
-                                        <li class="{{active_menu('admin-home/tender/page-settings')}}"><a href="{{route('admin.tender.page.settings')}}">{{__('Page Settings')}}</a></li>
+                                        <li class="{{active_menu('admin-home/tender/page-settings')}}"><a href="{{route('admin.tender.page.settings')}}">{{__('Tender Page Settings')}}</a></li>
                                     </ul>
                                 </li>
                             @endif
@@ -698,7 +698,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                     <ul class="collapse">
                                         <li class="{{active_menu('admin-home/useful-links')}}"><a href="{{route('admin.useful.links.all')}}">{{__('All Links')}}</a></li>
                                         <li class="{{active_menu('admin-home/useful-links/new')}}"><a href="{{route('admin.useful.links.new')}}">{{__('Add New Link')}}</a></li>
-                                        <li class="{{active_menu('admin-home/useful-links/page-settings')}}"><a href="{{route('admin.useful.links.page.settings')}}">{{__('Page Settings')}}</a></li>
+                                        <li class="{{active_menu('admin-home/useful-links/page-settings')}}"><a href="{{route('admin.useful.links.page.settings')}}">{{__('Useful Links Page Settings')}}</a></li>
                                     </ul>
                                 </li>
                             @endif
@@ -744,7 +744,11 @@ document.addEventListener('DOMContentLoaded', function() {
                                                         href="{{route('admin.popup.builder.new')}}">{{__('New Popup')}}</a></li>
                                         </ul>
                                     </li>
+                                    <li class="{{active_menu('admin-home/general-settings/popup-settings')}}"><a
+                                            href="{{route('admin.general.popup.settings')}}">{{__('Popup Settings')}}</a>
+                                    </li>
                                 @endif
+
                                 
 
                                  <li class="main_dropdown {{active_menu('admin-home/media-upload/page')}}">
@@ -807,9 +811,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                         href="{{route('admin.general.gdpr.settings')}}">{{__('GDPR Compliant Cookies Settings')}}</a>
                             </li>
                             
-                            <li class="{{active_menu('admin-home/general-settings/popup-settings')}}"><a
-                                    href="{{route('admin.general.popup.settings')}}">{{__('Popup Settings')}}</a>
-                            </li>
+                            
                             <li class="{{active_menu('admin-home/general-settings/sitemap-settings')}}"><a
                                     href="{{route('admin.general.sitemap.settings')}}">{{__('Sitemap Settings')}}</a>
                             </li>
