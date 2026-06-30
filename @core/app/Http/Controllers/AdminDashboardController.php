@@ -71,14 +71,7 @@ class AdminDashboardController extends Controller
         $total_appointment_booking = 0;
         $total_visitor = Visitor::count();
         
-        //recent 5 order of product order
-        $product_recent_order = \App\ProductOrder::orderBy('id','desc')->take(5)->get();
-        $package_recent_order = collect();
-        $event_attendance_recent_order = EventAttendance::orderBy('id','desc')->take(5)->get();
-        $donation_recent = collect();
-
         $this->update_script_info();
-
         return view('backend.admin-home')->with([
             'blog_count' => $all_blogs,
             'total_admin' => $total_admin,
