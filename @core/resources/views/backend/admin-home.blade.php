@@ -189,8 +189,8 @@
                             </div>
                         </div>
                     </div>
-                     @endif
-                     @if(!empty(get_static_option('course_module_status')))
+                     @endif --}}
+                     {{-- @if(!empty(get_static_option('course_module_status')))
                     <div class="col-md-3 mt-md-5 mb-3">
                         <div class="card">
                             <div class="dsh-box-style">
@@ -219,8 +219,8 @@
                             </div>
                         </div>
                     </div>
-                    @endif
-                    @if(!empty(get_static_option('appointment_module_status')))
+                    @endif --}}
+                    {{-- @if(!empty(get_static_option('appointment_module_status')))
                     <div class="col-md-3 mt-md-5 mb-3">
                         <div class="card">
                             <div class="dsh-box-style">

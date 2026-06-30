@@ -38,12 +38,13 @@ $(document).ready(function () {
   });
 })();
 
-function openVideo() {
+function openVideo(url) {
 
     const modal = document.getElementById("videoModal");
     const iframe = document.getElementById("videoFrame");
 
-    iframe.src = "https://www.youtube.com/embed/t_KKNNeH8jU?autoplay=1";
+    let finalUrl = url ? (url.includes('?') ? url + '&autoplay=1' : url + '?autoplay=1') : "https://www.youtube.com/embed/t_KKNNeH8jU?autoplay=1";
+    iframe.src = finalUrl;
 
     modal.style.display = "flex";
 }

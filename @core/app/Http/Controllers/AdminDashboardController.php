@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Appointment;
-use App\AppointmentBooking;
-use App\Course;
-use App\CourseEnroll;
+
+
+
+
 use App\Admin;
 use App\Brand;
-use App\Donation;
-use App\DonationLogs;
+
+
 use App\EventAttendance;
 use App\EventPaymentLogs;
 use App\Events;
@@ -23,7 +23,7 @@ use App\Mail\BasicMail;
 use App\Mail\ProductOrder;
 use App\MediaUpload;
 use App\Newsletter;
-use App\Order;
+
 use App\Products;
 use App\Services;
 use App\Blog;
@@ -69,28 +69,28 @@ class AdminDashboardController extends Controller
         $total_works = Works::where('lang', $default_lang)->count();
         $total_jobs = Jobs::where('lang', $default_lang)->count();
         $total_events = Events::where('lang', $default_lang)->count();
-        $total_donations = Donation::where('lang', $default_lang)->count();
+        $total_donations = 0;
         $total_products = Products::where('lang', $default_lang)->count();
         $total_Faq = Faq::where('lang', $default_lang)->count();
         $total_brand = Brand::all()->count();
         $total_product_order = \App\ProductOrder::all()->count();
-        $total_donated_log = DonationLogs::where('status','complete')->count();
+        $total_donated_log = 0;
         $total_event_attendance = EventAttendance::where('status','complete')->count();
 
-        $total_courses = Course::count();
-        $total_courses_enroll = CourseEnroll::where('payment_status' ,'complete')->count();
+        $total_courses = 0;
+        $total_courses_enroll = 0;
         
-        $total_appointments = Appointment::count();
-        $total_appointment_booking = AppointmentBooking::where('payment_status' ,'complete')->count();
+        $total_appointments = 0;
+        $total_appointment_booking = 0;
 
         $total_visitor = Visitor::count();
         
          
         //recent 5 order of product order
         $product_recent_order = \App\ProductOrder::orderBy('id','desc')->take(5)->get();
-        $package_recent_order = Order::orderBy('id','desc')->take(5)->get();
+        $package_recent_order = collect();
         $event_attendance_recent_order = EventAttendance::orderBy('id','desc')->take(5)->get();
-        $donation_recent = DonationLogs::orderBy('id','desc')->take(5)->get();
+        $donation_recent = collect();
 
         $this->update_script_info();
 

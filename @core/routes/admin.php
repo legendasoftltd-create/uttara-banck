@@ -46,6 +46,11 @@ Route::prefix('admin-home')->middleware(['setlang:backend'])->group(function () 
         Route::get('/file/download/{id}', 'ProductsController@download_file')->name('admin.products.file.download');
         Route::post('/slug-check', 'ProductsController@slug_check')->name('admin.products.slug.check');
         /*-----------------------------------
+           * variant dummy routes
+        ------------------------------------*/
+        Route::post('/variants/details', function () { return response()->json(['terms' => '[]', 'title' => '', 'id' => 0]); })->name('admin.products.variants.details');
+        Route::post('/variants/by-lang', function () { return response()->json([]); })->name('admin.products.variant.by.lang');
+        /*-----------------------------------
            PRODUCTS RATINGS ROUTES
        ------------------------------------*/
         Route::group(['prefix' => 'product-ratings'],function (){

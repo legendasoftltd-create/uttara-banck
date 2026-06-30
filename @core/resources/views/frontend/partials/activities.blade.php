@@ -64,17 +64,26 @@
                 </div>
             </div>
 
-            <div class="grid-item box-sme" onclick="openVideo()"
-                style="background-image: url('assets/images/image_video_thumnail_1_image.png'); background-position: center; background-size: cover;"
+            @php
+                $ad_item_5 = $add_query->where('id', 5)->first();
+                $image_details_5 = $ad_item_5 ? get_attachment_image_by_id($ad_item_5->image, 'full') : null;
+                $bg_img_url = !empty($image_details_5['img_url']) ? $image_details_5['img_url'] : asset('assets/images/image_video_thumnail_1_image.png');
+                $video_url = '';
+                if ($ad_item_5 && preg_match('/src="([^"]+)"/', $ad_item_5->embed_code, $match)) {
+                    $video_url = $match[1];
+                }
+            @endphp
+            <div class="grid-item box-sme" onclick="openVideo('{{ $video_url }}')"
+                style="background-image: url('{{ $bg_img_url }}'); background-position: center; background-size: cover;"
                 data-aos="fade-up" data-aos-duration="900">
-                {{ $add_query->where('type', 'script')->where('id', 5)->first()->embed_code ?? '' }}
                 <div class="background-overlay"></div>
                 <div class="play-btn"></div>
-                <h1
+                <!-- <h1
                     style="position: absolute; right: 20px; bottom: 20px; color: white; text-align: right; line-height: 1;">
-                    {{ $add_query->where('type', 'script')->where('id', 5)->first()->title ?? '' }}
-                </h1>
+                    {{ $ad_item_5->title ?? '' }}
+                </h1> -->
             </div>
+            
             <div class="img-card box-wings" data-aos="fade-up" data-aos-duration="1000">
                 <div class="grid-item">
                     @if ($add_query->where('type', 'image')->where('id', 6)->first())

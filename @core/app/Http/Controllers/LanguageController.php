@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\AppointmentCategoryLang;
-use App\AppointmentLang;
+
+
 use App\Blog;
 use App\BlogCategory;
 use App\ContactInfoItem;
 use App\Counterup;
-use App\CourseInstructorLang;
-use App\CourseLang;
-use App\CourseLessionLang;
-use App\CoursesCategoryLang;
+
+
+
+
 use App\Donation;
 use App\Events;
 use App\EventsCategory;
@@ -255,13 +255,6 @@ class LanguageController extends Controller
         ProductShipping::where('lang',$lang->slug)->delete();
         JobsCategory::where('lang',$lang->slug)->delete();
         Jobs::where('lang',$lang->slug)->delete();
-        Donation::where('lang',$lang->slug)->delete();
-        CourseLang::where('lang',$lang->slug)->delete();
-        CourseInstructorLang::where('lang',$lang->slug)->delete();
-        CourseLessionLang::where('lang',$lang->slug)->delete();
-        CoursesCategoryLang::where('lang',$lang->slug)->delete();
-        AppointmentLang::where('lang',$lang->slug)->delete();
-        AppointmentCategoryLang::where('lang',$lang->slug)->delete();
         PopupBuilder::where('lang',$lang->slug)->delete();
         if (file_exists(resource_path('lang/') . $lang->slug . '_backend.json')){
             unlink(resource_path('lang/') . $lang->slug . '_backend.json');
