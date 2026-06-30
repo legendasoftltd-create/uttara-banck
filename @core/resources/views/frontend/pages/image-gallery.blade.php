@@ -175,12 +175,12 @@
 </style>
 
 @section('content')
-<div class="contact-section padding-bottom-120 padding-top-120">
+<div class="my-5 padding-bottom-120 padding-top-120">
 
 
-    <div class="container ">
-        <div class="row gap-3">
-            <div class="col-md-6 col-sm-6 mb-3 mb-sm-0">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-4 col-md-6 col-sm-6 col-12 mb-3">
                 
                 <div class="custom-select-wrapper" id="categoryDropdown">
                     <button class="custom-select-btn" onclick="toggleDropdown('categoryDropdown')">
@@ -205,7 +205,7 @@
 
             </div>
 
-            <div class="col-md-6 col-sm-6 mb-3 mb-sm-0 w-100">
+            <div class="col-lg-4 col-md-6 col-sm-6 col-12 mb-3">
                 
                 <div class="custom-select-wrapper" id="yearDropdown">
                     <button class="custom-select-btn" onclick="toggleDropdown('yearDropdown')">
