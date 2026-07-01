@@ -69,8 +69,17 @@
                 $image_details_5 = $ad_item_5 ? get_attachment_image_by_id($ad_item_5->image, 'full') : null;
                 $bg_img_url = !empty($image_details_5['img_url']) ? $image_details_5['img_url'] : asset('assets/images/image_video_thumnail_1_image.png');
                 $video_url = '';
-                if ($ad_item_5 && preg_match('/src="([^"]+)"/', $ad_item_5->embed_code, $match)) {
-                    $video_url = $match[1];
+                if ($ad_item_5) {
+                    if (!empty($ad_item_5->redirect_url)) {
+                        $raw_url = html_entity_decode($ad_item_5->redirect_url);
+                        if (preg_match('/(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?|shorts|live)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/ ]{11})/i', $raw_url, $match)) {
+                            $video_url = "https://www.youtube.com/embed/" . $match[1];
+                        } else {
+                            $video_url = $raw_url;
+                        }
+                    } elseif (!empty($ad_item_5->embed_code) && preg_match('/src="([^"]+)"/', $ad_item_5->embed_code, $match)) {
+                        $video_url = $match[1];
+                    }
                 }
             @endphp
             <div class="grid-item box-sme" onclick="openVideo('{{ $video_url }}')"
