@@ -85,7 +85,7 @@
                                                             </div>
                                                         </td>
                                                         <td>{{ $tender->id }}</td>
-                                                        <td style="max-width:300px;">{{ Str::limit($tender->title, 80) }}</td>
+                                                        <td style="max-width:300px;">{{ Str::limit($tender->title, 200) }}</td>
                                                         <td>
                                                             @if($tender->file)
                                                                 <a href="{{ asset('assets/uploads/tenders/' . $tender->file) }}"
