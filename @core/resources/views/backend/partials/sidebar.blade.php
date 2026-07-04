@@ -809,7 +809,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         </ul>
                     </li>
                     @if(check_page_permission_by_string('General Settings'))
-                    <li class="main_dropdown @if(request()->is(['admin-home/general-settings/*', 'admin-home/faq', 'admin-home/faq/*'])) active @endif">
+                    <li class="main_dropdown @if((request()->is('admin-home/general-settings/*') && !request()->is(['admin-home/general-settings/footer-settings', 'admin-home/general-settings/popup-settings'])) || request()->is(['admin-home/faq', 'admin-home/faq/*'])) active @endif">
                         <a href="javascript:void(0)" aria-expanded="true"><i class="ti-settings"></i>
                             <span>{{__('General Settings')}}</span></a>
                         <ul class="collapse ">
