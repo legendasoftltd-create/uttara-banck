@@ -14,7 +14,6 @@ use App\Language;
 use App\Mail\BasicMail;
 use App\ProductCategory;
 use App\ProductOrder;
-use App\ProductRatings;
 use App\Products;
 use App\ProductShipping;
 use App\ProductSubCategory;
@@ -482,14 +481,12 @@ class ProductsController extends Controller
 
     public function product_ratings()
     {
-        $all_ratings = ProductRatings::all();
-
+        $all_ratings = collect();
         return view('backend.products.product-ratings-all')->with(['all_ratings' => $all_ratings]);
     }
 
     public function product_ratings_delete(Request $request, $id)
     {
-        ProductRatings::find($id)->delete();
         return redirect()->back()->with(['msg' => __('Product Review Deleted..'), 'type' => 'danger']);
     }
 
@@ -507,7 +504,6 @@ class ProductsController extends Controller
 
     public function product_ratings_bulk_action(Request $request)
     {
-        ProductRatings::whereIn('id', $request->ids)->delete();
         return response()->json(['status' => 'ok']);
     }
 

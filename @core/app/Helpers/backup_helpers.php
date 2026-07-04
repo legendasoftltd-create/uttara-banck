@@ -3,7 +3,6 @@
 use App\CourseCoupon;
 use App\Language;
 use App\Menu;
-use App\ProductRatings;
 use App\StaticOption;
 use App\WorksCategory;
 use App\Works;
@@ -570,8 +569,7 @@ function render_ratings($ratings)
 
 function get_product_ratings_avg_by_id($id)
 {
-    $average_ratings = ProductRatings::Where('product_id', $id)->pluck('ratings')->avg();
-    return $average_ratings;
+    return 0;
 }
 function get_appointment_ratings_avg_by_id($id)
 {

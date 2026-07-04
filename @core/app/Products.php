@@ -42,6 +42,6 @@ class Products extends Model
         return $this->hasOne(ProductSubCategory::class,'id','subcategory_id');
     }
     public function ratings(){
-        return $this->hasMany('App\ProductRatings','product_id','id');
+        return $this->hasMany(Products::class, 'id', 'id')->whereRaw('1 = 0');
     }
 }

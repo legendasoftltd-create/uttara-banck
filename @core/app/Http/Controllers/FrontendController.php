@@ -37,7 +37,6 @@ use App\Page;
 use App\PaymentLogs;
 use App\ProductCategory;
 use App\ProductOrder;
-use App\ProductRatings;
 use App\Products;
 use App\ProductShipping;
 use App\ProductSubCategory;
@@ -1061,12 +1060,7 @@ ITEM;
         $selected_rating = $request->rating ? $request->rating : '';
         $query = Products::query();
         if ($selected_rating) {
-            $product_ids = [];
-            $all_products_id = ProductRatings::where('ratings', '>=', $selected_rating)->get('product_id');
-            foreach ($all_products_id as $product_id) {
-                $product_ids[] = $product_id->product_id;
-            }
-            $query->find(array_unique($product_ids));
+            $query->whereRaw('1 = 0');
         }
         $query->where(['status' => 'publish', 'lang' => $lang]);
         // $maximum_available_price = Products::max('sale_price');
@@ -1130,7 +1124,7 @@ ITEM;
            abort(404);
         }
         $related_products = Products::where('category_id', $product->category_id)->get()->except($product->id)->take(3);
-        $average_ratings = ProductRatings::Where('product_id', $product->id)->pluck('ratings')->avg();
+        $average_ratings = 0;
         return view('frontend.pages.products.product-single')->with(
             [
                 'product' => $product,
