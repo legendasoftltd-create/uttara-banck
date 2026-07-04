@@ -407,18 +407,18 @@ document.addEventListener('DOMContentLoaded', function() {
                     @endif
                     @if(check_page_permission_by_string('Important Information'))
                     <li class="main_dropdown
-                    @if(request()->is(['admin-home/works/*','admin-home/works'])) active @endif ">
+                    @if(request()->is(['admin-home/important-information/*','admin-home/important-information'])) active @endif ">
                         <a href="javascript:void(0)"
                            aria-expanded="true">
                             <i class="ti-layout"></i>
                             <span>{{__('Important Information')}}</span>
                         </a>
                         <ul class="collapse">
-                            <li class="{{active_menu('admin-home/works')}}"><a
+                            <li class="{{active_menu('admin-home/important-information')}}"><a
                                         href="{{route('admin.work')}}">{{__('All Important Information')}}</a></li>
-                            <li class="{{active_menu('admin-home/works/new')}}"><a
+                            <li class="{{active_menu('admin-home/important-information/new')}}"><a
                                     href="{{route('admin.work.new')}}">{{__('New Important Information')}}</a></li>
-                            <li class="{{active_menu('admin-home/works/category')}}"><a
+                            <li class="{{active_menu('admin-home/important-information/category')}}"><a
                                         href="{{route('admin.work.category')}}">{{__('Category')}}</a></li>
                             
                         </ul>
@@ -474,17 +474,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-                    <li class="main_dropdown">
+                    <li class="main_dropdown @if(request()->is(['admin-home/team-member*', 'admin-home/designation*'])) active @endif">
                         <a href="javascript:void(0)" aria-expanded="true"><i class="fa fa-users" aria-hidden="true"></i>
                             <span>{{__('Team Manage')}}</span></a>
                         <ul class="collapse ">
                             @if(check_page_permission_by_string('Team Members'))
-                                <li class="main_dropdown {{active_menu('admin-home/team-member')}}">
-                                    <a href="{{route('admin.team.member')}}" aria-expanded="true">
+                                <li class="{{active_menu('admin-home/team-member')}}">
+                                    <a href="{{route('admin.team.member')}}">
                                         <span>{{__('Team Members')}}</span></a>
                                 </li>
-                                <li class="main_dropdown {{active_menu('admin-home/designation')}}">
-                                    <a href="{{route('admin.designation')}}" aria-expanded="true">
+                                <li class="{{active_menu('admin-home/designation')}}">
+                                    <a href="{{route('admin.designation')}}">
                                         <span>{{__('Designations')}}</span></a>
                                 </li>
                             @endif
@@ -513,16 +513,34 @@ document.addEventListener('DOMContentLoaded', function() {
                     @endif
                     
                     <li class="main_dropdown
-                    @if(request()->is(['admin-home/jobs',
-                    'admin-home/jobs/*',
-                    'admin-home/events',
-                    'admin-home/events/*',
-                    'admin-home/products',
-                    'admin-home/products/*',
-                    'admin-home/support-tickets/*',
-                    'admin-home/support-tickets',
-                    'admin-home/bank-downloads',
-                    'admin-home/bank-downloads/*'
+                    @if(request()->is([
+                        'admin-home/jobs',
+                        'admin-home/jobs/*',
+                        'admin-home/new-jobs',
+                        'admin-home/events',
+                        'admin-home/events/*',
+                        'admin-home/products',
+                        'admin-home/products/*',
+                        'admin-home/support-tickets/*',
+                        'admin-home/support-tickets',
+                        'admin-home/bank-downloads',
+                        'admin-home/bank-downloads/*',
+                        'admin-home/locations',
+                        'admin-home/locations/*',
+                        'admin-home/auction',
+                        'admin-home/auction/*',
+                        'admin-home/notice',
+                        'admin-home/notice/*',
+                        'admin-home/complaint',
+                        'admin-home/complaint/*',
+                        'admin-home/exchange-rate',
+                        'admin-home/exchange-rate/*',
+                        'admin-home/tender',
+                        'admin-home/tender/*',
+                        'admin-home/useful-links',
+                        'admin-home/useful-links/*',
+                        'admin-home/visitors',
+                        'admin-home/visitors/*'
                     ])) active @endif">
                         <a href="javascript:void(0)" aria-expanded="true"><i class="ti-settings"></i>
                             <span>{{__('All Modules')}}</span></a>
@@ -530,7 +548,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             @if(check_page_permission_by_string('Job Post Manage') && !empty(get_static_option('job_module_status')))
                                 <li
                                     class="main_dropdown
-                                    @if(request()->is(['admin-home/jobs/*','admin-home/jobs'])) active @endif
+                                    @if(request()->is(['admin-home/jobs/*', 'admin-home/jobs', 'admin-home/new-jobs'])) active @endif
                                     ">
                                     <a href="javascript:void(0)" aria-expanded="true">
                                         {{__('Career Manage')}}</a>
@@ -631,8 +649,8 @@ document.addEventListener('DOMContentLoaded', function() {
                                 </li>
                             @endif
 
-                            <li class="main_dropdown {{active_menu('admin-home/visitors')}}">
-                                <a href="{{route('admin.visitors')}}" aria-expanded="true">
+                            <li class="{{active_menu('admin-home/visitors')}}">
+                                <a href="{{route('admin.visitors')}}">
                                     {{__('Visitor Log')}}</a>
                             </li>
 
@@ -715,7 +733,12 @@ document.addEventListener('DOMContentLoaded', function() {
                         'admin-home/menu-edit/*',
                         'admin-home/media-upload/page',
                         'admin-home/menu',
-                        'admin-home/appearance-setting/*'
+                        'admin-home/appearance-setting/*',
+                        'admin-home/header',
+                        'admin-home/404-page-manage',
+                        'admin-home/maintains-page/settings',
+                        'admin-home/general-settings/popup-settings',
+                        'admin-home/general-settings/footer-settings'
                         ])) active @endif
                         ">
                         <a href="javascript:void(0)" aria-expanded="true"><i class="ti-settings"></i>
@@ -751,12 +774,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
                                 
 
-                                 <li class="main_dropdown {{active_menu('admin-home/media-upload/page')}}">
-                                    <a href="{{route('admin.upload.media.images.page')}}"
-                                       aria-expanded="true">
+                                 <li class="{{active_menu('admin-home/media-upload/page')}}">
+                                    <a href="{{route('admin.upload.media.images.page')}}">
                                         {{__('Media  Manage')}}
                                     </a>
-                                </li>
+                                 </li>
 
                                 @if(check_page_permission_by_string('Home Page Manage'))
                                     <li class="{{active_menu('admin-home/header')}}">
@@ -765,15 +787,14 @@ document.addEventListener('DOMContentLoaded', function() {
                                         </a>
                                     </li>
                                     @if(check_page_permission_by_string('404 Page Manage'))
-                                        <li class="main_dropdown {{active_menu('admin-home/404-page-manage')}}">
-                                            <a href="{{route('admin.404.page.settings')}}" aria-expanded="true">
+                                        <li class="{{active_menu('admin-home/404-page-manage')}}">
+                                            <a href="{{route('admin.404.page.settings')}}">
                                                 {{__('404 Page Manage')}}</a>
                                         </li>
                                     @endif
                                     <!-- @if(!empty(get_static_option('site_maintenance_mode'))) -->
-                                        <li class="main_dropdown {{active_menu('admin-home/maintains-page/settings')}}">
-                                            <a href="{{route('admin.maintains.page.settings')}}"
-                                            aria-expanded="true">
+                                        <li class="{{active_menu('admin-home/maintains-page/settings')}}">
+                                            <a href="{{route('admin.maintains.page.settings')}}">
                                             {{__('Maintain Page Manage')}}
                                             </a>
                                         </li>
@@ -782,13 +803,13 @@ document.addEventListener('DOMContentLoaded', function() {
                                 
                                 @if(check_page_permission_by_string('General Settings'))
                                     <li class="{{active_menu('admin-home/general-settings/footer-settings')}}"><a
-                                            href="{{route('admin.general.footer.settings')}}">{{__('Footer Settings')}}</a>
+                                             href="{{route('admin.general.footer.settings')}}">{{__('Footer Settings')}}</a>
                                     </li>
                                 @endif
                         </ul>
                     </li>
                     @if(check_page_permission_by_string('General Settings'))
-                    <li class="main_dropdown @if(request()->is('admin-home/general-settings/*')) active @endif">
+                    <li class="main_dropdown @if(request()->is(['admin-home/general-settings/*', 'admin-home/faq', 'admin-home/faq/*'])) active @endif">
                         <a href="javascript:void(0)" aria-expanded="true"><i class="ti-settings"></i>
                             <span>{{__('General Settings')}}</span></a>
                         <ul class="collapse ">
@@ -820,8 +841,8 @@ document.addEventListener('DOMContentLoaded', function() {
                             </li>
 
                             @if(check_page_permission_by_string('FAQ'))
-                                <li class="main_dropdown {{active_menu('admin-home/faq')}}">
-                                    <a href="{{route('admin.faq')}}" aria-expanded="true">
+                                <li class="{{active_menu('admin-home/faq')}}">
+                                    <a href="{{route('admin.faq')}}">
                                         <span>{{__('Faq')}}</span></a>
                                 </li>
                             @endif
