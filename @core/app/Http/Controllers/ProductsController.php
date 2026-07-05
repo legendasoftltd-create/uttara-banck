@@ -123,13 +123,11 @@ class ProductsController extends Controller
         $all_languages = Language::all();
         $all_category = ProductCategory::where(['status' => 'publish', 'lang' => $product->lang])->get();
         $all_subcategory = ProductSubCategory::where(['status' => 'publish', 'lang' => $product->lang,'product_category_id' => $product->category_id])->get();
-        $all_variants = ProductVariant::all();
         return view('backend.products.edit-product')->with([
             'all_languages' => $all_languages,
             'all_categories' => $all_category,
             'all_subcategory' => $all_subcategory,
             'product' => $product,
-            'all_variants' => $all_variants,
         ]);
     }
 

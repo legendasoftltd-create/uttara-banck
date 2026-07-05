@@ -214,7 +214,7 @@
                     <style>
                         .achievementSlider { overflow: hidden; width: 100%; }
                         .achievementSlider .swiper-wrapper { margin: 0; }
-                        .achievementSlider .swiper-slide { width: 130px !important; margin: 0 10px 0 0 !important; flex-shrink: 0; display: flex; gap: 10px; align-items: center; justify-content: center; }
+                        .achievementSlider .swiper-slide { width: 130px !important; height: 36px !important; margin: 0 10px 0 0 !important; flex-shrink: 0; display: flex; gap: 10px; align-items: center; justify-content: center; }
                         .achievementSlider .swiper-slide img { max-width: 100%; max-height: 60px; object-fit: contain; }
                     </style>
                     <a href="{{ route('frontend.achievement') }}">
