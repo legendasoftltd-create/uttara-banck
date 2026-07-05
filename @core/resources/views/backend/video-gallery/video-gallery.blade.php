@@ -85,7 +85,7 @@
             <div class="col-lg-6 mt-5">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="header-title">{{__('Add New Item')}}</h4>
+                        <h4 class="header-title">{{__('Add New Video Item')}}</h4>
                         <form action="{{route('admin.video.gallery.new')}}" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group">
@@ -103,7 +103,7 @@
                                     <option value="draft">{{__('Draft')}}</option>
                                 </select>
                             </div>
-                            <button type="submit" class="btn btn-primary mt-4 pr-4 pl-4">{{__('Save Changes')}}</button>
+                            <button type="submit" class="btn btn-primary mt-4 pr-4 pl-4">{{__('Add New Video')}}</button>
                         </form>
                     </div>
                 </div>
@@ -115,7 +115,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">{{__('Edit Testimonial Item')}}</h5>
+                    <h5 class="modal-title">{{__('Edit Video Item')}}</h5>
                     <button type="button" class="close" data-dismiss="modal"><span>×</span></button>
                 </div>
                 <form action="{{route('admin.video.gallery.update')}}" id="testimonial_edit_modal_form"  method="post" enctype="multipart/form-data">

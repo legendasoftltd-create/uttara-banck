@@ -186,7 +186,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">{{__('Edit Testimonial Item')}}</h5>
+                    <h5 class="modal-title">{{__('Edit Image Gallery')}}</h5>
                     <button type="button" class="close" data-dismiss="modal"><span>×</span></button>
                 </div>
                 <form action="{{route('admin.gallery.update')}}" id="testimonial_edit_modal_form"  method="post" enctype="multipart/form-data">
