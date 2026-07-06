@@ -37,11 +37,7 @@
                     @php
                         if($a == 4){ $a = 1;}else{$a++;}; @endphp
                 @endforeach
-                <div class="col-lg-12">
-                    <div class="pagination-wrapper">
-                        {{$all_services->links()}}
-                    </div>
-                </div>
+                
             </div>
         </div>
     </section>

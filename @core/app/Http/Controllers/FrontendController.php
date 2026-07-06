@@ -850,7 +850,38 @@ ITEM;
     {
         $default_lang = Language::where('default', 1)->first();
         $lang = !empty(session()->get('lang')) ? session()->get('lang') : $default_lang->slug;
-        $all_services = Services::where('status', 'publish')->where('lang', $lang)->orderBy('sr_order', 'asc')->paginate(get_static_option('service_page_service_items'));
+        $service_names = [
+            'International Division',
+            'International Trade Services',
+            'Risk Management Department',
+            'Treasury Service',
+            'AD Branches',
+            'Foreign Currency Account',
+            'NFCD Account',
+            'RFCD Account',
+            'Standard Settlement Instruction',
+            'Off - Shore Banking Unit',
+            'Exchange Rate',
+            'FDI Help Desk',
+            'Government Securities Investment Window',
+            'Cash Dollar Transaction'
+        ];
+
+        $all_db_services = Services::where('status', 'publish')
+            ->where('lang', $lang)
+            ->get();
+            
+        $all_services = collect();
+        foreach ($service_names as $name) {
+            $searchName = strtolower(preg_replace('/[^a-z0-9]/i', '', $name));
+            $found = $all_db_services->first(function ($service) use ($searchName) {
+                return strtolower(preg_replace('/[^a-z0-9]/i', '', $service->title)) === $searchName;
+            });
+            if ($found) {
+                $all_services->push($found);
+            }
+        }
+
         $all_header_slider = HeaderSlider::where(['lang' => $lang, 'page_type' => 'service'])->get();
         return view('frontend.pages.service.services')->with([
             'all_services' => $all_services,

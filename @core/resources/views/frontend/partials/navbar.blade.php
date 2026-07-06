@@ -138,14 +138,48 @@
                         </ul>
                     </li>
                     @endforeach
+                    
                     <li class="has-dropdown">
                         <a href="{{ route('frontend.service') }}" class="dropdown-toggle">Our Services</a>
                         <ul class="sub-menu">
-                            @foreach (get_services() as $service)
+                            @php
+                                $service_names = [
+                                    'International Division',
+                                    'International Trade Services',
+                                    'Risk Management Department',
+                                    'Treasury Service',
+                                    'AD Branches',
+                                    'Foreign Currency Account',
+                                    'NFCD Account',
+                                    'RFCD Account',
+                                    'Standard Settlement Instruction',
+                                    'Off - Shore Banking Unit',
+                                    'Exchange Rate',
+                                    'FDI Help Desk',
+                                    'Government Securities Investment Window',
+                                    'Cash Dollar Transaction'
+                                ];
+                                
+                                $all_db_services = \App\Services::where('status', 'publish')->get();
+                                $filtered_services = collect();
+                                
+                                foreach ($service_names as $name) {
+                                    $searchName = strtolower(preg_replace('/[^a-z0-9]/i', '', $name));
+                                    $found = $all_db_services->first(function ($service) use ($searchName) {
+                                        return strtolower(preg_replace('/[^a-z0-9]/i', '', $service->title)) === $searchName;
+                                    });
+                                    if ($found) {
+                                        $filtered_services->push($found);
+                                    }
+                                }
+                            @endphp
+                            @foreach ($filtered_services as $service)
                                 <li><a href="{{ route('frontend.services.single', $service->slug) }}">{{ $service->title }}</a></li>
                             @endforeach
                         </ul>
                     </li>
+
+
                     <li class="has-dropdown">
                         <a href="#" class="dropdown-toggle">Financial Reports</a>
                         <ul class="sub-menu">
