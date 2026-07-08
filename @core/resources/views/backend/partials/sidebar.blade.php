@@ -469,19 +469,55 @@ document.addEventListener('DOMContentLoaded', function() {
                     </li>
                     @endif 
 
-                    
 
-
-
-
-                    <li class="main_dropdown @if(request()->is(['admin-home/team-member*', 'admin-home/designation*'])) active @endif">
+                    <li class="main_dropdown @if(request()->is(['admin-home/team-member*', 'admin-home/designation*', 'admin-home/board-of-director*', 'admin-home/executive-committee*', 'admin-home/audit-committee*', 'admin-home/risk-management-committee*', 'admin-home/senior-management*'])) active @endif">
                         <a href="javascript:void(0)" aria-expanded="true"><i class="fa fa-users" aria-hidden="true"></i>
                             <span>{{__('Team Manage')}}</span></a>
                         <ul class="collapse ">
                             @if(check_page_permission_by_string('Team Members'))
-                                <li class="{{active_menu('admin-home/team-member')}}">
+                                <!-- <li class="{{active_menu('admin-home/team-member')}}">
                                     <a href="{{route('admin.team.member')}}">
                                         <span>{{__('Team Members')}}</span></a>
+                                </li> -->
+
+                                {{-- Board of Director --}}
+                                <li class="main_dropdown @if(request()->is('admin-home/board-of-director*')) active @endif">
+                                    <a href="{{route('admin.board.of.director')}}" aria-expanded="true">
+                                        
+                                        <span>{{__('Board of Director')}}</span>
+                                    </a>
+                                </li>
+
+                                {{-- Executive Committee --}}
+                                <li class="main_dropdown @if(request()->is('admin-home/executive-committee*')) active @endif">
+                                    <a href="{{route('admin.executive.committee')}}" aria-expanded="true">
+                                        
+                                        <span>{{__('Executive Committee')}}</span>
+                                    </a>
+                                </li>
+
+                                {{-- Audit Committee --}}
+                                <li class="main_dropdown @if(request()->is('admin-home/audit-committee*')) active @endif">
+                                    <a href="{{route('admin.audit.committee')}}" aria-expanded="true">
+                                        
+                                        <span>{{__('Audit Committee')}}</span>
+                                    </a>
+                                </li>
+
+                                {{-- Risk Management Committee --}}
+                                <li class="main_dropdown @if(request()->is('admin-home/risk-management-committee*')) active @endif">
+                                    <a href="{{route('admin.risk.management.committee')}}" aria-expanded="true">
+                                        
+                                        <span>{{__('Risk Management')}}</span>
+                                    </a>
+                                </li>
+
+                                {{-- Senior Management --}}
+                                <li class="main_dropdown @if(request()->is('admin-home/senior-management*')) active @endif">
+                                    <a href="{{route('admin.senior.management')}}" aria-expanded="true">
+                                        
+                                        <span>{{__('Senior Management')}}</span>
+                                    </a>
                                 </li>
                                 <li class="{{active_menu('admin-home/designation')}}">
                                     <a href="{{route('admin.designation')}}">
@@ -490,6 +526,9 @@ document.addEventListener('DOMContentLoaded', function() {
                             @endif
                         </ul> 
                     </li>
+
+                    
+                    
 
                     @if(check_page_permission_by_string('Products Manage') && !empty(get_static_option('product_module_status')))
                             <li class="main_dropdown

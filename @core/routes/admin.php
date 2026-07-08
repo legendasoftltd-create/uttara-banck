@@ -706,6 +706,61 @@ Route::prefix('admin-home')->middleware(['setlang:backend'])->group(function () 
         Route::post('/bulk-action', 'DesignationController@bulk_action')->name('admin.designation.bulk.action');
     });
 
+    /*==============================================
+        BOARD OF DIRECTOR ROUTES
+    ==============================================*/
+    Route::prefix('board-of-director')->middleware(['adminPermissionCheck:Team Members'])->group(function () {
+        Route::get('/', 'BoardOfDirectorController@index')->name('admin.board.of.director');
+        Route::post('/', 'BoardOfDirectorController@store');
+        Route::post('/update', 'BoardOfDirectorController@update')->name('admin.board.of.director.update');
+        Route::post('/delete/{id}', 'BoardOfDirectorController@delete')->name('admin.board.of.director.delete');
+        Route::post('/bulk-action', 'BoardOfDirectorController@bulk_action')->name('admin.board.of.director.bulk.action');
+    });
+
+    /*==============================================
+        EXECUTIVE COMMITTEE ROUTES
+    ==============================================*/
+    Route::prefix('executive-committee')->middleware(['adminPermissionCheck:Team Members'])->group(function () {
+        Route::get('/', 'ExecutiveCommitteeController@index')->name('admin.executive.committee');
+        Route::post('/', 'ExecutiveCommitteeController@store');
+        Route::post('/update', 'ExecutiveCommitteeController@update')->name('admin.executive.committee.update');
+        Route::post('/delete/{id}', 'ExecutiveCommitteeController@delete')->name('admin.executive.committee.delete');
+        Route::post('/bulk-action', 'ExecutiveCommitteeController@bulk_action')->name('admin.executive.committee.bulk.action');
+    });
+
+    /*==============================================
+        AUDIT COMMITTEE ROUTES
+    ==============================================*/
+    Route::prefix('audit-committee')->middleware(['adminPermissionCheck:Team Members'])->group(function () {
+        Route::get('/', 'AuditCommitteeController@index')->name('admin.audit.committee');
+        Route::post('/', 'AuditCommitteeController@store');
+        Route::post('/update', 'AuditCommitteeController@update')->name('admin.audit.committee.update');
+        Route::post('/delete/{id}', 'AuditCommitteeController@delete')->name('admin.audit.committee.delete');
+        Route::post('/bulk-action', 'AuditCommitteeController@bulk_action')->name('admin.audit.committee.bulk.action');
+    });
+
+    /*==============================================
+        RISK MANAGEMENT COMMITTEE ROUTES
+    ==============================================*/
+    Route::prefix('risk-management-committee')->middleware(['adminPermissionCheck:Team Members'])->group(function () {
+        Route::get('/', 'RiskManagementCommitteeController@index')->name('admin.risk.management.committee');
+        Route::post('/', 'RiskManagementCommitteeController@store');
+        Route::post('/update', 'RiskManagementCommitteeController@update')->name('admin.risk.management.committee.update');
+        Route::post('/delete/{id}', 'RiskManagementCommitteeController@delete')->name('admin.risk.management.committee.delete');
+        Route::post('/bulk-action', 'RiskManagementCommitteeController@bulk_action')->name('admin.risk.management.committee.bulk.action');
+    });
+
+    /*==============================================
+        SENIOR MANAGEMENT ROUTES
+    ==============================================*/
+    Route::prefix('senior-management')->middleware(['adminPermissionCheck:Team Members'])->group(function () {
+        Route::get('/', 'SeniorManagementController@index')->name('admin.senior.management');
+        Route::post('/', 'SeniorManagementController@store');
+        Route::post('/update', 'SeniorManagementController@update')->name('admin.senior.management.update');
+        Route::post('/delete/{id}', 'SeniorManagementController@delete')->name('admin.senior.management.delete');
+        Route::post('/bulk-action', 'SeniorManagementController@bulk_action')->name('admin.senior.management.bulk.action');
+    });
+
     /*======================================
         EMAIL TEMPLATE SETTINGS
     =======================================*/
