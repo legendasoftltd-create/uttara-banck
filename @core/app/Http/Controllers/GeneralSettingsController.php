@@ -631,28 +631,11 @@ class GeneralSettingsController extends Controller
             'site_google_captcha_v3_secret_key',
             'site_third_party_tracking_body_code',
             'site_google_captcha_status',
-            'enable_google_login',
-            'google_client_id',
-            'google_client_secret',
-            'enable_facebook_login',
-            'facebook_client_id',
-            'facebook_client_secret',
-            'google_adsense_publisher_id',
-            'google_adsense_customer_id',
-            'instagram_access_token',
         ];
 
         foreach ($fields as $field){
             update_static_option($field,$request->$field);
         }
-        setEnvValue([
-            'FACEBOOK_CLIENT_ID' => $request->facebook_client_id,
-            'FACEBOOK_CLIENT_SECRET' => $request->facebook_client_secret,
-            'FACEBOOK_CALLBACK_URL' => route('facebook.callback'),
-            'GOOGLE_CLIENT_ID' => $request->google_client_id,
-            'GOOGLE_CLIENT_SECRET' => $request->google_client_secret,
-            'GOOGLE_CALLBACK_URL' => route('google.callback'),
-        ]);
 
         return redirect()->back()->with(['msg' => __('Third Party Scripts Settings Updated..'), 'type' => 'success']);
     }

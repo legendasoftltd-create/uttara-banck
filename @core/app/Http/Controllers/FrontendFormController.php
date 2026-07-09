@@ -307,9 +307,11 @@ class FrontendFormController extends Controller
             'suggestion' => 'nullable|string',
         ]);
 
-        $google_captcha_result = google_captcha_check($request->captcha_token);
-        if (!$google_captcha_result['success']) {
-            return redirect()->back()->with(['msg' => __('google recaptcha error'), 'type' => 'danger']);
+        if (!empty(get_static_option('site_google_captcha_status')) && !empty(get_static_option('site_google_captcha_v3_site_key'))) {
+            $google_captcha_result = google_captcha_check($request->captcha_token);
+            if (!$google_captcha_result['success']) {
+                return redirect()->back()->with(['msg' => __('google recaptcha error'), 'type' => 'danger']);
+            }
         }
 
         $complaint = Complaint::create([

@@ -46,55 +46,12 @@
                                 <input type="text" name="site_google_captcha_v3_secret_key"  class="form-control" value="{{get_static_option('site_google_captcha_v3_secret_key')}}" id="site_google_captcha_v3_secret_key">
                             </div>
                             <div class="form-group">
-                                <label for="tawk_api_key">{{__('Google Adsense Publisher ID')}}</label>
-                                <input type="text" name="google_adsense_publisher_id"  class="form-control" value="{{get_static_option('google_adsense_publisher_id')}}" id="google_adsense_id">
-                            </div>
-                            <div class="form-group">
-                                <label for="tawk_api_key">{{__('Google Adsense Customer ID')}}</label>
-                                <input type="text" name="google_adsense_customer_id"  class="form-control" value="{{get_static_option('google_adsense_customer_id')}}" id="google_adsense_id">
-                            </div>
-                            <div class="form-group">
-                                <label for="tawk_api_key">{{__('Instagram Access Token')}}</label>
-                                <input type="text" name="instagram_access_token"  class="form-control" value="{{get_static_option('instagram_access_token')}}" id="instagram_access_token">
-                            </div>
-                            <div class="form-group">
                                 <label for="site_disqus_key">{{__('Disqus')}}</label>
                                 <input type="text" name="site_disqus_key"  class="form-control" value="{{get_static_option('site_disqus_key')}}" id="site_disqus_key">
                             </div>
                             <div class="form-group">
                                 <label for="tawk_api_key">{{__('Tawk.to API')}}</label>
                                 <textarea name="tawk_api_key" id="tawk_api_key" class="form-control" cols="30" rows="5">{{get_static_option('tawk_api_key')}}</textarea>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="enable_facebook_login"><strong>{{__('Enable/Disable Facebook Login')}}</strong></label>
-                                <label class="switch">
-                                    <input type="checkbox" name="enable_facebook_login"  @if(!empty(get_static_option('enable_facebook_login'))) checked @endif >
-                                    <span class="slider"></span>
-                                </label>
-                            </div>
-                            <div class="form-group">
-                                <label for="facebook_client_id">{{__('Facebook Client ID')}}</label>
-                                <input type="text" name="facebook_client_id"  class="form-control" value="{{get_static_option('facebook_client_id')}}">
-                            </div>
-                            <div class="form-group">
-                                <label for="facebook_client_secret">{{__('Facebook Client Secret')}}</label>
-                                <input type="text" name="facebook_client_secret"  class="form-control" value="{{get_static_option('facebook_client_secret')}}">
-                            </div>
-                            <div class="form-group">
-                                <label for="enable_google_login"><strong>{{__('Enable/Disable Google Login')}}</strong></label>
-                                <label class="switch">
-                                    <input type="checkbox" name="enable_google_login"  @if(!empty(get_static_option('enable_google_login'))) checked @endif >
-                                    <span class="slider"></span>
-                                </label>
-                            </div>
-                            <div class="form-group">
-                                <label for="google_client_id">{{__('Google Client ID')}}</label>
-                                <input type="text" name="google_client_id"  class="form-control" value="{{get_static_option('google_client_id')}}">
-                            </div>
-                            <div class="form-group">
-                                <label for="google_client_secret">{{__('Google Client Secret')}}</label>
-                                <input type="text" name="google_client_secret"  class="form-control" value="{{get_static_option('google_client_secret')}}">
                             </div>
 
                             <button type="submit" class="btn btn-primary mt-4 pr-4 pl-4">{{__('Update Changes')}}</button>
