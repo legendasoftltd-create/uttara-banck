@@ -13,12 +13,20 @@
 
 @section('style')
 <style>
+    /* Center the first card (single row) always */
+    .management-comete .row.single {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 30px;
+    }
+
     /* Base style (Mobile / Small devices: 1 column) */
     .management-comete .row.four-grid {
         display: grid;
         grid-template-columns: repeat(1, minmax(0, 1fr));
         gap: 20px;
         justify-content: center;
+        justify-items: center; /* Centers items inside the grid cells */
     }
     
     .management-comete .row.four-grid .card {
@@ -40,20 +48,22 @@
         .management-comete .row.four-grid {
             grid-template-columns: repeat(3, minmax(0, 1fr));
             gap: 15px;
+            justify-content: center;
         }
         .management-comete .row.four-grid .card {
-            max-width: 100% !important;
+            max-width: 260px !important; /* Keep card width controlled so they align nicely and center */
         }
     }
 
     /* Extra large devices: 6 columns */
     @media (min-width: 1200px) {
         .management-comete .row.four-grid {
-            grid-template-columns: repeat(5, minmax(0, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(260px, max-content)); /* Auto centers grid items dynamically */
             gap: 20px;
+            justify-content: center;
         }
         .management-comete .row.four-grid .card {
-            max-width: 100% !important;
+            width: 260px !important;
         }
     }
 </style>

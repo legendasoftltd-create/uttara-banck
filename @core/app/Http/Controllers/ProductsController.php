@@ -35,7 +35,46 @@ class ProductsController extends Controller
     public function all_product()
     {
         $all_products = Products::all()->groupBy('lang');
-        return view('backend.products.all-products')->with(['all_products' => $all_products]);
+        return view('backend.products.all-products')->with([
+            'all_products'  => $all_products,
+            'filter_label'  => null,
+            'is_filtered'   => false,
+        ]);
+    }
+
+    /**
+     * Show products filtered by category (dynamic — any category from DB)
+     * Sidebar-এ product category add হলে automatically এখানে কাজ করবে
+     */
+    public function products_by_category($category_slug)
+    {
+        // সব published categories fetch করে slug match করো
+        $all_categories = ProductCategory::where('status', 'publish')->get();
+
+        $category      = null;
+        $category_name = ucfirst(str_replace('-', ' ', $category_slug));
+
+        foreach ($all_categories as $cat) {
+            if (\Illuminate\Support\Str::slug($cat->title) === $category_slug) {
+                $category      = $cat;
+                $category_name = $cat->title;
+                break;
+            }
+        }
+
+        $filtered_products = collect();
+
+        if ($category) {
+            $filtered_products = Products::where('category_id', $category->id)
+                ->get()
+                ->groupBy('lang');
+        }
+
+        return view('backend.products.all-products')->with([
+            'all_products'  => $filtered_products,
+            'filter_label'  => $category_name,
+            'is_filtered'   => true,
+        ]);
     }
 
     public function new_product()

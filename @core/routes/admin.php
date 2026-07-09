@@ -127,6 +127,13 @@ Route::prefix('admin-home')->middleware(['setlang:backend'])->group(function () 
             Route::post('/bulk-action', 'ProductSubCategoryController@bulk_action')->name('admin.products.subcategory.bulk.action');
         });
 
+        /*-----------------------------------
+           CATEGORY-WISE FILTER ROUTE
+           (Loan / Deposit / Services)
+        ------------------------------------*/
+        Route::get('/by-category/{category_slug}', 'ProductsController@products_by_category')
+             ->name('admin.products.by.category');
+
     });
 
 

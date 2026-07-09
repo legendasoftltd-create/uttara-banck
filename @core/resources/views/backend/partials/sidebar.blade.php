@@ -392,7 +392,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         <a href="javascript:void(0)"
                            aria-expanded="true">
                             <i class="ti-layout"></i>
-                            <span>{{__('Services')}}</span>
+                            <span>{{__('Our Services')}}</span>
                         </a>
                         <ul class="collapse">
                             <li class="{{active_menu('admin-home/services')}}"><a
@@ -531,22 +531,62 @@ document.addEventListener('DOMContentLoaded', function() {
                     
 
                     @if(check_page_permission_by_string('Products Manage') && !empty(get_static_option('product_module_status')))
+                        @php
+                            /* DB থেকে সব published product categories fetch করো */
+                            $sidebar_product_categories = \App\ProductCategory::where('status', 'publish')
+                                ->where('lang', get_default_language())
+                                ->orderBy('title', 'ASC')
+                                ->get();
+                            /* current URL থেকে active category slug বের করো */
+                            $active_cat_slug = request()->segment(3) === 'by-category' ? request()->segment(4) : null;
+                        @endphp
                             <li class="main_dropdown
-                            {{active_menu('admin-home/products')}}
-                            @if(request()->is('admin-home/products/*')) active @endif
+                            @if(request()->is(['admin-home/products', 'admin-home/products/*'])) active @endif
                                     ">
-                                <a href="javascript:void(0)" aria-expanded="true"> <i class="fa fa-camera-retro"></i> <span>{{__('Products Manage')}}</span>
-                                    </a>
+                                <a href="javascript:void(0)" aria-expanded="true">
+                                    <i class="fa fa-camera-retro"></i>
+                                    <span>{{__('Loan & Deposit Manage')}}</span>
+                                </a>
                                 <ul class="collapse">
-                                    <li class="{{active_menu('admin-home/products')}}"><a
-                                                href="{{route('admin.products.all')}}">{{__('All Products')}}</a></li>
-                                    <li class="{{active_menu('admin-home/products/new')}}"><a
-                                                href="{{route('admin.products.new')}}">{{__('Add New Product')}}</a></li>
-                                    <li class="{{active_menu('admin-home/products/category')}}"><a
-                                                href="{{route('admin.products.category.all')}}">{{__('Category')}}</a></li>
-                                    <li class="{{active_menu('admin-home/products/subcategory')}}"><a
-                                                href="{{route('admin.products.subcategory.all')}}">{{__('Sub Category')}}</a></li>
+
+                                    {{--  All Products --}}
                                     
+                                    <!-- <li class="@if(request()->is('admin-home/products') && !request()->is('admin-home/products/by-category/*')) active @endif">
+                                        <a href="{{route('admin.products.all')}}">
+                                            <i class="ti-layout-list-thumb" style="font-size:12px;"></i>
+                                            {{__('All Products')}}
+                                        </a>
+                                    </li> -->
+
+                                    {{--  Dynamic Category Filter Items (DB থেকে আসে) --}}
+                                    @foreach($sidebar_product_categories as $sidebar_cat)
+                                        @php
+                                            $cat_slug = \Illuminate\Support\Str::slug($sidebar_cat->title);
+                                        @endphp
+                                        <li class="@if($active_cat_slug === $cat_slug) active @endif">
+                                            <a href="{{ route('admin.products.by.category', $cat_slug) }}">
+                                                
+                                                {{ $sidebar_cat->title }}
+                                            </a>
+                                        </li>
+                                    @endforeach
+
+                                    {{--  Add New Product --}}
+                                    <li class="{{active_menu('admin-home/products/new')}}">
+                                        <a href="{{route('admin.products.new')}}">
+                                            
+                                            {{__('Add New Product')}}
+                                        </a>
+                                    </li>
+
+                                    {{--  Product Type (Category Manager) --}}
+                                    <li class="{{active_menu('admin-home/products/category')}}">
+                                        <a href="{{route('admin.products.category.all')}}">
+                                            
+                                            {{__('Product Type')}}
+                                        </a>
+                                    </li>
+
                                 </ul>
                             </li>
                     @endif
@@ -558,8 +598,6 @@ document.addEventListener('DOMContentLoaded', function() {
                         'admin-home/new-jobs',
                         'admin-home/events',
                         'admin-home/events/*',
-                        'admin-home/products',
-                        'admin-home/products/*',
                         'admin-home/support-tickets/*',
                         'admin-home/support-tickets',
                         'admin-home/bank-downloads',

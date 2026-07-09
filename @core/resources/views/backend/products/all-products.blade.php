@@ -29,7 +29,7 @@
             <div class="col-lg-12 mt-5">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="header-title">{{__('All Products')}}</h4>
+                        
                         <div class="bulk-delete-wrapper">
                             <div class="select-box-wrap">
                                 <select name="bulk_option" id="bulk_option">
@@ -64,7 +64,7 @@
                                             <th>{{__('Title')}}</th>
                                             <th>{{__('Image')}}</th>
                                             <!-- <th>{{__('Price')}}</th> -->
-                                            <th>{{__('Category/Subcategory')}}</th>
+                                            <th>{{__('Product Type')}}</th>
                                             <!-- <th>{{__('Sales')}}</th> -->
                                             <th>{{__('Status')}}</th>
                                             <th>{{__('Action')}}</th>

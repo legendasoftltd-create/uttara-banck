@@ -48,6 +48,7 @@
                     <div>
                         <div class="cards-container">
                             <div class="card">
+                                <a href="{{ route('frontend.products.single', $product->slug) }}">
                                 <div class="card-image">
                                     <img @if($product->category_id == 3) class="atm-card" @endif src="{{ get_attachment_image_by_id($product->image, 'full', false)['img_url'] ?? '' }}" alt="{{ $product->title }}">
                                 </div>
@@ -58,6 +59,7 @@
                                             More</a>
                                     </div>
                                 </div>
+                                </a>
                             </div>
                         </div>
                     </div>

@@ -1,6 +1,6 @@
 @extends('backend.admin-master')
 @section('site-title')
-    {{__('Products Category')}}
+    {{__('Products Type')}}
 @endsection
 @section('style')
     @include('backend.partials.datatable.style-enqueue')
@@ -17,7 +17,7 @@
             <div class="col-lg-6 mt-5">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="header-title">{{__('All Products Categories')}}</h4>
+                        <h4 class="header-title">{{__('All Products Types')}}</h4>
                         <div class="bulk-delete-wrapper">
                             <div class="select-box-wrap">
                                 <select name="bulk_option" id="bulk_option">
@@ -117,7 +117,7 @@
             <div class="col-lg-6 mt-5">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="header-title">{{__('Add New Category')}}</h4>
+                        <h4 class="header-title">{{__('Add New Product Type')}}</h4>
                         <form action="{{route('admin.products.category.new')}}" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group">
