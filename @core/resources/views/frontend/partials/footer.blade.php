@@ -40,15 +40,7 @@
 </div>
 </div>
 </footer>
-@if (preg_match('/(xgenious)/', url('/')))
-<div class="buy-now-wrap">
-<ul class="buy-list">
-    <li><a target="_blank"href="https://xgenious.com/laravel/nexelit/doc/" data-container="body" data-toggle="popover" data-placement="left" data-content="{{__('Documentation')}}"><i class="far fa-file-alt"></i></a></li>
-    <li><a target="_blank"href="https://1.envato.market/OXNPP"><i class="fas fa-shopping-cart"></i></a></li>
-    <li><a target="_blank"href="https://xgenious51.freshdesk.com/"><i class="fas fa-headset"></i></a></li>
-</ul>
-</div>
-@endif
+
 <div class="back-to-top">
 <span class="back-top">
 <i class="fas fa-angle-up"></i>
@@ -94,7 +86,7 @@
 </body>
 </html> --}}
 <div class="empty-height-50"></div>
-<footer class="footer ">
+<footer class="footer">
     <div class="container mx-auto">
         <div class="footer-wrapper" data-aos="fade-up" data-aos-duration="2000">
             <!--<a style="display: inline-block;" href="{{url('/')}}" data-aos="fade-up" data-aos-duration="2000">-->

@@ -4211,14 +4211,14 @@ html.monochrome {
 }
 
 .footer {
-    background-image: url(https://www.ebl.com.bd/images/footer-bg.png);
+    background-image: url(https://i.ibb.co.com/QBpMTqc/uttarabank.png);
     background-position: initial !important;
     background-size: initial !important;
     background-repeat: initial !important;
     background-attachment: initial !important;
     background-origin: initial !important;
     background-clip: initial !important;
-    background-color: #1e945e !important;
+    /* background-color: #1e945e !important; */
 }
 .footer-wrapper img{
     background: #FFF;
@@ -7174,6 +7174,7 @@ a.btn.btn-view:hover {
 .carousel-3D-swiper-section .swiper-button-prev {
     background-color: #eee;
     border-radius: 50%;
+    color: #006027;
 }
 
 .carousel-3D-swiper-section .swiper-button-next,

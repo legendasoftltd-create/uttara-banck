@@ -890,6 +890,9 @@ document.addEventListener('DOMContentLoaded', function() {
                         <a href="javascript:void(0)" aria-expanded="true"><i class="ti-settings"></i>
                             <span>{{__('General Settings')}}</span></a>
                         <ul class="collapse ">
+                            <li class="{{active_menu('admin-home/general-settings/basic-settings')}}">
+                                <a href="{{route('admin.general.basic.settings')}}">{{__('Basic Settings')}}</a>
+                            </li>
                             <li class="{{active_menu('admin-home/general-settings/site-identity')}}">
                                 <a href="{{route('admin.general.site.identity')}}">{{__('Site Identity')}}</a>
                             </li>

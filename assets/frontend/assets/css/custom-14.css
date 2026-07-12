@@ -4211,7 +4211,7 @@ html.monochrome {
 }
 
 .footer {
-    background-image: url(https://www.ebl.com.bd/images/footer-bg.png);
+    background-image: url(https://i.ibb.co.com/QBpMTqc/uttarabank.png);
     background-position: initial !important;
     background-size: initial !important;
     background-repeat: initial !important;
@@ -7253,6 +7253,7 @@ a.btn.btn-view:hover {
 .carousel-3D-swiper-section .swiper-button-prev {
     background-color: #eee;
     border-radius: 50%;
+    color: #006027;
 }
 
 .carousel-3D-swiper-section .swiper-button-next,
