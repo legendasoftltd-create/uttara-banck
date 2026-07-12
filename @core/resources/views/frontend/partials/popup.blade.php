@@ -99,10 +99,9 @@
             <div class="modal-dialog modal-lg modal-dialog-centered" role="document" style="max-width: 700px; width: 90%; margin: 30px auto;">
                 <div class="modal-content" style="border: none; border-radius: 10px; overflow: hidden;">
                     <div class="skl-modal-body modal-body" style>
-                        <span class="skl-modal-close-button_02 close" data-dismiss="modal" style="z-index: 999; position: absolute; right: 5px; top: 5px;"
-                            aria-label="Close">
-                            <img src="https://www.legacy.bracbank.com/client_end/img/icon/skl-close.png" alt>
-                        </span>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="z-index: 999; position: absolute; right: -1px; top: -5px; font-size: 35px; color: #000; background: transparent; border: none; outline: none; opacity: 0.8; cursor: pointer;">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                         <div id="carouselExampleControls" class="carousel slide popup" data-ride="carousel">
                             <div class="carousel-inner">
                                 @foreach($popup_details as $data)
