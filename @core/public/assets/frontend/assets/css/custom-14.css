@@ -8152,12 +8152,16 @@ Download Page Design CSS Starts Here
 .sticky-complain .complain-stk {
     list-style-type: none;
     padding: 0px;
-    margin: 20px 0px 1px 0px; /* Increased gap to 20px */
+    margin: 20px 0px 1px 0px; /* Reverted to 0px for closed state */
     -webkit-transition: all 0.25s ease-in-out;
     -moz-transition: all 0.25s ease-in-out;
     -o-transition: all 0.25s ease-in-out;
     transition: all 0.25s ease-in-out;
     cursor: pointer;
+}
+
+.sticky-complain .complain-stk.initially-open {
+    margin-left: -212px !important;
 }
 
 .sticky-complain a {

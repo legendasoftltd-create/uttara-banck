@@ -269,18 +269,7 @@
                     </div>
                 </div>
             </div>
-            <div class="sticky-complain">
-                <a href="{{ route('frontend.complain') }}" target="_blank">
-                <div class="complain-stk">
-                    <div class="left-head-complain">
-                        <span class="rotate-complain">Complain&nbsp;Cell</span>
-                    </div>
-                    <div class="con-fild-complain">
-                            <img src="{{ asset('assets/frontend/assets/images/icon/complain-icon.jpg') }}" alt="Complain Cell">
-                        </div>
-                    </div>
-                </a>
-            </div>
+
             <!-- floating calculator widget -->
             <!-- <a href="{{ route('deposit.calculator') }}" class="calculator-widget">
                 <div class="calc-tooltip">Deposit Calculator</div>

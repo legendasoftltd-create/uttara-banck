@@ -33,7 +33,7 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
             border-top: 5px solid #008649; /* Bank green theme */
             width: 100%;
-            max-width: 580px;
+            max-width: 380px;
             padding: 35px;
             box-sizing: border-box;
             text-align: left;
@@ -62,7 +62,10 @@
 
         .complaint-info-card .info-item-row {
             display: flex;
+            flex-direction: column;
             align-items: center;
+            justify-content: center;
+            text-align: center;
             padding: 15px 0;
             position: relative;
         }
@@ -80,13 +83,14 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-right: 20px;
+            margin-bottom: 10px;
             flex-shrink: 0;
         }
 
         .complaint-info-card .info-texts {
             display: flex;
             flex-direction: column;
+            align-items: center;
         }
 
         .complaint-info-card .info-label {
@@ -463,8 +467,6 @@
                 <h4 class="complaint-section-title text-center">{{__('Central Customer Service & Complaint Management Cell')}}</h4>
                 <div class="complaint-info-card-wrapper">
                     <div class="complaint-info-card">
-                        <!-- <h4 class="info-card-title">{{ __('COMPLAINT CELL') }}</h4> -->
-                        <!-- <div class="info-card-divider"></div> -->
                         
                         <div class="info-card-body">
                             <!-- Bank Name -->

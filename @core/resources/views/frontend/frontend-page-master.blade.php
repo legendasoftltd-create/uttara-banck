@@ -46,9 +46,10 @@
             </div>
         </div>
     </div>
+        @if(request()->routeIs('frontend.complain') || request()->routeIs('frontend.complain.*') || request()->is('complain') || request()->is('complain/*'))
         <div class="sticky-complain">
-            <a href="{{ route('frontend.complain') }}" target="_blank">
-            <div class="complain-stk">
+            <a href="{{ route('frontend.complain') }}">
+            <div class="complain-stk initially-open">
                 <div class="left-head-complain">
                     <span class="rotate-complain">Complain&nbsp;Cell</span>
                 </div>
@@ -58,6 +59,17 @@
                 </div>
             </a>
         </div>
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                setTimeout(function() {
+                    var el = document.querySelector('.sticky-complain .complain-stk');
+                    if (el) {
+                        el.classList.remove('initially-open');
+                    }
+                }, 2000);
+            });
+        </script>
+        @endif
         <!-- floating calculator widget -->
         <!-- <a href="{{ route('deposit.calculator') }}" class="calculator-widget">
             <div class="calc-tooltip">Deposit Calculator</div>
