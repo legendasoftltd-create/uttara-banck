@@ -375,6 +375,10 @@ const tabs = document.querySelectorAll(".tab");
 const list = document.getElementById("branchList");
 const map = document.getElementById("mapFrame");
 const search = document.getElementById("searchInputLocation");
+const filterDivision = document.getElementById("filterDivision");
+const filterDistrict = document.getElementById("filterDistrict");
+const totalBranches = document.getElementById("totalBranches");
+const filterCategory = document.getElementById("filterCategory");
 
 if (data && tabs.length && list && map && search) {
   const availableTabs = Object.keys(data).filter(function (key) {
@@ -385,6 +389,77 @@ if (data && tabs.length && list && map && search) {
     Array.from(tabs).find(function (tab) {
       return tab.classList.contains("active") && data[tab.dataset.tab];
     })?.dataset.tab || availableTabs[0] || null;
+
+  function populateDropdowns() {
+    if (!filterDivision || !filterDistrict) return;
+    let items = Array.isArray(data[currentTab]) ? data[currentTab] : [];
+    
+    const catVal = filterCategory ? filterCategory.value : "";
+    if (currentTab === 'branch') {
+      if (filterCategory) filterCategory.style.display = "block";
+      if (catVal) {
+        items = items.filter(item => item.branch_point === catVal);
+      }
+    } else {
+      if (filterCategory) {
+        filterCategory.style.display = "none";
+        filterCategory.value = "";
+      }
+    }
+
+    // Get unique divisions
+    const divisions = Array.from(new Set(items.map(item => item.division).filter(Boolean))).sort();
+    
+    // Get unique districts based on selected division if any
+    const selectedDivision = filterDivision.value;
+    const filteredItemsForDistrict = selectedDivision 
+      ? items.filter(item => item.division === selectedDivision)
+      : items;
+    const districts = Array.from(new Set(filteredItemsForDistrict.map(item => item.district).filter(Boolean))).sort();
+
+    // Populate Division
+    const currentDivVal = filterDivision.value;
+    filterDivision.innerHTML = '<option value="">All Divisions</option>';
+    divisions.forEach(div => {
+      const opt = document.createElement("option");
+      opt.value = div;
+      opt.textContent = div;
+      if (div === currentDivVal) opt.selected = true;
+      filterDivision.appendChild(opt);
+    });
+
+    // Populate District
+    const currentDistVal = filterDistrict.value;
+    filterDistrict.innerHTML = '<option value="">All Districts</option>';
+    districts.forEach(dist => {
+      const opt = document.createElement("option");
+      opt.value = dist;
+      opt.textContent = dist;
+      if (dist === currentDistVal) opt.selected = true;
+      filterDistrict.appendChild(opt);
+    });
+  }
+
+  if (filterCategory) {
+    filterCategory.addEventListener("change", function() {
+      if (filterDivision) filterDivision.value = "";
+      if (filterDistrict) filterDistrict.value = "";
+      populateDropdowns();
+      loadLocations();
+    });
+  }
+
+  if (filterDivision) {
+    filterDivision.addEventListener("change", function() {
+      if (filterDistrict) filterDistrict.value = "";
+      populateDropdowns();
+      loadLocations();
+    });
+  }
+
+  if (filterDistrict) {
+    filterDistrict.addEventListener("change", loadLocations);
+  }
 
   function getEmbedUrl(item) {
     if (item.latitude && item.longitude) {
@@ -440,17 +515,55 @@ if (data && tabs.length && list && map && search) {
     div.appendChild(title);
 
     if (item) {
-      const phone = document.createElement("p");
+      const detailsContainer = document.createElement("div");
+      detailsContainer.className = "branch-details-container";
+      detailsContainer.style.fontSize = "13px";
+      detailsContainer.style.lineHeight = "1.5";
+      detailsContainer.style.marginTop = "5px";
+      detailsContainer.style.color = "#555";
 
-      let parts = [];
-      if (item.phone) parts.push("Phone: " + item.phone);
-      if (item.mobile) parts.push("Mobile: " + item.mobile);
-      if (item.email) parts.push("Email: " + item.email);
-      if (item.address) parts.push("Address: " + item.address);
+      if (item.address) {
+        const address = document.createElement("p");
+        address.style.margin = "2px 0";
+        address.innerHTML = "<strong>Address:</strong> " + item.address;
+        detailsContainer.appendChild(address);
+      }
 
-      phone.textContent = parts.join(", ");
+      if (item.division || item.district) {
+        const divDist = document.createElement("p");
+        divDist.style.margin = "2px 0";
+        let geoInfo = [];
+        if (item.district) geoInfo.push("<strong>District:</strong> " + item.district);
+        if (item.division) geoInfo.push("<strong>Division:</strong> " + item.division);
+        divDist.innerHTML = geoInfo.join(" | ");
+        detailsContainer.appendChild(divDist);
+      }
 
-      div.appendChild(phone);
+      if (item.routing_no) {
+        const routing = document.createElement("p");
+        routing.style.margin = "2px 0";
+        routing.innerHTML = "<strong>Routing No:</strong> " + item.routing_no;
+        detailsContainer.appendChild(routing);
+      }
+
+      if (item.email) {
+        const email = document.createElement("p");
+        email.style.margin = "2px 0";
+        email.innerHTML = "<strong>Email:</strong> <a href='mailto:" + item.email + "'>" + item.email + "</a>";
+        detailsContainer.appendChild(email);
+      }
+
+      let phoneParts = [];
+      if (item.phone) phoneParts.push(item.phone);
+      if (item.mobile) phoneParts.push(item.mobile);
+      if (phoneParts.length > 0) {
+        const phone = document.createElement("p");
+        phone.style.margin = "2px 0";
+        phone.innerHTML = "<strong>Phone/Mobile:</strong> " + phoneParts.join(", ");
+        detailsContainer.appendChild(phone);
+      }
+
+      div.appendChild(detailsContainer);
     }
 
     div.onclick = function () {
@@ -465,8 +578,21 @@ if (data && tabs.length && list && map && search) {
   }
 
   function getFilteredLocations() {
-    const items = Array.isArray(data[currentTab]) ? data[currentTab] : [];
+    let items = Array.isArray(data[currentTab]) ? data[currentTab] : [];
+    const divVal = filterDivision ? filterDivision.value : "";
+    const distVal = filterDistrict ? filterDistrict.value : "";
+    const catVal = filterCategory ? filterCategory.value : "";
     const value = search.value.toLowerCase().trim();
+
+    if (currentTab === 'branch' && catVal) {
+      items = items.filter(item => item.branch_point === catVal);
+    }
+    if (divVal) {
+      items = items.filter(item => item.division === divVal);
+    }
+    if (distVal) {
+      items = items.filter(item => item.district === distVal);
+    }
 
     if (!value) {
       return items;
@@ -484,6 +610,10 @@ if (data && tabs.length && list && map && search) {
   function loadLocations() {
     const items = getFilteredLocations();
     list.innerHTML = "";
+
+    if (totalBranches) {
+      totalBranches.textContent = items.length;
+    }
 
     if (!items.length) {
       map.innerHTML =
@@ -510,16 +640,21 @@ if (data && tabs.length && list && map && search) {
     tab.addEventListener("click", function () {
       currentTab = tab.dataset.tab;
       search.value = "";
+      if (filterCategory) filterCategory.value = "";
+      if (filterDivision) filterDivision.value = "";
+      if (filterDistrict) filterDistrict.value = "";
 
       tabs.forEach(function (t) {
         t.classList.remove("active");
       });
       tab.classList.add("active");
 
+      populateDropdowns();
       loadLocations();
     });
   });
 
+  populateDropdowns();
   loadLocations();
   search.addEventListener("input", loadLocations);
 }

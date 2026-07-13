@@ -141,7 +141,23 @@
 
                         <div class="list-area">
                             <div class="search-boxs">
+                                <div class="filter-wrapper" style="display: flex; gap: 10px; margin-bottom: 10px; flex-wrap: wrap;">
+                                    <select id="filterCategory" style="flex: 1; min-width: 120px; padding: 8px; border: 1px solid #ccc; border-radius: 4px; display: none;">
+                                        <option value="">All Categories</option>
+                                        <option value="Branches">Branch</option>
+                                        <option value="AD Branches">AD Branch</option>
+                                    </select>
+                                    <select id="filterDivision" style="flex: 1; min-width: 120px; padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
+                                        <option value="">All Divisions</option>
+                                    </select>
+                                    <select id="filterDistrict" style="flex: 1; min-width: 120px; padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
+                                        <option value="">All Districts</option>
+                                    </select>
+                                </div>
                                 <input type="text" id="searchInputLocation" placeholder="Search...">
+                                <div class="branch-count pb-2" style="margin: 0px 10px; font-weight: bold; color: #1a1a1a;">
+                                    Total: <span id="totalBranches">0</span>
+                                </div>
                             </div>
                             <div class="branch-list" id="branchList"></div>
                         </div>
@@ -154,7 +170,8 @@
                     return [
                         'name' => $item->name,
                         'address' => $item->address,
-                        'phone' => $item->mobile,
+                        'phone' => $item->phone,
+                        'mobile' => $item->mobile,
                         'email' => $item->email,
                         'division' => $item->division,
                         'district' => $item->district,
@@ -162,6 +179,8 @@
                         'map' => $item->map,
                         'latitude' => $item->latitude,
                         'longitude' => $item->longitude,
+                        'routing_no' => $item->routing_no,
+                        'branch_point' => $item->branch_point,
                         'query' => collect([
                             $item->name,
                             $item->address,
@@ -169,8 +188,10 @@
                             $item->district,
                             $item->division,
                             $item->email,
+                            $item->phone,
                             $item->mobile,
-                            $item->routing_no
+                            $item->routing_no,
+                            $item->branch_point
                         ])->filter()->implode(', '),
                     ];
                 })->values();
