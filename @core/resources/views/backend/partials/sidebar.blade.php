@@ -291,14 +291,14 @@ document.addEventListener('DOMContentLoaded', function() {
                         @if(request()->is(['admin-home/admin/*'])) active @endif
                         ">
                         <a href="javascript:void(0)" aria-expanded="true"><i class="ti-user"></i>
-                            <span>{{__('Admin Manage')}}</span></a>
+                            <span>{{__('User Management')}}</span></a>
                         <ul class="collapse">
                             <li class="{{active_menu('admin-home/admin/all')}}"><a
-                                        href="{{route('admin.all.user')}}">{{__('All Admin')}}</a></li>
+                                        href="{{route('admin.all.user')}}">{{__('All Users')}}</a></li>
                             <li class="{{active_menu('admin-home/admin/new')}}"><a
-                                        href="{{route('admin.new.user')}}">{{__('Add New Admin')}}</a></li>
+                                        href="{{route('admin.new.user')}}">{{__('Add New User')}}</a></li>
                             <li class="{{active_menu('admin-home/admin/all/role')}}"><a
-                                        href="{{route('admin.all.user.role')}}">{{__('All Admin Role & Permission')}}</a></li>
+                                        href="{{route('admin.all.user.role')}}">{{__('All User Role & Permission')}}</a></li>
                         </ul>
                     </li>
                     @endif

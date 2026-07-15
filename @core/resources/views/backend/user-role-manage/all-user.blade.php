@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="{{asset('assets/backend/css/media-uploader.css')}}">
 @endsection
 @section('site-title')
-    {{__('All Admins')}}
+    {{__('All Users')}}
 @endsection
 @section('content')
     <div class="col-lg-12 col-ml-12 padding-bottom-30">
@@ -30,7 +30,7 @@
                                 <div class="card-body">
                                    <x-error-msg/>
                                    <x-flash-msg/>
-                                    <h4 class="header-title">{{__('All Admin Created By Super Admin')}}</h4>
+                                    <h4 class="header-title">{{__('All Users Created By Super Admin')}}</h4>
                                     <div class="data-tables datatable-primary">
                                         <table id="all_user_table" class="text-center">
                                             <thead class="text-capitalize">
