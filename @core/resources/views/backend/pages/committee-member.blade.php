@@ -5,6 +5,8 @@
 @section('style')
     <link rel="stylesheet" href="{{asset('assets/backend/css/dropzone.css')}}">
     <link rel="stylesheet" href="{{asset('assets/backend/css/media-uploader.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/backend/css/codemirror.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/backend/css/summernote-bs4.css')}}">
     <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
     <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap.min.css">
@@ -194,7 +196,8 @@
                             </div>
                             <div class="form-group">
                                 <label>{{__('Description / Bio')}}</label>
-                                <textarea name="description" class="form-control" rows="4" placeholder="{{__('Brief bio...')}}"></textarea>
+                                <input type="hidden" name="description" id="bod_description">
+                                <div class="summernote"></div>
                             </div>
 
                             {{-- Social One --}}
@@ -319,7 +322,8 @@
                         </div>
                         <div class="form-group">
                             <label>{{__('Description / Bio')}}</label>
-                            <textarea name="description" id="cm_edit_description" class="form-control" rows="4"></textarea>
+                            <input type="hidden" name="description" id="cm_edit_description">
+                            <div class="summernote"></div>
                         </div>
 
                         <div class="row">
@@ -403,6 +407,8 @@
 @endsection
 
 @section('script')
+    <script src="{{asset('assets/backend/js/codemirror.js')}}"></script>
+    <script src="{{asset('assets/backend/js/summernote-bs4.js')}}"></script>
     <script>
         $(document).ready(function () {
 
@@ -440,6 +446,7 @@
                 form.find('#cm_edit_designation').val(el.data('designation')).trigger('change');
                 form.find('#cm_edit_order_by').val(el.data('order_by'));
                 form.find('#cm_edit_description').val(el.data('description'));
+                form.find('#cm_edit_description').next('.summernote').summernote('code', el.data('description') || '');
                 form.find('#cm_edit_icon_one').val(el.data('iconone'));
                 form.find('#cm_edit_icon_two').val(el.data('icontwo'));
                 form.find('#cm_edit_icon_three').val(el.data('iconthree'));
@@ -470,6 +477,35 @@
             $('.icp-dd').iconpicker();
             $('.icp-dd').on('iconpickerSelected', function (e) {
                 $(this).parent().parent().children('input[type="hidden"]').val(e.iconpickerValue);
+            });
+
+            function syncContent(editor, contents) {
+                let final = typeof iFrameFilterInSummernote === 'function' ? iFrameFilterInSummernote(contents) : contents;
+                $(editor).prev('input').val(final);
+            }
+
+            $('.summernote').summernote({
+                disableDragAndDrop: true,
+                height: 250,
+                codeviewFilter: false,
+                codeviewIframeFilter: false,
+                toolbar: [
+                    ['style', ['style']],
+                    ['font', ['bold', 'italic', 'underline', 'strikethrough', 'clear']],
+                    ['fontsize', ['fontsize']],
+                    ['color', ['color']],
+                    ['para', ['ul', 'ol', 'paragraph']],
+                    ['table', ['table']],
+                    ['insert', ['link', 'hr']],
+                    ['history', ['undo', 'redo']],
+                    ['view', ['fullscreen', 'codeview']],
+                ],
+                codemirror: { theme: 'default', mode: 'text/html', lineNumbers: true, lineWrapping: true },
+                callbacks: {
+                    onChange: function(contents) { syncContent(this, contents); },
+                    onChangeCodeview: function(contents) { syncContent(this, contents); },
+                    onBlurCodeview: function(contents) { syncContent(this, contents); }
+                }
             });
         });
     </script>
