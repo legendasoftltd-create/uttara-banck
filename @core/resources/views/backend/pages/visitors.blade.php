@@ -34,33 +34,39 @@
             </div>
 
             <!-- Visitor Logs List -->
-            <div class="col-lg-7 mt-5">
+            <div class="@if(check_page_permission('visitor_log_delete')) col-lg-7 @else col-lg-12 @endif mt-5">
                 <div class="card">
                     <div class="card-body">
                         <div class="d-flex justify-content-between align-items-center mb-4">
                             <h4 class="header-title mb-0">{{__('Visitor Logs')}}</h4>
+                            @if(check_page_permission('visitor_log_delete'))
                             <form action="{{route('admin.visitors.clear.all')}}" method="POST" onsubmit="return confirm('Are you sure you want to clear all logs?');">
                                 @csrf
                                 <button type="submit" class="btn btn-danger btn-sm">{{__('Clear All Logs')}}</button>
                             </form>
+                            @endif
                         </div>
+                        @if(check_page_permission('visitor_log_delete'))
                         <div class="bulk-delete-wrapper mb-3">
                             <div class="select-box-wrap d-flex justify-content-start align-items-center">
                                 <select name="bulk_option" id="bulk_option" class="form-control form-control-sm mr-2" style="width: 150px;">
                                     <option value="">{{__('Bulk Action')}}</option>
-                                    <option value="delete">{{__('Delete')}}</option>
+                                    <option value="delete">{{{__('Delete')}}}</option>
                                 </select>
                                 <button class="btn btn-primary btn-sm" id="bulk_delete_btn">{{__('Apply')}}</button>
                             </div>
                         </div>
+                        @endif
                         <div class="table-wrap table-responsive">
                             <table class="table table-default">
                                 <thead>
+                                @if(check_page_permission('visitor_log_delete'))
                                 <th class="no-sort" style="width: 50px;">
                                     <div class="mark-all-checkbox">
                                         <input type="checkbox" class="all-checkbox">
                                     </div>
                                 </th>
+                                @endif
                                 <th>{{__('ID')}}</th>
                                 <th>{{__('IP Address')}}</th>
                                 <th>{{__('Visit Date')}}</th>
@@ -69,16 +75,20 @@
                                 <tbody>
                                 @foreach($all_visitors as $data)
                                     <tr>
+                                        @if(check_page_permission('visitor_log_delete'))
                                         <td>
                                             <div class="bulk-checkbox-wrapper">
                                                 <input type="checkbox" class="bulk-checkbox" name="bulk_delete[]" value="{{$data->id}}">
                                             </div>
                                         </td>
+                                        @endif
                                         <td>{{$data->id}}</td>
                                         <td>{{$data->ip_address}}</td>
                                         <td>{{$data->created_at ? $data->created_at->format('Y-m-d h:i A') : $data->visit_date}}</td>
                                         <td>
+                                            @if(check_page_permission('visitor_log_delete'))
                                             <x-delete-popover :url="route('admin.visitors.delete',$data->id)"/>
+                                            @endif
                                         </td>
                                     </tr>
                                 @endforeach
@@ -93,6 +103,7 @@
             </div>
 
             <!-- Settings Column -->
+            @if(check_page_permission('visitor_log_delete'))
             <div class="col-lg-5 mt-5">
                 <div class="card">
                     <div class="card-body">
@@ -129,6 +140,7 @@
                     </div>
                 </div>
             </div>
+            @endif
         </div>
     </div>
 @endsection

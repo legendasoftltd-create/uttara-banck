@@ -24,9 +24,12 @@
                     <div class="card-body">
                         <div class="header-wrap d-flex justify-content-between mb-4">
                             <h4 class="header-title">{{__('All Exchange Rates')}}</h4>
+                            @if(check_page_permission('exchange_rate_create'))
                             <a href="{{route('admin.exchange.rate.new')}}" class="btn btn-primary">{{__('Add New Exchange Rate')}}</a>
+                            @endif
                         </div>
 
+                        @if(check_page_permission('exchange_rate_delete'))
                         <div class="bulk-delete-wrapper">
                             <div class="select-box-wrap">
                                 <select name="bulk_option" id="bulk_option">
@@ -36,16 +39,19 @@
                                 <button class="btn btn-primary btn-sm" id="bulk_delete_btn">{{__('Apply')}}</button>
                             </div>
                         </div>
+                        @endif
 
                         <div class="table-wrap table-responsive">
                             <table class="table table-default" id="all_exchange_rates_table">
                                 <thead>
                                 <tr>
+                                    @if(check_page_permission('exchange_rate_delete'))
                                     <th class="no-sort">
                                         <div class="mark-all-checkbox">
                                             <input type="checkbox" class="all-checkbox">
                                         </div>
                                     </th>
+                                    @endif
                                     <th>{{__('ID')}}</th>
                                     <th>{{__('Items')}}</th>
                                     <th>{{__('PDF')}}</th>
@@ -56,11 +62,13 @@
                                 <tbody>
                                 @foreach($all_exchange_rates as $rate)
                                     <tr>
+                                        @if(check_page_permission('exchange_rate_delete'))
                                         <td>
                                             <div class="bulk-checkbox-wrapper">
                                                 <input type="checkbox" class="bulk-checkbox" value="{{$rate->id}}">
                                             </div>
                                         </td>
+                                        @endif
                                         <td>{{$rate->id}}</td>
                                         <td>
                                             @php $items = $rate->items ?? []; @endphp
@@ -96,10 +104,14 @@
                                             @endif
                                         </td>
                                         <td>
+                                            @if(check_page_permission('exchange_rate_delete'))
                                             <x-delete-popover :url="route('admin.exchange.rate.delete',$rate->id)"/>
+                                            @endif
+                                            @if(check_page_permission('exchange_rate_edit'))
                                             <a class="btn btn-primary btn-xs mb-3 mr-1" href="{{route('admin.exchange.rate.edit',$rate->id)}}">
                                                 <i class="ti-pencil"></i>
                                             </a>
+                                            @endif
                                         </td>
                                     </tr>
                                 @endforeach

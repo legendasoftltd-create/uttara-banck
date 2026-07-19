@@ -19,26 +19,32 @@
                         <div class="top-wrapp d-flex justify-content-between">
                             <div class="left-part">
                                 <h4 class="header-title">{{__('All Tickets')}}</h4>
-                                <div class="bulk-delete-wrapper">
-                                    <div class="select-box-wrap">
-                                        <select name="bulk_option" id="bulk_option">
-                                            <option value="">{{{__('Bulk Action')}}}</option>
-                                            <option value="delete">{{{__('Delete')}}}</option>
-                                        </select>
-                                        <button class="btn btn-primary btn-sm" id="bulk_delete_btn">{{__('Apply')}}</button>
+                                @if(check_page_permission('support_ticket_delete'))
+                                    <div class="bulk-delete-wrapper">
+                                        <div class="select-box-wrap">
+                                            <select name="bulk_option" id="bulk_option">
+                                                <option value="">{{{__('Bulk Action')}}}</option>
+                                                <option value="delete">{{{__('Delete')}}}</option>
+                                            </select>
+                                            <button class="btn btn-primary btn-sm" id="bulk_delete_btn">{{__('Apply')}}</button>
+                                        </div>
                                     </div>
-                                </div>
+                                @endif
                             </div>
-                            <div class="btn-wrapper"><a href="{{route('admin.support.ticket.new')}}" class="btn btn-primary">{{__('New Ticket')}}</a></div>
+                            @if(check_page_permission('support_ticket_create'))
+                                <div class="btn-wrapper"><a href="{{route('admin.support.ticket.new')}}" class="btn btn-primary">{{__('New Ticket')}}</a></div>
+                            @endif
                         </div>
                         <div class="table-wrap table-responsive">
                             <table class="table table-default">
                                 <thead>
+                                @if(check_page_permission('support_ticket_delete'))
                                 <th class="no-sort">
                                     <div class="mark-all-checkbox">
                                         <input type="checkbox" class="all-checkbox">
                                     </div>
                                 </th>
+                                @endif
                                 <th>{{__('ID')}}</th>
                                 <th>{{__('Title')}}</th>
                                 <th>{{__('Department')}}</th>
@@ -50,11 +56,13 @@
                                 <tbody>
                                 @foreach($all_tickets as $data)
                                     <tr>
+                                        @if(check_page_permission('support_ticket_delete'))
                                         <td>
                                             <div class="bulk-checkbox-wrapper">
                                                 <input type="checkbox" class="bulk-checkbox" name="bulk_delete[]" value="{{$data->id}}">
                                             </div>
                                         </td>
+                                        @endif
                                         <td>#{{$data->id}}</td>
                                         <td>{{$data->title}}</td>
                                         <td>{{$data->department->name ?? __('anonymous')}}</td>
@@ -62,6 +70,7 @@
                                             {{$data->user->name ?? __('anonymous')}}
                                         </td>
                                         <td>
+                                            @if(check_page_permission('support_ticket_edit'))
                                             <div class="btn-group">
                                                 <button type="button" class="{{$data->priority}} dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                     {{$data->priority}}
@@ -73,8 +82,12 @@
                                                     <a class="dropdown-item change_priority" data-id="{{$data->id}}" data-val="urgent" href="#">{{__('Urgent')}}</a>
                                                 </div>
                                             </div>
+                                            @else
+                                            <span class="alert alert-info py-1 px-2 d-inline-block">{{$data->priority}}</span>
+                                            @endif
                                         </td>
                                         <td>
+                                            @if(check_page_permission('support_ticket_edit'))
                                             <div class="btn-group">
                                                 <button type="button" class="status-{{$data->status}} dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                     {{$data->status}}
@@ -84,9 +97,14 @@
                                                     <a class="dropdown-item status_change" data-id="{{$data->id}}" data-val="close" href="#">{{__('Close')}}</a>
                                                 </div>
                                             </div>
+                                            @else
+                                            <span class="alert alert-info py-1 px-2 d-inline-block">{{$data->status}}</span>
+                                            @endif
                                         </td>
                                         <td>
+                                            @if(check_page_permission('support_ticket_delete'))
                                             <x-delete-popover :url="route('admin.support.ticket.delete',$data->id)"/>
+                                            @endif
                                             <x-view-icon :url="route('admin.support.ticket.view',$data->id)"/>
                                         </td>
                                     </tr>

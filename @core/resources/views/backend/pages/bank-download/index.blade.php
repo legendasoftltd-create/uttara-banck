@@ -31,11 +31,12 @@
             <div class="col-lg-12 mt-5">
                 <div class="card">
                     <div class="card-body">
-                        <div class="header-wrap d-flex justify-content-between">
                             <h4 class="header-title">{{__('Bank Downloads')}}</h4>
+                            @if(check_page_permission('downloads_create'))
                             <a href="{{route('admin.bank.download.new')}}" class="btn btn-primary">{{__('Add New Download')}}</a>
-                        </div>
+                            @endif
 
+                        @if(check_page_permission('downloads_delete'))
                         <div class="bulk-delete-wrapper">
                             <div class="select-box-wrap">
                                 <select name="bulk_option" id="bulk_option">
@@ -47,6 +48,7 @@
                                 <button class="btn btn-primary btn-sm" id="bulk_delete_btn">{{__('Apply')}}</button>
                             </div>
                         </div>
+                        @endif
 
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
                             @php $a=0; @endphp
@@ -64,11 +66,13 @@
                                     <div class="table-wrap table-responsive">
                                         <table class="table table-default">
                                         <thead>
+                                        @if(check_page_permission('downloads_delete'))
                                         <th class="no-sort">
                                             <div class="mark-all-checkbox">
                                                 <input type="checkbox" class="all-checkbox">
                                             </div>
                                         </th>
+                                        @endif
                                         <th>{{__('ID')}}</th>
                                         <th>{{__('Title')}}</th>
                                         <th>{{__('Category')}}</th>
@@ -79,11 +83,13 @@
                                         <tbody>
                                         @foreach($downloads as $data)
                                             <tr>
+                                                @if(check_page_permission('downloads_delete'))
                                                 <td>
                                                     <div class="bulk-checkbox-wrapper">
                                                         <input type="checkbox" class="bulk-checkbox" name="bulk_delete[]" value="{{$data->id}}">
                                                     </div>
                                                 </td>
+                                                @endif
                                                 <td>{{$data->id}}</td>
                                                 <td>{{$data->title}}</td>
                                                 <td>{{optional($data->category)->title ?? 'N/A'}}</td>
@@ -96,9 +102,12 @@
                                                 </td>
                                                 <td>{{ $data->publish_date->format('M d, Y') }}</td>
                                                 <td>
+                                                    @if(check_page_permission('downloads_edit'))
                                                     <a href="{{route('admin.bank.download.edit', $data->id)}}" class="btn btn-primary btn-xs mb-3 mr-1">{{__('Edit')}}</a>
-                                                    {{-- <a href="{{route('frontend.bank.downloads.single', $data->slug)}}" target="_blank" class="btn btn-info btn-xs mb-3 mr-1">{{__('View')}}</a> --}}
+                                                    @endif
+                                                    @if(check_page_permission('downloads_delete'))
                                                     <x-delete-popover :url="route('admin.bank.download.delete', $data->id)"/>
+                                                    @endif
                                                 </td>
                                             </tr>
                                         @endforeach

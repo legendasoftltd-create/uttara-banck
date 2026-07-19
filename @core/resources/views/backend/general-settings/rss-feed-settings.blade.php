@@ -30,7 +30,9 @@
                                 <label for="site_rss_feed_description">{{__('RSS Feed Description')}}</label>
                                 <textarea name="site_rss_feed_description" id="site_rss_feed_description" cols="30" rows="5" class="form-control">{{get_static_option('site_rss_feed_description')}}</textarea>
                             </div>
+                            @if(check_page_permission('rss_settings_edit'))
                             <button type="submit" class="btn btn-primary mt-4 pr-4 pl-4">{{__('Update Changes')}}</button>
+                            @endif
                         </form>
                     </div>
                 </div>

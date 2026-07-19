@@ -24,7 +24,9 @@
                     <div class="card-body">
                         <div class="header-wrap d-flex justify-content-between mb-4">
                             <h4 class="header-title">{{__('Bank Branch, Sub-Branch & ATM List')}}</h4>
+                            @if(check_page_permission('locations_create'))
                             <a href="{{route('admin.locations.new')}}" class="btn btn-primary">{{__('Add New Location')}}</a>
+                            @endif
                         </div>
 
                         <form method="get" action="{{route('admin.locations.all')}}" class="mb-4">
@@ -61,6 +63,7 @@
                             </div>
                         </form>
 
+                        @if(check_page_permission('locations_delete'))
                         <div class="bulk-delete-wrapper">
                             <div class="select-box-wrap">
                                 <select name="bulk_option" id="bulk_option">
@@ -70,16 +73,19 @@
                                 <button class="btn btn-primary btn-sm" id="bulk_delete_btn">{{__('Apply')}}</button>
                             </div>
                         </div>
+                        @endif
 
                         <div class="table-wrap table-responsive">
                             <table class="table table-default" id="all_locations_table">
                                 <thead>
                                 <tr>
+                                    @if(check_page_permission('locations_delete'))
                                     <th class="no-sort">
                                         <div class="mark-all-checkbox">
                                             <input type="checkbox" class="all-checkbox">
                                         </div>
                                     </th>
+                                    @endif
                                     <th>{{__('ID')}}</th>
                                     <th>{{__('Name')}}</th>
                                     <th>{{__('Type')}}</th>
@@ -94,11 +100,13 @@
                                 <tbody>
                                 @foreach($all_locations as $location)
                                     <tr>
+                                        @if(check_page_permission('locations_delete'))
                                         <td>
                                             <div class="bulk-checkbox-wrapper">
                                                 <input type="checkbox" class="bulk-checkbox" value="{{$location->id}}">
                                             </div>
                                         </td>
+                                        @endif
                                         <td>{{$location->id}}</td>
                                         <td>{{$location->name}}</td>
                                         <td>{{ucwords(str_replace('_',' ',$location->type))}}</td>
@@ -114,10 +122,14 @@
                                             @endif
                                         </td>
                                         <td>
+                                            @if(check_page_permission('locations_delete'))
                                             <x-delete-popover :url="route('admin.locations.delete',$location->id)"/>
+                                            @endif
+                                            @if(check_page_permission('locations_edit'))
                                             <a class="btn btn-primary btn-xs mb-3 mr-1" href="{{route('admin.locations.edit',$location->id)}}">
                                                 <i class="ti-pencil"></i>
                                             </a>
+                                            @endif
                                             <a class="btn btn-info btn-xs mb-3 mr-1" target="_blank" href="{{route('frontend.locations.single',$location->slug)}}">
                                                 <i class="ti-eye"></i>
                                             </a>

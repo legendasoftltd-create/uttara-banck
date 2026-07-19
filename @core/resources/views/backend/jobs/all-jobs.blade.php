@@ -37,6 +37,7 @@
                 <div class="card">
                     <div class="card-body">
                         <h4 class="header-title">{{__('All Posted Jobs')}}</h4>
+                        @if(check_page_permission('jobs_delete'))
                         <div class="bulk-delete-wrapper">
                             <div class="select-box-wrap">
                                 <select name="bulk_option" id="bulk_option">
@@ -46,6 +47,7 @@
                                 <button class="btn btn-primary btn-sm" id="bulk_delete_btn">{{__('Apply')}}</button>
                             </div>
                         </div>
+                        @endif
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
                             @php $a=0; @endphp
                             @foreach($all_jobs as $key => $job)
@@ -62,11 +64,13 @@
                                     <div class="table-wrap table-responsive">
                                         <table class="table table-default" id="all_blog_table">
                                             <thead>
+                                            @if(check_page_permission('jobs_delete'))
                                             <th class="no-sort">
                                                 <div class="mark-all-checkbox">
                                                     <input type="checkbox" class="all-checkbox">
                                                 </div>
                                             </th>
+                                            @endif
                                             <th>{{__('ID')}}</th>
                                             <th>{{__('Title')}}</th>
                                             <th>{{__('Position')}}</th>
@@ -80,11 +84,13 @@
                                             <tbody>
                                             @foreach($job as $data)
                                                 <tr>
+                                                    @if(check_page_permission('jobs_delete'))
                                                     <td>
                                                         <div class="bulk-checkbox-wrapper">
                                                             <input type="checkbox" class="bulk-checkbox" name="bulk_delete[]" value="{{$data->id}}">
                                                         </div>
                                                     </td>
+                                                    @endif
                                                     <td>{{$data->id}}</td>
                                                     <td>{{$data->title}}</td>
                                                     <td>{{$data->position}}</td>
@@ -100,19 +106,24 @@
                                                         @endif
                                                     </td>
                                                     <td>
+                                                        @if(check_page_permission('jobs_delete'))
                                                         <x-delete-popover :url="route('admin.jobs.delete',$data->id)"/>
-                                                        
+                                                        @endif
+                                                        @if(check_page_permission('jobs_edit'))
                                                         <a class="btn btn-xs btn-primary btn-xs mb-3 mr-1" href="{{route('admin.jobs.edit',$data->id)}}">
                                                             <i class="ti-pencil"></i>
                                                         </a>
+                                                        @endif
                                                         <a class="btn btn-xs btn-info btn-xs mb-3 mr-1" target="_blank" href="{{route('frontend.jobs.single',$data->slug)}}">
                                                             <i class="ti-eye"></i>
                                                         </a>
+                                                        @if(check_page_permission('jobs_create'))
                                                         <form action="{{route('admin.jobs.clone')}}" method="post" style="display: inline-block">
                                                             @csrf
                                                             <input type="hidden" name="item_id" value="{{$data->id}}">
                                                             <button type="submit" title="clone this to new draft" class="btn btn-xs btn-secondary btn-sm mb-3 mr-1"><i class="far fa-copy"></i></button>
                                                         </form>
+                                                        @endif
                                                     </td>
                                                 </tr>
                                             @endforeach

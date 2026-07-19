@@ -23,11 +23,14 @@
                     <div class="card-body">
                         <div class="header-wrap d-flex justify-content-between align-items-center mb-3">
                             <h4 class="header-title">{{ __('All Notices') }}</h4>
+                            @if(check_page_permission('notice_create'))
                             <a href="{{ route('admin.notice.new') }}" class="btn btn-primary btn-sm">
                                 <i class="ti-plus"></i> {{ __('Add New Notice') }}
                             </a>
+                            @endif
                         </div>
 
+                        @if(check_page_permission('notice_delete'))
                         <div class="bulk-delete-wrapper mb-3">
                             <div class="select-box-wrap">
                                 <select name="bulk_option" id="bulk_option">
@@ -37,6 +40,7 @@
                                 <button class="btn btn-primary btn-sm" id="bulk_delete_btn">{{ __('Apply') }}</button>
                             </div>
                         </div>
+                        @endif
 
                         @if($all_notices->isEmpty())
                             <div class="alert alert-info">{{ __('No notices found.') }}</div>
@@ -62,11 +66,13 @@
                                         <table class="table table-default" id="notice_table_{{ $lang_key }}">
                                             <thead>
                                                 <tr>
+                                                    @if(check_page_permission('notice_delete'))
                                                     <th class="no-sort">
                                                         <div class="mark-all-checkbox">
                                                             <input type="checkbox" class="all-checkbox">
                                                         </div>
                                                     </th>
+                                                    @endif
                                                     <th>{{ __('ID') }}</th>
                                                     <th>{{ __('Title') }}</th>
                                                     <th>{{ __('Category') }}</th>
@@ -79,11 +85,13 @@
                                             <tbody>
                                                 @foreach($notices as $notice)
                                                     <tr>
+                                                        @if(check_page_permission('notice_delete'))
                                                         <td>
                                                             <div class="bulk-checkbox-wrapper">
                                                                 <input type="checkbox" class="bulk-checkbox" value="{{ $notice->id }}">
                                                             </div>
                                                         </td>
+                                                        @endif
                                                         <td>{{ $notice->id }}</td>
                                                         <td>{{ $notice->title }}</td>
                                                         <td>{{ $notice->category ?: '-' }}</td>
@@ -105,10 +113,13 @@
                                                             @endif
                                                         </td>
                                                         <td>
+                                                            @if(check_page_permission('notice_edit'))
                                                             <a href="{{ route('admin.notice.edit', $notice->id) }}"
                                                                class="btn btn-primary btn-sm">
                                                                 <i class="ti-pencil"></i> {{ __('Edit') }}
                                                             </a>
+                                                            @endif
+                                                            @if(check_page_permission('notice_delete'))
                                                             <form action="{{ route('admin.notice.delete', $notice->id) }}"
                                                                   method="post" style="display:inline-block;">
                                                                 @csrf
@@ -117,6 +128,7 @@
                                                                     <i class="ti-trash"></i> {{ __('Delete') }}
                                                                 </button>
                                                             </form>
+                                                            @endif
                                                         </td>
                                                     </tr>
                                                 @endforeach

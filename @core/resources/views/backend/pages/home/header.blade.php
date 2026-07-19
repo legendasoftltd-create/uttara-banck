@@ -36,10 +36,11 @@
                 @endif
             </div>
 
-            <div class="col-lg-6 mt-5">
+            <div class="@if(check_page_permission('home_page_manage_create')) col-lg-6 @else col-lg-12 @endif mt-5">
                 <div class="card">
                     <div class="card-body">
                         <h4 class="header-title">{{__('All Header Slider')}}</h4>
+                        @if(check_page_permission('home_page_manage_delete'))
                         <div class="bulk-delete-wrapper">
                             <div class="select-box-wrap">
                                 <select name="bulk_option" id="bulk_option">
@@ -49,6 +50,7 @@
                                 <button class="btn btn-primary btn-sm" id="bulk_delete_btn">{{__('Apply')}}</button>
                             </div>
                         </div>
+                        @endif
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
                             @php $a=0; @endphp
                             @foreach($all_header_slider as $key => $slider)
@@ -66,11 +68,13 @@
                                <div class="table-wrap table-responsive">
                                    <table class="table table-default">
                                        <thead>
+                                       @if(check_page_permission('home_page_manage_delete'))
                                        <th class="no-sort">
                                            <div class="mark-all-checkbox">
                                                <input type="checkbox" class="all-checkbox">
                                            </div>
                                        </th>
+                                       @endif
                                        <th>{{__('ID')}}</th>
                                        <th>{{__('Image')}}</th>
                                        <th>{{__('Title')}}</th>
@@ -82,11 +86,13 @@
                                        @foreach($slider as $data)
                                            @php $img_url =''; @endphp
                                            <tr>
+                                               @if(check_page_permission('home_page_manage_delete'))
                                                <td>
                                                    <div class="bulk-checkbox-wrapper">
                                                        <input type="checkbox" class="bulk-checkbox" name="bulk_delete[]" value="{{$data->id}}">
                                                    </div>
                                                </td>
+                                               @endif
                                                <td>{{$data->id}}</td>
                                                <td>
                                                    @php
@@ -115,7 +121,8 @@
                                                        {{__('Category:')}} {{optional($data->category)->title ?? $data->category_id}}
                                                    @endif
                                                </td>
-                                               <td>
+                                                <td>
+                                                   @if(check_page_permission('home_page_manage_delete'))
                                                    <a tabindex="0" class="btn btn-xs btn-danger btn-sm mb-3 mr-1"
                                                       role="button"
                                                       data-toggle="popover"
@@ -132,6 +139,8 @@
                                                 ">
                                                        <i class="ti-trash"></i>
                                                    </a>
+                                                   @endif
+                                                   @if(check_page_permission('home_page_manage_edit'))
                                                    <a href="#"
                                                       data-toggle="modal"
                                                       data-target="#header_slider_item_edit_modal"
@@ -154,6 +163,7 @@
                                                    >
                                                        <i class="ti-pencil"></i>
                                                    </a>
+                                                   @endif
                                                </td>
                                            </tr>
                                        @endforeach
@@ -167,6 +177,7 @@
                     </div>
                 </div>
             </div>
+            @if(check_page_permission('home_page_manage_create'))
             <div class="col-lg-6 mt-5">
                 <div class="card">
                     <div class="card-body">
@@ -258,6 +269,7 @@
                     </div>
                 </div>
             </div>
+            @endif
         </div>
     </div>
 

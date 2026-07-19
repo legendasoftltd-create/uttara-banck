@@ -140,25 +140,33 @@ Route::prefix('admin-home')->middleware(['setlang:backend'])->group(function () 
     /*==============================================
        SUPPORT TICKET MODULE
     ==============================================*/
-    Route::prefix('support-tickets')->middleware(['auth:admin','adminPermissionCheck:Support Tickets','moduleCheck:support_ticket_module_status'])->group(function () {
-        Route::get('/', 'SupportTicketController@all_tickets')->name('admin.support.ticket.all');
-        Route::get('/new', 'SupportTicketController@new_ticket')->name('admin.support.ticket.new');
-        Route::post('/new', 'SupportTicketController@store_ticket');
-        Route::post('/delete/{id}', 'SupportTicketController@delete')->name('admin.support.ticket.delete');
-        Route::get('/view/{id}', 'SupportTicketController@view')->name('admin.support.ticket.view');
-        Route::post('/bulk-action', 'SupportTicketController@bulk_action')->name('admin.support.ticket.bulk.action');
-        Route::post('/priority-change', 'SupportTicketController@priority_change')->name('admin.support.ticket.priority.change');
-        Route::post('/status-change', 'SupportTicketController@status_change')->name('admin.support.ticket.status.change');
-        Route::post('/send message', 'SupportTicketController@send_message')->name('admin.support.ticket.send.message');
-        /*-----------------------------------
-            SUPPORT TICKET : PAGE SETTINGS ROUTES
-        ------------------------------------*/
-        Route::get('/page-settings', 'SupportTicketController@page_settings')->name('admin.support.ticket.page.settings');
-        Route::post('/page-settings', 'SupportTicketController@update_page_settings');
+    Route::prefix('support-tickets')->middleware(['auth:admin','moduleCheck:support_ticket_module_status'])->group(function () {
+        
+        Route::group(['middleware' => 'adminPermissionCheck:Support Ticket All'], function() {
+            Route::get('/', 'SupportTicketController@all_tickets')->name('admin.support.ticket.all');
+            Route::post('/delete/{id}', 'SupportTicketController@delete')->name('admin.support.ticket.delete');
+            Route::get('/view/{id}', 'SupportTicketController@view')->name('admin.support.ticket.view');
+            Route::post('/bulk-action', 'SupportTicketController@bulk_action')->name('admin.support.ticket.bulk.action');
+            Route::post('/priority-change', 'SupportTicketController@priority_change')->name('admin.support.ticket.priority.change');
+            Route::post('/status-change', 'SupportTicketController@status_change')->name('admin.support.ticket.status.change');
+            Route::post('/send message', 'SupportTicketController@send_message')->name('admin.support.ticket.send.message');
+            
+            /*-----------------------------------
+                SUPPORT TICKET : PAGE SETTINGS ROUTES
+            ------------------------------------*/
+            Route::get('/page-settings', 'SupportTicketController@page_settings')->name('admin.support.ticket.page.settings');
+            Route::post('/page-settings', 'SupportTicketController@update_page_settings');
+        });
+
+        Route::group(['middleware' => 'adminPermissionCheck:Support Ticket Add New'], function() {
+            Route::get('/new', 'SupportTicketController@new_ticket')->name('admin.support.ticket.new');
+            Route::post('/new', 'SupportTicketController@store_ticket');
+        });
+
         /*-----------------------------------
           SUPPORT TICKET : DEPARTMENT ROUTES
         ------------------------------------*/
-        Route::group(['prefix' => 'department'],function (){
+        Route::group(['prefix' => 'department', 'middleware' => 'adminPermissionCheck:Support Ticket Department'], function (){
             Route::get('/', 'Admin\SupportDepartmentController@category')->name('admin.support.ticket.department');
             Route::post('/', 'Admin\SupportDepartmentController@new_category');
             Route::post('/delete/{id}', 'Admin\SupportDepartmentController@delete')->name('admin.support.ticket.department.delete');
@@ -705,67 +713,64 @@ Route::prefix('admin-home')->middleware(['setlang:backend'])->group(function () 
     /*======================================
         DESIGNATION ROUTES
     =======================================*/
-    Route::prefix('designation')->middleware(['adminPermissionCheck:Team Members'])->group(function () {
-        Route::get('/', 'DesignationController@index')->name('admin.designation');
-        Route::post('/', 'DesignationController@store')->name('admin.designation.store');
-        Route::post('/update', 'DesignationController@update')->name('admin.designation.update');
-        Route::post('/delete/{id}', 'DesignationController@delete')->name('admin.designation.delete');
-        Route::post('/bulk-action', 'DesignationController@bulk_action')->name('admin.designation.bulk.action');
+    Route::prefix('designation')->group(function () {
+        Route::get('/', 'DesignationController@index')->name('admin.designation')->middleware('adminPermissionCheck:Designation View');
+        Route::post('/', 'DesignationController@store')->name('admin.designation.store')->middleware('adminPermissionCheck:Designation Create');
+        Route::post('/update', 'DesignationController@update')->name('admin.designation.update')->middleware('adminPermissionCheck:Designation Edit');
+        Route::post('/delete/{id}', 'DesignationController@delete')->name('admin.designation.delete')->middleware('adminPermissionCheck:Designation Delete');
+        Route::post('/bulk-action', 'DesignationController@bulk_action')->name('admin.designation.bulk.action')->middleware('adminPermissionCheck:Designation Delete');
     });
 
-    /*==============================================
-        BOARD OF DIRECTOR ROUTES
-    ==============================================*/
-    Route::prefix('board-of-director')->middleware(['adminPermissionCheck:Team Members'])->group(function () {
-        Route::get('/', 'BoardOfDirectorController@index')->name('admin.board.of.director');
-        Route::post('/', 'BoardOfDirectorController@store');
-        Route::post('/update', 'BoardOfDirectorController@update')->name('admin.board.of.director.update');
-        Route::post('/delete/{id}', 'BoardOfDirectorController@delete')->name('admin.board.of.director.delete');
-        Route::post('/bulk-action', 'BoardOfDirectorController@bulk_action')->name('admin.board.of.director.bulk.action');
+    Route::prefix('board-of-director')->group(function () {
+        Route::get('/', 'BoardOfDirectorController@index')->name('admin.board.of.director')->middleware('adminPermissionCheck:Board of Director View');
+        Route::post('/', 'BoardOfDirectorController@store')->middleware('adminPermissionCheck:Board of Director Create');
+        Route::post('/update', 'BoardOfDirectorController@update')->name('admin.board.of.director.update')->middleware('adminPermissionCheck:Board of Director Edit');
+        Route::post('/delete/{id}', 'BoardOfDirectorController@delete')->name('admin.board.of.director.delete')->middleware('adminPermissionCheck:Board of Director Delete');
+        Route::post('/bulk-action', 'BoardOfDirectorController@bulk_action')->name('admin.board.of.director.bulk.action')->middleware('adminPermissionCheck:Board of Director Delete');
     });
 
     /*==============================================
         EXECUTIVE COMMITTEE ROUTES
     ==============================================*/
-    Route::prefix('executive-committee')->middleware(['adminPermissionCheck:Team Members'])->group(function () {
-        Route::get('/', 'ExecutiveCommitteeController@index')->name('admin.executive.committee');
-        Route::post('/', 'ExecutiveCommitteeController@store');
-        Route::post('/update', 'ExecutiveCommitteeController@update')->name('admin.executive.committee.update');
-        Route::post('/delete/{id}', 'ExecutiveCommitteeController@delete')->name('admin.executive.committee.delete');
-        Route::post('/bulk-action', 'ExecutiveCommitteeController@bulk_action')->name('admin.executive.committee.bulk.action');
+    Route::prefix('executive-committee')->group(function () {
+        Route::get('/', 'ExecutiveCommitteeController@index')->name('admin.executive.committee')->middleware('adminPermissionCheck:Executive Committee View');
+        Route::post('/', 'ExecutiveCommitteeController@store')->middleware('adminPermissionCheck:Executive Committee Create');
+        Route::post('/update', 'ExecutiveCommitteeController@update')->name('admin.executive.committee.update')->middleware('adminPermissionCheck:Executive Committee Edit');
+        Route::post('/delete/{id}', 'ExecutiveCommitteeController@delete')->name('admin.executive.committee.delete')->middleware('adminPermissionCheck:Executive Committee Delete');
+        Route::post('/bulk-action', 'ExecutiveCommitteeController@bulk_action')->name('admin.executive.committee.bulk.action')->middleware('adminPermissionCheck:Executive Committee Delete');
     });
 
     /*==============================================
         AUDIT COMMITTEE ROUTES
     ==============================================*/
-    Route::prefix('audit-committee')->middleware(['adminPermissionCheck:Team Members'])->group(function () {
-        Route::get('/', 'AuditCommitteeController@index')->name('admin.audit.committee');
-        Route::post('/', 'AuditCommitteeController@store');
-        Route::post('/update', 'AuditCommitteeController@update')->name('admin.audit.committee.update');
-        Route::post('/delete/{id}', 'AuditCommitteeController@delete')->name('admin.audit.committee.delete');
-        Route::post('/bulk-action', 'AuditCommitteeController@bulk_action')->name('admin.audit.committee.bulk.action');
+    Route::prefix('audit-committee')->group(function () {
+        Route::get('/', 'AuditCommitteeController@index')->name('admin.audit.committee')->middleware('adminPermissionCheck:Audit Committee View');
+        Route::post('/', 'AuditCommitteeController@store')->middleware('adminPermissionCheck:Audit Committee Create');
+        Route::post('/update', 'AuditCommitteeController@update')->name('admin.audit.committee.update')->middleware('adminPermissionCheck:Audit Committee Edit');
+        Route::post('/delete/{id}', 'AuditCommitteeController@delete')->name('admin.audit.committee.delete')->middleware('adminPermissionCheck:Audit Committee Delete');
+        Route::post('/bulk-action', 'AuditCommitteeController@bulk_action')->name('admin.audit.committee.bulk.action')->middleware('adminPermissionCheck:Audit Committee Delete');
     });
 
     /*==============================================
         RISK MANAGEMENT COMMITTEE ROUTES
     ==============================================*/
-    Route::prefix('risk-management-committee')->middleware(['adminPermissionCheck:Team Members'])->group(function () {
-        Route::get('/', 'RiskManagementCommitteeController@index')->name('admin.risk.management.committee');
-        Route::post('/', 'RiskManagementCommitteeController@store');
-        Route::post('/update', 'RiskManagementCommitteeController@update')->name('admin.risk.management.committee.update');
-        Route::post('/delete/{id}', 'RiskManagementCommitteeController@delete')->name('admin.risk.management.committee.delete');
-        Route::post('/bulk-action', 'RiskManagementCommitteeController@bulk_action')->name('admin.risk.management.committee.bulk.action');
+    Route::prefix('risk-management-committee')->group(function () {
+        Route::get('/', 'RiskManagementCommitteeController@index')->name('admin.risk.management.committee')->middleware('adminPermissionCheck:Risk Management Committee View');
+        Route::post('/', 'RiskManagementCommitteeController@store')->middleware('adminPermissionCheck:Risk Management Committee Create');
+        Route::post('/update', 'RiskManagementCommitteeController@update')->name('admin.risk.management.committee.update')->middleware('adminPermissionCheck:Risk Management Committee Edit');
+        Route::post('/delete/{id}', 'RiskManagementCommitteeController@delete')->name('admin.risk.management.committee.delete')->middleware('adminPermissionCheck:Risk Management Committee Delete');
+        Route::post('/bulk-action', 'RiskManagementCommitteeController@bulk_action')->name('admin.risk.management.committee.bulk.action')->middleware('adminPermissionCheck:Risk Management Committee Delete');
     });
 
     /*==============================================
         SENIOR MANAGEMENT ROUTES
     ==============================================*/
-    Route::prefix('senior-management')->middleware(['adminPermissionCheck:Team Members'])->group(function () {
-        Route::get('/', 'SeniorManagementController@index')->name('admin.senior.management');
-        Route::post('/', 'SeniorManagementController@store');
-        Route::post('/update', 'SeniorManagementController@update')->name('admin.senior.management.update');
-        Route::post('/delete/{id}', 'SeniorManagementController@delete')->name('admin.senior.management.delete');
-        Route::post('/bulk-action', 'SeniorManagementController@bulk_action')->name('admin.senior.management.bulk.action');
+    Route::prefix('senior-management')->group(function () {
+        Route::get('/', 'SeniorManagementController@index')->name('admin.senior.management')->middleware('adminPermissionCheck:Senior Management View');
+        Route::post('/', 'SeniorManagementController@store')->middleware('adminPermissionCheck:Senior Management Create');
+        Route::post('/update', 'SeniorManagementController@update')->name('admin.senior.management.update')->middleware('adminPermissionCheck:Senior Management Edit');
+        Route::post('/delete/{id}', 'SeniorManagementController@delete')->name('admin.senior.management.delete')->middleware('adminPermissionCheck:Senior Management Delete');
+        Route::post('/bulk-action', 'SeniorManagementController@bulk_action')->name('admin.senior.management.bulk.action')->middleware('adminPermissionCheck:Senior Management Delete');
     });
 
     /*======================================
@@ -1051,7 +1056,7 @@ Route::prefix('admin-home')->middleware(['setlang:backend'])->group(function () 
     /*==============================================
             MEDIA UPLOAD ROUTES
      ==============================================*/
-    Route::prefix('media-upload')->group(function () {
+    Route::prefix('media-upload')->middleware(['adminPermissionCheck:Media Manage'])->group(function () {
         Route::post('/delete', 'MediaUploadController@delete_upload_media_file')->name('admin.upload.media.file.delete');
         Route::get('/page', 'MediaUploadController@all_upload_media_images_for_page')->name('admin.upload.media.images.page');
         Route::post('/alt', 'MediaUploadController@alt_change_upload_media_file')->name('admin.upload.media.file.alt.change');
@@ -1301,7 +1306,7 @@ Route::prefix('admin-home')->middleware(['setlang:backend'])->group(function () 
     /*==============================================
        VISITOR MANAGE ROUTES
     ==============================================*/
-    Route::prefix('visitors')->group(function () {
+    Route::prefix('visitors')->middleware(['adminPermissionCheck:Visitor Log View'])->group(function () {
         Route::get('/', 'VisitorManageController@index')->name('admin.visitors');
         Route::post('/settings', 'VisitorManageController@update_settings')->name('admin.visitors.settings');
         Route::post('/delete/{id}', 'VisitorManageController@delete')->name('admin.visitors.delete');

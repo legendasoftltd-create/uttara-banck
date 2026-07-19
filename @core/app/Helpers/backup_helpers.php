@@ -373,6 +373,9 @@ function check_page_permission($page)
         $role_id = \App\Admin::where('id', $id)->first();
         $user_role = \App\AdminRole::where('id', $role_id->role)->first();
         if ($user_role){
+            if (strtolower($user_role->name) === 'super admin' || strtolower($user_role->name) === 'super_admin' || $user_role->id == 1) {
+                return true;
+            }
             $all_permission = json_decode($user_role->permission);
             if (in_array($page, $all_permission)) {
                 return true;
@@ -390,6 +393,9 @@ function check_page_permission_by_string($page)
         $role_id = \App\Admin::where('id', $id)->first();
         $user_role = \App\AdminRole::where('id', $role_id->role)->first();
         if ($user_role){
+            if (strtolower($user_role->name) === 'super admin' || strtolower($user_role->name) === 'super_admin' || $user_role->id == 1) {
+                return true;
+            }
             $all_permission = json_decode($user_role->permission);
             if (in_array($page, $all_permission)) {
                 return true;

@@ -28,7 +28,9 @@
                                 <label for="complaint_cell_phone">{{__('Phone No of Complaint Cell')}}</label>
                                 <input type="text" name="complaint_cell_phone" class="form-control" value="{{get_static_option('complaint_cell_phone')}}" id="complaint_cell_phone">
                             </div>
+                            @if(check_page_permission('complaint_edit'))
                             <button type="submit" class="btn btn-primary mt-4 pr-4 pl-4">{{__('Update Info')}}</button>
+                            @endif
                         </form>
                     </div>
                 </div>
@@ -37,7 +39,9 @@
                 <div class="card">
                     <div class="card-body">
                         <h4 class="header-title">{{__('Complaint Cell Members')}}</h4>
+                        @if(check_page_permission('complaint_create'))
                         <div class="right-cotnent margin-bottom-40"><a class="btn btn-primary" data-target="#add_member_modal" data-toggle="modal" href="#">{{__('Add New Member')}}</a></div>
+                        @endif
                         <table class="table table-default">
                             <thead>
                             <th>{{__('ID')}}</th>
@@ -60,7 +64,10 @@
                                     <td>{!! nl2br(e($data->contact)) !!}</td>
                                     <td>{{$data->sort_order}}</td>
                                     <td>
+                                        @if(check_page_permission('complaint_delete'))
                                         <x-delete-popover :url="route('admin.complaint.cell.member.delete',$data->id)"/>
+                                        @endif
+                                        @if(check_page_permission('complaint_edit'))
                                         <a href="#"
                                            data-toggle="modal"
                                            data-target="#edit_member_modal"
@@ -76,6 +83,7 @@
                                         >
                                             <i class="ti-pencil"></i>
                                         </a>
+                                        @endif
                                     </td>
                                 </tr>
                             @endforeach

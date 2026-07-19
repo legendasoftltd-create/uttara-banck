@@ -63,8 +63,10 @@
                                         >
                                             <i class="ti-eye"></i>
                                         </a>
-                                        <x-delete-popover :url="route('admin.complaints.delete',$data->id)"/>
-                                    </td>
+                                         @if(check_page_permission('complaint_delete'))
+                                         <x-delete-popover :url="route('admin.complaints.delete',$data->id)"/>
+                                         @endif
+                                     </td>
                                 </tr>
                             @empty
                                 <tr>
@@ -101,6 +103,7 @@
                         <tr><th>{{__('Details of Complaint')}}</th><td id="vc_details" style="white-space: pre-line;"></td></tr>
                         <tr><th>{{__('What they would like us to do')}}</th><td id="vc_suggestion" style="white-space: pre-line;"></td></tr>
                     </table>
+                    @if(check_page_permission('complaint_edit'))
                     <form action="{{route('admin.complaints.status.change')}}" method="post" class="form-inline">
                         @csrf
                         <input type="hidden" name="id" id="vc_status_id">
@@ -114,6 +117,7 @@
                         </div>
                         <button type="submit" class="btn btn-primary">{{__('Update Status')}}</button>
                     </form>
+                    @endif
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">{{__('Close')}}</button>

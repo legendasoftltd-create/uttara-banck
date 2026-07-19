@@ -110,14 +110,18 @@
                                                 </div>
                                             @endforeach
                                         </div>
-                                        <div class="action-wrap">
-                                            <span class="add"><i class="ti-plus"></i></span>
-                                            <span class="remove"><i class="ti-trash"></i></span>
-                                        </div>
+                                         @if(check_page_permission('gdpr_settings_edit'))
+                                         <div class="action-wrap">
+                                             <span class="add"><i class="ti-plus"></i></span>
+                                             <span class="remove"><i class="ti-trash"></i></span>
+                                         </div>
+                                         @endif
                                     </div>
                                 </div>
                             @endforeach
-                            <button type="submit" class="btn btn-primary mt-4 pr-4 pl-4">{{__('Update Changes')}}</button>
+                             @if(check_page_permission('gdpr_settings_edit'))
+                             <button type="submit" class="btn btn-primary mt-4 pr-4 pl-4">{{__('Update Changes')}}</button>
+                             @endif
                         </form>
                     </div>
                 </div>

@@ -108,7 +108,9 @@
                                 </label>
                                 <small class="info-text">{{__('No, means user must have to verify their email account in order access his/her dashboard.')}}</small>
                             </div>
+                            @if(check_page_permission('general_settings_edit'))
                             <button type="submit" class="btn btn-primary mt-4 pr-4 pl-4">{{__('Update Changes')}}</button>
+                            @endif
                         </form>
                     </div>
                 </div>

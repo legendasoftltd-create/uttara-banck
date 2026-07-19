@@ -22,7 +22,8 @@
                         <div class="header-wrap d-flex justify-content-between">
                             <div class="left-content">
                                 <h4 class="header-title">{{__('All Our Activities')}}  </h4>
-                                <div class="bulk-delete-wrapper">
+                               @if(check_page_permission_by_string('Our Activities Delete') || check_page_permission_by_string('activities_delete'))
+                               <div class="bulk-delete-wrapper">
                                     <div class="select-box-wrap">
                                         <select name="bulk_option" id="bulk_option">
                                             <option value="">{{{__('Bulk Action')}}}</option>
@@ -31,19 +32,24 @@
                                         <button class="btn btn-primary btn-sm" id="bulk_delete_btn">{{__('Apply')}}</button>
                                     </div>
                                 </div>
+                               @endif
                             </div>
+                            @if(check_page_permission_by_string('Our Activities Edit') || check_page_permission_by_string('activities_edit'))
                             <div class="right-content">
                                 <a href="{{ route('admin.advertisement.new')}}" class="btn btn-primary">{{__('Add New Activity')}}</a>
                             </div>
+                            @endif
                         </div>
                         <div class="table-wrap table-responsive">
                             <table class="table table-default">
                                 <thead>
+                                @if(check_page_permission_by_string('Our Activities Delete') || check_page_permission_by_string('activities_delete'))
                                 <th class="no-sort">
                                     <div class="mark-all-checkbox">
                                         <input type="checkbox" class="all-checkbox">
                                     </div>
                                 </th>
+                                @endif
                                 <th>{{__('ID')}}</th>
                                 <th>{{__('Title')}}</th>
                                 <th>{{__('Type')}}</th>
@@ -57,9 +63,11 @@
                                 <tbody>
                                     @foreach($all_advertisements as $data)
                                         <tr>
+                                            @if(check_page_permission_by_string('Our Activities Delete') || check_page_permission_by_string('activities_delete'))
                                             <td>
                                                 <x-bulk-delete-checkbox :id="$data->id"/>
                                             </td>
+                                            @endif
                                             <td>{{$data->id}}</td>
                                             <td>{{$data->title}}</td>
                                             <td>{{__(str_replace('_',' ',$data->type))}}</td>
@@ -92,10 +100,12 @@
                                                     <span class="alert alert-{{$type}}">{{$name}}</span>
                                             </td>
                                             <td>
-
+                                                @if(check_page_permission_by_string('Our Activities Delete') || check_page_permission_by_string('activities_delete'))
                                                   <x-delete-popover :url="route('admin.advertisement.delete',$data->id)"/>
+                                                @endif
+                                                @if(check_page_permission_by_string('Our Activities Edit') || check_page_permission_by_string('activities_edit'))
                                                   <x-edit-icon :url="route('admin.advertisement.edit',$data->id)"/>
-
+                                                @endif
                                             </td>
                                         </tr>
                                     @endforeach

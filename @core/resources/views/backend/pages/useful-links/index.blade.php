@@ -26,15 +26,20 @@
                         <div class="header-wrap d-flex justify-content-between align-items-center mb-3">
                             <h4 class="header-title">{{ __('Useful Links') }}</h4>
                             <div class="d-flex gap-2">
+                                @if(check_page_permission('useful_links_create'))
                                 <a href="{{ route('admin.useful.links.new') }}" class="btn btn-primary btn-sm">
                                     <i class="ti-plus"></i> {{ __('Add New Link') }}
                                 </a>
+                                @endif
+                                @if(check_page_permission('useful_links_settings'))
                                 <a href="{{ route('admin.useful.links.page.settings') }}" class="btn btn-secondary btn-sm">
                                     <i class="ti-settings"></i> {{ __('Settings') }}
                                 </a>
+                                @endif
                             </div>
                         </div>
 
+                        @if(check_page_permission('useful_links_delete'))
                         <div class="bulk-delete-wrapper mb-3">
                             <div class="select-box-wrap">
                                 <select name="bulk_option" id="bulk_option">
@@ -44,6 +49,7 @@
                                 <button class="btn btn-primary btn-sm" id="bulk_delete_btn">{{ __('Apply') }}</button>
                             </div>
                         </div>
+                        @endif
 
                         @if($all_links->isEmpty())
                             <div class="alert alert-info">{{ __('No useful links found. Add your first link.') }}</div>
@@ -69,9 +75,11 @@
                                         <table class="table table-default" id="link_table_{{ $lang_key }}">
                                             <thead>
                                                 <tr>
+                                                    @if(check_page_permission('useful_links_delete'))
                                                     <th class="no-sort">
                                                         <input type="checkbox" class="all-checkbox">
                                                     </th>
+                                                    @endif
                                                     <th>{{ __('Order') }}</th>
                                                     <th>{{ __('Logo') }}</th>
                                                     <th>{{ __('Title') }}</th>
@@ -83,9 +91,11 @@
                                             <tbody>
                                                 @foreach($links as $link)
                                                     <tr>
+                                                        @if(check_page_permission('useful_links_delete'))
                                                         <td>
                                                             <input type="checkbox" class="bulk-checkbox" value="{{ $link->id }}">
                                                         </td>
+                                                        @endif
                                                         <td>{{ $link->sort_order }}</td>
                                                         <td>
                                                             @if($link->image)
@@ -109,10 +119,13 @@
                                                             @endif
                                                         </td>
                                                         <td>
+                                                            @if(check_page_permission('useful_links_edit'))
                                                             <a href="{{ route('admin.useful.links.edit', $link->id) }}"
                                                                class="btn btn-primary btn-sm">
                                                                 <i class="ti-pencil"></i> {{ __('Edit') }}
                                                             </a>
+                                                            @endif
+                                                            @if(check_page_permission('useful_links_delete'))
                                                             <form action="{{ route('admin.useful.links.delete', $link->id) }}"
                                                                   method="post" style="display:inline-block;">
                                                                 @csrf
@@ -121,6 +134,7 @@
                                                                     <i class="ti-trash"></i> {{ __('Delete') }}
                                                                 </button>
                                                             </form>
+                                                            @endif
                                                         </td>
                                                     </tr>
                                                 @endforeach

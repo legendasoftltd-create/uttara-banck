@@ -32,6 +32,7 @@
                        <div class="header-wrap d-flex align-content-center justify-content-between">
                            <div class="left-wrap">
                                <h4 class="header-title">{{__('All News Items')}}</h4>
+                               @if(check_page_permission('news_delete'))
                                <div class="bulk-delete-wrapper">
                                    <div class="select-box-wrap">
                                        <select name="bulk_option" id="bulk_option">
@@ -41,10 +42,13 @@
                                        <button class="btn btn-primary btn-sm" id="bulk_delete_btn">{{__('Apply')}}</button>
                                    </div>
                                </div>
+                               @endif
                            </div>
+                           @if(check_page_permission('news_edit'))
                            <div class="right-wrap">
                                <a href="{{route('admin.news.new')}}" class="btn btn-primary">{{__('Create New News')}}</a>
                            </div>
+                           @endif
                        </div>
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
                             @php $a=0; @endphp
@@ -62,11 +66,13 @@
                                     <div class="table-wrap table-responsive">
                                     <table class="table table-default" id="all_blog_table">
                                         <thead>
+                                        @if(check_page_permission('news_delete'))
                                         <th class="no-sort">
                                             <div class="mark-all-checkbox">
                                                 <input type="checkbox" class="all-checkbox">
                                             </div>
                                         </th>
+                                        @endif
                                         <th>{{__('ID')}}</th>
                                         <th>{{__('Title')}}</th>
                                         <th>{{__('Image')}}</th>
@@ -79,11 +85,13 @@
                                         <tbody>
                                         @foreach($blog as $data)
                                             <tr>
+                                                @if(check_page_permission('news_delete'))
                                                 <td>
                                                     <div class="bulk-checkbox-wrapper">
                                                         <input type="checkbox" class="bulk-checkbox" name="bulk_delete[]" value="{{$data->id}}">
                                                     </div>
                                                 </td>
+                                                @endif
                                                 <td>{{$data->id}}</td>
                                                 <td>{{$data->title}} @if(!empty($data->breaking_news === 1))<small class="breaking-news">{{__('Breaking News')}}</small>@endif @if(!empty($data->video_url))<small class="video">{{__('Video')}}</small>@endif</td>
                                                 <td>
@@ -115,19 +123,25 @@
                                                 </td>
                                                 <td>{{date_format($data->created_at,'d M Y')}}</td>
                                                 <td>
+                                                    @if(check_page_permission('news_delete'))
                                                     <x-delete-popover :url="route('admin.news.delete',$data->id)"/>
+                                                    @endif
                                                    
+                                                    @if(check_page_permission('news_edit'))
                                                     <a class="btn btn-xs btn-primary btn-xs mb-3 mr-1" href="{{route('admin.news.edit',$data->id)}}">
                                                         <i class="ti-pencil"></i>
                                                     </a>
+                                                    @endif
                                                     <a class="btn btn-xs btn-primary btn-xs mb-3 mr-1" target="_blank" href="{{route('frontend.news.single', $data->slug)}}">
                                                         <i class="ti-eye"></i>
                                                     </a>
+                                                    @if(check_page_permission('news_edit'))
                                                     <form action="{{route('admin.news.clone')}}" method="post" style="display: inline-block">
                                                         @csrf
                                                         <input type="hidden" name="item_id" value="{{$data->id}}">
                                                         <button type="submit" title="clone this to new draft" class="btn btn-xs btn-secondary btn-sm mb-3 mr-1"><i class="far fa-copy"></i></button>
                                                     </form>
+                                                    @endif
                                                 </td>
                                             </tr>
                                         @endforeach

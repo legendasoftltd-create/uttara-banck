@@ -27,11 +27,13 @@
                                 <div class="form-group">
                                     <input type="hidden" class="form-control site_url_data" name="site_url" value="{{$url}}">
                                 </div>
-                                <div class="form-group">
-                                    <button class="btn btn-primary my-3 sitemap_button " id="custom">{{__('Generate Now')}}</button>
-                                    <br>
-                                   <small class="text-danger">{{__('It will take time to generate sitemap..Please increase your server executing time over ( 300 seconds )')}}</small>
-                                </div>
+                                 @if(check_page_permission('sitemap_settings_edit'))
+                                 <div class="form-group">
+                                     <button class="btn btn-primary my-3 sitemap_button " id="custom">{{__('Generate Now')}}</button>
+                                     <br>
+                                    <small class="text-danger">{{__('It will take time to generate sitemap..Please increase your server executing time over ( 300 seconds )')}}</small>
+                                 </div>
+                                 @endif
                         </form>
                         <table class="table table-default">
                             <thead>
@@ -47,14 +49,16 @@
                                     <td>{{date('j F Y - h:m:s',filectime($data)) }}</td>
                                     <td>@if(trim(formatBytes(filesize($data))) === 'NAN') {{__('0 Byte')}} @else {{formatBytes(filesize($data))}} @endif</td>
                                     <td>
-                                        <a class="btn btn-xs text-white btn-danger mb-3 mr-1 delete_sitemap_xml_file_btn">
-                                            <i class="ti-trash"></i>
-                                        </a>
-                                        <form method='post' class="d-none delete_sitemap_file_form"  action='{{route("admin.general.sitemap.settings.delete")}}'>
-                                               @csrf
-                                            <input type='hidden' name='sitemap_name' value='{{$data}}'>
-                                            <input type='submit' class='btn btn-danger btn-xs' value='{{__('Yes, Please')}}'>
-                                        </form>
+                                         @if(check_page_permission('sitemap_settings_edit'))
+                                         <a class="btn btn-xs text-white btn-danger mb-3 mr-1 delete_sitemap_xml_file_btn">
+                                             <i class="ti-trash"></i>
+                                         </a>
+                                         <form method='post' class="d-none delete_sitemap_file_form"  action='{{route("admin.general.sitemap.settings.delete")}}'>
+                                                @csrf
+                                             <input type='hidden' name='sitemap_name' value='{{$data}}'>
+                                             <input type='submit' class='btn btn-danger btn-xs' value='{{__('Yes, Please')}}'>
+                                         </form>
+                                         @endif
                                         <a href="{{asset('sitemap')}}/{{basename($data)}}" download class="btn btn-primary btn-xs mb-3 mr-1"> <i class="fa fa-download"></i> </a>
                                     </td>
                                 </tr>

@@ -35,6 +35,7 @@
                     <div class="card-body">
                         <h4 class="header-title">{{__('Service Items')}}</h4>
 
+                        @if(check_page_permission('services_delete'))
                         <div class="bulk-delete-wrapper">
                             <div class="select-box-wrap">
                                 <select name="bulk_option" id="bulk_option">
@@ -44,6 +45,7 @@
                                 <button class="btn btn-primary btn-sm" id="bulk_delete_btn">{{__('Apply')}}</button>
                             </div>
                         </div>
+                        @endif
 
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
                             @php $a=0; @endphp
@@ -61,11 +63,13 @@
                                     <div class="table-wrap table-responsive">
                                         <table class="table table-default">
                                         <thead>
+                                        @if(check_page_permission('services_delete'))
                                         <th class="no-sort">
                                             <div class="mark-all-checkbox">
                                                 <input type="checkbox" class="all-checkbox">
                                             </div>
                                         </th>
+                                        @endif
                                         <th>{{__('ID')}}</th>
                                         <th>{{__('Title')}}</th>
                                         <th>{{__('Status')}}</th>
@@ -80,11 +84,13 @@
                                         <tbody>
                                         @foreach($service as $data)
                                             <tr>
+                                                @if(check_page_permission('services_delete'))
                                                 <td>
                                                     <div class="bulk-checkbox-wrapper">
                                                         <input type="checkbox" class="bulk-checkbox" name="bulk_delete[]" value="{{$data->id}}">
                                                     </div>
                                                 </td>
+                                                @endif
                                                 <td>{{$data->id}}</td>
                                                 <td>{{$data->title}}</td>
                                                 <td>
@@ -122,19 +128,25 @@
                                                 <!-- <td>{{$data->sr_order}}</td> -->
                                                 <td>{{date_format($data->created_at,'d M Y')}}</td>
                                                 <td>
+                                                     @if(check_page_permission('services_delete'))
                                                      <x-delete-popover :url="route('admin.services.delete',$data->id)"/>
-                                                    <a href="{{route('admin.services.edit',$data->id)}}" class="btn btn-xs btn-primary btn-xs mb-3 mr-1">
-                                                        <i class="ti-pencil"></i>
-                                                    </a>
-                                                    <br>
-                                                    <a target="_blank" href="{{route('frontend.services.single',$data->slug)}}" class="btn btn-xs btn-info btn-sm mb-3 mr-1">
-                                                        <i class="ti-eye"></i>
-                                                    </a>
-                                                    <form action="{{route('admin.services.clone')}}" method="post" style="display: inline-block">
-                                                        @csrf
-                                                        <input type="hidden" name="item_id" value="{{$data->id}}">
-                                                        <button type="submit" title="clone this to new draft" class="btn btn-xs btn-secondary btn-sm mb-3 mr-1"><i class="far fa-copy"></i></button>
-                                                    </form>
+                                                     @endif
+                                                     @if(check_page_permission('services_edit'))
+                                                     <a href="{{route('admin.services.edit',$data->id)}}" class="btn btn-xs btn-primary btn-xs mb-3 mr-1">
+                                                         <i class="ti-pencil"></i>
+                                                     </a>
+                                                     @endif
+                                                     <br>
+                                                     <a target="_blank" href="{{route('frontend.services.single',$data->slug)}}" class="btn btn-xs btn-info btn-sm mb-3 mr-1">
+                                                         <i class="ti-eye"></i>
+                                                     </a>
+                                                     @if(check_page_permission('services_edit'))
+                                                     <form action="{{route('admin.services.clone')}}" method="post" style="display: inline-block">
+                                                         @csrf
+                                                         <input type="hidden" name="item_id" value="{{$data->id}}">
+                                                         <button type="submit" title="clone this to new draft" class="btn btn-xs btn-secondary btn-sm mb-3 mr-1"><i class="far fa-copy"></i></button>
+                                                     </form>
+                                                     @endif
                                                 </td>
                                             </tr>
                                         @endforeach

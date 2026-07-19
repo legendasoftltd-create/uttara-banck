@@ -23,11 +23,14 @@
                     <div class="card-body">
                         <div class="header-wrap d-flex justify-content-between align-items-center mb-3">
                             <h4 class="header-title">{{ __('All Tenders') }}</h4>
+                            @if(check_page_permission('tender_create'))
                             <a href="{{ route('admin.tender.new') }}" class="btn btn-primary btn-sm">
                                 <i class="ti-plus"></i> {{ __('Add New Tender') }}
                             </a>
+                            @endif
                         </div>
 
+                        @if(check_page_permission('tender_delete'))
                         <div class="bulk-delete-wrapper mb-3">
                             <div class="select-box-wrap">
                                 <select name="bulk_option" id="bulk_option">
@@ -37,6 +40,7 @@
                                 <button class="btn btn-primary btn-sm" id="bulk_delete_btn">{{ __('Apply') }}</button>
                             </div>
                         </div>
+                        @endif
 
                         @if($all_tenders->isEmpty())
                             <div class="alert alert-info">{{ __('No tenders found.') }}</div>
@@ -62,11 +66,13 @@
                                         <table class="table table-default" id="tender_table_{{ $lang_key }}">
                                             <thead>
                                                 <tr>
+                                                    @if(check_page_permission('tender_delete'))
                                                     <th class="no-sort">
                                                         <div class="mark-all-checkbox">
                                                             <input type="checkbox" class="all-checkbox">
                                                         </div>
                                                     </th>
+                                                    @endif
                                                     <th>{{ __('ID') }}</th>
                                                     <th>{{ __('Title') }}</th>
                                                     <th>{{ __('File') }}</th>
@@ -79,11 +85,13 @@
                                             <tbody>
                                                 @foreach($tenders as $tender)
                                                     <tr>
+                                                        @if(check_page_permission('tender_delete'))
                                                         <td>
                                                             <div class="bulk-checkbox-wrapper">
                                                                 <input type="checkbox" class="bulk-checkbox" value="{{ $tender->id }}">
                                                             </div>
                                                         </td>
+                                                        @endif
                                                         <td>{{ $tender->id }}</td>
                                                         <td style="max-width:300px;">{{ Str::limit($tender->title, 200) }}</td>
                                                         <td>
@@ -114,10 +122,13 @@
                                                             @endif
                                                         </td>
                                                         <td>
+                                                            @if(check_page_permission('tender_edit'))
                                                             <a href="{{ route('admin.tender.edit', $tender->id) }}"
                                                                class="btn btn-primary btn-sm">
                                                                 <i class="ti-pencil"></i> {{ __('Edit') }}
                                                             </a>
+                                                            @endif
+                                                            @if(check_page_permission('tender_delete'))
                                                             <form action="{{ route('admin.tender.delete', $tender->id) }}"
                                                                   method="post" style="display:inline-block;">
                                                                 @csrf
@@ -126,6 +137,7 @@
                                                                     <i class="ti-trash"></i> {{ __('Delete') }}
                                                                 </button>
                                                             </form>
+                                                            @endif
                                                         </td>
                                                     </tr>
                                                 @endforeach

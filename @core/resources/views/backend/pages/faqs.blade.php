@@ -37,10 +37,11 @@
                 @endif
             </div>
 
-            <div class="col-lg-6 mt-5">
+            <div class="@if(check_page_permission('faq_create')) col-lg-6 @else col-lg-12 @endif mt-5">
                 <div class="card">
                     <div class="card-body">
                         <h4 class="header-title">{{__('Faq Items')}}</h4>
+                        @if(check_page_permission('faq_delete'))
                         <div class="bulk-delete-wrapper">
                             <div class="select-box-wrap">
                                 <select name="bulk_option" id="bulk_option">
@@ -50,6 +51,7 @@
                                 <button class="btn btn-primary btn-sm" id="bulk_delete_btn">{{__('Apply')}}</button>
                             </div>
                         </div>
+                        @endif
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
                             @php $a=0; @endphp
                             @foreach($all_faqs as $key => $blog)
@@ -66,11 +68,13 @@
                                     <div class="table-wrap table-responsive">
                                         <table class="table table-default">
                                         <thead>
+                                        @if(check_page_permission('faq_delete'))
                                         <th class="no-sort">
                                             <div class="mark-all-checkbox">
                                                 <input type="checkbox" class="all-checkbox">
                                             </div>
                                         </th>
+                                        @endif
                                         <th>{{__('ID')}}</th>
                                         <th>{{__('Title')}}</th>
                                         <th>{{__('Status')}}</th>
@@ -79,16 +83,21 @@
                                         <tbody>
                                         @foreach($faq as $data)
                                             <tr>
+                                                @if(check_page_permission('faq_delete'))
                                                 <td>
                                                     <div class="bulk-checkbox-wrapper">
                                                         <input type="checkbox" class="bulk-checkbox" name="bulk_delete[]" value="{{$data->id}}">
                                                     </div>
                                                 </td>
+                                                @endif
                                                 <td>{{$data->id}}</td>
                                                 <td>{{$data->title}}</td>
                                                 <td>@if($data->status == 'publish') <span class="alert alert-success">{{__('Publish')}}</span> @else <span class="alert alert-warning">{{__('Draft')}}</span> @endif</td>
                                                 <td>
+                                                    @if(check_page_permission('faq_delete'))
                                                     <x-delete-popover :url="route('admin.faq.delete',$data->id)"/>
+                                                    @endif
+                                                    @if(check_page_permission('faq_edit'))
                                                     <a href="#"
                                                        data-toggle="modal"
                                                        data-target="#faq_item_edit_modal"
@@ -102,11 +111,14 @@
                                                     >
                                                         <i class="ti-pencil"></i>
                                                     </a>
+                                                    @endif
+                                                    @if(check_page_permission('faq_create'))
                                                     <form action="{{route('admin.faq.clone')}}" method="post" style="display: inline-block">
                                                         @csrf
                                                         <input type="hidden" name="item_id" value="{{$data->id}}">
                                                         <button type="submit" title="clone this to new draft" class="btn btn-xs btn-secondary btn-sm mb-3 mr-1"><i class="far fa-copy"></i></button>
                                                     </form>
+                                                    @endif
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -121,6 +133,7 @@
                     </div>
                 </div>
             </div>
+            @if(check_page_permission('faq_create'))
             <div class="col-lg-6 mt-5">
                 <div class="card">
                     <div class="card-body">
@@ -163,6 +176,7 @@
                     </div>
                 </div>
             </div>
+            @endif
         </div>
     </div>
 

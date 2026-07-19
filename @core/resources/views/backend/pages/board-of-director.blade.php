@@ -40,10 +40,11 @@
             </div>
 
             {{-- Member List --}}
-            <div class="col-lg-8 mt-5">
+            <div class="@if(check_page_permission_by_string('Board of Director Create') || check_page_permission_by_string('Team Members')) col-lg-8 @else col-lg-12 @endif mt-5">
                 <div class="card">
                     <div class="card-body">
                         <h4 class="header-title">{{__('Board of Director Members')}}</h4>
+                        @if(check_page_permission_by_string('Board of Director Delete') || check_page_permission_by_string('Team Members'))
                         <div class="bulk-delete-wrapper">
                             <div class="select-box-wrap">
                                 <select name="bulk_option" id="bulk_option">
@@ -53,6 +54,7 @@
                                 <button class="btn btn-primary btn-sm" id="bulk_delete_btn">{{__('Apply')}}</button>
                             </div>
                         </div>
+                        @endif
 
                         {{-- Language Tabs --}}
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -75,11 +77,13 @@
                                     <div class="table-wrap table-responsive">
                                         <table class="table table-default">
                                             <thead>
+                                                @if(check_page_permission_by_string('Board of Director Delete') || check_page_permission_by_string('Team Members'))
                                                 <th class="no-sort">
                                                     <div class="mark-all-checkbox">
                                                         <input type="checkbox" class="all-checkbox">
                                                     </div>
                                                 </th>
+                                                @endif
                                                 <th>{{__('ID')}}</th>
                                                 <th>{{__('Image')}}</th>
                                                 <th>{{__('Name')}}</th>
@@ -91,11 +95,13 @@
                                             @foreach($group->sortBy(function($m){ return $m->order_by ?: 999999; }) as $data)
                                                 @php $img_url = ''; @endphp
                                                 <tr>
+                                                    @if(check_page_permission_by_string('Board of Director Delete') || check_page_permission_by_string('Team Members'))
                                                     <td>
                                                         <div class="bulk-checkbox-wrapper">
                                                             <input type="checkbox" class="bulk-checkbox" name="bulk_delete[]" value="{{$data->id}}">
                                                         </div>
                                                     </td>
+                                                    @endif
                                                     <td>{{$data->id}}</td>
                                                     <td>
                                                         @php $brand_img = get_attachment_image_by_id($data->image, null, true); @endphp
@@ -114,28 +120,32 @@
                                                     <td>{{$data->designation}}</td>
                                                     <td>{{$data->order_by ?? 0}}</td>
                                                     <td>
-                                                        <x-delete-popover :url="route('admin.board.of.director.delete', $data->id)"/>
-                                                        <a href="#"
-                                                           data-toggle="modal"
-                                                           data-target="#bod_edit_modal"
-                                                           class="btn btn-primary btn-xs mb-3 mr-1 bod_edit_btn"
-                                                           data-id="{{$data->id}}"
-                                                           data-action="{{route('admin.board.of.director.update')}}"
-                                                           data-name="{{$data->name}}"
-                                                           data-imageid="{{$data->image}}"
-                                                           data-image="{{$img_url}}"
-                                                           data-designation="{{$data->designation}}"
-                                                           data-description="{{$data->description}}"
-                                                           data-lang="{{$data->lang}}"
-                                                           data-iconOne="{{$data->icon_one}}"
-                                                           data-iconTwo="{{$data->icon_two}}"
-                                                           data-iconThree="{{$data->icon_three}}"
-                                                           data-iconOneUrl="{{$data->icon_one_url}}"
-                                                           data-iconTwoUrl="{{$data->icon_two_url}}"
-                                                           data-iconThreeUrl="{{$data->icon_three_url}}"
-                                                           data-order_by="{{$data->order_by}}">
-                                                            <i class="ti-pencil"></i>
-                                                        </a>
+                                                        @if(check_page_permission_by_string('Board of Director Delete') || check_page_permission_by_string('Team Members'))
+                                                            <x-delete-popover :url="route('admin.board.of.director.delete', $data->id)"/>
+                                                        @endif
+                                                        @if(check_page_permission_by_string('Board of Director Edit') || check_page_permission_by_string('Team Members'))
+                                                            <a href="#"
+                                                               data-toggle="modal"
+                                                               data-target="#bod_edit_modal"
+                                                               class="btn btn-primary btn-xs mb-3 mr-1 bod_edit_btn"
+                                                               data-id="{{$data->id}}"
+                                                               data-action="{{route('admin.board.of.director.update')}}"
+                                                               data-name="{{$data->name}}"
+                                                               data-imageid="{{$data->image}}"
+                                                               data-image="{{$img_url}}"
+                                                               data-designation="{{$data->designation}}"
+                                                               data-description="{{$data->description}}"
+                                                               data-lang="{{$data->lang}}"
+                                                               data-iconOne="{{$data->icon_one}}"
+                                                               data-iconTwo="{{$data->icon_two}}"
+                                                               data-iconThree="{{$data->icon_three}}"
+                                                               data-iconOneUrl="{{$data->icon_one_url}}"
+                                                               data-iconTwoUrl="{{$data->icon_two_url}}"
+                                                               data-iconThreeUrl="{{$data->icon_three_url}}"
+                                                               data-order_by="{{$data->order_by}}">
+                                                                <i class="ti-pencil"></i>
+                                                            </a>
+                                                        @endif
                                                     </td>
                                                 </tr>
                                             @endforeach
@@ -154,6 +164,7 @@
                 </div>
             </div>
 
+            @if(check_page_permission_by_string('Board of Director Create') || check_page_permission_by_string('Team Members'))
             {{-- Add Form --}}
             <div class="col-lg-4 mt-5">
                 <div class="card">
@@ -270,6 +281,7 @@
                     </div>
                 </div>
             </div>
+            @endif
         </div>
     </div>
 

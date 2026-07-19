@@ -54,7 +54,9 @@
                                 <textarea name="tawk_api_key" id="tawk_api_key" class="form-control" cols="30" rows="5">{{get_static_option('tawk_api_key')}}</textarea>
                             </div>
 
+                            @if(check_page_permission('third_party_scripts_edit'))
                             <button type="submit" class="btn btn-primary mt-4 pr-4 pl-4">{{__('Update Changes')}}</button>
+                            @endif
                         </form>
                     </div>
                 </div>

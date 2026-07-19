@@ -19,7 +19,9 @@
                             <x-media-upload :name="'site_logo'" :dimentions="'160x50'" :title="__('Site Logo')"/>
                             <x-media-upload :name="'site_white_logo'" :dimentions="'160x50'" :title="__('White Site Logo')"/>
                             <x-media-upload :name="'site_favicon'" :dimentions="'40x40'" :title="__('Favicon')"/>
+                            @if(check_page_permission('site_identity_edit'))
                             <button type="submit" class="btn btn-primary mt-4 pr-4 pl-4">{{__('Update Changes')}}</button>
+                            @endif
                         </form>
                     </div>
                 </div>

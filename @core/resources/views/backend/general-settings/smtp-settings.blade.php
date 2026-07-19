@@ -50,11 +50,14 @@
                                     <option value="tls" @if(get_static_option('site_smtp_mail_encryption') == 'tls') selected @endif>{{__('TLS')}}</option>
                                 </select>
                             </div>
+                            @if(check_page_permission('smtp_settings_edit'))
                             <button type="submit" class="btn btn-primary mt-4 pr-4 pl-4">{{__('Update SMTP Settings')}}</button>
+                            @endif
                         </form>
                     </div>
                 </div>
             </div>
+            @if(check_page_permission('smtp_settings_edit'))
             <div class="col-6 mt-5">
                 <div class="card">
                     <div class="card-body">
@@ -78,6 +81,7 @@
                     </div>
                 </div>
             </div>
+            @endif
         </div>
     </div>
 @endsection

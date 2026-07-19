@@ -29,6 +29,7 @@
                 <div class="card">
                     <div class="card-body">
                         <h4 class="header-title">{{__('All Pages')}}</h4>
+                        @if(check_page_permission_by_string('Pages Delete') || check_page_permission_by_string('Pages Manage'))
                         <div class="bulk-delete-wrapper">
                             <div class="select-box-wrap">
                                 <select name="bulk_option" id="bulk_option">
@@ -38,6 +39,7 @@
                                 <button class="btn btn-primary btn-sm" id="bulk_delete_btn">{{__('Apply')}}</button>
                             </div>
                         </div>
+                        @endif
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
                             @php $a=0; @endphp
                             @foreach($all_page as $key => $page)
@@ -84,14 +86,18 @@
                                                     @endif
                                                 </td>
                                                 <td>
-                                                    <x-delete-popover :url="route('admin.page.delete',$data->id)"/>
-                                                    <a class="btn btn-xs btn-primary btn-sm mb-3 mr-1" href="{{route('admin.page.edit',$data->id)}}">
-                                                        <i class="ti-pencil"></i>
-                                                    </a>
+                                                    @if(check_page_permission_by_string('Pages Delete') || check_page_permission_by_string('Pages Manage'))
+                                                        <x-delete-popover :url="route('admin.page.delete',$data->id)"/>
+                                                    @endif
+                                                    @if(check_page_permission_by_string('Pages Edit') || check_page_permission_by_string('Pages Manage'))
+                                                        <a class="btn btn-xs btn-primary btn-sm mb-3 mr-1" href="{{route('admin.page.edit',$data->id)}}">
+                                                            <i class="ti-pencil"></i>
+                                                        </a>
+                                                    @endif
                                                     <a class="btn btn-xs btn-info btn-sm mb-3 mr-1" target="_blank" href="{{route('frontend.dynamic.page',$data->slug)}}">
                                                         <i class="ti-eye"></i>
                                                     </a>
-                                                    @if(!empty($data->page_builder_status))
+                                                    @if(!empty($data->page_builder_status) && (check_page_permission_by_string('Pages Edit') || check_page_permission_by_string('Pages Manage')))
                                                         <a href="{{route('admin.dynamic.page.builder',['type' =>'dynamic-page','id' => $data->id])}}" target="_blank" class="btn btn-xs btn-secondary mb-3 mr-1">{{__('Open Page Builder')}}</a>
                                                     @endif
                                                 </td>

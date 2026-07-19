@@ -60,7 +60,9 @@
                 <div class="card">
                     <div class="card-body">
                         <h4 class="header-title">{{__('Social Icons')}}</h4>
+                        @if(check_page_permission('topbar_settings_edit'))
                         <div class="right-cotnent margin-bottom-40"><a class="btn btn-primary" data-target="#add_social_icon" data-toggle="modal" href="#">{{__('Add New Social Item')}}</a></div>
+                        @endif
                         <table class="table table-default">
                             <thead>
                             <th>{{__('ID')}}</th>
@@ -77,7 +79,10 @@
                                     <td>{{$data->name}}</td>
                                     <td>{{$data->url}}</td>
                                     <td>
+                                        @if(check_page_permission('topbar_settings_delete'))
                                         <x-delete-popover :url="route('admin.delete.social.item',$data->id)"/>
+                                        @endif
+                                        @if(check_page_permission('topbar_settings_edit'))
                                         <a href="#"
                                            data-toggle="modal"
                                            data-target="#social_item_edit_modal"
@@ -89,6 +94,7 @@
                                         >
                                             <i class="ti-pencil"></i>
                                         </a>
+                                        @endif
                                     </td>
                                 </tr>
                             @endforeach
@@ -153,14 +159,18 @@
                                             </div>
 
                                         </div>
+                                        @if(check_page_permission('topbar_settings_edit'))
                                         <div class="action-wrap">
                                             <span class="add"><i class="ti-plus"></i></span>
                                             <span class="remove"><i class="ti-trash"></i></span>
                                         </div>
+                                        @endif
                                     </div>
                                 </div>
                             @endforeach
+                            @if(check_page_permission('topbar_settings_edit'))
                             <button type="submit" class="btn btn-primary mt-4 pr-4 pl-4">{{__('Update Settings')}}</button>
+                            @endif
                         </form>
                     </div>
                 </div>

@@ -129,6 +129,7 @@
                                     @endforelse
                                 </div>
                             </div>
+                            @if(check_page_permission('support_ticket_edit'))
                             <div class="reply-message-wrap ">
                                 <h5 class="title">{{__('Replay To Message')}}</h5>
                                <x-error-msg/>
@@ -154,6 +155,7 @@
                                     <button class="btn-primary btn btn-md" type="submit">{{__('Send Message')}}</button>
                                 </form>
                             </div>
+                            @endif
                         </div>
                     </div>
                 </div>
