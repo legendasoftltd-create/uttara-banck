@@ -100,7 +100,7 @@ class FrontendController extends Controller
         $all_service = Services::where('status', 'publish')->where(['lang' => $lang, 'status' => 'publish'])->orderBy('sr_order', 'ASC')->take(10)->get();
         $all_testimonial = Testimonial::where('status', 'publish')->where(['lang' => $lang, 'status' => 'publish'])->orderBy('id', 'desc')->get();
         $all_price_plan = PricePlan::where('status', 'publish')->where(['lang' => $lang, 'status' => 'publish'])->orderBy('id', 'desc')->take(get_static_option('home_page_01_price_plan_section_items'))->get();
-        $all_team_members = TeamMember::where('lang', $lang)
+        $all_team_members = TeamMember::where('status', 'publish')->where('lang', $lang)
             ->orderByRaw('CASE WHEN order_by IS NULL OR order_by = 0 THEN 999999 ELSE order_by END ASC')
             ->orderBy('id', 'asc')
             ->take(get_static_option('home_page_01_team_member_items'))
@@ -817,7 +817,7 @@ ITEM;
         $default_lang = Language::where('default', 1)->first();
         $lang = !empty(session()->get('lang')) ? session()->get('lang') : $default_lang->slug;
         $all_brand_logo = Brand::all();
-        $all_team_members = TeamMember::where('lang', $lang)
+        $all_team_members = TeamMember::where('status', 'publish')->where('lang', $lang)
             ->orderByRaw('CASE WHEN order_by IS NULL OR order_by = 0 THEN 999999 ELSE order_by END ASC')
             ->orderBy('id', 'asc')
             ->take(get_static_option('about_page_team_member_item'))
@@ -926,7 +926,7 @@ ITEM;
             $active_type = array_key_first($team_types);
         }
 
-        $members = TeamMember::where('lang', $lang)
+        $members = TeamMember::where('status', 'publish')->where('lang', $lang)
             ->orderByRaw('CASE WHEN order_by IS NULL OR order_by = 0 THEN 999999 ELSE order_by END ASC')
             ->orderBy('id', 'asc')
             ->get()

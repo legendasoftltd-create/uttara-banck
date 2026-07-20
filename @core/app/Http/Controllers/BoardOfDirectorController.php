@@ -52,6 +52,7 @@ class BoardOfDirectorController extends Controller
             'icon_two_url'   => 'nullable|string|max:191',
             'icon_three_url' => 'nullable|string|max:191',
             'order_by'       => 'nullable|integer',
+            'status'         => 'nullable|string|max:191',
         ]);
 
         // Always assign board_of_directors type
@@ -78,6 +79,7 @@ class BoardOfDirectorController extends Controller
             'icon_two_url'   => 'nullable|string|max:191',
             'icon_three_url' => 'nullable|string|max:191',
             'order_by'       => 'nullable|integer',
+            'status'         => 'nullable|string|max:191',
         ]);
 
         $data = $request->except('id');

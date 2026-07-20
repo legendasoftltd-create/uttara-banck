@@ -67,6 +67,7 @@ abstract class CommitteeMemberBaseController extends Controller
             'icon_two_url'   => 'nullable|string|max:191',
             'icon_three_url' => 'nullable|string|max:191',
             'order_by'       => 'nullable|integer',
+            'status'         => 'nullable|string|max:191',
         ]);
 
         $data = $request->all();
@@ -95,6 +96,7 @@ abstract class CommitteeMemberBaseController extends Controller
             'icon_two_url'   => 'nullable|string|max:191',
             'icon_three_url' => 'nullable|string|max:191',
             'order_by'       => 'nullable|integer',
+            'status'         => 'nullable|string|max:191',
         ]);
 
         $data = $request->except('id');

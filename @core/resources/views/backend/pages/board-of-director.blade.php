@@ -89,6 +89,7 @@
                                                 <th>{{__('Name')}}</th>
                                                 <th>{{__('Designation')}}</th>
                                                 <th>{{__('Order')}}</th>
+                                                <th>{{__('Status')}}</th>
                                                 <th>{{__('Action')}}</th>
                                             </thead>
                                             <tbody>
@@ -120,6 +121,13 @@
                                                     <td>{{$data->designation}}</td>
                                                     <td>{{$data->order_by ?? 0}}</td>
                                                     <td>
+                                                        @if($data->status === 'publish')
+                                                            <span class="badge badge-success">{{__('Publish')}}</span>
+                                                        @else
+                                                            <span class="badge badge-warning">{{__('Draft')}}</span>
+                                                        @endif
+                                                    </td>
+                                                    <td>
                                                         @if(check_page_permission_by_string('Board of Director Delete') || check_page_permission_by_string('Team Members'))
                                                             <x-delete-popover :url="route('admin.board.of.director.delete', $data->id)"/>
                                                         @endif
@@ -142,6 +150,7 @@
                                                                data-iconOneUrl="{{$data->icon_one_url}}"
                                                                data-iconTwoUrl="{{$data->icon_two_url}}"
                                                                data-iconThreeUrl="{{$data->icon_three_url}}"
+                                                               data-status="{{$data->status}}"
                                                                data-order_by="{{$data->order_by}}">
                                                                 <i class="ti-pencil"></i>
                                                             </a>
@@ -203,6 +212,13 @@
                                     @for($o = 1; $o <= 100; $o++)
                                         <option value="{{$o}}">{{$o}}</option>
                                     @endfor
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="bod_status">{{__('Status')}}</label>
+                                <select name="status" id="bod_status" class="form-control">
+                                    <option value="publish">{{__('Publish')}}</option>
+                                    <option value="draft">{{__('Draft')}}</option>
                                 </select>
                             </div>
                             <div class="form-group">
@@ -298,7 +314,7 @@
                         @csrf
                         <input type="hidden" name="id" id="bod_edit_id">
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label>{{__('Language')}}</label>
                                     <select name="lang" class="form-control" id="bod_edit_lang">
@@ -308,7 +324,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label>{{__('Order By')}}</label>
                                     <select name="order_by" id="bod_edit_order_by" class="form-control">
@@ -316,6 +332,15 @@
                                         @for($o = 1; $o <= 100; $o++)
                                             <option value="{{$o}}">{{$o}}</option>
                                         @endfor
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="bod_edit_status">{{__('Status')}}</label>
+                                    <select name="status" id="bod_edit_status" class="form-control">
+                                        <option value="publish">{{__('Publish')}}</option>
+                                        <option value="draft">{{__('Draft')}}</option>
                                     </select>
                                 </div>
                             </div>
@@ -471,6 +496,7 @@
                 form.find('#bod_edit_icon_two_url').val(el.data('icontwourl'));
                 form.find('#bod_edit_icon_three_url').val(el.data('iconthreeurl'));
                 form.find('#bod_edit_lang option[value="' + el.data('lang') + '"]').attr('selected', true);
+                form.find('#bod_edit_status').val(el.data('status'));
 
                 // Icon pickers
                 form.find('.edit_icon_one .icp-dd').attr('data-selected', el.data('iconone'));
