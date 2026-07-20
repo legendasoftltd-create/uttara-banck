@@ -423,53 +423,51 @@
                         </div>
                         <div class="form-group">
                             <label for="edit_permission"><strong>{{__('Permissions')}}</strong></label>
-                            <div class="row">
-                                @foreach($permissions_by_module as $moduleName => $perms)
-                                    <div class="col-md-6 mb-3">
-                                        <div class="card border-light shadow-sm">
-                                            <div class="card-header bg-light py-2 d-flex justify-content-between align-items-center">
-                                                <span class="mb-0 text-primary font-weight-bold" style="font-size: 13px;">{{ $moduleName }}</span>
-                                                <button type="button" class="btn btn-xs btn-outline-primary select-all-module" style="padding: 1px 5px; font-size: 10px;">{{ __('Check All') }}</button>
-                                            </div>
-                                            <div class="card-body py-2 px-3">
-                                                <div class="row">
-                                                    @foreach($perms as $label => $value)
-                                                        @if(is_array($value))
-                                                            <div class="col-12 mt-2 mb-2">
-                                                                <div class="card border-light bg-light shadow-none">
-                                                                    <div class="card-header py-1 px-3 d-flex justify-content-between align-items-center">
-                                                                        <span class="mb-0 text-secondary font-weight-bold" style="font-size: 12px;">{{ $label }}</span>
-                                                                        <button type="button" class="btn btn-xs btn-outline-secondary select-all-submodule" style="padding: 0px 4px; font-size: 9px;">{{ __('Check All') }}</button>
-                                                                    </div>
-                                                                    <div class="card-body py-2 px-3">
-                                                                        <div class="row">
-                                                                            @foreach($value as $subLabel => $subValue)
-                                                                                <div class="col-12 py-1">
-                                                                                     <div class="custom-control custom-checkbox">
-                                                                                         <input type="checkbox" name="permission[]" value="{{ $subValue }}" class="custom-control-input perm-checkbox sub-perm-checkbox" id="edit_perm_{{ $subValue }}_{{ \Illuminate\Support\Str::slug($subLabel) }}">
-                                                                                         <label class="custom-control-label text-secondary" for="edit_perm_{{ $subValue }}_{{ \Illuminate\Support\Str::slug($subLabel) }}" style="font-size: 12px; font-weight: normal; cursor: pointer;">{{ $subLabel }}</label>
-                                                                                     </div>
-                                                                                </div>
-                                                                            @endforeach
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        @else
-                                                            <div class="col-12 py-1">
-                                                                 <div class="custom-control custom-checkbox">
-                                                                     <input type="checkbox" name="permission[]" value="{{ $value }}" class="custom-control-input perm-checkbox" id="edit_perm_{{ $value }}_{{ \Illuminate\Support\Str::slug($label) }}">
-                                                                     <label class="custom-control-label text-secondary" for="edit_perm_{{ $value }}_{{ \Illuminate\Support\Str::slug($label) }}" style="font-size: 12px; font-weight: normal; cursor: pointer;">{{ $label }}</label>
+                             <div class="card-columns" style="column-count: 2; column-gap: 15px;">
+                                 @foreach($permissions_by_module as $moduleName => $perms)
+                                     <div class="card border-light shadow-sm mb-3" style="display: inline-block; width: 100%;">
+                                         <div class="card-header bg-light py-2 d-flex justify-content-between align-items-center">
+                                             <span class="mb-0 text-primary font-weight-bold" style="font-size: 13px;">{{ $moduleName }}</span>
+                                             <button type="button" class="btn btn-xs btn-outline-primary select-all-module" style="padding: 1px 5px; font-size: 10px;">{{ __('Check All') }}</button>
+                                         </div>
+                                         <div class="card-body py-2 px-3">
+                                             <div class="row">
+                                                 @foreach($perms as $label => $value)
+                                                     @if(is_array($value))
+                                                         <div class="col-12 mt-2 mb-2">
+                                                             <div class="card border-light bg-light shadow-none">
+                                                                 <div class="card-header py-1 px-3 d-flex justify-content-between align-items-center">
+                                                                     <span class="mb-0 text-secondary font-weight-bold" style="font-size: 12px;">{{ $label }}</span>
+                                                                     <button type="button" class="btn btn-xs btn-outline-secondary select-all-submodule" style="padding: 0px 4px; font-size: 9px;">{{ __('Check All') }}</button>
                                                                  </div>
-                                                            </div>
-                                                        @endif
-                                                    @endforeach
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                @endforeach
-                            </div>
+                                                                 <div class="card-body py-2 px-3">
+                                                                     <div class="row">
+                                                                         @foreach($value as $subLabel => $subValue)
+                                                                             <div class="col-12 py-1">
+                                                                                  <div class="custom-control custom-checkbox">
+                                                                                      <input type="checkbox" name="permission[]" value="{{ $subValue }}" class="custom-control-input perm-checkbox sub-perm-checkbox" id="edit_perm_{{ $subValue }}_{{ \Illuminate\Support\Str::slug($subLabel) }}">
+                                                                                      <label class="custom-control-label text-secondary" for="edit_perm_{{ $subValue }}_{{ \Illuminate\Support\Str::slug($subLabel) }}" style="font-size: 12px; font-weight: normal; cursor: pointer;">{{ $subLabel }}</label>
+                                                                                  </div>
+                                                                             </div>
+                                                                         @endforeach
+                                                                     </div>
+                                                                 </div>
+                                                             </div>
+                                                         </div>
+                                                     @else
+                                                         <div class="col-12 py-1">
+                                                              <div class="custom-control custom-checkbox">
+                                                                  <input type="checkbox" name="permission[]" value="{{ $value }}" class="custom-control-input perm-checkbox" id="edit_perm_{{ $value }}_{{ \Illuminate\Support\Str::slug($label) }}">
+                                                                  <label class="custom-control-label text-secondary" for="edit_perm_{{ $value }}_{{ \Illuminate\Support\Str::slug($label) }}" style="font-size: 12px; font-weight: normal; cursor: pointer;">{{ $label }}</label>
+                                                              </div>
+                                                         </div>
+                                                     @endif
+                                                 @endforeach
+                                             </div>
+                                         </div>
+                                     </div>
+                                 @endforeach
+                             </div>
                             <div class="info-text">{{__('assign permission to role, which page can seen by the this role')}}</div>
                         </div>
                     </div>
