@@ -11,9 +11,10 @@
         <div class="row mt-5">
             <div class="col-lg-12">
                 <div class="dashboard-stats-grid">
-                 @if(check_page_permission('admin_manage'))
                     <div class="stat-card stat-card--violet">
+                        @if(is_super_admin())
                         <a href="{{route('admin.new.user')}}" class="stat-card-add"><i class="ti-plus"></i></a>
+                        @endif
                         <div class="stat-card-icon">
                             <i class="ti-user"></i>
                         </div>
@@ -22,7 +23,6 @@
                             <h4 class="stat-card-title">{{__('Total Admin')}}</h4>
                         </div>
                     </div>
-                @endif
                     <div class="stat-card stat-card--blue">
                         <div class="stat-card-icon">
                             <i class="ti-eye"></i>
@@ -32,9 +32,10 @@
                             <h4 class="stat-card-title">{{__('Total Visitor')}}</h4>
                         </div>
                     </div>
-                @if(check_page_permission_by_string('News Manage'))
                     <div class="stat-card stat-card--pink">
+                        @if(is_super_admin())
                         <a href="{{route('admin.news.new')}}" class="stat-card-add"><i class="ti-plus"></i></a>
+                        @endif
                         <div class="stat-card-icon">
                             <i class="ti-comments"></i>
                         </div>
@@ -43,7 +44,6 @@
                             <h4 class="stat-card-title">{{__('Total News')}}</h4>
                         </div>
                     </div>
-                 @endif
                     {{-- @if(check_page_permission_by_string('Job Post Manage') && !empty(get_static_option('job_module_status')))
                     <div class="col-md-3 mt-md-5 mb-3">
                         <div class="card text-dark  mb-3">
@@ -120,9 +120,11 @@
                             </div>
                         </div>
                     @endif --}}
-                    @if(check_page_permission_by_string('Products Manage') && !empty(get_static_option('product_module_status')))
+                    @if(!empty(get_static_option('product_module_status')))
                     <div class="stat-card stat-card--orange">
+                        @if(is_super_admin())
                         <a href="{{route('admin.products.new')}}" class="stat-card-add"><i class="ti-plus"></i></a>
+                        @endif
                         <div class="stat-card-icon">
                             <i class="ti-package"></i>
                         </div>
@@ -146,9 +148,10 @@
                         </div>
                     </div> --}}
                     @endif
-                    @if(check_page_permission_by_string('Services'))
                     <div class="stat-card stat-card--teal">
+                        @if(is_super_admin())
                         <a href="{{route('admin.services.new')}}" class="stat-card-add"><i class="ti-plus"></i></a>
+                        @endif
                         <div class="stat-card-icon">
                             <i class="ti-blackboard"></i>
                         </div>
@@ -157,7 +160,6 @@
                             <h4 class="stat-card-title">{{__('Total Services')}}</h4>
                         </div>
                     </div>
-                    @endif
                     {{-- @if(check_page_permission_by_string('Price Plan'))
                     <div class="col-md-3 mt-md-5 mb-3">
                         <div class="card text-dark  mb-3">

@@ -2910,3 +2910,20 @@ function uncla_menu(){
 
     return $uncla_menus;
 }
+
+function is_super_admin()
+{
+    if (Auth::check()) {
+        $user = auth()->user();
+        if ($user instanceof \App\Admin) {
+            $role_id = \App\Admin::where('id', $user->id)->first();
+            $user_role = \App\AdminRole::where('id', $role_id->role)->first();
+            if ($user_role){
+                if (strtolower($user_role->name) === 'super admin' || strtolower($user_role->name) === 'super_admin' || $user_role->id == 1) {
+                    return true;
+                }
+            }
+        }
+    }
+    return false;
+}
