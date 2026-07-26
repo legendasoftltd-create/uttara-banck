@@ -1,79 +1,32 @@
-# Test Report 18 — Path Traversal
+# 18 — Path Traversal
 
-## 1. Objective
-Find any file-serving/deletion/inclusion code path where a user-controllable string
-(query param, form field, or route parameter) is concatenated into a filesystem path
-without sanitization, allowing `../` traversal to read or delete files outside the
-intended directory.
+**PO §3.1 category 18** · **Date:** 26 July 2026 · **Target:** https://uttaradev.blocknots.com
 
-## 2. Scope & Methodology
-- Repo-wide search for `file_exists(`, `readfile(`, `unlink(`, `response()->download(`
-  across every controller, tracing each one's path-component back to its source: a
-  request parameter, or a database-stored value.
-- Reviewed every route with an `{id}`/`{filename}`-style parameter feeding into a
-  file-related controller method, to confirm whether the parameter is used as a
-  numeric primary key (safe) or literally as a path/filename component (the risky
-  pattern).
+## Result: Finding (Medium) — F8
 
-## 3. Findings
+## Scope & method
+Traced every filesystem operation (`file_get_contents`, `file_put_contents`, `@unlink`,
+`->move()`, `readfile`) that incorporates request input, and reviewed the input validation on
+each, with an authenticated administrator session.
 
-### 3.1 [NOT EXPLOITABLE — traced and ruled out] All file-path components originate from server-generated, DB-stored filenames
-Every `file_exists()`/`response()->download()`/`unlink()` call found
-(`ProductsController`, `BankDownloadController`, `MediaUploadController`,
-`TenderController`, `JobsController`, `FrontendController`, `CourseLessonController`,
-`ExchangeRateController`, `UserDashboardController`) builds its path from a **model
-attribute** (e.g. `$product_details->downloadable_file`, `$lesson->file`,
-`$exchange_rate->pdf`) that was itself written at *upload time* as a server-generated
-filename (`time().'_'.Str::random(10).'.'.extension`, consistent with the pattern
-already confirmed safe in the File Upload report) — never directly from a request
-parameter at the time the file is read/served.
+## Findings
+- **F8 — Authenticated path traversal / arbitrary file operations (Medium).**
+  - **Language management (`LanguageController`)** concatenates `$request->slug` and
+    `$request->type` directly into `resource_path('lang/')` paths for read, write, and delete.
+    Validation is only `'slug' => 'string:max:191'` and `'type' => 'required'` — no path/format
+    restriction — so `../` sequences escape the directory (arbitrary read/write/delete of
+    `.json`-suffixed paths).
+  - **Sitemap delete (`delete_sitemap_settings`)** runs `@unlink($request->sitemap_name)` on a
+    **fully request-controlled, unvalidated path** — arbitrary file deletion.
+- Public/front-end file paths are server-generated (uploads are renamed and moved to fixed
+  directories), so the traversal exposure is limited to these authenticated admin functions —
+  but F1 (trivial admin password) makes that precondition easy to meet.
 
-Every route parameter feeding into these methods (`{id}` in
-`/download/file/{id}`, `/course-certificate/download/{id}`, etc.) is used purely as a
-numeric **Eloquent primary key** (`Products::find($id)`,
-`CourseEnroll::where('id', $id)...`) to look up the record first — it is never used
-literally as a path/filename component, so there is no traversal vector through these
-route parameters.
+## Remediation
+- Whitelist `slug`/`type` against known values; reject any input containing `/`, `\`, or `..`;
+  resolve the final real path and confirm it stays within the intended base directory.
+- For sitemap deletion, reference the file by a server-side identifier, never a client path.
 
-### 3.2 [NOT EXPLOITABLE — traced and ruled out] One request-supplied filename exists, but only ever matches a pre-existing, server-generated entry
-**Location:** `BankDownloadController::delete_file()` (line 262):
-```php
-$files = json_decode($download->files, true) ?? [];
-$file_to_delete = $request->file_name;          // attacker-controlled string
-
-foreach ($files as $key => $file) {
-    if ($file['name'] === $file_to_delete) {     // exact-match against known-safe names only
-        if (file_exists('assets/uploads/bank-downloads/' . $file['name'])) {
-            unlink('assets/uploads/bank-downloads/' . $file['name']);
-        }
-        ...
-```
-This is the one place a raw request value (`$request->file_name`) reaches a file path.
-However, it is only ever used in a strict `===` comparison against the *already
-server-generated* filenames stored in that specific download record's `files` JSON
-column — a traversal payload like `../../@core/.env` would simply never equal any
-entry in that array, so `unlink()` is never reached with an attacker-chosen path. The
-worst case an attacker (who would already need the "Bank Downloads" admin permission
-to reach this endpoint at all) could do is delete a file that's already a legitimate
-upload belonging to that same download record — not a traversal vulnerability.
-
-## 4. Out of Scope
-- Did not test the underlying web server (LiteSpeed) for path-traversal-via-URL
-  (`%2e%2e%2f` sequences against static file serving) — that's an infrastructure/
-  web-server-configuration question rather than an application-code one, and LiteSpeed
-  is a mature, actively-maintained web server not expected to have such a basic flaw;
-  flagging as out of scope rather than asserting a tested result.
-
-## 5. Summary Table
-| # | Finding | Severity | Status |
-|---|---|---|---|
-| 3.1 | All file-serving paths use server-generated filenames, not request input | — | Not exploitable, no finding |
-| 3.2 | One request-supplied filename exists but is constrained to exact-match against known-safe entries | — | Not exploitable, no finding |
-
-## 6. Conclusion
-No exploitable Path Traversal vulnerability was found. The application consistently
-generates random, unpredictable filenames at upload time and stores them in the
-database, then only ever serves/deletes files by looking up that stored value via a
-numeric ID or an exact-match check — never by directly trusting a request-supplied
-path/filename string. This is the correct pattern and was verified across every
-file-handling controller in the codebase, not sampled.
+## Conclusion
+Front-end file handling is safe, but two admin functions build paths from raw input, giving an
+authenticated attacker arbitrary file read/write/delete. Whitelisting and path-confinement fix it.
