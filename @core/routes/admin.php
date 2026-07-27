@@ -350,27 +350,6 @@ Route::prefix('admin-home')->middleware(['setlang:backend'])->group(function () 
             Route::post('/bulk-action/', 'HeaderSliderController@bulk_action')->name('admin.header.bulk.action');
         });
 
-        /*----------------------------------------
-            HOME PAGE: 05 (PORTFOLIO)
-        -----------------------------------------*/
-        Route::group(['prefix' => 'home-05'],function (){
-            Route::get('/header', 'PortfolioHomePageController@header_area')->name('admin.home05.header');
-            Route::post('/header', 'PortfolioHomePageController@update_header_area');
-            Route::get('/about', 'PortfolioHomePageController@about_area')->name('admin.home05.about');
-            Route::post('/about', 'PortfolioHomePageController@update_about_area');
-            Route::get('/expertises', 'PortfolioHomePageController@expertises_area')->name('admin.home05.expertises');
-            Route::post('/expertises', 'PortfolioHomePageController@update_expertises_area');
-            Route::get('/what-we-offer', 'PortfolioHomePageController@what_we_offer_area')->name('admin.home05.what.offer.area');
-            Route::post('/what-we-offer', 'PortfolioHomePageController@update_what_we_offer_area');
-            Route::get('/recent-work', 'PortfolioHomePageController@recent_work_area')->name('admin.home05.recent.work.area');
-            Route::post('/recent-work', 'PortfolioHomePageController@update_recent_work_area');
-            Route::get('/cta-area', 'PortfolioHomePageController@cta_area')->name('admin.home05.cta.area');
-            Route::post('/cta-area', 'PortfolioHomePageController@update_cta_area');
-            Route::get('/testimonial-area', 'PortfolioHomePageController@testimonial_area')->name('admin.home05.testimonial.area');
-            Route::post('/testimonial-area', 'PortfolioHomePageController@update_testimonial_area');
-            Route::get('/news-area', 'PortfolioHomePageController@news_area')->name('admin.home05.news.area');
-            Route::post('/news-area', 'PortfolioHomePageController@update_news_area');
-        });
 
         /*----------------------------------------
            HOME PAGE: 12 (MEDICAL)
@@ -1277,17 +1256,6 @@ Route::prefix('admin-home')->middleware(['setlang:backend'])->group(function () 
         Route::post('/clear-all', 'VisitorManageController@clear_all')->name('admin.visitors.clear.all');
     });
 
-    /*==============================================
-        TESTIMONIAL ROUTES
-     ==============================================*/
-    Route::prefix('testimonial')->middleware(['adminPermissionCheck:Testimonial'])->group(function () {
-        Route::get('/', 'TestimonialController@index')->name('admin.testimonial');
-        Route::post('/', 'TestimonialController@store');
-        Route::post('/clone', 'TestimonialController@clone')->name('admin.testimonial.clone');
-        Route::post('/update', 'TestimonialController@update')->name('admin.testimonial.update');
-        Route::post('/delete/{id}', 'TestimonialController@delete')->name('admin.testimonial.delete');
-        Route::post('/bulk-action', 'TestimonialController@bulk_action')->name('admin.testimonial.bulk.action');
-    });
 
     /*==============================================
            EVENTS MODULE ROUTES

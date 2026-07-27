@@ -53,12 +53,7 @@ Route::group(['middleware' => ['setlang:frontend', 'globalVariable', 'maintains_
     Route::get( $product_page_slug.'-category/{id}/{any?}', 'FrontendController@products_category')->name('frontend.products.category');
     Route::get( $product_page_slug.'-subcategory/{id}/{any?}', 'FrontendController@products_subcategory')->name('frontend.products.subcategory');
 
-    Route::post( $product_page_slug.'-item/ajax/add-to-cart', 'ProductCartController@ajax_add_to_cart')->name('frontend.products.add.to.cart.ajax');
-    Route::post( $product_page_slug.'-item/ajax/add-to-wishlist', 'ProductCartController@ajax_add_to_wishlist')->name('frontend.products.add.to.wishlist.ajax');
-    Route::post( $product_page_slug.'-item/ajax/coupon', 'ProductCartController@ajax_coupon_code')->name('frontend.products.coupon.code');
-    Route::post( $product_page_slug.'-item/ajax/shipping', 'ProductCartController@ajax_shipping_apply')->name('frontend.products.shipping.apply');
-    Route::post( $product_page_slug.'-item/ajax/cart-update', 'ProductCartController@ajax_cart_update')->name('frontend.products.ajax.cart.update');
-    Route::get( $product_page_slug.'-checkout', 'FrontendController@product_checkout')->name('frontend.products.checkout');
+
 
 });
 
