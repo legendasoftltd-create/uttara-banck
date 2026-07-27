@@ -29,22 +29,22 @@ However, the assessment found a **critical weakness in administrator account sec
 upload**, and **authenticated path-traversal / arbitrary file operations**. These, with a
 set of missing HTTP security headers, are the remediation priorities.
 
-### Findings at a glance
+### 1. Findings at a glance
 
-| # | Finding | Category | Severity |
-|---|---|---|---|
-| F1 | Administrator account uses a trivial, guessable password (`password`) | Authentication | **Critical** |
-| F2 | No brute-force / rate-limiting protection on administrator login | Authentication | **High** |
-| F3 | Debug mode enabled — stack traces & absolute server paths disclosed to anonymous users | Information Disclosure | **High** |
-| F4 | Stored XSS via SVG file upload (served inline as `image/svg+xml`) | XSS / File Upload | **Medium** |
-| F5 | Missing anti-clickjacking header — admin panel is framable | Clickjacking | **Medium** |
-| F6 | Missing hardening headers (CSP, `X-Content-Type-Options`, HSTS, Referrer-Policy, Permissions-Policy) | Information Disclosure | **Medium** |
-| F7 | Public complaint form collects sensitive financial PII with no request throttling | Business Logic | **Medium** |
-| F8 | Authenticated path traversal / arbitrary file operations (Language import-export & sitemap delete) | Path Traversal | **Medium** |
-| F9 | Session cookies do not set an explicit `SameSite` attribute | CSRF / Hardening | **Low** |
-| F10 | Application returns HTTP 200 for non-existent pages instead of 404 | Information Disclosure | **Low** |
-| F11 | Password-reset submission sends e-mail synchronously (request blocks) | Authentication | **Low** |
-| F12 | `unserialize()` on stored values without `allowed_classes` guard | Insecure Deserialization | **Low** |
+| # | Finding | Category | Severity | Status |
+|---|---|---|---|---|
+| F1 | Administrator account uses a trivial, guessable password (`password`) | Authentication | **Critical** | Solved ✅ |
+| F2 | No brute-force / rate-limiting protection on administrator login | Authentication | **High** | Solved ✅ |
+| F3 | Debug mode enabled — stack traces & absolute server paths disclosed to anonymous users | Information Disclosure | **High** | Solved ✅ |
+| F4 | Stored XSS via SVG file upload (served inline as `image/svg+xml`) | XSS / File Upload | **Medium** | |
+| F5 | Missing anti-clickjacking header — admin panel is framable | Clickjacking | **Medium** | Solved ✅ |
+| F6 | Missing hardening headers (CSP, `X-Content-Type-Options`, HSTS, Referrer-Policy, Permissions-Policy) | Information Disclosure | **Medium** | Solved ✅ |
+| F7 | Public complaint form collects sensitive financial PII with no request throttling | Business Logic | **Medium** | Solved ✅ |
+| F8 | Authenticated path traversal / arbitrary file operations (Language import-export & sitemap delete) | Path Traversal | **Medium** | Solved ✅ |
+| F9 | Session cookies do not set an explicit `SameSite` attribute | CSRF / Hardening | **Low** | Solved ✅ |
+| F10 | Application returns HTTP 200 for non-existent pages instead of 404 | Information Disclosure | **Low** | Solved ✅ |
+| F11 | Password-reset submission sends e-mail synchronously (request blocks) | Authentication | **Low** | Solved ✅ |
+| F12 | `unserialize()` on stored values without `allowed_classes` guard | Insecure Deserialization | **Low** | Solved ✅ |
 
 ---
 
