@@ -221,7 +221,7 @@ Route::group(['middleware' => ['setlang:frontend', 'globalVariable', 'HtmlMinifi
     Route::post('/logout/admin', 'AdminDashboardController@adminLogout')->name('admin.logout');
     Route::post('/login/admin', 'Auth\LoginController@adminLogin');
     Route::get('/lang', 'FrontendController@lang_change')->name('frontend.langchange');
-    Route::post('/subscribe-newsletter', 'FrontendController@subscribe_newsletter')->name('frontend.subscribe.newsletter');
+
     Route::post('/contact-message', 'FrontendFormController@send_contact_message')->name('frontend.contact.message');
     Route::post('/complain-submit', 'FrontendFormController@complain_submit')->name('frontend.complain.submit');
     Route::post('/place-order', 'FrontendFormController@send_order_message')->name('frontend.order.message');

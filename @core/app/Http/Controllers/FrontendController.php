@@ -31,7 +31,6 @@ use App\Mail\ContactMessage;
 use App\Mail\PlaceOrder;
 use App\Mail\RequestQuote;
 use App\Menu;
-use App\Newsletter;
 use App\Order;
 use App\Page;
 use App\PaymentLogs;
@@ -983,18 +982,6 @@ ITEM;
     }
 
 
-    public function subscribe_newsletter(Request $request)
-    {
-        $this->validate($request, [
-            'email' => 'required|string|email|max:191|unique:newsletters'
-        ],
-            [
-                'required' => __('Enter Valid Email'),
-                'unique' => __('This Email Already Registered'),
-            ]);
-        Newsletter::create($request->all());
-        return response()->json(__('Thanks for Subscribe Our Newsletter'));
-    }
 
     public function category_wise_works_page($id)
     {
@@ -1351,12 +1338,6 @@ ITEM;
         ]);
     }
 
-    public function subscriber_verify(Request $request){
-        Newsletter::where('token',$request->token)->update([
-            'verified' => 1
-        ]);
-        return view('frontend.thankyou');
-    }
     public function product_download(Request $request,$id){
         $product_details = Products::find($id);
         if (!is_null($product_details)){

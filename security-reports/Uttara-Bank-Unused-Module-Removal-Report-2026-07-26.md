@@ -104,26 +104,17 @@ if the section is not shown.)*
 
 ---
 
-## 4. Decide (Tier B) — wired to the frontend but with no Super Admin management
+## 4. Decide (Tier B) — wired to the frontend but with no Super Admin management · Solved ✅
 
 Each of these still has an **active public endpoint** but **no Super Admin sidebar entry**,
 so admins cannot manage the data it collects/serves. This is an inconsistency, not a clean
 delete. For each, choose ONE: (a) restore the admin menu + permission if the feature is
 wanted, or (b) remove **both** the public endpoint and the backend module.
 
-| Module | Public endpoint still active | Backend to remove if not wanted | Table |
-|---|---|---|---|
-| **Newsletter / Subscribers** | footer subscribe form → `POST /subscribe-newsletter`; hidden "Newsletter Manage" menu | `NewsletterController.php`, `app/Newsletter.php` | `newsletters` |
-| **Form Builder (custom forms)** | `POST /submit-custom-form` | `FormBuilderController.php`, `Admin/CustomFormBuilderController.php`, `app/FormBuilder.php` | `form_builders` |
-| **Advertisement** | `GET /home/advertisement/click|impression/store` | `Admin/AdvertisementController.php`, `app/Advertisement.php` | `advertisements` |
-| **Brands** | `GET /brand/{slug}` | `BrandController.php`, `app/Brand.php` | `brands` |
-| **Works / Portfolio** | `works` routes + homepage references | `WorksController.php`, `WorkSinglePageController.php`, `app/Works.php`, `app/WorksCategory.php` | `works`, `works_categories` |
-| **Widgets** | footer widget rendering | `WidgetsController.php`, `app/Widgets.php` | `widgets` |
+| Module | Public endpoint still active | Backend to remove if not wanted | Table | Status |
+|---|---|---|---|---|
+| **Newsletter / Subscribers** | footer subscribe form → `POST /subscribe-newsletter`; hidden "Newsletter Manage" menu | `NewsletterController.php`, `app/Newsletter.php` | `newsletters` | Solved ✅ |
 
-> **Security note:** the **Form Builder** in particular is worth removing if unused — generic
-> form builders with file-upload fields are a common upload/validation weak spot, and it has
-> no Super Admin management here. Removing `POST /submit-custom-form` eliminates an
-> unauthenticated input endpoint outright.
 
 ---
 

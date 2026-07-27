@@ -964,19 +964,6 @@ Route::prefix('admin-home')->middleware(['setlang:backend'])->group(function () 
     });
 
     /*==============================================
-         NEWSLETTER ROUTES
-     ==============================================*/
-    Route::prefix('newsletter')->middleware(['adminPermissionCheck:Newsletter Manage'])->group(function () {
-        Route::get('/', 'NewsletterController@index')->name('admin.newsletter');
-        Route::post('/delete/{id}', 'NewsletterController@delete')->name('admin.newsletter.delete');
-        Route::post('/single', 'NewsletterController@send_mail')->name('admin.newsletter.single.mail');
-        Route::get('/all', 'NewsletterController@send_mail_all_index')->name('admin.newsletter.mail');
-        Route::post('/all', 'NewsletterController@send_mail_all');
-        Route::post('/new', 'NewsletterController@add_new_sub')->name('admin.newsletter.new.add');
-        Route::post('/bulk-action', 'NewsletterController@bulk_action')->name('admin.newsletter.bulk.action');
-        Route::post('/verify-mail-send','NewsletterController@verify_mail_send')->name('admin.newsletter.verify.mail.send');
-    });
-    /*==============================================
             LANGUAGE ROUTES
      ==============================================*/
     Route::prefix('languages')->middleware(['adminPermissionCheck:Languages'])->group(function () {

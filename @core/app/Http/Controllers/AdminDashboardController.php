@@ -21,9 +21,6 @@ use App\Jobs;
 use App\Language;
 use App\Mail\BasicMail;
 use App\Mail\ProductOrder;
-use App\MediaUpload;
-use App\Newsletter;
-
 use App\Products;
 use App\Services;
 use App\Blog;

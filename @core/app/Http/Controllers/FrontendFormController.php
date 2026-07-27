@@ -18,7 +18,6 @@ use App\Mail\CustomFormBuilderMail;
 use App\Mail\FeedbackMessage;
 use App\Mail\PlaceOrder;
 use App\Mail\RequestQuote;
-use App\Newsletter;
 use App\Order;
 use App\Quote;
 use Illuminate\Http\Request;
@@ -182,30 +181,6 @@ class FrontendFormController extends Controller
         return response()->json($data);
     }
 
-    public function subscribe_newsletter(Request $request)
-    {
-        $this->validate($request, [
-            'email' => 'required|string|email|max:191|unique:newsletters'
-        ]);
-        $verify_token = \Str::random(32);
-        $newsletter = Newsletter::create([
-            'email' => $request->email,
-            'verified' => 0,
-            'token' => $verify_token
-        ]);
-        try{
-            //send verify mail to newsletter subscriber
-            Mail::to($request->email)
-                ->send(new BasicMail(EmailTemplate::newsletterVerifyMail($newsletter)));
-        }catch (\Exception $e){
-            return redirect()->back()->with(LegendaSoftHelpers::item_delete($e->getMessage()));
-        }
-
-        return redirect()->back()->with([
-            'msg' => __('Thanks for Subscribe Our Newsletter'),
-            'type' => 'success'
-        ]);
-    }
 
     public function send_order_message(Request $request)
     {
