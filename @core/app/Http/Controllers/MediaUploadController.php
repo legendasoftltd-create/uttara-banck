@@ -25,8 +25,14 @@ class MediaUploadController extends Controller
 
             $image = $request->file;
 
-            $image_extenstion = $image->extension();
+            $image_extenstion = strtolower($image->getClientOriginalExtension() ?: $image->extension());
             $image_name_with_ext = $image->getClientOriginalName();
+
+            if ($image_extenstion === 'svg') {
+                $svg_content = file_get_contents($image->getRealPath());
+                $svg_content = $this->sanitize_svg($svg_content);
+                file_put_contents($image->getRealPath(), $svg_content);
+            }
 
             $image_name = pathinfo($image_name_with_ext, PATHINFO_FILENAME);
             $image_name = strtolower(Str::slug($image_name));
@@ -337,5 +343,17 @@ class MediaUploadController extends Controller
             $resize_grid_image->save($folder_path . $image_grid);
             $resize_large_image->save($folder_path . $image_large);
         }
+    }
+
+    private function sanitize_svg($content)
+    {
+        $content = preg_replace('/<script\b[^>]*>(.*?)<\/script>/is', '', $content);
+        $content = preg_replace('/on[a-z]+\s*=\s*"[^"]*"/i', '', $content);
+        $content = preg_replace('/on[a-z]+\s*=\s*\'[^\']*\'/i', '', $content);
+        $content = preg_replace('/on[a-z]+\s*=\s*[^\s>]+/i', '', $content);
+        $content = preg_replace('/href\s*=\s*"javascript:[^"]*"/i', '', $content);
+        $content = preg_replace('/href\s*=\s*\'javascript:[^\']*\'/i', '', $content);
+        $content = preg_replace('/<foreignObject\b[^>]*>(.*?)<\/foreignObject>/is', '', $content);
+        return $content;
     }
 }
