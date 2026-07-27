@@ -36,7 +36,7 @@ set of missing HTTP security headers, are the remediation priorities.
 | F1 | Administrator account uses a trivial, guessable password (`password`) | Authentication | **Critical** | Solved ✅ |
 | F2 | No brute-force / rate-limiting protection on administrator login | Authentication | **High** | Solved ✅ |
 | F3 | Debug mode enabled — stack traces & absolute server paths disclosed to anonymous users | Information Disclosure | **High** | Solved ✅ |
-| F4 | Stored XSS via SVG file upload (served inline as `image/svg+xml`) | XSS / File Upload | **Medium** | |
+| F4 | Stored XSS via SVG file upload (served inline as `image/svg+xml`) | XSS / File Upload | **Medium** | Solved ✅ |
 | F5 | Missing anti-clickjacking header — admin panel is framable | Clickjacking | **Medium** | Solved ✅ |
 | F6 | Missing hardening headers (CSP, `X-Content-Type-Options`, HSTS, Referrer-Policy, Permissions-Policy) | Information Disclosure | **Medium** | Solved ✅ |
 | F7 | Public complaint form collects sensitive financial PII with no request throttling | Business Logic | **Medium** | Solved ✅ |
