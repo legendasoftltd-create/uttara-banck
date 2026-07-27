@@ -26,7 +26,6 @@ use App\Language;
 use App\Menu;
 use App\Page;
 use App\PopupBuilder;
-use App\PricePlan;
 use App\ProductCategory;
 use App\Products;
 use App\ProductShipping;

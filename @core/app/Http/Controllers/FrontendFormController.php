@@ -20,7 +20,6 @@ use App\Mail\PlaceOrder;
 use App\Mail\RequestQuote;
 use App\Newsletter;
 use App\Order;
-use App\PricePlan;
 use App\Quote;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;

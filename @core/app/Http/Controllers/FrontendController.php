@@ -97,8 +97,8 @@ class FrontendController extends Controller
         $all_counterup = Counterup::where('lang', $lang)->get();
         $all_key_features = KeyFeatures::where('lang', $lang)->get();
         $all_service = Services::where('status', 'publish')->where(['lang' => $lang, 'status' => 'publish'])->orderBy('sr_order', 'ASC')->take(10)->get();
-        $all_testimonial = Testimonial::where('status', 'publish')->where(['lang' => $lang, 'status' => 'publish'])->orderBy('id', 'desc')->get();
-        $all_price_plan = PricePlan::where('status', 'publish')->where(['lang' => $lang, 'status' => 'publish'])->orderBy('id', 'desc')->take(get_static_option('home_page_01_price_plan_section_items'))->get();
+        $all_testimonial = collect();
+        $all_price_plan = collect();
         $all_team_members = TeamMember::where('status', 'publish')->where('lang', $lang)
             ->orderByRaw('CASE WHEN order_by IS NULL OR order_by = 0 THEN 999999 ELSE order_by END ASC')
             ->orderBy('id', 'asc')

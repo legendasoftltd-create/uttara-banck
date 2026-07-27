@@ -66,18 +66,18 @@ Slider (`header_sliders`), Key Features (`key_features`). Framework infra
 
 ---
 
-## 3.1 Remove — confirmed by client (no customer login)
+## 3.1 Remove — confirmed by client (no customer login) · Solved ✅
 
 The client has confirmed there is **no customer/public login**. The following are therefore
 out of scope and to be removed in full — routes, controllers, models, views, sidebar blocks,
 permission strings, and tables. Because Support Tickets are also removed, the `users` table
 has no remaining in-scope dependency and is dropped too.
 
-| Feature | Code to remove | DB table(s) to drop |
-|---|---|---|
-| **Customer Users** | `FrontendUserManageController.php`, `UserDashboardController.php`, `Auth/RegisterController.php`, `app/User.php`, customer login/registration views, and the customer-user sidebar entries. Clean up vestigial `use App\User;` imports (e.g. in `UserRoleManageController`, `AdminDashboardController`, `ProductsController`). **Keep `UserRoleManageController` itself** (admin RBAC). | `users`, `password_resets` (customer reset) |
-| **Social / OAuth login** | `SocialLoginController.php`, Socialite provider config/keys, social-login buttons in the login views | — |
-| **Support Tickets** | frontend `SupportTicketController.php` (root + `Frontend/`), `Admin/SupportDepartmentController.php`, `SupportDepartmentController.php`, models `SupportTicket.php`, `SupportTicketMessage.php`, `SupportDepartment.php`, the admin support-ticket route group in `routes/admin.php`, the **Support Ticket sidebar block**, and the `support_ticket_*` / `support_ticket_department_*` **permission strings** in every role | `support_tickets`, `support_ticket_messages`, `support_departments` |
+| Feature | Code to remove | DB table(s) to drop | Status |
+|---|---|---|---|
+| **Customer Users** | `FrontendUserManageController.php`, `UserDashboardController.php`, `Auth/RegisterController.php`, `app/User.php`, customer login/registration views, and the customer-user sidebar entries. Clean up vestigial `use App\User;` imports (e.g. in `UserRoleManageController`, `AdminDashboardController`, `ProductsController`). **Keep `UserRoleManageController` itself** (admin RBAC). | `users`, `password_resets` (customer reset) | Solved ✅ |
+| **Social / OAuth login** | `SocialLoginController.php`, Socialite provider config/keys, social-login buttons in the login views | — | Solved ✅ |
+| **Support Tickets** | frontend `SupportTicketController.php` (root + `Frontend/`), `Admin/SupportDepartmentController.php`, `SupportDepartmentController.php`, models `SupportTicket.php`, `SupportTicketMessage.php`, `SupportDepartment.php`, the admin support-ticket route group in `routes/admin.php`, the **Support Ticket sidebar block**, and the `support_ticket_*` / `support_ticket_department_*` **permission strings** in every role | `support_tickets`, `support_ticket_messages`, `support_departments` | Solved ✅ |
 
 > **Removal note for `users`:** confirm no other in-scope table has a foreign key to `users`
 > before dropping (the support-ticket tables were the only in-scope references and are being
@@ -85,18 +85,18 @@ has no remaining in-scope dependency and is dropped too.
 
 ---
 
-## 3. Remove (Tier A) — dead template modules, not in admin scope, not on the frontend
+## 3. Remove (Tier A) — dead template modules, not in admin scope, not on the frontend · Solved ✅
 
 These have **no Super Admin menu** and are **not surfaced on the live site**. Removing them
 is the highest-value, lowest-risk cleanup.
 
-| Module | Code to remove | DB table(s) to drop |
-|---|---|---|
-| **Testimonials** | `TestimonialController.php`, `app/Testimonial.php`, view/partials, route `frontend.testimonials` | `testimonials` |
-| **Price Plans** | `app/PricePlan.php` + any price-plan partials/settings | `price_plans` |
-| **Portfolio home variant** | `PortfolioHomePageController.php` + its views (only the bank home page is used) | — |
-| **Product cart / e-commerce checkout** | `ProductCartController.php` and cart/checkout/order views (no order/cart tables exist — the "Products" module is used only as Loan & Deposit content) | — (no order tables present) |
-| **Generic "Team Members" menu** | the generic `TeamMemberController.php` CRUD screens and the hidden sidebar block **only** | **keep `team_members`** (see dependency note) |
+| Module | Code to remove | DB table(s) to drop | Status |
+|---|---|---|---|
+| **Testimonials** | `TestimonialController.php`, `app/Testimonial.php`, view/partials, route `frontend.testimonials` | `testimonials` | Solved ✅ |
+| **Price Plans** | `app/PricePlan.php` + any price-plan partials/settings | `price_plans` | Solved ✅ |
+| **Portfolio home variant** | `PortfolioHomePageController.php` + its views (only the bank home page is used) | — | Solved ✅ |
+| **Product cart / e-commerce checkout** | `ProductCartController.php` and cart/checkout/order views (no order/cart tables exist — the "Products" module is used only as Loan & Deposit content) | — (no order tables present) | Solved ✅ |
+
 
 *(Counterups: the homepage references a counter section — verify whether the bank home page
 actually renders it before dropping `counterups`/`app/Counterup.php`. Treat as Tier A only

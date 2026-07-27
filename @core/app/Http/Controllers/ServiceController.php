@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\PricePlan;
 use App\ServiceCategory;
 use App\Services;
 use App\Works;
