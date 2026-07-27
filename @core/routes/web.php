@@ -211,44 +211,6 @@ Route::group(['middleware' => ['setlang:frontend', 'globalVariable', 'maintains_
 });
 
 
-/*----------------------------------
-    USER DASHBOARD
------------------------------------*/
-// Route::prefix('user-home')->middleware(['userEmailVerify', 'setlang:frontend', 'globalVariable', 'maintains_mode'])->group(function () {
-//     Route::get('/', 'UserDashboardController@user_index')->name('user.home');
-//     Route::get('/download/file/{id}', 'UserDashboardController@download_file')->name('user.dashboard.download.file');
-//     Route::get('/package-orders', 'UserDashboardController@package_orders')->name('user.home.package.order');
-//     Route::get('/product-orders', 'UserDashboardController@product_orders')->name('user.home.product.order');
-//     Route::get('/product-download', 'UserDashboardController@product_downloads')->name('user.home.product.download');
-//     Route::get('/events-booking', 'UserDashboardController@event_booking')->name('user.home.event.booking');
-//     Route::get('/donations', 'UserDashboardController@donations')->name('user.home.donations');
-//     Route::get('/appointment-booking', 'UserDashboardController@appointment_booking')->name('user.home.appointment.booking');
-//     Route::get('/course-enroll', 'UserDashboardController@course_enroll')->name('user.home.course.enroll');
-//     Route::get('/support-tickets', 'UserDashboardController@support_tickets')->name('user.home.support.tickets');
-
-//     Route::get('/change-password', 'UserDashboardController@change_password')->name('user.home.change.password');
-//     Route::get('/edit-profile', 'UserDashboardController@edit_profile')->name('user.home.edit.profile');
-//     Route::post('/profile-update', 'UserDashboardController@user_profile_update')->name('user.profile.update');
-//     Route::post('/password-change', 'UserDashboardController@user_password_change')->name('user.password.change');
-//     Route::post('/package-order/cancel', 'UserDashboardController@package_order_cancel')->name('user.dashboard.package.order.cancel');
-//     Route::post('/product-order/cancel', 'UserDashboardController@product_order_cancel')->name('user.dashboard.product.order.cancel');
-//     Route::post('/event-order/cancel', 'UserDashboardController@event_order_cancel')->name('user.dashboard.event.order.cancel');
-//     Route::post('/donation-order/cancel', 'UserDashboardController@donation_order_cancel')->name('user.dashboard.donation.order.cancel');
-//     Route::post('/appointment-order/cancel', 'UserDashboardController@appointment_order_cancel')->name('user.dashboard.appointment.order.cancel');
-//     Route::post('/course-order/cancel', 'UserDashboardController@course_order_cancel')->name('user.dashboard.course.order.cancel');
-//     Route::get('/product-order/view/{id}', 'UserDashboardController@product_order_view')->name('user.dashboard.product.order.view');
-
-//     Route::post('/course-certificate', 'UserDashboardController@course_certificate')->name('user.dashboard.course.certificate');
-//     Route::get('/course-certificate/download/{id}', 'UserDashboardController@course_certificate_download')->name('user.dashboard.course.certificate.download');
-//     Route::get('support-ticket/view/{id}', 'UserDashboardController@support_ticket_view')->name('user.dashboard.support.ticket.view');
-//     Route::post('support-ticket/priority-change', 'UserDashboardController@support_ticket_priority_change')->name('user.dashboard.support.ticket.priority.change');
-//     Route::post('support-ticket/status-change', 'UserDashboardController@support_ticket_status_change')->name('user.dashboard.support.ticket.status.change');
-//     Route::post('support-ticket/message', 'UserDashboardController@support_ticket_message')->name('user.dashboard.support.ticket.message');
-
-//     /* EVENT TICKET QR CODE GENERATOR */
-//     Route::post('/event-user/generate-ticket', 'UserDashboardController@generate_event_ticket')->name('user.dashboard.event.ticket.generate');
-// });
-
 
 
 /*------------------------------------

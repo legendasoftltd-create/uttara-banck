@@ -303,39 +303,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     </li>
                     @endif
 
-                    <!-- @if(check_page_permission_by_string('Users Manage'))
-                    <li
-                        class="main_dropdown
-                        @if(request()->is([
-                        'admin-home/frontend/user/*',
-                        ])) active @endif
-                        ">
-                        <a href="javascript:void(0)" aria-expanded="true"><i class="ti-user"></i>
-                            <span>{{__('Users Manage')}}</span></a>
-                        <ul class="collapse">
-                            <li class="{{active_menu('admin-home/frontend/user/all')}}"><a
-                                    href="{{route('admin.all.frontend.user')}}">{{__('All Users')}}</a></li>
-                            <li class="{{active_menu('admin-home/frontend/user/new')}}"><a
-                                    href="{{route('admin.frontend.new.user')}}">{{__('Add New User')}}</a></li>
-                        </ul>
-                    </li>
-                    @endif -->
-                    
-                    <!-- @if(check_page_permission_by_string('Newsletter Manage'))
-                    <li
-                        class="main_dropdown @if(request()->is(['admin-home/newsletter/*','admin-home/newsletter'])) active @endif
-                     ">
-                        <a href="javascript:void(0)" aria-expanded="true"><i class="ti-email"></i>
-                            <span>{{__('Newsletter Manage')}}</span></a>
-                        <ul class="collapse">
-                            <li class="{{active_menu('admin-home/newsletter')}}"><a
-                                        href="{{route('admin.newsletter')}}">{{__('All Subscriber')}}</a></li>
-                            <li class="{{active_menu('admin-home/newsletter/all')}}"><a
-                                        href="{{route('admin.newsletter.mail')}}">{{__('Send Mail To All')}}</a></li>
-                        </ul>
-                    </li>
-                    @endif -->
-
                     @if(check_page_permission_by_string('Pages Manage') || check_page_permission_by_string('Pages View'))
                         <li
                         class="main_dropdown
@@ -692,27 +659,6 @@ document.addEventListener('DOMContentLoaded', function() {
                             @endif
 
                             
-                                @if((check_page_permission('support_ticket_view') || check_page_permission('support_ticket_department_view')) && !empty(get_static_option('support_ticket_module_status')))
-                                <li class="main_dropdown {{active_menu('admin-home/support-tickets')}} @if(request()->is('admin-home/support-tickets/*')) active @endif"
-                                >
-                                    <a href="javascript:void(0)" aria-expanded="true">
-                                        {{__('Support Tickets')}}</a>
-                                    <ul class="collapse">
-                                        @if(check_page_permission('support_ticket_view'))
-                                            <li class="{{active_menu('admin-home/support-tickets')}}">
-                                                <a href="{{route('admin.support.ticket.all')}}">{{__('All Tickets')}}</a></li>
-                                        @endif
-                                        @if(check_page_permission('support_ticket_create'))
-                                            <li class="{{active_menu('admin-home/support-tickets/new')}}"><a
-                                                        href="{{route('admin.support.ticket.new')}}">{{__('Add New Ticket')}}</a></li>
-                                        @endif
-                                        @if(check_page_permission('support_ticket_department_view'))
-                                            <li class="{{active_menu('admin-home/support-tickets/department')}}"><a
-                                                        href="{{route('admin.support.ticket.department')}}">{{__('Departments')}}</a></li>
-                                        @endif
-                                    </ul>
-                                </li>
-                            @endif
                             @if(check_page_permission('locations_view'))
                                 <li class="main_dropdown {{active_menu('admin-home/locations')}} @if(request()->is('admin-home/locations/*')) active @endif">
                                     <a href="javascript:void(0)" aria-expanded="true"> {{__('Locations')}}</a>

@@ -137,43 +137,6 @@ Route::prefix('admin-home')->middleware(['setlang:backend'])->group(function () 
     });
 
 
-    /*==============================================
-       SUPPORT TICKET MODULE
-    ==============================================*/
-    Route::prefix('support-tickets')->middleware(['auth:admin','moduleCheck:support_ticket_module_status'])->group(function () {
-        
-        Route::group(['middleware' => 'adminPermissionCheck:Support Ticket All'], function() {
-            Route::get('/', 'SupportTicketController@all_tickets')->name('admin.support.ticket.all');
-            Route::post('/delete/{id}', 'SupportTicketController@delete')->name('admin.support.ticket.delete');
-            Route::get('/view/{id}', 'SupportTicketController@view')->name('admin.support.ticket.view');
-            Route::post('/bulk-action', 'SupportTicketController@bulk_action')->name('admin.support.ticket.bulk.action');
-            Route::post('/priority-change', 'SupportTicketController@priority_change')->name('admin.support.ticket.priority.change');
-            Route::post('/status-change', 'SupportTicketController@status_change')->name('admin.support.ticket.status.change');
-            Route::post('/send message', 'SupportTicketController@send_message')->name('admin.support.ticket.send.message');
-            
-            /*-----------------------------------
-                SUPPORT TICKET : PAGE SETTINGS ROUTES
-            ------------------------------------*/
-            Route::get('/page-settings', 'SupportTicketController@page_settings')->name('admin.support.ticket.page.settings');
-            Route::post('/page-settings', 'SupportTicketController@update_page_settings');
-        });
-
-        Route::group(['middleware' => 'adminPermissionCheck:Support Ticket Add New'], function() {
-            Route::get('/new', 'SupportTicketController@new_ticket')->name('admin.support.ticket.new');
-            Route::post('/new', 'SupportTicketController@store_ticket');
-        });
-
-        /*-----------------------------------
-          SUPPORT TICKET : DEPARTMENT ROUTES
-        ------------------------------------*/
-        Route::group(['prefix' => 'department', 'middleware' => 'adminPermissionCheck:Support Ticket Department'], function (){
-            Route::get('/', 'Admin\SupportDepartmentController@category')->name('admin.support.ticket.department');
-            Route::post('/', 'Admin\SupportDepartmentController@new_category');
-            Route::post('/delete/{id}', 'Admin\SupportDepartmentController@delete')->name('admin.support.ticket.department.delete');
-            Route::post('/update', 'Admin\SupportDepartmentController@update')->name('admin.support.ticket.department.update');
-            Route::post('/bulk-action', 'Admin\SupportDepartmentController@bulk_action')->name('admin.support.ticket.department.bulk.action');
-        });
-    });
 
     /*==============================================
          LOCATIONS MODULE
@@ -1484,20 +1447,6 @@ Route::prefix('admin-home')->middleware(['setlang:backend'])->group(function () 
         Route::post('/mega-menu', 'MenuController@mega_menu_item_select_markup')->name('admin.mega.menu.item.select.markup');
     });
 
-    /*==============================================
-          FRONTEND USER MANAGE
-    ==============================================*/
-    Route::prefix('frontend/user')->middleware(['adminPermissionCheck:Users Manage'])->group(function () {
-        Route::get('/new', 'FrontendUserManageController@new_user')->name('admin.frontend.new.user');
-        Route::post('/new', 'FrontendUserManageController@new_user_add');
-        Route::post('/update', 'FrontendUserManageController@user_update')->name('admin.frontend.user.update');
-        Route::post('/password-change', 'FrontendUserManageController@user_password_change')->name('admin.frontend.user.password.change');
-        Route::post('/delete/{id}', 'FrontendUserManageController@new_user_delete')->name('admin.frontend.delete.user');
-        Route::get('/all', 'FrontendUserManageController@all_user')->name('admin.all.frontend.user');
-        Route::post('/all/bulk-action', 'FrontendUserManageController@bulk_action')->name('admin.all.frontend.user.bulk.action');
-        Route::post('/all/email-status', 'FrontendUserManageController@email_status')->name('admin.all.frontend.user.email.status');
-
-    });
 
     /*==============================================
          ADMIN ROLE MANAGE MANAGE

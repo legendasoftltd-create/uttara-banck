@@ -883,8 +883,7 @@ function render_favicon_by_id($id)
 
 function get_user_name_by_id($id)
 {
-    $user = \App\User::find($id);
-    return $user;
+    return null;
 }
 
 function get_price_plan_category_name_by_id($id)

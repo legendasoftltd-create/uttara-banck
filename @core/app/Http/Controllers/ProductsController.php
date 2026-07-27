@@ -18,7 +18,6 @@ use App\Products;
 use App\ProductShipping;
 use App\ProductSubCategory;
 use App\ProductVariant;
-use App\User;
 use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Http\Request;

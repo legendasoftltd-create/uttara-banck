@@ -55,7 +55,6 @@ use App\KeyFeatures;
 use App\PricePlan;
 use App\StaticOption;
 use App\TeamMember;
-use App\User;
 use App\Counterup;
 use App\Testimonial;
 use App\VideoGallery;

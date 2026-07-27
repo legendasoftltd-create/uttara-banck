@@ -3,7 +3,6 @@
 namespace App\Facades;
 
 use App\Newsletter;
-use App\User;
 use Illuminate\Support\Facades\Facade;
 
 
