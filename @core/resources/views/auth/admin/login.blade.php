@@ -107,14 +107,20 @@
                        password : $('#password').val(),
                        remember : $('#remember').val(),
                    },
-                   error:function(data){
-                       var errors = data.responseJSON;
-                       erContainer.html('<div class="alert alert-danger"></div>');
-                       $.each(errors.errors, function(index,value){
-                           erContainer.find('.alert.alert-danger').append('<p>'+value+'</p>');
-                       });
-                       el.text('Login');
-                   },
+                    error:function(data){
+                        var errors = data.responseJSON;
+                        erContainer.html('<div class="alert alert-danger"></div>');
+                        if (errors && errors.errors) {
+                            $.each(errors.errors, function(index,value){
+                                erContainer.find('.alert.alert-danger').append('<p>'+value+'</p>');
+                            });
+                        } else if (errors && errors.message) {
+                            erContainer.find('.alert.alert-danger').append('<p>'+errors.message+'</p>');
+                        } else {
+                            erContainer.find('.alert.alert-danger').append('<p>'+(data.statusText || 'An error occurred')+'</p>');
+                        }
+                        el.text('Login');
+                    },
                    success:function (data){
                        $('.alert.alert-danger').remove();
                        if (data.status == 'ok'){

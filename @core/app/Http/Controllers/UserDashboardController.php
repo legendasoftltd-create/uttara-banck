@@ -174,7 +174,7 @@ class UserDashboardController extends Controller
         $downloads = [];
         if (!empty($product_success_orders)){
             foreach ($product_success_orders as $order){
-                $cart_items = unserialize($order->cart_items);
+                $cart_items = unserialize($order->cart_items, ['allowed_classes' => false]);
                 foreach ($cart_items as $product){
                     if ($product['id'] == $id){
                         //check this user purchased this item or not

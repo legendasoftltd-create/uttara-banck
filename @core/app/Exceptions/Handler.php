@@ -58,14 +58,34 @@ class Handler extends ExceptionHandler
         ]);
     }
 
+    protected static $isRenderingException = false;
+
     public function render($request, Throwable $exception)
     {
+        if (self::$isRenderingException) {
+            return parent::render($request, $exception);
+        }
+
         if ($this->isHttpException($exception)) {
             if ($exception->getStatusCode() == 404) {
-                return response()->view('frontend.pages.404');
+                try {
+                    self::$isRenderingException = true;
+                    $response = response()->view('frontend.pages.404', [], 404);
+                    self::$isRenderingException = false;
+                    return $response;
+                } catch (\Throwable $e) {
+                    self::$isRenderingException = false;
+                }
             }
-            if ($exception->getStatusCode() == 500 ) {
-                return response()->view('frontend.pages.500');
+            if ($exception->getStatusCode() == 500) {
+                try {
+                    self::$isRenderingException = true;
+                    $response = response()->view('frontend.pages.500', [], 500);
+                    self::$isRenderingException = false;
+                    return $response;
+                } catch (\Throwable $e) {
+                    self::$isRenderingException = false;
+                }
             }
         }
         return parent::render($request, $exception);

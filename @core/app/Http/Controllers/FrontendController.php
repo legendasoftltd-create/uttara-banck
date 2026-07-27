@@ -718,20 +718,15 @@ ITEM;
                 'message_content' => $message
             ];
             try {
-                Mail::to($user_info->email)->send(new AdminResetEmail($data));
+                Mail::to($user_info->email)->queue(new AdminResetEmail($data));
             }catch (\Exception $e){
-                return redirect()->back()->with(LegendaSoftHelpers::item_delete($e->getMessage()));
+                // SMTP exceptions caught silently to avoid blocking or leak
             }
-
-            return redirect()->back()->with([
-                'msg' => __('Check Your Mail For Reset Password Link'),
-                'type' => 'success'
-            ]);
         }
 
         return redirect()->back()->with([
-            'msg' => __('Your Username or Email Is Wrong!!!'),
-            'type' => 'danger'
+            'msg' => __('If the username or email exists in our records, a password reset link has been sent.'),
+            'type' => 'success'
         ]);
     }
 

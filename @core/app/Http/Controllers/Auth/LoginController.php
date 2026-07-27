@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\RateLimiter;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
@@ -71,7 +73,19 @@ class LoginController extends Controller
             'password.required' => __('password required')
         ]);
 
+        $throttleKey = Str::transliterate(Str::lower($request->input('username')).'|'.$request->ip());
+
+        if (RateLimiter::tooManyAttempts($throttleKey, 5)) {
+            $seconds = RateLimiter::availableIn($throttleKey);
+            return response()->json([
+                'msg' => __('Too many login attempts. Please try again in :seconds seconds.', ['seconds' => $seconds]),
+                'type' => 'danger',
+                'status' => 'not_ok'
+            ]);
+        }
+
         if (Auth::guard('admin')->attempt(['username' => $request->username, 'password' => $request->password], $request->get('remember'))) {
+            RateLimiter::clear($throttleKey);
 
             return response()->json([
                'msg' => __('Login Success Redirecting'),
@@ -79,6 +93,9 @@ class LoginController extends Controller
                'status' => 'ok'
             ]);
         }
+
+        RateLimiter::hit($throttleKey, 60);
+
         return response()->json([
             'msg' => __('Your Username or Password Is Wrong !!'),
             'type' => 'danger',

@@ -292,6 +292,16 @@ class FrontendFormController extends Controller
 
     public function complain_submit(Request $request)
     {
+        $complainKey = 'complain|' . $request->ip();
+        if (\Illuminate\Support\Facades\RateLimiter::tooManyAttempts($complainKey, 3)) {
+            $seconds = \Illuminate\Support\Facades\RateLimiter::availableIn($complainKey);
+            return redirect()->back()->with([
+                'msg' => __('Too many submissions. Please wait :seconds seconds.', ['seconds' => $seconds]),
+                'type' => 'danger'
+            ]);
+        }
+        \Illuminate\Support\Facades\RateLimiter::hit($complainKey, 60);
+
         $this->validate($request, [
             'concerned_division' => 'nullable|string|max:191',
             'concerned_branch' => 'nullable|string|max:191',
@@ -314,6 +324,16 @@ class FrontendFormController extends Controller
             }
         }
 
+        $account_number = $request->account_number;
+        if ($request->has('has_account') && !empty($account_number)) {
+            $len = strlen($account_number);
+            if ($len > 4) {
+                $account_number = str_repeat('*', $len - 4) . substr($account_number, -4);
+            }
+        } else {
+            $account_number = null;
+        }
+
         $complaint = Complaint::create([
             'concerned_division' => $request->concerned_division,
             'concerned_branch' => $request->concerned_branch,
@@ -322,7 +342,7 @@ class FrontendFormController extends Controller
             'mobile' => $request->mobile,
             'email' => $request->email,
             'has_account' => $request->has('has_account'),
-            'account_number' => $request->has('has_account') ? $request->account_number : null,
+            'account_number' => $account_number,
             'nature_of_complain' => $request->nature_of_complain,
             'amount_involved' => $request->amount_involved,
             'details' => $request->details,

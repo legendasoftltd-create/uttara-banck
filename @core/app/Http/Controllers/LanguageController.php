@@ -59,7 +59,7 @@ class LanguageController extends Controller
         $this->validate($request,[
             'name' =>  'required|string:max:191',
             'direction' =>  'required|string:max:191',
-            'slug' => 'required|string:max:191',
+            'slug' => 'required|string|max:191|regex:/^[a-zA-Z0-9_\-]+$/',
             'status' => 'required|string:max:191',
         ]);
         Language::create([
@@ -84,6 +84,9 @@ class LanguageController extends Controller
 
     public function backend_edit_words($slug)
     {
+        if (preg_match('/[^a-zA-Z0-9_\-]/', $slug)) {
+            abort(400, 'Invalid slug');
+        }
         if (!file_exists(resource_path('lang/') . $slug . '_backend.json')){
             $backend_default_lang_data = file_get_contents(resource_path('lang') . '/backend_default.json');
             file_put_contents(resource_path('lang/') . $slug . '_backend.json', $backend_default_lang_data);
@@ -99,6 +102,9 @@ class LanguageController extends Controller
     }
     public function frontend_edit_words($slug)
     {
+        if (preg_match('/[^a-zA-Z0-9_\-]/', $slug)) {
+            abort(400, 'Invalid slug');
+        }
         if (!file_exists(resource_path('lang/') . $slug . '_frontend.json')){
             $frontend_default_lang_data = file_get_contents(resource_path('lang') . '/frontend_default.json');
             file_put_contents(resource_path('lang/') .$slug . '_frontend.json', $frontend_default_lang_data);
@@ -114,8 +120,11 @@ class LanguageController extends Controller
     }
 
     public function update_words(Request $request,$slug){
+        if (preg_match('/[^a-zA-Z0-9_\-]/', $slug)) {
+            abort(400, 'Invalid slug');
+        }
         $this->validate($request,[
-            'type' => 'required',
+            'type' => 'required|string|regex:/^[a-zA-Z0-9_\-]+$/',
             'string_key' => 'required',
             'translate_word' => 'required',
         ],[
@@ -275,7 +284,8 @@ class LanguageController extends Controller
     public function add_new_words(Request $request){
         // return $request;
         $this->validate($request,[
-            'lang_slug' => 'required|string',
+            'lang_slug' => 'required|string|regex:/^[a-zA-Z0-9_\-]+$/',
+            'type' => 'required|string|regex:/^[a-zA-Z0-9_\-]+$/',
             'new_string' => 'required|string',
             'translate_string' => 'required|string',
         ]);

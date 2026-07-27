@@ -279,7 +279,7 @@ class JobsController extends Controller
 
     public function delete_job_applicant(Request $request,$id){
         $job_details = JobApplicant::find($id);
-        $all_attachment = unserialize($job_details->attachment);
+        $all_attachment = unserialize($job_details->attachment, ['allowed_classes' => false]);
          if(is_array($all_attachment) || is_object($all_attachment)){
             foreach($all_attachment as $name => $path){
                 if(file_exists($path)){

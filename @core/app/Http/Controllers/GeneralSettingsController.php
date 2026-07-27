@@ -1124,8 +1124,17 @@ class GeneralSettingsController extends Controller
 
     public function delete_sitemap_settings(Request $request)
     {
-        if (file_exists($request->sitemap_name)) {
-            @unlink($request->sitemap_name);
+        $this->validate($request, [
+            'sitemap_name' => 'required|string',
+        ]);
+
+        $filename = basename($request->sitemap_name);
+
+        if (preg_match('/^sitemap-.*\.xml$/', $filename)) {
+            $sitemap_path = 'sitemap/' . $filename;
+            if (file_exists($sitemap_path)) {
+                @unlink($sitemap_path);
+            }
         }
         return redirect()->back()->with(['msg' => __('Sitemap Deleted...'), 'type' => 'danger']);
     }
