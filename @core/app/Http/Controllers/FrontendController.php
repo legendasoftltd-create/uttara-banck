@@ -1145,7 +1145,7 @@ ITEM;
             ]);
     }
 
-    public function products_category($id, $any)
+    public function products_category($id, $any = null)
     {
         $default_lang = Language::where('default', 1)->first();
         $lang = !empty(session()->get('lang')) ? session()->get('lang') : $default_lang->slug;
@@ -1162,7 +1162,7 @@ ITEM;
         ]);
     }
     
-    public function products_subcategory($id, $any)
+    public function products_subcategory($id, $any = null)
     {
         $all_products = Products::where(['status' => 'publish', 'subcategory_id' => $id])->orderBy('id', 'desc')->paginate(get_static_option('product_post_items'));
         $category_name = ProductSubCategory::find($id)->title;
