@@ -621,6 +621,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         'admin-home/useful-links',
                         'admin-home/useful-links/*',
                         'admin-home/visitors',
+                        'admin-home/audit-logs',
                         'admin-home/visitors/*'
                     ])) active @endif">
                         <a href="javascript:void(0)" aria-expanded="true"><i class="ti-settings"></i>
@@ -736,7 +737,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             @endif
                             @if(check_page_permission('audit_log_manage'))
                                 <li class="{{active_menu('admin-home/audit-logs')}}">
-                                    <a href="{{route('admin.audit.logs.all')}}"><i class="ti-shield"></i> {{__('Audit Trail')}}</a>
+                                    <a href="{{route('admin.audit.logs.all')}}">{{__('Audit Trail')}}</a>
                                 </li>
                             @endif
 
