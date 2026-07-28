@@ -354,142 +354,139 @@ Route::prefix('admin-home')->middleware(['setlang:backend'])->group(function () 
         /*----------------------------------------
            HOME PAGE: 12 (MEDICAL)
          -----------------------------------------*/
-        Route::group(['prefix' => '/home-12'], function () {
-            Route::get('/header-area', 'MedicalHomePageController@header_area')->name('admin.home12.header');
-            Route::post('/header-area', 'MedicalHomePageController@update_header_area');
-            Route::get('/about-area', 'MedicalHomePageController@about_area')->name('admin.home12.about');
-            Route::post('/about-area', 'MedicalHomePageController@update_about_area');
-            Route::get('/service-area', 'MedicalHomePageController@service_area')->name('admin.home12.service');
-            Route::post('/service-area', 'MedicalHomePageController@update_service_area');
-            Route::get('/cta-area', 'MedicalHomePageController@cta_area')->name('admin.home12.cta');
-            Route::post('/cta-area', 'MedicalHomePageController@update_cta_area');
-            Route::get('/appointment-area', 'MedicalHomePageController@appointment_area')->name('admin.home12.appointment');
-            Route::post('/appointment-area', 'MedicalHomePageController@update_appointment_area');
-            Route::post('/appointment-category-by-slug', 'MedicalHomePageController@appointment_category_by_slug')->name('admin.home12.appointment.category.by.slug');
-            Route::get('/case-study-area', 'MedicalHomePageController@case_study_area')->name('admin.home12.case.study');
-            Route::post('/case-study-area', 'MedicalHomePageController@update_case_study_area');
-            Route::get('/testimonial-area', 'MedicalHomePageController@testimonial_area')->name('admin.home12.testimonial');
-            Route::post('/testimonial-area', 'MedicalHomePageController@update_testimonial_area');
-            Route::get('/news-area', 'MedicalHomePageController@news_area')->name('admin.home12.news');
-            Route::post('/news-area', 'MedicalHomePageController@update_news_area');
-
-        });
+        // Route::group(['prefix' => '/home-12'], function () {
+        //     Route::get('/header-area', 'MedicalHomePageController@header_area')->name('admin.home12.header');
+        //     Route::post('/header-area', 'MedicalHomePageController@update_header_area');
+        //     Route::get('/about-area', 'MedicalHomePageController@about_area')->name('admin.home12.about');
+        //     Route::post('/about-area', 'MedicalHomePageController@update_about_area');
+        //     Route::get('/service-area', 'MedicalHomePageController@service_area')->name('admin.home12.service');
+        //     Route::post('/service-area', 'MedicalHomePageController@update_service_area');
+        //     Route::get('/cta-area', 'MedicalHomePageController@cta_area')->name('admin.home12.cta');
+        //     Route::post('/cta-area', 'MedicalHomePageController@update_cta_area');
+        //     Route::get('/appointment-area', 'MedicalHomePageController@appointment_area')->name('admin.home12.appointment');
+        //     Route::post('/appointment-area', 'MedicalHomePageController@update_appointment_area');
+        //     Route::post('/appointment-category-by-slug', 'MedicalHomePageController@appointment_category_by_slug')->name('admin.home12.appointment.category.by.slug');
+        //     Route::get('/case-study-area', 'MedicalHomePageController@case_study_area')->name('admin.home12.case.study');
+        //     Route::post('/case-study-area', 'MedicalHomePageController@update_case_study_area');
+        //     Route::get('/testimonial-area', 'MedicalHomePageController@testimonial_area')->name('admin.home12.testimonial');
+        //     Route::post('/testimonial-area', 'MedicalHomePageController@update_testimonial_area');
+        //     Route::get('/news-area', 'MedicalHomePageController@news_area')->name('admin.home12.news');
+        //     Route::post('/news-area', 'MedicalHomePageController@update_news_area');
+        // });
         /*-----------------------------------
            HOME 21 ROUTES
-        ------------------------------------*/
-        Route::group(['namespace' => 'Admin','prefix' => 'home-page-21'],function (){
-            /* header area */
-            Route::get('/header-area', 'CreativeAgencyHomePageManageController@header_area')->name('admin.home21.header');
-            Route::post('/header-area', 'CreativeAgencyHomePageManageController@header_area_update');
-
-            /* services area */
-            Route::get('/services-area', 'CreativeAgencyHomePageManageController@services_area')->name('admin.home21.services');
-            Route::post('/services-area', 'CreativeAgencyHomePageManageController@services_area_update');
-
-            /* project area */
-            Route::get('/project-area', 'CreativeAgencyHomePageManageController@project_area')->name('admin.home21.project');
-            Route::post('/project-area', 'CreativeAgencyHomePageManageController@project_area_update');
-
-            /* counterup area */
-            Route::get('/counterup-area', 'CreativeAgencyHomePageManageController@counterup_area')->name('admin.home21.counterup');
-            Route::post('/counterup-area', 'CreativeAgencyHomePageManageController@counterup_area_update');
-
-            /* blog area */
-            Route::get('/blog-area', 'CreativeAgencyHomePageManageController@blog_area')->name('admin.home21.blog');
-            Route::post('/blog-area', 'CreativeAgencyHomePageManageController@blog_area_update');
-
-            /* testimonial area */
-            Route::get('/testimonial-area', 'CreativeAgencyHomePageManageController@testimonial_area')->name('admin.home21.testimonial');
-            Route::post('/testimonial-area', 'CreativeAgencyHomePageManageController@testimonial_area_update');
-
-            /* contact area */
-            Route::get('/contact-area', 'CreativeAgencyHomePageManageController@contact_area')->name('admin.home21.contact');
-            Route::post('/contact-area', 'CreativeAgencyHomePageManageController@contact_area_update');
-
-            /* newsletter area */
-            Route::get('/newsletter-area', 'CreativeAgencyHomePageManageController@newsletter_area')->name('admin.home21.newsletter');
-            Route::post('/newsletter-area', 'CreativeAgencyHomePageManageController@newsletter_area_update');
-
-        }); //end home 21 routes group
+         ------------------------------------*/
+        // Route::group(['namespace' => 'Admin','prefix' => 'home-page-21'],function (){
+        //     /* header area */
+        //     Route::get('/header-area', 'CreativeAgencyHomePageManageController@header_area')->name('admin.home21.header');
+        //     Route::post('/header-area', 'CreativeAgencyHomePageManageController@header_area_update');
+        // 
+        //     /* services area */
+        //     Route::get('/services-area', 'CreativeAgencyHomePageManageController@services_area')->name('admin.home21.services');
+        //     Route::post('/services-area', 'CreativeAgencyHomePageManageController@services_area_update');
+        // 
+        //     /* project area */
+        //     Route::get('/project-area', 'CreativeAgencyHomePageManageController@project_area')->name('admin.home21.project');
+        //     Route::post('/project-area', 'CreativeAgencyHomePageManageController@project_area_update');
+        // 
+        //     /* counterup area */
+        //     Route::get('/counterup-area', 'CreativeAgencyHomePageManageController@counterup_area')->name('admin.home21.counterup');
+        //     Route::post('/counterup-area', 'CreativeAgencyHomePageManageController@counterup_area_update');
+        // 
+        //     /* blog area */
+        //     Route::get('/blog-area', 'CreativeAgencyHomePageManageController@blog_area')->name('admin.home21.blog');
+        //     Route::post('/blog-area', 'CreativeAgencyHomePageManageController@blog_area_update');
+        // 
+        //     /* testimonial area */
+        //     Route::get('/testimonial-area', 'CreativeAgencyHomePageManageController@testimonial_area')->name('admin.home21.testimonial');
+        //     Route::post('/testimonial-area', 'CreativeAgencyHomePageManageController@testimonial_area_update');
+        // 
+        //     /* contact area */
+        //     Route::get('/contact-area', 'CreativeAgencyHomePageManageController@contact_area')->name('admin.home21.contact');
+        //     Route::post('/contact-area', 'CreativeAgencyHomePageManageController@contact_area_update');
+        // 
+        //     /* newsletter area */
+        //     Route::get('/newsletter-area', 'CreativeAgencyHomePageManageController@newsletter_area')->name('admin.home21.newsletter');
+        //     Route::post('/newsletter-area', 'CreativeAgencyHomePageManageController@newsletter_area_update');
+        // }); //end home 21 routes group
 
         /*-----------------------------------
-         HOME 20 ROUTES
-      ------------------------------------*/
-        Route::group(['namespace' => 'Admin','prefix' => 'home-page-20'],function (){
-            /* breaking news area */
-            Route::get('/breaking-news-area', 'NewspaperHomePageManageController@breaking_news_area')->name('admin.home20.breaking.news');
-            Route::post('/breaking-news-area', 'NewspaperHomePageManageController@breaking_news_area_update');
-
-            /* header area */
-            Route::get('/header-area', 'NewspaperHomePageManageController@header_area')->name('admin.home20.header');
-            Route::post('/header-area', 'NewspaperHomePageManageController@header_area_update');
-
-            /* advertisement area */
-            Route::get('/advertisement-area', 'NewspaperHomePageManageController@advertisement_area')->name('admin.home20.advertisement');
-            Route::post('/advertisement-area', 'NewspaperHomePageManageController@advertisement_area_update');
-
-            /* popular area */
-            Route::get('/popular-news-area', 'NewspaperHomePageManageController@popular_area')->name('admin.home20.popular');
-            Route::post('/popular-news-area', 'NewspaperHomePageManageController@popular_area_update');
-            /* video area */
-            Route::get('/video-news-area', 'NewspaperHomePageManageController@video_area')->name('admin.home20.video');
-            Route::post('/video-news-area', 'NewspaperHomePageManageController@video_area_update');
-
-            /* Sports News area */
-            Route::get('/sports-news-area', 'NewspaperHomePageManageController@sports_area')->name('admin.home20.sports');
-            Route::post('/sports-news-area', 'NewspaperHomePageManageController@sports_area_update');
-
-            /* Hot News area */
-            Route::get('/hot-news-area', 'NewspaperHomePageManageController@hot_area')->name('admin.home20.hot');
-            Route::post('/hot-news-area', 'NewspaperHomePageManageController@hot_area_update');
-
-        }); // home 20 routes group
+           HOME 20 ROUTES
+        ------------------------------------*/
+        // Route::group(['namespace' => 'Admin','prefix' => 'home-page-20'],function (){
+        //     /* breaking news area */
+        //     Route::get('/breaking-news-area', 'NewspaperHomePageManageController@breaking_news_area')->name('admin.home20.breaking.news');
+        //     Route::post('/breaking-news-area', 'NewspaperHomePageManageController@breaking_news_area_update');
+        // 
+        //     /* header area */
+        //     Route::get('/header-area', 'NewspaperHomePageManageController@header_area')->name('admin.home20.header');
+        //     Route::post('/header-area', 'NewspaperHomePageManageController@header_area_update');
+        // 
+        //     /* advertisement area */
+        //     Route::get('/advertisement-area', 'NewspaperHomePageManageController@advertisement_area')->name('admin.home20.advertisement');
+        //     Route::post('/advertisement-area', 'NewspaperHomePageManageController@advertisement_area_update');
+        // 
+        //     /* popular area */
+        //     Route::get('/popular-news-area', 'NewspaperHomePageManageController@popular_area')->name('admin.home20.popular');
+        //     Route::post('/popular-news-area', 'NewspaperHomePageManageController@popular_area_update');
+        //     /* video area */
+        //     Route::get('/video-news-area', 'NewspaperHomePageManageController@video_area')->name('admin.home20.video');
+        //     Route::post('/video-news-area', 'NewspaperHomePageManageController@video_area_update');
+        // 
+        //     /* Sports News area */
+        //     Route::get('/sports-news-area', 'NewspaperHomePageManageController@sports_area')->name('admin.home20.sports');
+        //     Route::post('/sports-news-area', 'NewspaperHomePageManageController@sports_area_update');
+        // 
+        //     /* Hot News area */
+        //     Route::get('/hot-news-area', 'NewspaperHomePageManageController@hot_area')->name('admin.home20.hot');
+        //     Route::post('/hot-news-area', 'NewspaperHomePageManageController@hot_area_update');
+        // 
+        // }); // home 20 routes group
 
         /*-----------------------------------
             HOME 19 ROUTES
         ------------------------------------*/
-        Route::group(['namespace' => 'Admin','prefix' => 'home-page-19'],function (){
-            /* header area */
-            Route::get('/header-area', 'FashionEcommerceHomePageController@header_area')->name('admin.home19.header');
-            Route::post('/header-area', 'FashionEcommerceHomePageController@header_area_update');
-
-            /* Today's deal area */
-            Route::get('/todays-deal-area', 'FashionEcommerceHomePageController@todays_deal_area')->name('admin.home19.todays.deal');
-            Route::post('/todays-deal-area', 'FashionEcommerceHomePageController@todays_deal_area_update');
-
-            /* Updated area */
-            Route::get('/updated-area', 'FashionEcommerceHomePageController@updated_area')->name('admin.home19.updated.area');
-            Route::post('/updated-area', 'FashionEcommerceHomePageController@updated_area_update');
-
-            /* Store area */
-            Route::get('/store-area', 'FashionEcommerceHomePageController@store_area')->name('admin.home19.store.area');
-            Route::post('/store-area', 'FashionEcommerceHomePageController@store_area_update');
-
-            /* Clothing area */
-            Route::get('/clothing-area', 'FashionEcommerceHomePageController@clothing_area')->name('admin.home19.clothing.area');
-            Route::post('/clothing-area', 'FashionEcommerceHomePageController@clothing_area_update');
-
-            /* Popular area */
-            Route::get('/popular-area', 'FashionEcommerceHomePageController@popular_area')->name('admin.home19.popular.area');
-            Route::post('/popular-area', 'FashionEcommerceHomePageController@popular_area_update');
-
-            /* Instagram area */
-            Route::get('/instagram-area', 'FashionEcommerceHomePageController@instagram_area')->name('admin.home19.instagram.area');
-            Route::post('/instagram-area', 'FashionEcommerceHomePageController@instagram_area_update');
-
-            /* Promoo area */
-            Route::get('/promo-area', 'FashionEcommerceHomePageController@promo_area')->name('admin.home19.promo.area');
-            Route::post('/promo-area', 'FashionEcommerceHomePageController@promo_area_update');
-            Route::post('/blog-by-lang', 'FashionEcommerceHomePageController@product_by_lang')->name('admin.product.by.lang');
-            Route::post('/blog-category-by-lang', 'FashionEcommerceHomePageController@product_category_by_lang')->name('admin.product.category.by.lang');
-
-        }); // home 19 routes group
+        // Route::group(['namespace' => 'Admin','prefix' => 'home-page-19'],function (){
+        //     /* header area */
+        //     Route::get('/header-area', 'FashionEcommerceHomePageController@header_area')->name('admin.home19.header');
+        //     Route::post('/header-area', 'FashionEcommerceHomePageController@header_area_update');
+        // 
+        //     /* Today's deal area */
+        //     Route::get('/todays-deal-area', 'FashionEcommerceHomePageController@todays_deal_area')->name('admin.home19.todays.deal');
+        //     Route::post('/todays-deal-area', 'FashionEcommerceHomePageController@todays_deal_area_update');
+        // 
+        //     /* Updated area */
+        //     Route::get('/updated-area', 'FashionEcommerceHomePageController@updated_area')->name('admin.home19.updated.area');
+        //     Route::post('/updated-area', 'FashionEcommerceHomePageController@updated_area_update');
+        // 
+        //     /* Store area */
+        //     Route::get('/store-area', 'FashionEcommerceHomePageController@store_area')->name('admin.home19.store.area');
+        //     Route::post('/store-area', 'FashionEcommerceHomePageController@store_area_update');
+        // 
+        //     /* Clothing area */
+        //     Route::get('/clothing-area', 'FashionEcommerceHomePageController@clothing_area')->name('admin.home19.clothing.area');
+        //     Route::post('/clothing-area', 'FashionEcommerceHomePageController@clothing_area_update');
+        // 
+        //     /* Popular area */
+        //     Route::get('/popular-area', 'FashionEcommerceHomePageController@popular_area')->name('admin.home19.popular.area');
+        //     Route::post('/popular-area', 'FashionEcommerceHomePageController@popular_area_update');
+        // 
+        //     /* Instagram area */
+        //     Route::get('/instagram-area', 'FashionEcommerceHomePageController@instagram_area')->name('admin.home19.instagram.area');
+        //     Route::post('/instagram-area', 'FashionEcommerceHomePageController@instagram_area_update');
+        // 
+        //     /* Promoo area */
+        //     Route::get('/promo-area', 'FashionEcommerceHomePageController@promo_area')->name('admin.home19.promo.area');
+        //     Route::post('/promo-area', 'FashionEcommerceHomePageController@promo_area_update');
+        //     Route::post('/blog-by-lang', 'FashionEcommerceHomePageController@product_by_lang')->name('admin.product.by.lang');
+        //     Route::post('/blog-category-by-lang', 'FashionEcommerceHomePageController@product_category_by_lang')->name('admin.product.category.by.lang');
+        // }); // home 19 routes group
 
 
         /*----------------------------------------
          HOME PAGE: DONATION BY LANGUAGE
         -----------------------------------------*/
-        Route::post('/blog-category-by-lang', 'Admin\NewspaperHomePageManageController@blog_category_by_lang')->name('admin.blog.category.by.lang');
+        // Route::post('/blog-category-by-lang', 'Admin\NewspaperHomePageManageController@blog_category_by_lang')->name('admin.blog.category.by.lang');
     });
 
 
@@ -547,28 +544,26 @@ Route::prefix('admin-home')->middleware(['setlang:backend'])->group(function () 
     /*==============================================
           FEEDBACK MODULE ROUTES
      ==============================================*/
-    Route::prefix('feedback-page')->middleware(['adminPermissionCheck:Feedback Page Manage'])->group(function () {
-
-        /*------------------
-            PAGE SETTINGS
-        ------------------*/
-        Route::get('/page-settings', 'FeedbackController@page_settings')->name('admin.feedback.page.settings');
-        Route::post('/page-settings', 'FeedbackController@update_page_settings');
-        /*------------------
-            FORM BUILDER
-       ------------------*/
-        Route::get('/form-builder', 'FeedbackController@form_builder')->name('admin.feedback.page.form.builder');
-        Route::post('/form-builder', 'FeedbackController@update_form_builder');
-        /*------------------
-           ALL FEEDBACK
-        -------------------*/
-        Route::group(['prefix' => 'all-feedback'],function (){
-            Route::get('/', 'FeedbackController@all_feedback')->name('admin.feedback.all');
-            Route::post('/delete/{id}', 'FeedbackController@delete_feedback')->name('admin.feedback.delete');
-            Route::post('/bulk-action', 'FeedbackController@bulk_action')->name('admin.feedback.bulk.action');
-        });
-
-    });
+    // Route::prefix('feedback-page')->middleware(['adminPermissionCheck:Feedback Page Manage'])->group(function () {
+    //     /*------------------
+    //         PAGE SETTINGS
+    //     ------------------*/
+    //     Route::get('/page-settings', 'FeedbackController@page_settings')->name('admin.feedback.page.settings');
+    //     Route::post('/page-settings', 'FeedbackController@update_page_settings');
+    //     /*------------------
+    //         FORM BUILDER
+    //    ------------------*/
+    //     Route::get('/form-builder', 'FeedbackController@form_builder')->name('admin.feedback.page.form.builder');
+    //     Route::post('/form-builder', 'FeedbackController@update_form_builder');
+    //     /*------------------
+    //        ALL FEEDBACK
+    //     -------------------*/
+    //     Route::group(['prefix' => 'all-feedback'],function (){
+    //         Route::get('/', 'FeedbackController@all_feedback')->name('admin.feedback.all');
+    //         Route::post('/delete/{id}', 'FeedbackController@delete_feedback')->name('admin.feedback.delete');
+    //         Route::post('/bulk-action', 'FeedbackController@bulk_action')->name('admin.feedback.bulk.action');
+    //     });
+    // });
 
     /*==============================================
       IMAGE GALLERY ROUTES
@@ -748,43 +743,43 @@ Route::prefix('admin-home')->middleware(['setlang:backend'])->group(function () 
             COURSE EMAIL TEMPLATE ROUTE
         ==========================================*/
         /* course enroll admin */
-        Route::get('/course-enroll-admin', 'CourseEmailTemplateController@course_enroll_admin')->name('admin.email.template.course.enroll.admin');
-        Route::post('/course-enroll-admin', 'CourseEmailTemplateController@update_courese_enroll_admin');
+        // Route::get('/course-enroll-admin', 'CourseEmailTemplateController@course_enroll_admin')->name('admin.email.template.course.enroll.admin');
+        // Route::post('/course-enroll-admin', 'CourseEmailTemplateController@update_courese_enroll_admin');
         /* course enroll user */
-        Route::get('/course-enroll-user', 'CourseEmailTemplateController@course_enroll_user')->name('admin.email.template.course.enroll.user');
-        Route::post('/course-enroll-user', 'CourseEmailTemplateController@update_course_enroll_user');
-
-        /* course payment accept */
-        Route::get('/course-payment-accept', 'CourseEmailTemplateController@course_payment_accept')->name('admin.email.template.course.payment.accept');
-        Route::post('/course-payment-accept', 'CourseEmailTemplateController@update_course_payment_accept');
-
-        /* course reminder mail */
-        Route::get('/course-reminder-mail', 'CourseEmailTemplateController@course_reminder_mail')->name('admin.email.template.course.reminder.mail');
-        Route::post('/course-reminder-mail', 'CourseEmailTemplateController@update_course_reminder_mail');
+        // Route::get('/course-enroll-user', 'CourseEmailTemplateController@course_enroll_user')->name('admin.email.template.course.enroll.user');
+        // Route::post('/course-enroll-user', 'CourseEmailTemplateController@update_course_enroll_user');
+        // 
+        // /* course payment accept */
+        // Route::get('/course-payment-accept', 'CourseEmailTemplateController@course_payment_accept')->name('admin.email.template.course.payment.accept');
+        // Route::post('/course-payment-accept', 'CourseEmailTemplateController@update_course_payment_accept');
+        // 
+        // /* course reminder mail */
+        // Route::get('/course-reminder-mail', 'CourseEmailTemplateController@course_reminder_mail')->name('admin.email.template.course.reminder.mail');
+        // Route::post('/course-reminder-mail', 'CourseEmailTemplateController@update_course_reminder_mail');
 
         /*==========================================
            APPOINTMENT EMAIL TEMPLATE ROUTE
        ==========================================*/
 
         /* appointment booking mail admin */
-        Route::get('/appointment-booking-admin', 'AppointmentEmailTempalteController@appointment_booking_admin')->name('admin.email.template.appointment.booking.admin');
-        Route::post('/appointment-booking-admin', 'AppointmentEmailTempalteController@update_appointment_booking_admin');
-
-        /* appointment booking mail user */
-        Route::get('/appointment-booking-user', 'AppointmentEmailTempalteController@appointment_booking_user')->name('admin.email.template.appointment.booking.user');
-        Route::post('/appointment-booking-user', 'AppointmentEmailTempalteController@update_appointment_booking_user');
-
-        /* appointment booking update */
-        Route::get('/appointment-booking-update', 'AppointmentEmailTempalteController@appointment_booking_update')->name('admin.email.template.appointment.booking.update');
-        Route::post('/appointment-booking-update', 'AppointmentEmailTempalteController@update_appointment_booking_update');
-
-        /* appointment payment accept */
-        Route::get('/appointment-payment-accept', 'AppointmentEmailTempalteController@appointment_payment_accept')->name('admin.email.template.appointment.payment.accept');
-        Route::post('/appointment-payment-accept', 'AppointmentEmailTempalteController@update_appointment_payment_accept');
-
-        /* appointment reminder mail */
-        Route::get('/appointment-reminder-mail', 'AppointmentEmailTempalteController@appointment_reminder_mail')->name('admin.email.template.appointment.reminder.mail');
-        Route::post('/appointment-reminder-mail', 'AppointmentEmailTempalteController@update_appointment_reminder_mail');
+        // Route::get('/appointment-booking-admin', 'AppointmentEmailTempalteController@appointment_booking_admin')->name('admin.email.template.appointment.booking.admin');
+        // Route::post('/appointment-booking-admin', 'AppointmentEmailTempalteController@update_appointment_booking_admin');
+        // 
+        // /* appointment booking mail user */
+        // Route::get('/appointment-booking-user', 'AppointmentEmailTempalteController@appointment_booking_user')->name('admin.email.template.appointment.booking.user');
+        // Route::post('/appointment-booking-user', 'AppointmentEmailTempalteController@update_appointment_booking_user');
+        // 
+        // /* appointment booking update */
+        // Route::get('/appointment-booking-update', 'AppointmentEmailTempalteController@appointment_booking_update')->name('admin.email.template.appointment.booking.update');
+        // Route::post('/appointment-booking-update', 'AppointmentEmailTempalteController@update_appointment_booking_update');
+        // 
+        // /* appointment payment accept */
+        // Route::get('/appointment-payment-accept', 'AppointmentEmailTempalteController@appointment_payment_accept')->name('admin.email.template.appointment.payment.accept');
+        // Route::post('/appointment-payment-accept', 'AppointmentEmailTempalteController@update_appointment_payment_accept');
+        // 
+        // /* appointment reminder mail */
+        // Route::get('/appointment-reminder-mail', 'AppointmentEmailTempalteController@appointment_reminder_mail')->name('admin.email.template.appointment.reminder.mail');
+        // Route::post('/appointment-reminder-mail', 'AppointmentEmailTempalteController@update_appointment_reminder_mail');
 
         /*==========================================
           QUOTE EMAIL TEMPLATE ROUTE
@@ -798,54 +793,54 @@ Route::prefix('admin-home')->middleware(['setlang:backend'])->group(function () 
         ==========================================*/
 
         /* package order mail admin */
-        Route::get('/package-order-admin', 'PackageOrderEmailTemplateController@package_order_admin')->name('admin.email.template.package.order.admin');
-        Route::post('/package-order-admin', 'PackageOrderEmailTemplateController@update_package_order_admin');
-
-        /* package order mail user */
-        Route::get('/package-order-user', 'PackageOrderEmailTemplateController@package_order_user')->name('admin.email.template.package.order.user');
-        Route::post('/package-order-user', 'PackageOrderEmailTemplateController@update_package_order_user');
-
-        /* package order status change */
-        Route::get('/package-order-status-change', 'PackageOrderEmailTemplateController@package_order_status_change')->name('admin.email.template.package.order.status.change');
-        Route::post('/package-order-status-change', 'PackageOrderEmailTemplateController@update_package_order_status_change');
-
-        /* package order payment accept */
-        Route::get('/package-order-payment-accept', 'PackageOrderEmailTemplateController@package_order_payment_accept')->name('admin.email.template.package.order.payment.accept');
-        Route::post('/package-order-payment-accept', 'PackageOrderEmailTemplateController@update_package_order_payment_accept');
-
-        /* package order reminder mail */
-        Route::get('/package-order-reminder-mail', 'PackageOrderEmailTemplateController@package_order_reminder_mail')->name('admin.email.template.package.order.reminder.mail');
-        Route::post('/package-order-reminder-mail', 'PackageOrderEmailTemplateController@update_package_order_reminder_mail');
+        // Route::get('/package-order-admin', 'PackageOrderEmailTemplateController@package_order_admin')->name('admin.email.template.package.order.admin');
+        // Route::post('/package-order-admin', 'PackageOrderEmailTemplateController@update_package_order_admin');
+        // 
+        // /* package order mail user */
+        // Route::get('/package-order-user', 'PackageOrderEmailTemplateController@package_order_user')->name('admin.email.template.package.order.user');
+        // Route::post('/package-order-user', 'PackageOrderEmailTemplateController@update_package_order_user');
+        // 
+        // /* package order status change */
+        // Route::get('/package-order-status-change', 'PackageOrderEmailTemplateController@package_order_status_change')->name('admin.email.template.package.order.status.change');
+        // Route::post('/package-order-status-change', 'PackageOrderEmailTemplateController@update_package_order_status_change');
+        // 
+        // /* package order payment accept */
+        // Route::get('/package-order-payment-accept', 'PackageOrderEmailTemplateController@package_order_payment_accept')->name('admin.email.template.package.order.payment.accept');
+        // Route::post('/package-order-payment-accept', 'PackageOrderEmailTemplateController@update_package_order_payment_accept');
+        // 
+        // /* package order reminder mail */
+        // Route::get('/package-order-reminder-mail', 'PackageOrderEmailTemplateController@package_order_reminder_mail')->name('admin.email.template.package.order.reminder.mail');
+        // Route::post('/package-order-reminder-mail', 'PackageOrderEmailTemplateController@update_package_order_reminder_mail');
 
         /*==========================================
            JOB APPLICATION EMAIL TEMPLATE ROUTE
          ==========================================*/
         /* package order mail admin */
-        Route::get('/job-application-admin', 'JobApplicantEmailTemplateController@job_application_admin')->name('admin.email.template.job.application.admin');
-        Route::post('/job-application-admin', 'JobApplicantEmailTemplateController@update_job_application_admin');
-
-        /* package order mail user */
-        Route::get('/job-application-user', 'JobApplicantEmailTemplateController@job_application_user')->name('admin.email.template.job.application.user');
-        Route::post('/job-application-user', 'JobApplicantEmailTemplateController@update_job_application_user');
+        // Route::get('/job-application-admin', 'JobApplicantEmailTemplateController@job_application_admin')->name('admin.email.template.job.application.admin');
+        // Route::post('/job-application-admin', 'JobApplicantEmailTemplateController@update_job_application_admin');
+        // 
+        // /* package order mail user */
+        // Route::get('/job-application-user', 'JobApplicantEmailTemplateController@job_application_user')->name('admin.email.template.job.application.user');
+        // Route::post('/job-application-user', 'JobApplicantEmailTemplateController@update_job_application_user');
 
         /*==========================================
             EVENT EMAIL TEMPLATE ROUTE
         ==========================================*/
 
         /* event order mail admin */
-        Route::get('/event-attendance-mail-admin', 'EventEmailTemplateController@event_attendance_mail_admin')->name('admin.email.template.event.attendance.mail.admin');
-        Route::post('/event-attendance-mail-admin', 'EventEmailTemplateController@update_event_attendance_mail_admin');
-
-        /* event order mail user */
-        Route::get('/event-attendance-mail-user', 'EventEmailTemplateController@event_attendance_mail_user')->name('admin.email.template.event.attendance.mail.user');
-        Route::post('/event-attendance-mail-user', 'EventEmailTemplateController@update_event_attendance_mail_user');
-        /* event order payment accept */
-        Route::get('/event-attendance-mail-payment-accept', 'EventEmailTemplateController@event_attendance_mail_payment_accept')->name('admin.email.template.event.attendance.mail.payment.accept');
-        Route::post('/event-attendance-mail-payment-accept', 'EventEmailTemplateController@update_event_attendance_mail_payment_accept');
-
-        /* event order reminder mail */
-        Route::get('/event-attendance-mail-reminder-mail', 'EventEmailTemplateController@event_attendance_mail_reminder_mail')->name('admin.email.template.event.attendance.mail.reminder.mail');
-        Route::post('/event-attendance-mail-reminder-mail', 'EventEmailTemplateController@update_event_attendance_mail_reminder_mail');
+        // Route::get('/event-attendance-mail-admin', 'EventEmailTemplateController@event_attendance_mail_admin')->name('admin.email.template.event.attendance.mail.admin');
+        // Route::post('/event-attendance-mail-admin', 'EventEmailTemplateController@update_event_attendance_mail_admin');
+        // 
+        // /* event order mail user */
+        // Route::get('/event-attendance-mail-user', 'EventEmailTemplateController@event_attendance_mail_user')->name('admin.email.template.event.attendance.mail.user');
+        // Route::post('/event-attendance-mail-user', 'EventEmailTemplateController@update_event_attendance_mail_user');
+        // /* event order payment accept */
+        // Route::get('/event-attendance-mail-payment-accept', 'EventEmailTemplateController@event_attendance_mail_payment_accept')->name('admin.email.template.event.attendance.mail.payment.accept');
+        // Route::post('/event-attendance-mail-payment-accept', 'EventEmailTemplateController@update_event_attendance_mail_payment_accept');
+        // 
+        // /* event order reminder mail */
+        // Route::get('/event-attendance-mail-reminder-mail', 'EventEmailTemplateController@event_attendance_mail_reminder_mail')->name('admin.email.template.event.attendance.mail.reminder.mail');
+        // Route::post('/event-attendance-mail-reminder-mail', 'EventEmailTemplateController@update_event_attendance_mail_reminder_mail');
 
         /*==========================================
           PRODUCTS EMAIL TEMPLATE ROUTE
@@ -876,20 +871,20 @@ Route::prefix('admin-home')->middleware(['setlang:backend'])->group(function () 
         ==========================================*/
 
         /* donation mail admin */
-        Route::get('/donation-mail-admin', 'DonationEmailTemplateController@donation_mail_admin')->name('admin.email.template.donation.mail.admin');
-        Route::post('/donation-mail-admin', 'DonationEmailTemplateController@update_donation_mail_admin');
-
-        /* donation mail user */
-        Route::get('/donation-mail-user', 'DonationEmailTemplateController@donation_mail_user')->name('admin.email.template.donation.mail.user');
-        Route::post('/donation-mail-user', 'DonationEmailTemplateController@update_donation_mail_user');
-
-        /* donation payment accept */
-        Route::get('/donation-mail-payment-accept', 'DonationEmailTemplateController@donation_mail_payment_accept')->name('admin.email.template.donation.mail.payment.accept');
-        Route::post('/donation-mail-payment-accept', 'DonationEmailTemplateController@update_donation_mail_payment_accept');
-
-        /* donation reminder mail */
-        Route::get('/donation-mail-reminder-mail', 'DonationEmailTemplateController@donation_mail_reminder_mail')->name('admin.email.template.donation.mail.reminder.mail');
-        Route::post('/donation-mail-reminder-mail', 'DonationEmailTemplateController@update_donation_mail_reminder_mail');
+        // Route::get('/donation-mail-admin', 'DonationEmailTemplateController@donation_mail_admin')->name('admin.email.template.donation.mail.admin');
+        // Route::post('/donation-mail-admin', 'DonationEmailTemplateController@update_donation_mail_admin');
+        // 
+        // /* donation mail user */
+        // Route::get('/donation-mail-user', 'DonationEmailTemplateController@donation_mail_user')->name('admin.email.template.donation.mail.user');
+        // Route::post('/donation-mail-user', 'DonationEmailTemplateController@update_donation_mail_user');
+        // 
+        // /* donation payment accept */
+        // Route::get('/donation-mail-payment-accept', 'DonationEmailTemplateController@donation_mail_payment_accept')->name('admin.email.template.donation.mail.payment.accept');
+        // Route::post('/donation-mail-payment-accept', 'DonationEmailTemplateController@update_donation_mail_payment_accept');
+        // 
+        // /* donation reminder mail */
+        // Route::get('/donation-mail-reminder-mail', 'DonationEmailTemplateController@donation_mail_reminder_mail')->name('admin.email.template.donation.mail.reminder.mail');
+        // Route::post('/donation-mail-reminder-mail', 'DonationEmailTemplateController@update_donation_mail_reminder_mail');
 
 
     });
@@ -1247,94 +1242,95 @@ Route::prefix('admin-home')->middleware(['setlang:backend'])->group(function () 
     /*==============================================
            EVENTS MODULE ROUTES
      ==============================================*/
-    Route::prefix('events')->middleware(['adminPermissionCheck:Events Manage', 'moduleCheck:events_module_status' ])->group(function () {
-
-        /*----------------------------------------
-            EVENTS MODULE: ROUTEs
-        ----------------------------------------*/
-        Route::get('/all', 'EventsController@all_events')->name('admin.events.all');
-        Route::get('/new', 'EventsController@new_event')->name('admin.events.new');
-        Route::post('/new', 'EventsController@store_event');
-        Route::get('/edit/{id}', 'EventsController@edit_event')->name('admin.events.edit');
-        Route::post('/update', 'EventsController@update_event')->name('admin.events.update');
-        Route::post('/delete/{id}', 'EventsController@delete_event')->name('admin.events.delete');
-        Route::post('/clone', 'EventsController@clone_event')->name('admin.events.clone');
-        Route::post('/bulk-action', 'EventsController@bulk_action')->name('admin.events.bulk.action');
-        Route::post('/slug-check', 'EventsController@slug_check')->name('admin.events.slug.check');
-
-        /*----------------------------------------
-            EVENTS MODULE: PAGE SETTINGS
-        ----------------------------------------*/
-        Route::get('/page-settings', 'EventsController@page_settings')->name('admin.events.page.settings');
-        Route::post('/page-settings', 'EventsController@update_page_settings');
-        /*----------------------------------------
-            EVENTS MODULE: SUCCESS PAGE SETTINGS
-        ----------------------------------------*/
-
-        Route::get('/payment-success-page-settings', 'EventsController@payment_success_page_settings')->name('admin.events.payment.success.page.settings');
-        Route::post('/payment-success-page-settings', 'EventsController@update_payment_success_page_settings');
-        /*----------------------------------------
-          EVENTS MODULE: CANCEL PAGE SETTINGS
-        ----------------------------------------*/
-        Route::get('/payment-cancel-pag-settings', 'EventsController@payment_cancel_page_settings')->name('admin.events.payment.cancel.page.settings');
-        Route::post('/payment-cancel-pag-settings', 'EventsController@update_payment_cancel_page_settings');
-
-        /*----------------------------------------
-         EVENTS MODULE: SETTINGS
-       ----------------------------------------*/
-        Route::get('/settings', 'EventsController@settings')->name('admin.events.settings');
-        Route::post('/settings', 'EventsController@update_settings');
-
-        /*----------------------------------------
-          EVENTS MODULE: SINGLE PAGE SETTINGS
-        ----------------------------------------*/
-        Route::get('/single-page-settings', 'EventsController@single_page_settings')->name('admin.events.single.page.settings');
-        Route::post('/single-page-settings', 'EventsController@update_single_page_settings');
-        Route::get('/attendance', 'EventsController@event_attendance')->name('admin.events.attendance');
-        Route::post('/attendance', 'EventsController@update_event_attendance');
-
-        /*----------------------------------------
-         EVENTS MODULE: ATTENDANCE SETTINGS
-       ----------------------------------------*/
-        //event attendance logs
-        Route::group(['prefix' => 'attendance'],function (){
-            Route::get('/all', 'EventsController@event_attendance_logs')->name('admin.event.attendance.logs');
-            Route::post('/all', 'EventsController@update_event_attendance_logs_status');
-            Route::post('/delete/{id}', 'EventsController@delete_event_attendance_logs')->name('admin.event.attendance.logs.delete');
-            Route::post('/send-mail', 'EventsController@send_mail_event_attendance_logs')->name('admin.event.attendance.send.mail');
-            Route::post('/bulk-action', 'EventsController@attendance_logs_bulk_action')->name('admin.event.attendance.bulk.action');
-        });
-
-        /*----------------------------------------
-           EVENTS MODULE: PAYMENT LOGS
-         ----------------------------------------*/
-        Route::group(['prefix' => 'event-payment-logs'],function (){
-            Route::get('/', 'EventsController@event_payment_logs')->name('admin.event.payment.logs');
-            Route::post('/delete/{id}', 'EventsController@delete_event_payment_logs')->name('admin.event.payment.delete');
-            Route::post('/approve/{id}', 'EventsController@approve_event_payment')->name('admin.event.payment.approve');
-            Route::post('/bulk-action', 'EventsController@payment_logs_bulk_action')->name('admin.event.payment.bulk.action');
-        });
-
-        /*----------------------------------------
-        EVENTS MODULE: CATEGORY ROUTES
-         ----------------------------------------*/
-        Route::group(['prefix' => 'category'],function (){
-            //event category
-            Route::get('/', 'EventsCategoryController@all_events_category')->name('admin.events.category.all');
-            Route::post('/new', 'EventsCategoryController@store_events_category')->name('admin.events.category.new');
-            Route::post('/update', 'EventsCategoryController@update_events_category')->name('admin.events.category.update');
-            Route::post('/delete/{id}', 'EventsCategoryController@delete_events_category')->name('admin.events.category.delete');
-            Route::post('/lang', 'EventsCategoryController@Category_by_language_slug')->name('admin.events.category.by.lang');
-            Route::post('/bulk-action', 'EventsCategoryController@bulk_action')->name('admin.events.category.bulk.action');
-        });
-
-        /*----------------------------------------
-        EVENTS MODULE: OTHERS ROUTES
-        ----------------------------------------*/
-        Route::post('/event-attendance/reminder', 'EventsController@event_attedance_reminder')->name('admin.event.attendance.reminder');
-        Route::get('/payment/report', 'EventsController@payment_report')->name('admin.event.payment.report');
-        Route::get('/attendance/report', 'EventsController@attendance_report')->name('admin.event.attendance.report');
-    });
+    // Route::prefix('events')->middleware(['adminPermissionCheck:Events Manage', 'moduleCheck:events_module_status' ])->group(function () {
+    // 
+    //     /*----------------------------------------
+    //         EVENTS MODULE: ROUTEs
+    //     ----------------------------------------*/
+    //     Route::get('/all', 'EventsController@all_events')->name('admin.events.all');
+    //     Route::get('/new', 'EventsController@new_event')->name('admin.events.new');
+    //     Route::post('/new', 'EventsController@store_event');
+    //     Route::get('/edit/{id}', 'EventsController@edit_event')->name('admin.events.edit');
+    //     Route::post('/update', 'EventsController@update_event')->name('admin.events.update');
+    //     Route::post('/delete/{id}', 'EventsController@delete_event')->name('admin.events.delete');
+    //     Route::post('/clone', 'EventsController@clone_event')->name('admin.events.clone');
+    //     Route::post('/bulk-action', 'EventsController@bulk_action')->name('admin.events.bulk.action');
+    //     Route::post('/slug-check', 'EventsController@slug_check')->name('admin.events.slug.check');
+    // 
+    //     /*----------------------------------------
+    //         EVENTS MODULE: PAGE SETTINGS
+    //     ----------------------------------------*/
+    //     Route::get('/page-settings', 'EventsController@page_settings')->name('admin.events.page.settings');
+    //     Route::post('/page-settings', 'EventsController@update_page_settings');
+    //     /*----------------------------------------
+    //         EVENTS MODULE: SUCCESS PAGE SETTINGS
+    //     ----------------------------------------*/
+    // 
+    //     Route::get('/payment-success-page-settings', 'EventsController@payment_success_page_settings')->name('admin.events.payment.success.page.settings');
+    //     Route::post('/payment-success-page-settings', 'EventsController@update_payment_success_page_settings');
+    //     /*----------------------------------------
+    //       EVENTS MODULE: CANCEL PAGE SETTINGS
+    //     ----------------------------------------*/
+    //     Route::get('/payment-cancel-pag-settings', 'EventsController@payment_cancel_page_settings')->name('admin.events.payment.cancel.page.settings');
+    //     Route::post('/payment-cancel-pag-settings', 'EventsController@update_payment_cancel_page_settings');
+    // 
+    //     /*----------------------------------------
+    //      EVENTS MODULE: SETTINGS
+    //    ----------------------------------------*/
+    //     Route::get('/settings', 'EventsController@settings')->name('admin.events.settings');
+    //     Route::post('/settings', 'EventsController@update_settings');
+    // 
+    //     /*----------------------------------------
+    //       EVENTS MODULE: SINGLE PAGE SETTINGS
+    //     ----------------------------------------*/
+    //     Route::get('/single-page-settings', 'EventsController@single_page_settings')->name('admin.events.single.page.settings');
+    //     Route::post('/single-page-settings', 'EventsController@update_single_page_settings');
+    //     Route::get('/attendance', 'EventsController@event_attendance')->name('admin.events.attendance');
+    //     Route::post('/attendance', 'EventsController@update_event_attendance');
+    // 
+    //     /*----------------------------------------
+    //      EVENTS MODULE: ATTENDANCE SETTINGS
+    //    ----------------------------------------*/
+    //     //event attendance logs
+    //     Route::group(['prefix' => 'attendance'],function (){
+    //         Route::get('/all', 'EventsController@event_attendance_logs')->name('admin.event.attendance.logs');
+    //         Route::post('/all', 'EventsController@update_event_attendance_logs_status');
+    //         Route::post('/delete/{id}', 'EventsController@delete_event_attendance_logs')->name('admin.event.attendance.logs.delete');
+    //         Route::post('/send-mail', 'EventsController@send_mail_event_attendance_logs')->name('admin.event.attendance.send.mail');
+    //         Route::post('/bulk-action', 'EventsController@attendance_logs_bulk_action')->name('admin.event.attendance.bulk.action');
+    //     });
+    // 
+    //     /*----------------------------------------
+    //        EVENTS MODULE: PAYMENT LOGS
+    //      ----------------------------------------*/
+    //     Route::group(['prefix' => 'event-payment-logs'],function (){
+    //         Route::get('/', 'EventsController@event_payment_logs')->name('admin.event.payment.logs');
+    //         Route::post('/delete/{id}', 'EventsController@delete_event_payment_logs')->name('admin.event.payment.delete');
+    //         Route::post('/approve/{id}', 'EventsController@approve_event_payment')->name('admin.event.payment.approve');
+    //         Route::post('/bulk-action', 'EventsController@payment_logs_bulk_action')->name('admin.event.payment.bulk.action');
+    //     });
+    // 
+    //     /*----------------------------------------
+    //     EVENTS MODULE: CATEGORY ROUTES
+    //      ----------------------------------------*/
+    //     Route::group(['prefix' => 'category'],function (){
+    //         //event category
+    //         Route::get('/', 'EventsCategoryController@all_events_category')->name('admin.events.category.all');
+    //         Route::post('/new', 'EventsCategoryController@store_events_category')->name('admin.events.category.new');
+    //         Route::post('/update', 'EventsCategoryController@update_events_category')->name('admin.events.category.update');
+    //         Route::post('/delete/{id}', 'EventsCategoryController@delete_events_category')->name('admin.events.category.delete');
+    //         Route::post('/lang', 'EventsCategoryController@Category_by_language_slug')->name('admin.events.category.by.lang');
+    //         Route::post('/bulk-action', 'EventsCategoryController@bulk_action')->name('admin.events.category.bulk.action');
+    //     });
+    // 
+    //     /*----------------------------------------
+    //     EVENTS MODULE: OTHERS ROUTES
+    //     ----------------------------------------*/
+    //     Route::post('/event-attendance/reminder', 'EventsController@event_attedance_reminder')->name('admin.event.attendance.reminder');
+    //     Route::get('/payment/report', 'EventsController@payment_report')->name('admin.event.payment.report');
+    //     Route::get('/attendance/report', 'EventsController@attendance_report')->name('admin.event.attendance.report');
+    //     
+    // });
 
     /*==============================================
              CASE STUDY MODULE ROUTES
@@ -1517,8 +1513,8 @@ Route::prefix('admin-home')->middleware(['setlang:backend'])->group(function () 
         /*----------------------------------------------------
          UPDATE SETTINGS
         ----------------------------------------------------*/
-        Route::get('/update-script', 'ScriptUpdateController@index')->name('admin.general.script.update');
-        Route::post('/update-script', 'ScriptUpdateController@update_script');
+        // Route::get('/update-script', 'ScriptUpdateController@index')->name('admin.general.script.update');
+        // Route::post('/update-script', 'ScriptUpdateController@update_script');
 
         /*----------------------------------------------------
           CUSTOM JAVASCRIPT SETTINGS

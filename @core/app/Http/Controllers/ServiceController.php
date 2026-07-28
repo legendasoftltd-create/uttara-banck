@@ -27,7 +27,7 @@ class ServiceController extends Controller
     public function new_service()
     {
         $service_category = ServiceCategory::where(['lang' => get_default_language()])->get();
-        $price_plans = PricePlan::where(['lang' => get_default_language()])->get();
+        $price_plans = collect();
         return view('backend.pages.service.new-service')->with(['service_category' => $service_category,'price_plans' => $price_plans]);
     }
 
@@ -35,7 +35,7 @@ class ServiceController extends Controller
     {
         $service = Services::find($id);
         $service_category = ServiceCategory::where(['lang' => $service->lang])->get();
-        $price_plans = PricePlan::where(['lang' =>  $service->lang])->get();
+        $price_plans = collect();
 
         return view('backend.pages.service.edit-service')->with(['service_category' => $service_category,'service' => $service,'price_plans' => $price_plans]);
     }
