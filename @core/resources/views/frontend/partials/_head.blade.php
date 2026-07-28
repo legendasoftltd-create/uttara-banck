@@ -14,6 +14,7 @@
             gtag('config', "{{filter_static_option_value('site_google_analytics',$global_static_field_data)}}");
         </script>
     @endif
+    <meta name="referrer" content="strict-origin-when-cross-origin">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
