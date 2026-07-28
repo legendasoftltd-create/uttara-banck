@@ -14,6 +14,10 @@
 
     RewriteEngine On
 
+    # Block HTTP OPTIONS Method to prevent info disclosure
+    RewriteCond %{REQUEST_METHOD} ^(OPTIONS) [NC]
+    RewriteRule .* - [F]
+
     # Handle Authorization Header
     RewriteCond %{HTTP:Authorization} .
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
