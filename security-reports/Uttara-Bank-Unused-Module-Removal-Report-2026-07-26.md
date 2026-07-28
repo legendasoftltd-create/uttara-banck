@@ -133,7 +133,7 @@ wanted, or (b) remove **both** the public endpoint and the backend module.
 Beyond unused *modules*, the codebase carries dead and half-wired code that is a security
 liability in its own right. These should be removed, not left in place.
 
-### (a) Commented-out routes that still point at vulnerable, present controller code
+### (a) Commented-out routes that still point at vulnerable, present controller code · Solved ✅
 `routes/web.php` contains ~29 commented-out `// Route::` blocks (the old customer dashboard,
 product orders, and customer support-ticket routes). The **routes are inert, but the controller
 methods they referenced still exist** and contain insecure logic — for example
@@ -162,7 +162,7 @@ data they accept, and they were not part of the intended scope:
   `submit-custom-form` and `subscribe-newsletter` in particular deletes two unauthenticated write
   endpoints outright.
 
-### (c) Dead controllers present but not routed
+### (c) Dead controllers present but not routed · Solved ✅
 `Auth/RegisterController.php` (customer self-registration), `SocialLoginController.php`,
 `PortfolioHomePageController.php`, and the unused home-niche variants exist in the codebase even
 though no active route reaches them today.
