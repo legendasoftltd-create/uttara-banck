@@ -1,34 +1,4 @@
-# ====================================================================
-# robots.txt for Uttara Bank PLC
-# Prepared by Senior Software Engineer
-# ====================================================================
-
 User-agent: *
-
-# Block sensitive directories and administrative panels
-Disallow: /admin
-Disallow: /admin/
-Disallow: /admin-home
-Disallow: /login/admin
-Disallow: /@core
-Disallow: /@core/
-Disallow: /vendor/
-Disallow: /storage/
-
-# Block action/submit endpoints (No need to index form submissions)
-Disallow: /contact-message
-Disallow: /complain-submit
-Disallow: /place-order
-Disallow: /get-touch
-Disallow: /appointment-message
-Disallow: /service-quote
-Disallow: /case-study-quote
-Disallow: /poplar-item-by-category-ajax
-Disallow: /product-story-item-by-category-ajax
-
-# Allow search engines to index public assets
-Allow: /assets/
 Allow: /
 
-# XML Sitemap link
 Sitemap: https://uttaradev.blocknots.com/sitemap.xml
