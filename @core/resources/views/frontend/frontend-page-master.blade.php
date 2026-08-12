@@ -48,7 +48,7 @@
     </div>
         @if(request()->routeIs('frontend.complain') || request()->routeIs('frontend.complain.*') || request()->is('complain') || request()->is('complain/*'))
         <div class="sticky-complain">
-            <a href="{{ route('frontend.complain') }}">
+            <a href="{{ route('frontend.complain.send') }}">
             <div class="complain-stk initially-open">
                 <div class="left-head-complain">
                     <span class="rotate-complain">Complain&nbsp;Cell</span>
