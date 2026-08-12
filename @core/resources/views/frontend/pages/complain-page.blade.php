@@ -34,7 +34,7 @@
             border-top: 5px solid #008649; /* Bank green theme */
             width: 100%;
             max-width: 380px;
-            padding: 35px;
+            padding: 30px;
             box-sizing: border-box;
             text-align: left;
         }
@@ -470,54 +470,77 @@
                         
                         <div class="info-card-body">
                             <!-- Bank Name -->
-                            <div class="info-item-row">
-                                <div class="info-icon-circle">
-                                    <!-- Bank Icon SVG -->
-                                    <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
-                                        <path d="M4 10h3v7H4zm6.5 0h3v7h-3zM2 19h20v3H2zm15-9h3v7h-3zm-5-9L2 6v2h20V6z"/>
-                                    </svg>
+                            <!-- <div class="info-item-row">
+                                
+                                <div class="d-flex gap-2">
+                                    <span class="info-value">{{ __('BANK NAME:') }}</span>
+                                    <span class="info-value"> {{ get_static_option('complaint_cell_bank_name') }}</span>
                                 </div>
-                                <div class="info-texts">
-                                    <span class="info-label">{{ __('BANK NAME') }}</span>
-                                    <span class="info-value">{{ get_static_option('complaint_cell_bank_name') }}</span>
+                                <div class="d-flex gap-2">
+                                    <span class="info-label">{{ __('EMAIL:') }}</span>
+                                    <a href="mailto:{{ get_static_option('complaint_cell_email') }}" class="info-value link-value">
+                                        {{ get_static_option('complaint_cell_email') }}
+                                    </a>
                                 </div>
+                                <div class="d-flex gap-2">
+                                    <span class="info-label">{{ __('PHONE:') }}</span>
+                                    <a href="tel:{{ get_static_option('complaint_cell_phone') }}" class="info-value link-value">
+                                        {{ get_static_option('complaint_cell_phone') }}
+                                    </a>
+                                </div>
+                            </div> -->
+
+
+
+                            <div class="flex flex-col sm:flex-row sm:flex-wrap items-start gap-3 sm:gap-x-8 sm:gap-y-3">
+
+                            <!-- Bank -->
+                            <div class="flex items-center gap-2 text-left">
+                                <strong class="member-designation">
+                                    {{ __('BANK NAME:') }}
+                                </strong>
+                                <span class="info-value">
+                                    {{ get_static_option('complaint_cell_bank_name') }}
+                                </span>
                             </div>
-                            
+
                             <!-- Email -->
-                            @if(!empty(get_static_option('complaint_cell_email')))
-                                <div class="info-item-row">
-                                    <div class="info-icon-circle">
-                                        <!-- Email Icon SVG -->
-                                        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
-                                            <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
-                                        </svg>
-                                    </div>
-                                    <div class="info-texts">
-                                        <span class="info-label">{{ __('EMAIL OF COMPLAIN CELL') }}</span>
-                                        <a href="mailto:{{ get_static_option('complaint_cell_email') }}" class="info-value link-value">
-                                            {{ get_static_option('complaint_cell_email') }}
-                                        </a>
-                                    </div>
-                                </div>
-                            @endif
-                            
+                            <div class="flex items-center gap-2 text-left">
+                                <span class="member-designation">
+                                    {{ __('EMAIL:') }}
+                                </span>
+                                <a href="mailto:{{ get_static_option('complaint_cell_email') }}"
+                                class="info-value link-value break-all">
+                                    {{ get_static_option('complaint_cell_email') }}
+                                </a>
+                            </div>
+
                             <!-- Phone -->
-                            @if(!empty(get_static_option('complaint_cell_phone')))
-                                <div class="info-item-row">
-                                    <div class="info-icon-circle">
-                                        <!-- Phone Icon SVG -->
-                                        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
-                                            <path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.57-.35-.11-.74-.03-1.01.24l-1.57 1.58c-2.83-1.44-5.15-3.75-6.59-6.59l1.58-1.57c.27-.27.35-.66.24-1.01-0.38-1.11-.58-2.3-.58-3.53 0-.55-.45-1-1-1H4.48C3.93 3 3.5 3.44 3.5 4c0 9.39 7.61 17 17 17 0 .55.44 1 1 1h3.51c.55 0 .99-.44.99-1v-5.62c0-.55-.44-1-1-1z"/>
-                                        </svg>
-                                    </div>
-                                    <div class="info-texts">
-                                        <span class="info-label">{{ __('PHONE NO OF COMPLAIN CELL') }}</span>
-                                        <a href="tel:{{ get_static_option('complaint_cell_phone') }}" class="info-value link-value">
-                                            {{ get_static_option('complaint_cell_phone') }}
-                                        </a>
-                                    </div>
-                                </div>
-                            @endif
+                            <div class="flex items-center gap-2 text-left">
+                                <span class="member-designation">
+                                    {{ __('PHONE:') }}
+                                </span>
+                                <a href="tel:{{ get_static_option('complaint_cell_phone') }}"
+                                class="info-value link-value">
+                                    {{ get_static_option('complaint_cell_phone') }}
+                                </a>
+                            </div>
+
+                        </div>
+
+
+
+
+
+
+
+
+                           
+
+
+
+
+
                         </div>
                     </div>
                 </div>
