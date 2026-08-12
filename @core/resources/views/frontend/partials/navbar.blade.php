@@ -122,7 +122,7 @@
                             <li><a href="{{ route('frontend.team.committee', ['committee' => 'audit-committee']) }}">Audit Committee</a></li>
                             <li><a href="{{ route('frontend.team.committee', ['committee' => 'risk-management-committee']) }}">Risk Management Committee</a></li>
                             <li><a href="{{ route('frontend.team.committee', ['committee' => 'senior-management']) }}">Senior Management</a></li>
-                            <li><a href="{{route('frontend.dynamic.page','employee-information')}}">Employee Information</a></li>
+                            <!-- <li><a href="{{route('frontend.dynamic.page','employee-information')}}">Employee Information</a></li> -->
                             <li><a href="{{route('frontend.dynamic.page','shareholding-structure')}}">Shareholding Structure</a></li>
                             <li><a href="{{route('frontend.dynamic.page','government-securities-investment-window')}}">Government Securities Investment Window</a></li>
                             <li><a href="{{route('frontend.dynamic.page','cash-dollar-transaction')}}">Cash Dollar Transaction</a></li>
