@@ -4292,6 +4292,22 @@ html.monochrome {
     font-size: 16px;
 }
 
+/* .footer-menu ul li a {
+    font-size: 10px !important;
+}
+
+@media (min-width: 768px) {
+    .footer-menu ul li a {
+        font-size: 12px !important;
+    }
+}
+
+@media (min-width: 1024px) {
+    .footer-menu ul li a {
+        font-size: 14px !important;
+    }
+} */
+
 /* last column: social/subscribe block */
 .footer-wrap>div:last-child {
     grid-column: span 3;

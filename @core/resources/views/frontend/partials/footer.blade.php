@@ -87,169 +87,182 @@
 </html> --}}
 <div class="empty-height-50"></div>
 <footer class="footer">
-    <div class="container mx-auto">
+
+
+
+
+
+
+    <div class=" mx-auto">
         <div class="footer-wrapper" data-aos="fade-up" data-aos-duration="2000">
-            <!--<a style="display: inline-block;" href="{{url('/')}}" data-aos="fade-up" data-aos-duration="2000">-->
-            <!--    @if(!empty(filter_static_option_value('site_logo',$global_static_field_data)))-->
-            <!--        {!! render_image_markup_by_attachment_id(filter_static_option_value('site_logo',$global_static_field_data)) !!}-->
-            <!--    @else-->
-            <!--        <h2 class="site-title">{{filter_static_option_value('site_'.$user_select_lang_slug.'_title',$global_static_field_data)}}</h2>-->
-            <!--    @endif-->
-            <!--</a>-->
+            
         </div>
-        <div class="footer-wrap">
-            <div style="opacity: 1; transform: none; grid-column: span 3 / span 3;">
-                    <!-- <h3 class="text-[#012C60] font-bold leading-4 text-base mb-4" data-aos="fade-up"
-                        data-aos-duration="2000">{{__('Address')}}</h3> -->
-                    <div data-aos="fade-up" data-aos-duration="2000"
-                    class="text-sm font-extralight sm:text-base sm:leading-[23px] text-[#637D92]">
 
-                    @if(!empty(get_static_option('site_'.get_user_lang().'_footer_address')))
-                        <p class="font-light">
-                            <span style="font-weight:800;">
-                                Address:
-                            </span>
-                            {!! nl2br(e(get_static_option('site_'.get_user_lang().'_footer_address'))) !!}
-                        </p>
-                    @endif
 
-                    @if(!empty(get_static_option('site_'.get_user_lang().'_footer_contact_label')) || !empty(get_static_option('site_footer_contact_phone')))
-                        <p class="font-light mt-2">
+                <div class="container">
+                    <div class="row g-2">
 
-                            @if(!empty(get_static_option('site_'.get_user_lang().'_footer_contact_label')))
-                                <span style="font-weight:800;">
-                                    {{get_static_option('site_'.get_user_lang().'_footer_contact_label')}}
+                        <!-- Column 1 -->
+                        <div class="col-12 col-sm-6 col-lg-3">
+                            <div class="">
+                                <div style="opacity: 1; transform: none; grid-column: span 3 / span 3;">
+                            
+                            <div data-aos="fade-up" data-aos-duration="2000"
+                            class="text-sm font-extralight sm:text-base sm:leading-[23px] text-[#637D92]">
+
+                            @if(!empty(get_static_option('site_'.get_user_lang().'_footer_address')))
+                                <p class="font-light" style="color:white">
+                                    <span style="font-weight:800;">
+                                        Address:
+                                    </span>
+                                    {!! nl2br(e(get_static_option('site_'.get_user_lang().'_footer_address'))) !!}
+                                </p>
+                            @endif
+
+                            @if(!empty(get_static_option('site_'.get_user_lang().'_footer_contact_label')) || !empty(get_static_option('site_footer_contact_phone')))
+                                <p class="font-light mt-2" style="color:white">
+
+                                    @if(!empty(get_static_option('site_'.get_user_lang().'_footer_contact_label')))
+                                        <span style="font-weight:800;">
+                                            {{get_static_option('site_'.get_user_lang().'_footer_contact_label')}}
+                                        </span>
+                                    @endif
+
+                                    @if(!empty(get_static_option('site_footer_contact_phone')))
+                                        <a class="text-[#012C60]" style="font-weight:300; color:white"
+                                        href="tel:{{get_static_option('site_footer_contact_phone')}}">
+                                            {{get_static_option('site_footer_contact_phone')}}
+                                        </a>
+                                    @endif
+
+                                </p>
+                            @endif
+
+                            @if(!empty(get_static_option('site_footer_contact_email')))
+                                <p class=" mt-2" style="color:white">
+                                    <span style="font-weight:700;">
+                                        Email:
+                                    </span>
+
+                                    <a class="text-[#012C60] text-sm font-extralight" style="font-weight:300;"
+                                    href="mailto:{{get_static_option('site_footer_contact_email')}}">
+                                        {{get_static_option('site_footer_contact_email')}}
+                                    </a>
+                                </p>
+                            @endif
+
+                            @if(get_static_option('show_visitor_count') === 'on')
+                            <p style="color:white">
+                                <span style="font-weight:700;">
+                                    {{__('Total Visitor')}}:
                                 </span>
+                                {{number_format(\App\Visitor::count() + (int)(get_static_option('manual_visitor_count') ?? 0))}}
+                            </p>
                             @endif
 
-                            @if(!empty(get_static_option('site_footer_contact_phone')))
-                                <a class="text-[#012C60]" style="font-weight:300;"
-                                href="tel:{{get_static_option('site_footer_contact_phone')}}">
-                                    {{get_static_option('site_footer_contact_phone')}}
-                                </a>
-                            @endif
-
-                        </p>
-                    @endif
-
-                    @if(!empty(get_static_option('site_footer_contact_email')))
-                        <p class=" mt-2">
-                            <span style="font-weight:700;">
-                                Email:
-                            </span>
-
-                            <a class="text-[#012C60] text-sm font-extralight" style="font-weight:300;"
-                            href="mailto:{{get_static_option('site_footer_contact_email')}}">
-                                {{get_static_option('site_footer_contact_email')}}
-                            </a>
-                        </p>
-                    @endif
-
-                    @if(get_static_option('show_visitor_count') === 'on')
-                    <p class="text-[#012C60] ">
-                        <span style="font-weight:700;">
-                            {{__('Total Visitor')}}:
-                        </span>
-                        {{number_format(\App\Visitor::count() + (int)(get_static_option('manual_visitor_count') ?? 0))}}
-                    </p>
-                    @endif
-
-                </div>
-
-                <div class="footer-social mt-3" data-aos="fade-up" data-aos-duration="5000">
-                    @foreach($all_social_item as $data)
-                                    <li><a href="{{$data->url}}" target="_blank" rel="noopener noreferrer canonical" aria-label="{{$data->name}}" title="{{$data->name}}"><i class="{{$data->icon}}"></i></a></li>
-                                @endforeach
-                </div>
-            </div>
-            <div class="footer-menu" style="opacity: 1; transform: none;">
-                @php
-                    $footer_link_columns = [];
-                    foreach (['footer_column_one_link_item', 'footer_column_two_link_item'] as $option_key) {
-                        $urls = get_static_option($option_key.'_url');
-                        $urls = !empty($urls) ? unserialize($urls, ['allowed_classes' => false]) : [];
-                        $titles = get_static_option($option_key.'_'.get_user_lang().'_title');
-                        $titles = !empty($titles) ? unserialize($titles, ['allowed_classes' => false]) : [];
-                        $icons = get_static_option($option_key.'_icon');
-                        $icons = !empty($icons) ? unserialize($icons, ['allowed_classes' => false]) : [];
-                        $links = [];
-                        foreach ($urls as $index => $url) {
-                            if (!empty($titles[$index]) && !empty($url)) {
-                                $links[] = ['title' => $titles[$index], 'url' => $url, 'icon' => $icons[$index] ?? ''];
-                            }
-                        }
-                        $footer_link_columns[] = $links;
-                    }
-                @endphp
-                @foreach($footer_link_columns as $column_index => $links)
-                    @if(!empty($links))
-                        <div data-aos="fade-up" data-aos-duration="{{3000 + $column_index * 1000}}">
-                            <ul class="space-y-2 p-0">
-                                @foreach($links as $link)
-                                    <li>
-                                        <a aria-label="{{$link['title']}}"
-                                            class="text-[#637D92] sm:font-light hover:underline text-sm font-extralight sm:text-base sm:leading-[23px] inline-flex items-center gap-2"
-                                            href="{{$link['url']}}">
-                                            @if(!empty($link['icon']))
-                                                <i class="{{$link['icon']}}" style="color:#ffffff;"></i>
-                                            @endif
-                                            {{$link['title']}}</a>
-                                    </li>
-                                @endforeach
-                            </ul>
+                            <div class="footer-social mt-3 mb-0">
+                            @foreach($all_social_item as $data)
+                            <li><a href="{{$data->url}}" target="_blank" rel="noopener noreferrer canonical" aria-label="{{$data->name}}" title="{{$data->name}}"><i class="{{$data->icon}}"></i></a></li>
+                            @endforeach
                         </div>
-                    @endif
-                @endforeach
-            </div>
-            <div style="opacity: 1; transform: none;">
-                <div class="footer-subscribe" data-aos="fade-up" data-aos-duration="5000">
-                    <style>
-                        .achievementSlider { overflow: hidden; width: 100%; }
-                        .achievementSlider .swiper-wrapper { margin: 0; }
-                        .achievementSlider .swiper-slide { width: 130px !important; height: 36px !important; margin: 0 10px 0 0 !important; flex-shrink: 0; display: flex; gap: 10px; align-items: center; justify-content: center; }
-                        .achievementSlider .swiper-slide img { max-width: 100%; max-height: 60px; object-fit: contain; }
-                    </style>
-                    <a href="{{ route('frontend.achievement') }}">
-                        <h3>Our Achivement </h3>
-                        <div class="swiper achievementSlider mt-4">
-                            <div class="swiper-wrapper">
-                                @foreach(achivement() as $brand)
-                                    <div class="swiper-slide">
-                                        {!! render_image_markup_by_attachment_id($brand->thumbnail, 'max-h-16 object-contain') !!}
-                                    </div>
+
+                        </div>
+
+                        <!-- <div class="footer-social mt-3 mb-0" >
+                            @foreach($all_social_item as $data)
+                            <li><a href="{{$data->url}}" target="_blank" rel="noopener noreferrer canonical" aria-label="{{$data->name}}" title="{{$data->name}}"><i class="{{$data->icon}}"></i></a></li>
+                            @endforeach
+                        </div> -->
+                    </div>
+                    </div>
+                </div>
+
+                <!-- Column 2 -->
+                <div class="col-12 col-sm-12 col-lg-6">
+                    <div class="">
+                            <div class="footer-menu" style="opacity: 1; transform: none;">
+                                @php
+                                    $footer_link_columns = [];
+                                    foreach (['footer_column_one_link_item', 'footer_column_two_link_item'] as $option_key) {
+                                        $urls = get_static_option($option_key.'_url');
+                                        $urls = !empty($urls) ? unserialize($urls, ['allowed_classes' => false]) : [];
+                                        $titles = get_static_option($option_key.'_'.get_user_lang().'_title');
+                                        $titles = !empty($titles) ? unserialize($titles, ['allowed_classes' => false]) : [];
+                                        $icons = get_static_option($option_key.'_icon');
+                                        $icons = !empty($icons) ? unserialize($icons, ['allowed_classes' => false]) : [];
+                                        $links = [];
+                                        foreach ($urls as $index => $url) {
+                                            if (!empty($titles[$index]) && !empty($url)) {
+                                                $links[] = ['title' => $titles[$index], 'url' => $url, 'icon' => $icons[$index] ?? ''];
+                                            }
+                                        }
+                                        $footer_link_columns[] = $links;
+                                    }
+                                @endphp
+                                @foreach($footer_link_columns as $column_index => $links)
+                                    @if(!empty($links))
+                                        <div data-aos="fade-up" data-aos-duration="{{3000 + $column_index * 1000}}">
+                                            <ul class="space-y-2 p-0">
+                                                @foreach($links as $link)
+                                                    <li>
+                                                        <a aria-label="{{$link['title']}}"
+                                                            class="text-[#637D92] sm:font-light hover:underline text-sm font-extralight sm:text-base sm:leading-[23px] inline-flex items-center gap-2"
+                                                            href="{{$link['url']}}">
+                                                            @if(!empty($link['icon']))
+                                                                <i class="{{$link['icon']}}" style="color:#ffffff;"></i>
+                                                            @endif
+                                                            {{$link['title']}}</a>
+                                                    </li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                    @endif
                                 @endforeach
                             </div>
-                        </div>
-                    </a>
-                    <!-- <div class="mt-3"> 
-                        <h3>Subscribe Newsletter</h3>
-                        <form>
-                            <input id="email" type="email" placeholder="Enter your email address" class="white-placeholder">
-                            <button type="submit">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="none"
-                                    viewBox="0 0 67 67">
-                                    <circle cx="33.209" cy="33.518" r="28.084" fill="#008649"></circle>
-                                    <circle cx="33.209" cy="33.518" r="30.584" stroke="#008649"
-                                        stroke-opacity="0.2" stroke-width="5"></circle>
-                                    <g clip-path="url(#footerRightCircle_svg__a)">
-                                        <path fill="#fff"
-                                            d="m44.754 33.792-6.884-6.938a.814.814 0 0 0-1.155 1.145l5.508 5.554H22.244a.813.813 0 0 0-.814.815c0 .45.363.814.814.814h19.979l-5.508 5.554a.814.814 0 0 0 1.155 1.146l6.884-6.94a.82.82 0 0 0 0-1.15">
-                                        </path>
-                                    </g>
-                                    <defs>
-                                        <clippath id="footerRightCircle_svg__a">
-                                            <path fill="#fff" d="M21.43 22.585h23.559v23.559h-23.56z"></path>
-                                        </clippath>
-                                    </defs>
-                                </svg>
-                            </button>
-                        </form>
-                    </div> -->
+                    </div>
                 </div>
+
+                <!-- Column 3 -->
+                <!-- <div class="col-12 col-sm-6 col-lg-3">
+                    <div class="">
+                        3
+                    </div>
+                </div> -->
+
+                <!-- Column 4 -->
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <div class="">
+                        <div style="opacity: 1; transform: none;">
+                            <div class="footer-subscribe" data-aos="fade-up" data-aos-duration="5000">
+                                <style>
+                                    .achievementSlider { overflow: hidden; width: 100%; }
+                                    .achievementSlider .swiper-wrapper { margin: 0; }
+                                    .achievementSlider .swiper-slide { width: 130px !important; height: 36px !important; margin: 0 10px 0 0 !important; flex-shrink: 0; display: flex; gap: 10px; align-items: center; justify-content: center; }
+                                    .achievementSlider .swiper-slide img { max-width: 100%; max-height: 60px; object-fit: contain; }
+                                </style>
+                                <a href="{{ route('frontend.achievement') }}">
+                                    <h3>Our Achivement </h3>
+                                    <div class="swiper achievementSlider mt-4">
+                                        <div class="swiper-wrapper">
+                                            @foreach(achivement() as $brand)
+                                                <div class="swiper-slide">
+                                                    {!! render_image_markup_by_attachment_id($brand->thumbnail, 'max-h-16 object-contain') !!}
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
+
     </div>
-    <div class=" py-2">
+
+    <div class="pb-2">
         <hr>
          <p style="color:#ffffff" class="text-center font-light md:text-base">{!! get_footer_copyright_text() !!}</p>
     </div>
