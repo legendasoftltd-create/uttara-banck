@@ -124,7 +124,7 @@
                             <li><a href="{{ route('frontend.team.committee', ['committee' => 'senior-management']) }}">Senior Management</a></li>
                             <!-- <li><a href="{{route('frontend.dynamic.page','employee-information')}}">Employee Information</a></li> -->
                             <li><a href="{{route('frontend.dynamic.page','shareholding-structure')}}">Shareholding Structure</a></li>
-                            <li><a href="{{route('frontend.dynamic.page','government-securities-investment-window')}}">Government Securities Investment Window</a></li>
+                            <li><a href="{{route('frontend.dynamic.page','gsiw')}}">Government Securities Investment Window</a></li>
                             <li><a href="{{route('frontend.dynamic.page','cash-dollar-transaction')}}">Cash Dollar Transaction</a></li>
                         </ul>
                     </li>
@@ -237,7 +237,7 @@
                                     <li><a href="https://uttaradev.blocknots.com/important-information/interest-rate-deposit-products">Interest Rate Deposit Products</a></li>
                                 </ul>
                             </li>
-                            <li><a href="{{ route('frontend.dynamic.page', 'branches-of-uttara-bank-limited-enlisted-for-e-gp') }}">e-GP</a></li>
+                            <li><a href="{{ route('frontend.dynamic.page', 'e-gp') }}">e-GP</a></li>
                             <li><a href="{{ route('frontend.dynamic.page', 'eligible-capital') }}">Eligible Capital</a></li>
                             <li><a href="{{ route('frontend.dynamic.page', 'tax-return-notice') }}">Tax Return Notice</a></li>
                             <li><a href="{{ route('frontend.dynamic.page', 'code-of-conduct') }}">Code of Conduct</a></li>
@@ -251,7 +251,7 @@
                     <li><a href="https://play.google.com/store/apps/details?id=com.uttarabank.ublmobile" target="_blank">Uttara eWallet</a></li>
                     <li><a href="{{ route('frontend.jobs') }}">Career</a></li>
                     <li><a href="{{ route('frontend.complain') }}">Complain</a></li>
-                    <li><a href="{{ route('frontend.dynamic.page', 'warning-against-illegal-forex-tradingdealing') }}">Warning against illegal forex trading/dealing</a></li>
+                    <li><a href="{{ route('frontend.dynamic.page', 'illegaltrading') }}">Warning against illegal forex trading/dealing</a></li>
                     <li><a href="https://nationalsavings.gov.bd" target="_blank">Sanchayapatra</a></li>
                      @php
                         $allow = [
@@ -276,14 +276,14 @@
                     <li><a href="{{ route('frontend.dynamic.page', 'fdi-help-desk') }}">FDI Help Desk</a></li>
                     <li><a href="{{ route('frontend.dynamic.page', 'lending-interest-rate') }}">Lending Interest Rate</a></li>
                     <li><a href="{{ route('frontend.dynamic.page', 'contact-us') }}">Contact</a></li>
-                    <li><a href="{{ route('frontend.dynamic.page', 'faq') }}">Faq</a></li>
-                    <li class="has-dropdown">
+                    <!-- <li><a href="{{ route('frontend.dynamic.page', 'faq') }}">Faq</a></li> -->
+                    <!-- <li class="has-dropdown">
                         <a href="#" class="dropdown-toggle">Calculator</a>
                         <ul class="sub-menu">
                             <li><a href="{{ route('frontend.dynamic.page', 'deposit-calculator') }}">Deposit Calculator</a></li>
                             <li><a href="{{ route('frontend.dynamic.page', 'emi-calculator') }}">EMI Calculator</a></li>
                         </ul>
-                    </li>
+                    </li> -->
                 </ul>
             </div>
             <div class="overlay" id="overlay"></div>
