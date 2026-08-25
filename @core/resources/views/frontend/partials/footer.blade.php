@@ -360,7 +360,7 @@
 <script src="{{ asset('assets/frontend/assets/js/script-custom.js') }}"></script>
 
 <script
-  src="https://uttarabank3.blocknots.com/static/widget.js"
+  src="https://ai-uttarabank.blocknots.com/widget/sheba-chat.js"
   data-bank-name="Uttara Bank Support">
 </script>
 
