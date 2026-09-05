@@ -67,6 +67,7 @@
                                             <th>{{__('ID')}}</th>
                                             <th>{{__('Title')}}</th>
                                             <th>{{__('Image')}}</th>
+                                            <th>{{__('Image Courtesy')}}</th>
                                             <!-- <th>{{__('Price')}}</th> -->
                                             <th>{{__('Product Type')}}</th>
                                             <!-- <th>{{__('Sales')}}</th> -->
@@ -100,6 +101,13 @@
                                                                </div>
                                                            @endif
                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        @if(!empty($data->image_courtesy))
+                                                            <span class="badge badge-info">{{$data->image_courtesy}}</span>
+                                                        @else
+                                                            <span class="text-muted">-</span>
+                                                        @endif
                                                     </td>
                                                     <!-- <td><del>{{amount_with_currency_symbol($data->regular_price)}}</del> <span>{{amount_with_currency_symbol($data->sale_price)}}</span></td> -->
                                                     <td>{{get_product_category_by_id($data->category_id)}} @if(!is_null($data->subcategory)) -> {{optional($data->subcategory)->title}}  @endif </td>

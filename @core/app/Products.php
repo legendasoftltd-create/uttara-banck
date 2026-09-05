@@ -22,6 +22,7 @@ class Products extends Model
         'attributes_description',
         'total_sold',
         'image',
+        'image_courtesy',
         'gallery',
         'status',
         'is_downloadable',

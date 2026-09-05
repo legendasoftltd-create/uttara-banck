@@ -49,8 +49,13 @@
                         <div class="cards-container">
                             <div class="card">
                                 <a href="{{ route('frontend.products.single', $product->slug) }}">
-                                <div class="card-image">
+                                <div class="card-image" style="position: relative;">
                                     <img @if($product->category_id == 3) class="atm-card" @endif src="{{ get_attachment_image_by_id($product->image, 'full', false)['img_url'] ?? '' }}" alt="{{ $product->title }}">
+                                    @if(!empty($product->image_courtesy))
+                                        <div class="product-image-courtesy-watermark">
+                                            {{ $product->image_courtesy }}
+                                        </div>
+                                    @endif
                                 </div>
                                 <div class="card-content">
                                     <h3>{{ $product->title }}</h3>
@@ -65,6 +70,26 @@
                     </div>
                 @endforeach
             </section>
+
+<style>
+.product-image-courtesy-watermark {
+    position: absolute;
+    bottom: -1px;
+    right: 5px;
+    color: rgb(46 46 46 / 60%);
+    opacity: 0.30;
+    filter: blur(0.7px);
+    font-size: 10px;
+    font-weight: 400;
+    line-height: 1.2;
+    padding: 2px 6px;
+    border-radius: 3px;
+    letter-spacing: 0.3px;
+    z-index: 5;
+    pointer-events: none;
+    user-select: none;
+}
+</style>
             <div class="row mt-4">
                 <div class="col-lg-12 text-center">
                     <nav class="pagination-wrapper" aria-label="Page navigation">

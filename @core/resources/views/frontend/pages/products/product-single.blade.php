@@ -55,11 +55,16 @@
             @foreach ($related_products as $data)
             
                 <div class="{{ $data->category_id == 3 ? 'card-product' : 'product-card' }}">
-                    <div class="image-container">
+                    <div class="image-container" style="position: relative;">
                     @php
                         $image_details = get_attachment_image_by_id($data->image, 'full');
                     @endphp
                         <img src="{{ $image_details['img_url'] ?? '' }}" alt="{{ $data->title }}" >
+                        @if(!empty($data->image_courtesy))
+                            <div class="product-image-courtesy-watermark">
+                                {{ $data->image_courtesy }}
+                            </div>
+                        @endif
                     </div>
                     <div class="card-content">
                         <h3 class="product-name"><a href="{{route('frontend.products.single',$data->slug)}}">{{ $data->title }}</a></h3>
@@ -69,6 +74,26 @@
             </div>
         </section>
     @endif
+
+<style>
+.product-image-courtesy-watermark {
+    position: absolute;
+    bottom: -1px;
+    right: 5px;
+    color: rgb(46 46 46 / 60%);
+    opacity: 0.30;
+    filter: blur(0.7px);
+    font-size: 10px;
+    font-weight: 400;
+    line-height: 1.2;
+    padding: 2px 6px;
+    border-radius: 3px;
+    letter-spacing: 0.3px;
+    z-index: 5;
+    pointer-events: none;
+    user-select: none;
+}
+</style>
 @endsection
 {{-- @section('scripts') --}}
     <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
