@@ -171,6 +171,24 @@
         z-index: 20;
     }
 
+    .gallery-image-courtesy-watermark {
+        position: absolute;
+        bottom: -1px;
+        right: 5px;
+        color: rgb(46 46 46 / 60%);
+        opacity: 0.30;
+        filter: blur(0.7px);
+        font-size: 10px;
+        font-weight: 400;
+        line-height: 1.2;
+        padding: 2px 6px;
+        border-radius: 3px;
+        letter-spacing: 0.3px;
+        z-index: 5;
+        pointer-events: none;
+        user-select: none;
+    }
+
     
 </style>
 
@@ -238,7 +256,10 @@
 <div class="lightbox-overlay" id="lightboxOverlay">
     <span class="lightbox-close" id="lightboxClose">&times;</span>
     <button class="lightbox-btn lightbox-prev" id="lightboxPrev">&#10094;</button>
-    <img id="lightboxImg" src="" alt="">
+    <div style="position: relative; display: inline-flex; align-items: center; justify-content: center; max-width: 90%; max-height: 90%;">
+        <img id="lightboxImg" src="" alt="" style="max-width: 100%; max-height: 90vh; border-radius: 4px; box-shadow: 0 0 30px rgba(0,0,0,0.5);">
+        <div id="lightboxCourtesy" class="gallery-image-courtesy-watermark" style="display: none; bottom: 8px; right: 12px; font-size: 12px;"></div>
+    </div>
     <button class="lightbox-btn lightbox-next" id="lightboxNext">&#10095;</button>
     <div class="lightbox-counter" id="lightboxCounter"></div>
 </div>
@@ -334,6 +355,7 @@
         // LIGHTBOX — infinite-loop slider
         var overlay = document.getElementById('lightboxOverlay');
         var lightboxImg = document.getElementById('lightboxImg');
+        var lightboxCourtesy = document.getElementById('lightboxCourtesy');
         var closeBtn = document.getElementById('lightboxClose');
         var prevBtn = document.getElementById('lightboxPrev');
         var nextBtn = document.getElementById('lightboxNext');
@@ -342,6 +364,10 @@
         function closeLightbox() {
             overlay.classList.remove('active');
             lightboxImg.src = '';
+            if (lightboxCourtesy) {
+                lightboxCourtesy.textContent = '';
+                lightboxCourtesy.style.display = 'none';
+            }
         }
 
         function showSlide(index) {
@@ -349,6 +375,17 @@
             galleryIndex = (index + galleryImages.length) % galleryImages.length;
             lightboxImg.src = galleryImages[galleryIndex];
             counterEl.textContent = (galleryIndex + 1) + ' / ' + galleryImages.length;
+
+            if (lightboxCourtesy) {
+                if (galleryCourtesies[galleryIndex]) {
+                    lightboxCourtesy.textContent = galleryCourtesies[galleryIndex];
+                    lightboxCourtesy.style.display = 'block';
+                } else {
+                    lightboxCourtesy.textContent = '';
+                    lightboxCourtesy.style.display = 'none';
+                }
+            }
+
             overlay.classList.add('active');
         }
 
@@ -374,6 +411,7 @@
 
     // LIGHTBOX — open .test-popup-link (event delegation survives AJAX)
     var galleryImages = [];
+    var galleryCourtesies = [];
     var galleryIndex = 0;
 
     document.addEventListener('click', function(e) {
@@ -384,16 +422,29 @@
 
         var allLinks = document.querySelectorAll('#galleryWrapper .test-popup-link');
         galleryImages = [];
+        galleryCourtesies = [];
 
         allLinks.forEach(function(el, i) {
             var href = el.getAttribute('href');
+            var courtesy = el.getAttribute('data-courtesy') || '';
             galleryImages.push(href);
+            galleryCourtesies.push(courtesy);
             if (el === link) galleryIndex = i;
         });
 
         if (!galleryImages.length) return;
 
         document.getElementById('lightboxImg').src = galleryImages[galleryIndex];
+        var courtesyEl = document.getElementById('lightboxCourtesy');
+        if (courtesyEl) {
+            if (galleryCourtesies[galleryIndex]) {
+                courtesyEl.textContent = galleryCourtesies[galleryIndex];
+                courtesyEl.style.display = 'block';
+            } else {
+                courtesyEl.textContent = '';
+                courtesyEl.style.display = 'none';
+            }
+        }
         document.getElementById('lightboxCounter').textContent = (galleryIndex + 1) + ' / ' + galleryImages.length;
         document.getElementById('lightboxOverlay').classList.add('active');
     });

@@ -26,6 +26,7 @@ class ImageGalleryPageController extends Controller
         $this->validate($request,[
             'image' => 'required|string',
             'title' => 'nullable|string',
+            'image_courtesy' => 'nullable|string|max:191',
             'publish_date' => 'nullable|date',
             'lang' => 'required|string',
             'cat_id' => 'required|string',
@@ -33,6 +34,7 @@ class ImageGalleryPageController extends Controller
         ImageGallery::create([
             'image' => $request->image,
             'title' => $request->title,
+            'image_courtesy' => $request->image_courtesy,
             'publish_date' => $request->publish_date 
                 ? Carbon::parse($request->publish_date)->format('Y-m-d') 
                 : null,
@@ -45,6 +47,7 @@ class ImageGalleryPageController extends Controller
         $this->validate($request,[
             'image' => 'required|string',
             'title' => 'nullable|string',
+            'image_courtesy' => 'nullable|string|max:191',
             'publish_date' => 'nullable|date',
             'lang' => 'required|string',
             'cat_id' => 'required|string',
@@ -52,6 +55,7 @@ class ImageGalleryPageController extends Controller
         ImageGallery::find($request->id)->update([
             'image' => $request->image,
             'title' => $request->title,
+            'image_courtesy' => $request->image_courtesy,
             'publish_date' => $request->publish_date 
                 ? Carbon::parse($request->publish_date)->format('Y-m-d') 
                 : null,

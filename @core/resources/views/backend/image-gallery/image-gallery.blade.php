@@ -119,6 +119,7 @@
                                                            class="btn btn-xs btn-primary btn-xs mb-3 mr-1 testimonial_edit_btn"
                                                            data-id="{{$data->id}}"
                                                            data-title="{{$data->title}}"
+                                                           data-courtesy="{{$data->image_courtesy}}"
                                                            data-imageid="{{$data->image}}"
                                                            data-image="{{$img_url}}"
                                                            data-lang="{{$data->lang}}"
@@ -161,6 +162,10 @@
                             <div class="form-group">
                                 <label for="title">{{__('Title')}}</label>
                                 <input type="text" name="title" id="title" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="image_courtesy">{{__('Image Courtesy')}}</label>
+                                <input type="text" name="image_courtesy" id="image_courtesy" class="form-control">
                             </div>
                             <div class="form-group">
                                 <label for="title">{{__('Publish Date')}}</label>
@@ -216,6 +221,10 @@
                         <div class="form-group">
                             <label for="title">{{__('Title')}}</label>
                             <input type="text" name="title" id="edit_title" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="edit_image_courtesy">{{__('Image Courtesy')}}</label>
+                            <input type="text" name="image_courtesy" id="edit_image_courtesy" class="form-control">
                         </div>
                         <div class="form-group">
                             <label for="publish_date">{{__('Publish Date')}}</label>
@@ -305,6 +314,7 @@
                 var form = $('#testimonial_edit_modal_form');
                 form.find('#gallery_id').val(id);
                 form.find('#edit_title').val(el.data('title'));
+                form.find('#edit_image_courtesy').val(el.data('courtesy'));
                 form.find('#edit_publish_date').val(el.data('publish_date'));
                 form.find('select[name="lang"] option[value="'+lang+'"]').attr('selected',true);
                 $.ajax({

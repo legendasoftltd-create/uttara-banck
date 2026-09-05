@@ -225,10 +225,16 @@ class ImageGalleryMasonry extends PageBuilderBase
            $gallery_img = get_attachment_image_by_id($item->image,'full',false);
            $img_url = !empty($gallery_img) ? $gallery_img['img_url'] : '';
 
+            $courtesy_markup = '';
+            if (!empty($item->image_courtesy)) {
+                $courtesy_markup = '<div class="gallery-image-courtesy-watermark">' . htmlspecialchars($item->image_courtesy) . '</div>';
+            }
+
             $case_study_markup .= <<<HTML
 <div class="col-lg-4 col-md-4 col-sm-6 masonry-item {$filter_slug}">
-     <div class="single-gallery-image ">
+     <div class="single-gallery-image " style="position: relative;">
        {$image_markup}
+       {$courtesy_markup}
        <div class="img-hover">
            <a href="{$img_url}" title="{$title}" class="image-popup">
                <i class="fas fa-search"></i>
@@ -255,6 +261,25 @@ HTM;
         }
 
         return <<<HTML
+<style>
+.gallery-image-courtesy-watermark {
+    position: absolute;
+    bottom: -1px;
+    right: 5px;
+    color: rgb(46 46 46 / 60%);
+    opacity: 0.30;
+    filter: blur(0.7px);
+    font-size: 10px;
+    font-weight: 400;
+    line-height: 1.2;
+    padding: 2px 6px;
+    border-radius: 3px;
+    letter-spacing: 0.3px;
+    z-index: 5;
+    pointer-events: none;
+    user-select: none;
+}
+</style>
 <div class="image-gallery-masonry-wrapper" data-padding-top="{$padding_top}" data-padding-bottom="{$padding_bottom}" {$background_color}>
     <div class="container">
         <div class="row">
