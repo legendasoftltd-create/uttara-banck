@@ -15,10 +15,15 @@
                         $bolg_image_details = get_attachment_image_by_id($data->image, 'full');
                     @endphp
                     <div class="carousel-item active col-md-3 mt-4">
-                        <div class="overflow-hidden">
+                        <div class="overflow-hidden" style="position: relative;">
                             {{-- {!! render_background_image_markup_by_attachment_id($data->image,'large') !!} --}}
                             <img class="img-fluid mx-auto d-block zoom" src="{{ $bolg_image_details['img_url'] ?? '' }}"
                                 width="100%" alt="Flexi Platinum Whats new">
+                            @if(!empty($data->image_courtesy))
+                                <div class="product-image-courtesy-watermark">
+                                    {{ $data->image_courtesy }}
+                                </div>
+                            @endif
                         </div>
                         <div class="whats-text-bg" data-toggle="modal" data-target="#">
                             <p><a href="{{route('frontend.products.single',$data->slug)}}" target="_blank">{{$data->title}}</a></p>
@@ -38,3 +43,23 @@
     </div>
     @include('frontend.partials.popup')
 </section>
+
+<style>
+.product-image-courtesy-watermark {
+    position: absolute;
+    bottom: -1px;
+    right: 5px;
+    color: rgb(46 46 46 / 60%);
+    opacity: 0.30;
+    filter: blur(0.7px);
+    font-size: 10px;
+    font-weight: 400;
+    line-height: 1.2;
+    padding: 2px 6px;
+    border-radius: 3px;
+    letter-spacing: 0.3px;
+    z-index: 5;
+    pointer-events: none;
+    user-select: none;
+}
+</style>

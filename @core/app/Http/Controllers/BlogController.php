@@ -55,6 +55,7 @@ class BlogController extends Controller
            'meta_tags' => 'nullable|string',
            'meta_description' => 'nullable|string',
            'image' => 'nullable|string|max:191',
+           'image_courtesy' => 'nullable|string|max:191',
            'published_at' => 'nullable|date',
         ]);
         $slug = !empty($request->slug) ? $request->slug : Str::slug($request->title,$request->lang);
@@ -71,6 +72,7 @@ class BlogController extends Controller
             'excerpt' => $request->excerpt,
             'lang' => $request->lang,
             'image' => $request->image,
+            'image_courtesy' => $request->image_courtesy,
             'user_id' => Auth::user()->id,
             'author' => $request->author,
             'video_url' => $request->video_url,
@@ -97,6 +99,7 @@ class BlogController extends Controller
             'excerpt' => $blog_details->excerpt,
             'lang' => $blog_details->lang,
             'image' => $blog_details->image,
+            'image_courtesy' => $blog_details->image_courtesy,
             'video_url' => $blog_details->video_url,
             'user_id' => null,
             'author' => $blog_details->author,
@@ -134,6 +137,7 @@ class BlogController extends Controller
             'meta_tags' => 'nullable|string',
             'meta_description' => 'nullable|string',
             'image' => 'nullable|string|max:191',
+            'image_courtesy' => 'nullable|string|max:191',
             'published_at' => 'nullable|date',
 
         ]);
@@ -151,6 +155,7 @@ class BlogController extends Controller
             'lang' => $request->lang,
             'video_url' => $request->video_url,
             'image' => $request->image,
+            'image_courtesy' => $request->image_courtesy,
             'user_id' => Auth::user()->id,
             'author' => $request->author,
             'breaking_news' => !empty($request->breaking_news) ? 1 : 0,

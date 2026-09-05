@@ -104,6 +104,11 @@
                                     </div>
 
                                     <x-media-upload :id="''" :name="'image'" :dimentions="'1920x1280'" :title="__('Image')"/>
+                                    <div class="form-group">
+                                        <label for="image_courtesy">{{__('Image Courtesy')}}</label>
+                                        <input type="text" class="form-control" id="image_courtesy" name="image_courtesy" placeholder="{{__('e.g. Collected')}}">
+                                        <small class="text-muted">{{__('If specified, it will appear as a watermark/credit on the news image')}}</small>
+                                    </div>
                                     <button type="submit" class="btn btn-primary mt-4 pr-4 pl-4">{{__('Add New Post')}}</button>
                                 </div>
                             </div>

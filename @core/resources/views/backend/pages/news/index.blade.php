@@ -76,6 +76,7 @@
                                         <th>{{__('ID')}}</th>
                                         <th>{{__('Title')}}</th>
                                         <th>{{__('Image')}}</th>
+                                        <th>{{__('Image Courtesy')}}</th>
                                         <!-- <th>{{__('Author')}}</th>
                                         <th>{{__('Category')}}</th> -->
                                         <th>{{__('Status')}}</th>
@@ -106,6 +107,13 @@
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                    @endif
+                                                </td>
+                                                <td>
+                                                    @if(!empty($data->image_courtesy))
+                                                        <span class="badge badge-info">{{$data->image_courtesy}}</span>
+                                                    @else
+                                                        <span class="text-muted">-</span>
                                                     @endif
                                                 </td>
                                                 <!-- <td>{{$data->author}}</td>

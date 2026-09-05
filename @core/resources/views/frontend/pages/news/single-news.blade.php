@@ -124,9 +124,14 @@
                             </div>
                             <h1>{{ $blog_post->title }}</h1>
                         </header>
-                            <div class="featured-image">
+                            <div class="featured-image" style="position: relative;">
                                 @php $image_details = get_attachment_image_by_id($blog_post->image, 'full'); @endphp
                                 <img src="{{ $image_details['img_url'] }}" alt="{{ __($blog_post->title) }}">
+                                @if(!empty($blog_post->image_courtesy))
+                                    <div class="news-image-courtesy-watermark">
+                                        {{ $blog_post->image_courtesy }}
+                                    </div>
+                                @endif
                             </div>
                             
                             <div class="text-content">
@@ -141,9 +146,16 @@
                                 <div class="scroll-area">
                                     @foreach($all_recent_blogs as $data)
                                         <div class="side-card">
-                                            <a href="{{route('frontend.news.single',$data->slug)}}">
+                                            <a href="{{route('frontend.news.single',$data->slug)}}" style="position: relative; display: flex;">
                                                 @php $image_details = get_attachment_image_by_id($data->image, 'full'); @endphp
-                                                <img src="{{ $image_details['img_url'] ?? ""}}" alt="{{ __($data->title) }}" width="300px">
+                                                <div style="position: relative; flex-shrink: 0;">
+                                                    <img src="{{ $image_details['img_url'] ?? ""}}" alt="{{ __($data->title) }}" width="300px">
+                                                    @if(!empty($data->image_courtesy))
+                                                        <div class="news-image-courtesy-watermark">
+                                                            {{ $data->image_courtesy }}
+                                                        </div>
+                                                    @endif
+                                                </div>
                                                 <div class="side-card-info">
                                                     <h3>{{ $data->title }}</h3>
                                                     <span class="time">🕒 {{ ($data->published_at ?? $data->created_at)->format('d F, Y') }}</span>
@@ -175,9 +187,14 @@
                     <div class="bottom-grid">
                         @foreach($all_related_blog as $data)
                             <article class="card">
-                                <a href="{{route('frontend.news.single',$data->slug)}}">
+                                <a href="{{route('frontend.news.single',$data->slug)}}" style="position: relative; display: block;">
                                     @php $image_details = get_attachment_image_by_id($data->image, 'full'); @endphp
                                     <img src="{{ $image_details['img_url'] ?? '' }}" alt="{{ $data->title }}">
+                                    @if(!empty($data->image_courtesy))
+                                        <div class="news-image-courtesy-watermark">
+                                            {{ $data->image_courtesy }}
+                                        </div>
+                                    @endif
                                 </a>
                                 <div class="card-body">
                                     <a href="{{route('frontend.news.single',$data->slug)}}">
@@ -191,6 +208,26 @@
                 </div>
             </div>
         </section>
+
+<style>
+.news-image-courtesy-watermark {
+    position: absolute;
+    bottom: -1px;
+    right: 5px;
+    color: rgb(46 46 46 / 60%);
+    opacity: 0.30;
+    filter: blur(0.7px);
+    font-size: 10px;
+    font-weight: 400;
+    line-height: 1.2;
+    padding: 2px 6px;
+    border-radius: 3px;
+    letter-spacing: 0.3px;
+    z-index: 5;
+    pointer-events: none;
+    user-select: none;
+}
+</style>
 @endsection
 
 @section('scripts')

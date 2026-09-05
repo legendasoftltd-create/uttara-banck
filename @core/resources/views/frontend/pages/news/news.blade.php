@@ -129,10 +129,15 @@
                 <div class="top-grid">
                     <article class="main-feature">
                         @if(!empty($recent_last_blogs))
-                            <div class="feature-content">
-                                <a href="{{route('frontend.news.single',$recent_last_blogs->slug)}}">
+                            <div class="feature-content" style="position: relative;">
+                                <a href="{{route('frontend.news.single',$recent_last_blogs->slug)}}" style="position: relative; display: block;">
                                 @php $image_details = get_attachment_image_by_id($recent_last_blogs->image, 'full'); @endphp
                                         <img src="{{ $image_details['img_url'] ?? '' }}" alt="{{ $recent_last_blogs->title }}" class="main-img">
+                                    @if(!empty($recent_last_blogs->image_courtesy))
+                                        <div class="news-image-courtesy-watermark">
+                                            {{ $recent_last_blogs->image_courtesy }}
+                                        </div>
+                                    @endif
                                 </a>
                             </div>
                             <div class="feature-text">
@@ -154,10 +159,15 @@
                                     </a>
                                     <p class="news-time">{{ timeAgo($data->published_at) }}</p>
                                 </div>
-                                <div class="side-img-wrapper">
-                                    <a href="{{route('frontend.news.single',$data->slug)}}">
+                                <div class="side-img-wrapper" style="position: relative;">
+                                    <a href="{{route('frontend.news.single',$data->slug)}}" style="position: relative; display: block;">
                                         @php $image_details = get_attachment_image_by_id($data->image, 'full'); @endphp
                                         <img src="{{ $image_details['img_url'] ?? '' }}" alt="{{ $data->title }}">
+                                        @if(!empty($data->image_courtesy))
+                                            <div class="news-image-courtesy-watermark">
+                                                {{ $data->image_courtesy }}
+                                            </div>
+                                        @endif
                                     </a>
                                 </div>
                             </div>
@@ -170,9 +180,14 @@
                 <section class="bottom-grid">
                     @foreach($all_blogs as $data)
                         <article class="card">
-                            <a href="{{route('frontend.news.single',$data->slug)}}">
+                            <a href="{{route('frontend.news.single',$data->slug)}}" style="position: relative; display: block;">
                                 @php $image_details = get_attachment_image_by_id($data->image, 'full'); @endphp
                                 <img src="{{ $image_details['img_url'] ?? '' }}" alt="{{ $data->title }}">
+                                @if(!empty($data->image_courtesy))
+                                    <div class="news-image-courtesy-watermark">
+                                        {{ $data->image_courtesy }}
+                                    </div>
+                                @endif
                             </a>
                             <div class="card-body">
                                 <a href="{{route('frontend.news.single',$data->slug)}}">
@@ -188,6 +203,26 @@
                 </div>
             </div>
         </section>
+
+<style>
+.news-image-courtesy-watermark {
+    position: absolute;
+    bottom: -1px;
+    right: 5px;
+    color: rgb(46 46 46 / 60%);
+    opacity: 0.30;
+    filter: blur(0.7px);
+    font-size: 10px;
+    font-weight: 400;
+    line-height: 1.2;
+    padding: 2px 6px;
+    border-radius: 3px;
+    letter-spacing: 0.3px;
+    z-index: 5;
+    pointer-events: none;
+    user-select: none;
+}
+</style>
 @endsection
 
 @section('scripts')
