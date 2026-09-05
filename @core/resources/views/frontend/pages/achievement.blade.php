@@ -76,6 +76,24 @@
         text-align: justify; /* Aligns text cleanly like a formal document */
     }
 
+    .achievement-image-courtesy-watermark {
+        position: absolute;
+        bottom: -1px;
+        right: 5px;
+        color: rgb(46 46 46 / 60%);
+        opacity: 0.30;
+        filter: blur(0.7px);
+        font-size: 10px;
+        font-weight: 400;
+        line-height: 1.2;
+        padding: 2px 6px;
+        border-radius: 3px;
+        letter-spacing: 0.3px;
+        z-index: 5;
+        pointer-events: none;
+        user-select: none;
+    }
+
 </style>
 
 <section class="achievement-section">
@@ -90,8 +108,13 @@
                                 {{ $item->title }}
                             </h3>
 
-                            <div class="achievement-image-wrapper">
+                            <div class="achievement-image-wrapper" style="position: relative;">
                                 {!! render_image_markup_by_attachment_id($item->image) !!}
+                                @if(!empty($item->image_courtesy))
+                                    <div class="achievement-image-courtesy-watermark">
+                                        {{ $item->image_courtesy }}
+                                    </div>
+                                @endif
                             </div>
 
                             @if($item->description)

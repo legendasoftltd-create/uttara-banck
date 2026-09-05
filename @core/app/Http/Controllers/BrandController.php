@@ -27,6 +27,7 @@ class BrandController extends Controller
             'description' => 'nullable|string',
             'slug' => 'nullable|string|max:191',
             'image' => 'nullable|string|max:191',
+            'image_courtesy' => 'nullable|string|max:191',
             'thumbnail' => 'nullable|string|max:191',
             'url' => 'nullable|string|max:191',
         ]);
@@ -36,6 +37,7 @@ class BrandController extends Controller
             'description' => $request->description,
             'slug' => $this->prepareSlug($request->slug, $request->title),
             'image' => $request->image,
+            'image_courtesy' => $request->image_courtesy,
             'thumbnail' => $request->thumbnail,
             'url' => $request->url,
         ]);
@@ -51,6 +53,7 @@ class BrandController extends Controller
             'description' => 'nullable|string',
             'slug' => 'nullable|string|max:191',
             'image' => 'nullable|string|max:191',
+            'image_courtesy' => 'nullable|string|max:191',
             'thumbnail' => 'nullable|string|max:191',
             'url' => 'nullable|string|max:191',
         ]);
@@ -60,6 +63,7 @@ class BrandController extends Controller
             'description' => $request->description,
             'slug' => $this->prepareSlug($request->slug, $request->title, $request->id),
             'image' => $request->image,
+            'image_courtesy' => $request->image_courtesy,
             'thumbnail' => $request->thumbnail,
             'url' => $request->url,
         ]);

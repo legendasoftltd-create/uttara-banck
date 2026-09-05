@@ -141,6 +141,7 @@
                                            data-url="{{$data->url}}"
                                            data-imageid="{{$data->image}}"
                                            data-image="{{$img_url}}"
+                                           data-courtesy="{{$data->image_courtesy}}"
                                            data-thumbnailid="{{$data->thumbnail}}"
                                            data-thumbnail="{{$thumb_url}}"
                                         >
@@ -189,6 +190,10 @@
                                     </button>
                                 </div>
                                 <small>{{__('You can upload image, PDF, document, Excel, zip, or presentation files')}}</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="image_courtesy">{{__('Image Courtesy')}}</label>
+                                <input type="text" class="form-control" id="image_courtesy" name="image_courtesy" placeholder="{{__('Image Courtesy')}}">
                             </div>
                             <div class="form-group">
                                 <label for="thumbnail">{{__('Thumbnail')}}</label>
@@ -247,6 +252,10 @@
                                 </button>
                             </div>
                             <small>{{__('You can upload image, PDF, document, Excel, zip, or presentation files')}}</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit_image_courtesy">{{__('Image Courtesy')}}</label>
+                            <input type="text" class="form-control" id="edit_image_courtesy" name="image_courtesy" placeholder="{{__('Image Courtesy')}}">
                         </div>
                         <div class="form-group">
                             <label for="edit_thumbnail">{{__('Thumbnail')}}</label>
@@ -378,6 +387,7 @@
                 form.find('#edit_description').val(el.data('description'));
                 form.find('#edit_slug').val(slug);
                 form.find('#edit_url').val(el.data('url'));
+                form.find('#edit_image_courtesy').val(el.data('courtesy'));
 
                 var fileWrapper = form.find('#edit_image').closest('.media-upload-btn-wrapper');
                 fileWrapper.find('.img-wrap').html('');
