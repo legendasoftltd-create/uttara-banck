@@ -69,6 +69,7 @@
                                         <th>{{__('Title')}}</th>
                                         <th>{{__('Status')}}</th>
                                         <th>{{__('Image')}}</th>
+                                        <th>{{__('Image Courtesy')}}</th>
                                         <th>{{__('Category')}}</th>
                                         <th>{{__('Publish Date')}}</th>
                                         <th>{{__('Action')}}</th>
@@ -107,6 +108,13 @@
                                                             </div>
                                                         </div>
                                                         @php  $img_url = $work_section_img['img_url']; @endphp
+                                                    @endif
+                                                </td>
+                                                <td>
+                                                    @if(!empty($data->image_courtesy))
+                                                        <span class="badge badge-info">{{$data->image_courtesy}}</span>
+                                                    @else
+                                                        <span class="text-muted">-</span>
                                                     @endif
                                                 </td>
                                                 <td>{!! get_work_category_by_id($data->id,'string') !!}</td>

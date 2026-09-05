@@ -126,6 +126,11 @@
                                 <input type="text" name="publish_date" id="publish_date" class="form-control publish-date-picker" value="{{ optional($work_details->publish_date)->format('Y-m-d') }}" placeholder="yyyy-mm-dd" autocomplete="off">
                             </div>
                             <x-media-upload :id="$work_details->image" :name="'image'" :dimentions="'1920x1280'" :title="__('Image')"/>
+                            <div class="form-group">
+                                <label for="image_courtesy">{{__('Image Courtesy')}}</label>
+                                <input type="text" class="form-control" id="image_courtesy" name="image_courtesy" value="{{$work_details->image_courtesy}}" placeholder="{{__('e.g. Collected')}}">
+                                <small class="text-muted">{{__('If specified, it will appear as a watermark/credit on the image')}}</small>
+                            </div>
 
                             <button type="submit" class="btn btn-primary mt-4 pr-4 pl-4">{{__('Update Important Information')}}</button>
                         </form>

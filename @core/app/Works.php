@@ -23,7 +23,8 @@ class Works extends Model
         'budget',
         'description',
         'gallery',
-        'image'
+        'image',
+        'image_courtesy'
     ];
 
     protected $casts = [

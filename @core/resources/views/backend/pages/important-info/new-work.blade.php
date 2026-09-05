@@ -114,6 +114,11 @@
                                 </div>
                                 {{-- <small>{{__('Recommended image size 1920x1280')}}</small> --}}
                             </div>
+                            <div class="form-group">
+                                <label for="image_courtesy">{{__('Image Courtesy')}}</label>
+                                <input type="text" class="form-control" id="image_courtesy" name="image_courtesy" placeholder="{{__('e.g. Collected')}}">
+                                <small class="text-muted">{{__('If specified, it will appear as a watermark/credit on the image')}}</small>
+                            </div>
                             <button type="submit" class="btn btn-primary mt-4 pr-4 pl-4">{{__('Add New Important Information')}}</button>
                         </form>
                     </div>

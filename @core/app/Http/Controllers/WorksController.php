@@ -63,6 +63,7 @@ class WorksController extends Controller
             'publish_date' => 'nullable|date',
             'categories_id' => 'required',
             'image' => 'nullable|string|max:191',
+            'image_courtesy' => 'nullable|string|max:191',
         ]);
         $slug = !empty($request->slug) ? $request->slug : Str::slug($request->title,$request->lang);
         Works::create([
@@ -80,6 +81,7 @@ class WorksController extends Controller
             'publish_date' => $request->publish_date,
             'description' => $request->description,
             'image' => $request->image,
+            'image_courtesy' => $request->image_courtesy,
             'categories_id' => serialize($request->categories_id),
         ]);
 
@@ -104,6 +106,7 @@ class WorksController extends Controller
             'publish_date' => 'nullable|date',
             'categories_id' => 'required',
             'image' => 'nullable|string|max:191',
+            'image_courtesy' => 'nullable|string|max:191',
         ]);
         $slug = !empty($request->slug) ? $request->slug : Str::slug($request->title,$request->lang);
         Works::find($request->id)->update(
@@ -122,6 +125,7 @@ class WorksController extends Controller
                 'publish_date' => $request->publish_date,
                 'description' => $request->description,
                 'image' => $request->image,
+                'image_courtesy' => $request->image_courtesy,
                 'categories_id' => serialize($request->categories_id),
             ]
         );
@@ -146,6 +150,7 @@ class WorksController extends Controller
                 'publish_date' => $single_work->publish_date,
                 'description' => $single_work->description,
                 'image' => $single_work->image,
+                'image_courtesy' => $single_work->image_courtesy,
                 'categories_id' => serialize($single_work->categories_id),
             ]
         );
