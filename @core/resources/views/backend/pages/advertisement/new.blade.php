@@ -102,6 +102,12 @@
                                     </div>
                                 </div>
 
+                                <div class="form-group image">
+                                    <label for="image_courtesy">{{__('Image Courtesy')}}</label>
+                                    <input type="text" class="form-control" id="image_courtesy" name="image_courtesy" placeholder="{{__('e.g. Collected')}}">
+                                    <small class="text-muted">{{__('If specified, it will appear as a watermark/credit on the activity image')}}</small>
+                                </div>
+
                                 <button id="submit" type="submit" class="btn btn-primary mt-5 submit_btn">{{__('Submit Activity')}}</button>
                               </div>
                         </form>

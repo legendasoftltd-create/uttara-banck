@@ -36,7 +36,8 @@ class AdvertisementController extends Controller
             'slot'=> 'nullable',
             'embed_code'=> 'nullable',
             'redirect_url'=> 'nullable',
-            'image'=> 'nullable'
+            'image'=> 'nullable',
+            'image_courtesy'=> 'nullable|string|max:191'
         ]);
 
         Advertisement::create([
@@ -48,6 +49,7 @@ class AdvertisementController extends Controller
             'embed_code' => $request->embed_code,
             'redirect_url' => purify_html($request->redirect_url),
             'image' => $request->image,
+            'image_courtesy' => $request->image_courtesy,
         ]);
 
         return redirect()->back()->with(['msg' => __('New Activity Created Successfully'), 'type' => 'success']);
@@ -69,7 +71,8 @@ class AdvertisementController extends Controller
             'slot'=> 'nullable',
             'embed_code'=> 'nullable',
             'redirect_url'=> 'nullable',
-            'image'=> 'nullable'
+            'image'=> 'nullable',
+            'image_courtesy'=> 'nullable|string|max:191'
         ]);
 
         $add_id =  Advertisement::where('id',$id)->update([
@@ -81,6 +84,7 @@ class AdvertisementController extends Controller
             'embed_code' => $request->embed_code,
             'redirect_url' => purify_html($request->redirect_url),
             'image' => $request->image,
+            'image_courtesy' => $request->image_courtesy,
         ]);
 
         return redirect()->back()->with(['msg' => __('Activity Updated Successfully'), 'type' => 'success']);

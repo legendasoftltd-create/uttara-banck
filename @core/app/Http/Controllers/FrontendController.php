@@ -129,7 +129,7 @@ class FrontendController extends Controller
         $latest_products = Products::where('status', 'publish')->where(['lang' => $lang, 'status' => 'publish'])->orderBy('id', 'DESC')->take(get_static_option('home_page_products_area_items'))->get();
         // $all_products = Products::where(['status' => 'publish', 'category_id' => $id])->orderBy('id', 'desc')->paginate(get_static_option('product_post_items'));
         $categories = ProductCategory::where('status', 'publish')->where(['lang' => $lang, 'status' => 'publish'])->orderBy('id', 'ASC')->get();
-        $add_query = Advertisement::select('id','type','image','slot','status','redirect_url','embed_code','title')->where('status',1)->inRandomOrder()->get();
+        $add_query = Advertisement::select('id','type','image','image_courtesy','slot','status','redirect_url','embed_code','title')->where('status',1)->inRandomOrder()->get();
         $all_recent_blogs = Blog::where('status', 'publish')->where(['lang' => $lang,'status' => 'publish'])->orderBy('id', 'desc')->take(get_static_option('blog_page_recent_post_widget_item'))->get();
         $exchange_rate = \App\ExchangeRate::where('status', 1)->latest()->first();
 
