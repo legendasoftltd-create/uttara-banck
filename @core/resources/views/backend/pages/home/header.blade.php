@@ -77,6 +77,7 @@
                                        @endif
                                        <th>{{__('ID')}}</th>
                                        <th>{{__('Image')}}</th>
+                                       <th>{{__('Image Courtesy')}}</th>
                                        <th>{{__('Title')}}</th>
                                        <th>{{__('Description')}}</th>
                                        <th>{{__('Display Page')}}</th>
@@ -108,6 +109,13 @@
                                                            </div>
                                                        </div>
                                                        @php  $img_url = $header_bg_img['img_url']; @endphp
+                                                   @endif
+                                               </td>
+                                               <td>
+                                                   @if(!empty($data->image_courtesy))
+                                                       <span class="badge badge-info">{{$data->image_courtesy}}</span>
+                                                   @else
+                                                       <span class="text-muted">-</span>
                                                    @endif
                                                </td>
                                                <td>{{$data->title}}</td>
@@ -149,6 +157,7 @@
                                                       data-title="{{$data->title}}"
                                                       data-subtitle="{{$data->subtitle}}"
                                                       data-imageid="{{$data->image}}"
+                                                      data-image_courtesy="{{$data->image_courtesy}}"
                                                       data-image="{{$img_url}}"
                                                       data-lang="{{$data->lang}}"
                                                       data-description="{{$data->description}}"
@@ -255,6 +264,12 @@
                             </div>
 
                             <div class="form-group">
+                                <label for="image_courtesy">{{__('Image Courtesy')}}</label>
+                                <input type="text" class="form-control" id="image_courtesy" name="image_courtesy" placeholder="{{__('e.g. Collected')}}">
+                                <small class="text-muted">{{__('If specified, it will appear as a watermark/credit on the image')}}</small>
+                            </div>
+
+                            <div class="form-group">
                                 <div class="media-upload-btn-wrapper">
                                     <div class="img-wrap"></div>
                                     <input type="hidden" name="image">
@@ -354,6 +369,12 @@
                         </div>
 
                         <div class="form-group">
+                            <label for="edit_image_courtesy">{{__('Image Courtesy')}}</label>
+                            <input type="text" class="form-control" id="edit_image_courtesy" name="image_courtesy" placeholder="{{__('e.g. Collected')}}">
+                            <small class="text-muted">{{__('If specified, it will appear as a watermark/credit on the image')}}</small>
+                        </div>
+
+                        <div class="form-group">
                             <div class="media-upload-btn-wrapper">
                                 <div class="img-wrap"></div>
                                 <input type="hidden" id="edit_image" name="image" value="">
@@ -445,6 +466,7 @@
                 form.find('#edit_btn_01_url').val(el.data('btn_01_url'));
                 form.find('#edit_video_btn_text').val(el.data('video_btn_text'));
                 form.find('#edit_video_btn_url').val(el.data('video_btn_url'));
+                form.find('#edit_image_courtesy').val(el.data('image_courtesy') || '');
                 form.find('#edit_language option[value='+el.data("lang")+']').attr('selected',true);//lang
 
                 var page_type = el.data('page_type');

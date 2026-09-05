@@ -45,6 +45,11 @@
                 </div>
             </div>
         </div>
+        @if(!empty($data->image_courtesy))
+            <div class="slider-image-courtesy-watermark" style="position: absolute; bottom: 15px; right: 20px; background: rgba(0,0,0,0.65); color: #fff; padding: 4px 10px; font-size: 11px; border-radius: 4px; z-index: 9;">
+                {{$data->image_courtesy}}
+            </div>
+        @endif
     </div>
     @endforeach
 </div>
