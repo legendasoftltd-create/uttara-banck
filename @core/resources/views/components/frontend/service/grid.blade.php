@@ -1,6 +1,11 @@
 <div class="single-what-we-cover-item-02 margin-bottom-30">
-    <div class="single-what-img">
+    <div class="single-what-img" style="position: relative;">
         {!! render_image_markup_by_attachment_id($service->image) !!}
+        @if(!empty($service->image_courtesy))
+            <div class="service-image-courtesy-watermark">
+                {{ $service->image_courtesy }}
+            </div>
+        @endif
     </div>
     @if($service->icon_type === 'icon' || $service->icon_type == '')
         <div class="icon-02 style-0{{$increment ?? '' }}">

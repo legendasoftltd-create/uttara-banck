@@ -74,6 +74,7 @@
                                         <th>{{__('Title')}}</th>
                                         <th>{{__('Status')}}</th>
                                         <th>{{__('Image')}}</th>
+                                        <th>{{__('Image Courtesy')}}</th>
                                         {{-- <th>{{__('Icon')}}</th> --}}
                                         {{-- <th>{{__('Category')}}</th> --}}
                                         {{-- <th>{{__('Sorting Order')}}</th> --}}
@@ -115,6 +116,13 @@
                                                             </div>
                                                         </div>
                                                         @php  $img_url = $service_section_img['img_url']; @endphp
+                                                    @endif
+                                                </td>
+                                                <td>
+                                                    @if(!empty($data->image_courtesy))
+                                                        <span class="badge badge-info">{{$data->image_courtesy}}</span>
+                                                    @else
+                                                        <span class="text-muted">-</span>
                                                     @endif
                                                 </td>
                                                 {{-- <td>

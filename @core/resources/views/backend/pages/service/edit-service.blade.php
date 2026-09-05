@@ -156,6 +156,11 @@
         class="info-text">{{__('if you set order for it, all service will show in frontend as a per this order')}}</span>
 </div> --}}
 <x-media-upload :id="$service->image" :name="'image'" :dimentions="'1920x1280'" :title="__('Image')" />
+<div class="form-group">
+    <label for="image_courtesy">{{__('Image Courtesy')}}</label>
+    <input type="text" class="form-control" id="image_courtesy" name="image_courtesy" value="{{$service->image_courtesy}}" placeholder="{{__('e.g. Collected')}}">
+    <small class="text-muted">{{__('If specified, it will appear as a watermark/credit on the service image')}}</small>
+</div>
 <button type="submit" class="btn btn-primary mt-4 pr-4 pl-4">{{__('Update Service')}}</button>
 </form>
 </div>

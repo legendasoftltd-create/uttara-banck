@@ -24,11 +24,16 @@
                                 id="c-profile">
                                 <div class="text-center about-nav dropdown">
                                     <a class="radius-icon" style="color: black" href="{{route('frontend.services.single',$service->slug)}}">
-                                        <div class="producticon">
+                                        <div class="producticon" style="position: relative;">
                                             @php
                                                 $image_details = get_attachment_image_by_id($service->image, 'full');
                                             @endphp
                                             <img src="{{ $image_details['img_url'] ?? '' }}" alt="{{ $service->title }}" class="img-responsive">
+                                            @if(!empty($service->image_courtesy))
+                                                <div class="service-image-courtesy-watermark">
+                                                    {{ $service->image_courtesy }}
+                                                </div>
+                                            @endif
                                         </div>
                                     </a>
                                     <p class="m-0"><a href="{{route('frontend.services.single',$service->slug)}}">{{ $service->title }}</a></p>
@@ -42,4 +47,24 @@
         </div>
     </section>
     {{-- <div class="empty-height-50"></div> --}}
+
+<style>
+.service-image-courtesy-watermark {
+    position: absolute;
+    bottom: -1px;
+    right: 5px;
+    color: rgb(46 46 46 / 60%);
+    opacity: 0.30;
+    filter: blur(0.7px);
+    font-size: 10px;
+    font-weight: 400;
+    line-height: 1.2;
+    padding: 2px 6px;
+    border-radius: 3px;
+    letter-spacing: 0.3px;
+    z-index: 5;
+    pointer-events: none;
+    user-select: none;
+}
+</style>
 @endsection
