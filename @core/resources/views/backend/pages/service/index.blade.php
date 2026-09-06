@@ -79,7 +79,9 @@
                                         {{-- <th>{{__('Category')}}</th> --}}
                                         {{-- <th>{{__('Sorting Order')}}</th> --}}
                                         <th>{{__('Category')}}</th>
-                                        <th>{{__('Date')}}</th>
+                                        <th>{{__('Created Date')}}</th>
+                                        <th>{{__('Updated Date')}}</th>
+                                        <th>{{__('Show Date')}}</th>
                                         <th>{{__('Action')}}</th>
                                         </thead>
                                         <tbody>
@@ -134,7 +136,15 @@
                                                 </td> --}}
                                                 <td>{{get_service_category_by_id($data->categories_id)}}</td>
                                                 <!-- <td>{{$data->sr_order}}</td> -->
-                                                <td>{{date_format($data->created_at,'d M Y')}}</td>
+                                                <td>{{$data->created_at ? $data->created_at->format('d-M-Y') : ''}}</td>
+                                                <td>{{$data->updated_at ? $data->updated_at->format('d-M-Y') : ''}}</td>
+                                                <td>
+                                                    @if(!empty($data->updated_date_status))
+                                                        <span class="badge badge-success">{{__('Enabled')}}</span>
+                                                    @else
+                                                        <span class="badge badge-secondary">{{__('Disabled')}}</span>
+                                                    @endif
+                                                </td>
                                                 <td>
                                                      @if(check_page_permission('services_delete'))
                                                      <x-delete-popover :url="route('admin.services.delete',$data->id)"/>

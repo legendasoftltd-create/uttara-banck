@@ -17,6 +17,19 @@
     {{$service_item->title}}
 @endsection
 @section('content')
+    <div class="empty-height-50"></div>
+    @if(!empty($service_item->updated_date_status))
+        <div class="container mb-3">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="page-updated-date-wrap text-right" style="font-size: 14px; color: #4b5563; font-weight: 500; padding: 6px 12px; background: #f8fafc; border-left: 4px solid #008649; border-radius: 4px; display: inline-block; float: right; margin-bottom: 20px;">
+                        <i class="fas fa-calendar-alt text-success mr-1"></i> {{__('Last Updated:')}} <span class="text-dark font-weight-bold">{{ $service_item->updated_at ? \Carbon\Carbon::parse($service_item->updated_at)->format('d-M-Y') : '' }}</span>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+    @endif
     <section class="content-section pt-4 mt-2">
         <div class="container content-box">
         <!-- <h2 class="title">{{ $service_item->title }}</h2> -->

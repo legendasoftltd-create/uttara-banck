@@ -78,6 +78,7 @@ class ServiceController extends Controller
             'sr_order' => $request->sr_order,
             'img_icon' => $request->img_icon,
             'icon_type' => $request->icon_type,
+            'updated_date_status' => !empty($request->updated_date_status) ? 'on' : null,
             'price_plan' =>  serialize($price_plan),
         ]);
 
@@ -121,6 +122,7 @@ class ServiceController extends Controller
             'sr_order' => $request->sr_order,
             'img_icon' => $request->img_icon,
             'icon_type' => $request->icon_type,
+            'updated_date_status' => !empty($request->updated_date_status) ? 'on' : null,
             'price_plan' => serialize($price_plan),
         ]);
 
@@ -147,6 +149,7 @@ class ServiceController extends Controller
             'icon_type' => $service->icon_type,
             'sr_order' => $service->sr_order,
             'price_plan' => $service->price_plan,
+            'updated_date_status' => $service->updated_date_status,
             'status' => 'draft',
         ]);
 

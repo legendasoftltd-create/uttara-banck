@@ -149,6 +149,13 @@
             <option @if($service->status == 'draft') selected @endif value="draft">{{__('Draft')}}</option>
         </select>
     </div>
+    <div class="form-group">
+        <label for="updated_date_status"><strong>{{__('Show Updated Date (Frontend)')}}</strong></label>
+        <label class="switch d-block">
+            <input type="checkbox" name="updated_date_status" value="on" @if(!empty($service->updated_date_status)) checked @endif>
+            <span class="slider onff"></span>
+        </label>
+    </div>
     {{-- <div class="form-group">
     <label for="sr_order">{{__('Order')}}</label>
     <input type="text" class="form-control" id="sr_order" name="sr_order" value="{{$service->sr_order}}">
