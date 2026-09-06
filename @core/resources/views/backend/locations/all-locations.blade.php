@@ -91,6 +91,7 @@
                                     <th>{{__('Type')}}</th>
                                     <th>{{__('Division')}}</th>
                                     <th>{{__('District')}}</th>
+                                    <th>{{__('Phone')}}</th>
                                     <th>{{__('Mobile')}}</th>
                                     <th>{{__('Routing No')}}</th>
                                     <th>{{__('Status')}}</th>
@@ -103,7 +104,7 @@
                                         @if(check_page_permission('locations_delete'))
                                         <td>
                                             <div class="bulk-checkbox-wrapper">
-                                                <input type="checkbox" class="bulk-checkbox" value="{{$location->id}}">
+                                                 <input type="checkbox" class="bulk-checkbox" value="{{$location->id}}">
                                             </div>
                                         </td>
                                         @endif
@@ -112,6 +113,7 @@
                                         <td>{{ucwords(str_replace('_',' ',$location->type))}}</td>
                                         <td>{{$location->division}}</td>
                                         <td>{{$location->district}}</td>
+                                        <td>{{$location->phone}}</td>
                                         <td>{{$location->mobile}}</td>
                                         <td>{{$location->routing_no}}</td>
                                         <td>

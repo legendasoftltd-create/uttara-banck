@@ -135,6 +135,12 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
+                                        <label for="phone">{{__('Phone')}}</label>
+                                        <input type="text" class="form-control" id="phone" name="phone" value="{{old('phone',$location->phone)}}">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
                                         <label for="mobile">{{__('Mobile')}}</label>
                                         <input type="text" class="form-control" id="mobile" name="mobile" value="{{old('mobile',$location->mobile)}}">
                                     </div>

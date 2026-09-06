@@ -112,6 +112,7 @@ class LocationController extends Controller
             'upazila' => 'nullable|string|max:191',
             'address' => 'required|string|max:500',
             'email' => 'nullable|email|max:191',
+            'phone' => 'nullable|string|max:191',
             'mobile' => 'nullable|string|max:191',
             'fax' => 'nullable|string|max:191',
             'image' => 'nullable|integer',
@@ -134,7 +135,8 @@ class LocationController extends Controller
         $data['status'] = (int) ($data['status'] ?? 0);
         $data['locker'] = (int) ($data['locker'] ?? 0);
         $data['dhaka_branch'] = (int) ($data['dhaka_branch'] ?? 0);
-        $data['phone'] = $data['mobile'] ?? null;
+        $data['phone'] = $data['phone'] ?? null;
+        $data['mobile'] = $data['mobile'] ?? null;
         $data['latitude'] = $data['latitude'] ?? 0;
         $data['longitude'] = $data['longitude'] ?? 0;
 
