@@ -83,6 +83,7 @@ class PagesController extends Controller
         Page::create([
             'lang' => $request->lang,
             'breadcrumb_status' => $request->breadcrumb_status,
+            'updated_date_status' => $request->updated_date_status,
             'slug' => $slug,
             'status' => $request->status,
             'content' => $request->page_content,
@@ -128,6 +129,7 @@ class PagesController extends Controller
             'visibility' => $request->visibility,
             'page_builder_status' => $request->page_builder_status,
             'breadcrumb_status' => $request->breadcrumb_status,
+            'updated_date_status' => $request->updated_date_status,
             'title' => $request->title,
             'slug' => $slug,
             'meta_tags' => $request->meta_tags,

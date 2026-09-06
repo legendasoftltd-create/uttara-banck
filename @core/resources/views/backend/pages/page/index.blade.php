@@ -63,7 +63,9 @@
                                         </th>
                                         <th>{{__('ID')}}</th>
                                         <th>{{__('Title')}}</th>
-                                        <th>{{__('Date')}}</th>
+                                        <th>{{__('Created Date')}}</th>
+                                        <th>{{__('Updated Date')}}</th>
+                                        <th>{{__('Show Date')}}</th>
                                         <th>{{__('Status')}}</th>
                                         <th>{{__('Action')}}</th>
                                         </thead>
@@ -77,7 +79,15 @@
                                                 </td>
                                                 <td>{{$data->id}}</td>
                                                 <td>{{$data->title}}</td>
-                                                <td>{{$data->created_at->diffForHumans()}}</td>
+                                                <td>{{$data->created_at ? $data->created_at->format('d-M-Y') : ''}}</td>
+                                                <td>{{$data->updated_at ? $data->updated_at->format('d-M-Y') : ''}}</td>
+                                                <td>
+                                                    @if(!empty($data->updated_date_status))
+                                                        <span class="badge badge-success">{{__('Enabled')}}</span>
+                                                    @else
+                                                        <span class="badge badge-secondary">{{__('Disabled')}}</span>
+                                                    @endif
+                                                </td>
                                                 <td>
                                                     @if($data->status === 'publish')
                                                         <span class="alert alert-success">{{__('Publish')}}</span>

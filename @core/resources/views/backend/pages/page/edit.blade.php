@@ -111,6 +111,14 @@
                                 <textarea name="meta_description" class="form-control"
                                     id="meta_description">{{$page_post->meta_description}}</textarea>
                             </div>
+                            <div class="form-group">
+                                <label for="updated_date_status"><strong>{{__('Show Updated Date (Frontend)')}}</strong></label>
+                                <label class="switch d-block">
+                                    <input type="checkbox" name="updated_date_status" value="on"
+                                        @if(!empty($page_post->updated_date_status)) checked @endif >
+                                    <span class="slider onff"></span>
+                                </label>
+                            </div>
                             <button type="submit" class="btn btn-primary mt-4 pr-4 pl-4">{{__('Update Page')}}</button>
                         </div>
                 </div>
