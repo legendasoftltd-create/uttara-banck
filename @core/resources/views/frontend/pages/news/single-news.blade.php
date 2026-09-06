@@ -120,7 +120,11 @@
                         <article class="article-body">
                         <header class="article-header">
                             <div class="meta-info">
-                                <span class="clock-icon">🕒</span> Published on: {{ ($blog_post->published_at ?? $blog_post->created_at)->format(' d F, Y') }}
+                                @if(!empty($blog_post->updated_date_status))
+                                    <span class="clock-icon">🕒</span> {{__('Updated on:')}} {{ ($blog_post->updated_at ?? $blog_post->created_at)->format('d-M-Y') }}
+                                @else
+                                    <span class="clock-icon">🕒</span> {{__('Published on:')}} {{ ($blog_post->published_at ?? $blog_post->created_at)->format('d-M-Y') }}
+                                @endif
                             </div>
                             <h1>{{ $blog_post->title }}</h1>
                         </header>
@@ -158,7 +162,7 @@
                                                 </div>
                                                 <div class="side-card-info">
                                                     <h3>{{ $data->title }}</h3>
-                                                    <span class="time">🕒 {{ ($data->published_at ?? $data->created_at)->format('d F, Y') }}</span>
+                                                    <span class="time">🕒 {{ (!empty($data->updated_date_status) ? $data->updated_at : ($data->published_at ?? $data->created_at))->format('d-M-Y') }}</span>
                                                 </div>
                                             </a>
                                         </div>
@@ -200,7 +204,7 @@
                                     <a href="{{route('frontend.news.single',$data->slug)}}">
                                         <h3>{{ $data->title }}</h3>
                                     </a>
-                                    <p class="news-time">{{ timeAgo($data->published_at) }}</p>
+                                    <p class="news-time">{{ (!empty($data->updated_date_status) ? $data->updated_at : ($data->published_at ?? $data->created_at))->format('d-M-Y') }}</p>
                                 </div>
                             </article>
                         @endforeach

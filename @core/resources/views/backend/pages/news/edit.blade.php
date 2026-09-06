@@ -96,6 +96,13 @@
                                         </label>
                                     </div>
                                     <div class="form-group">
+                                        <label for="updated_date_status"><strong>{{__('Show Updated Date (Frontend)')}}</strong></label>
+                                        <label class="switch d-block">
+                                            <input type="checkbox" name="updated_date_status" value="on" @if(!empty($blog_post->updated_date_status)) checked @endif>
+                                            <span class="slider onff"></span>
+                                        </label>
+                                    </div>
+                                    <div class="form-group">
                                         <label for="status">{{__('Status')}}</label>
                                         <select name="status" id="status" class="form-control">
                                             <option  @if($blog_post->status == 'publish') selected @endif value="publish">{{__('Publish')}}</option>

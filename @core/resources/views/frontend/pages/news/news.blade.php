@@ -145,7 +145,7 @@
                                     <h2>{{ $recent_last_blogs->title }}</h2>
                                 </a>
                                     <p>{{ $recent_last_blogs->excerpt }}</p>
-                                <p class="news-time">{{ timeAgo($recent_last_blogs->published_at) }}</p>
+                                <p class="news-time">{{ (!empty($recent_last_blogs->updated_date_status) ? $recent_last_blogs->updated_at : $recent_last_blogs->published_at)->format('d-M-Y') }}</p>
                             </div>
                         @endif
                     </article>
@@ -157,7 +157,7 @@
                                     <a href="{{route('frontend.news.single',$data->slug)}}">
                                         <h3>{{ $data->title }}</h3>
                                     </a>
-                                    <p class="news-time">{{ timeAgo($data->published_at) }}</p>
+                                    <p class="news-time">{{ (!empty($data->updated_date_status) ? $data->updated_at : $data->published_at)->format('d-M-Y') }}</p>
                                 </div>
                                 <div class="side-img-wrapper" style="position: relative;">
                                     <a href="{{route('frontend.news.single',$data->slug)}}" style="position: relative; display: block;">
@@ -193,7 +193,7 @@
                                 <a href="{{route('frontend.news.single',$data->slug)}}">
                                     <h3>{{ $data->title }}</h3>
                                 </a>
-                                <p class="news-time">{{ timeAgo($data->published_at) }}</p>
+                                <p class="news-time">{{ (!empty($data->updated_date_status) ? $data->updated_at : $data->published_at)->format('d-M-Y') }}</p>
                             </div>
                         </article>
                     @endforeach

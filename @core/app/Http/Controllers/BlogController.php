@@ -77,6 +77,7 @@ class BlogController extends Controller
             'author' => $request->author,
             'video_url' => $request->video_url,
             'breaking_news' => !empty($request->breaking_news) ? 1 : 0,
+            'updated_date_status' => !empty($request->updated_date_status) ? 'on' : null,
             'published_at' => $request->published_at ?: now(),
         ]);
         return redirect()->back()->with([
@@ -104,6 +105,7 @@ class BlogController extends Controller
             'user_id' => null,
             'author' => $blog_details->author,
             'breaking_news' => $blog_details->breaking_news,
+            'updated_date_status' => $blog_details->updated_date_status,
             'published_at' => $blog_details->published_at,
         ]);
 
@@ -159,6 +161,7 @@ class BlogController extends Controller
             'user_id' => Auth::user()->id,
             'author' => $request->author,
             'breaking_news' => !empty($request->breaking_news) ? 1 : 0,
+            'updated_date_status' => !empty($request->updated_date_status) ? 'on' : null,
             'published_at' => $request->published_at ?: now(),
         ]);
 

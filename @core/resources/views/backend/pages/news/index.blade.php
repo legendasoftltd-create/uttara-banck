@@ -80,7 +80,9 @@
                                         <!-- <th>{{__('Author')}}</th>
                                         <th>{{__('Category')}}</th> -->
                                         <th>{{__('Status')}}</th>
-                                        <th>{{__('Date')}}</th>
+                                        <th>{{__('Published Date')}}</th>
+                                        <th>{{__('Updated Date')}}</th>
+                                        <th>{{__('Show Date')}}</th>
                                         <th>{{__('Action')}}</th>
                                         </thead>
                                         <tbody>
@@ -129,7 +131,15 @@
                                                         <span class="alert alert-success" style="margin-top: 20px;display: inline-block;">{{__('Publish')}}</span>
                                                     @endif
                                                 </td>
-                                                <td>{{date_format($data->created_at,'d M Y')}}</td>
+                                                <td>{{$data->published_at ? date_format($data->published_at,'d M Y') : date_format($data->created_at,'d M Y')}}</td>
+                                                <td>{{$data->updated_at ? date_format($data->updated_at,'d M Y') : ''}}</td>
+                                                <td>
+                                                    @if(!empty($data->updated_date_status))
+                                                        <span class="badge badge-success">{{__('Updated Date')}}</span>
+                                                    @else
+                                                        <span class="badge badge-secondary">{{__('Created Date')}}</span>
+                                                    @endif
+                                                </td>
                                                 <td>
                                                     @if(check_page_permission('news_delete'))
                                                     <x-delete-popover :url="route('admin.news.delete',$data->id)"/>
