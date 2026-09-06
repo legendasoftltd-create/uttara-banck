@@ -83,7 +83,7 @@
         transition-property: transform, width, border, background-color;
     }
 </style>
-<div class="mouse-pointer" aria-hidden="true"></div>
+<!-- <div class="mouse-pointer" aria-hidden="true"></div> -->
 
 <script>
     const isReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
