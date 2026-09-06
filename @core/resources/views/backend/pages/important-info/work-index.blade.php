@@ -72,6 +72,9 @@
                                         <th>{{__('Image Courtesy')}}</th>
                                         <th>{{__('Category')}}</th>
                                         <th>{{__('Publish Date')}}</th>
+                                        <th>{{__('Created Date')}}</th>
+                                        <th>{{__('Updated Date')}}</th>
+                                        <th>{{__('Show Date')}}</th>
                                         <th>{{__('Action')}}</th>
                                         </thead>
                                         <tbody>
@@ -88,9 +91,9 @@
                                                 <td>{{$data->title}}</td>
                                                 <td>
                                                     @if($data->status == 'draft')
-                                                        <span class="alert alert-warning" style="margin-top: 20px;display: inline-block;">{{__('Draft')}}</span>
+                                                         <span class="alert alert-warning" style="margin-top: 20px;display: inline-block;">{{__('Draft')}}</span>
                                                     @else
-                                                        <span class="alert alert-success" style="margin-top: 20px;display: inline-block;">{{__('Publish')}}</span>
+                                                         <span class="alert alert-success" style="margin-top: 20px;display: inline-block;">{{__('Publish')}}</span>
                                                     @endif
                                                 </td>
                                                 <td>
@@ -114,11 +117,20 @@
                                                     @if(!empty($data->image_courtesy))
                                                         <span class="badge badge-info">{{$data->image_courtesy}}</span>
                                                     @else
-                                                        <span class="text-muted">-</span>
+                                                         <span class="text-muted">-</span>
                                                     @endif
                                                 </td>
                                                 <td>{!! get_work_category_by_id($data->id,'string') !!}</td>
-                                                <td>{{ optional($data->publish_date ?? $data->created_at)->format('d M Y') }}</td>
+                                                <td>{{ optional($data->publish_date ?? $data->created_at)->format('d-M-Y') }}</td>
+                                                <td>{{ $data->created_at ? $data->created_at->format('d-M-Y') : '' }}</td>
+                                                <td>{{ $data->updated_at ? $data->updated_at->format('d-M-Y') : '' }}</td>
+                                                <td>
+                                                    @if(!empty($data->updated_date_status))
+                                                        <span class="badge badge-success">{{__('Enabled')}}</span>
+                                                    @else
+                                                        <span class="badge badge-secondary">{{__('Disabled')}}</span>
+                                                    @endif
+                                                </td>
                                                 <td>
                                                     @if(check_page_permission('important_information_delete'))
                                                     <x-delete-popover :url="route('admin.work.delete',$data->id)"/>

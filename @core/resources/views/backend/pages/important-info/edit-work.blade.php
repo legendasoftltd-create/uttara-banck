@@ -122,6 +122,13 @@
                                 </select>
                             </div>
                             <div class="form-group">
+                                <label for="updated_date_status"><strong>{{__('Show Updated Date (Frontend)')}}</strong></label>
+                                <label class="switch d-block">
+                                    <input type="checkbox" name="updated_date_status" value="on" @if(!empty($work_details->updated_date_status)) checked @endif>
+                                    <span class="slider onff"></span>
+                                </label>
+                            </div>
+                            <div class="form-group">
                                 <label for="publish_date">{{__('Publish Date')}}</label>
                                 <input type="text" name="publish_date" id="publish_date" class="form-control publish-date-picker" value="{{ optional($work_details->publish_date)->format('Y-m-d') }}" placeholder="yyyy-mm-dd" autocomplete="off">
                             </div>

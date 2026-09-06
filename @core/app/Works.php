@@ -22,9 +22,9 @@ class Works extends Model
         'clients',
         'budget',
         'description',
-        'gallery',
         'image',
-        'image_courtesy'
+        'image_courtesy',
+        'updated_date_status'
     ];
 
     protected $casts = [
