@@ -4432,7 +4432,7 @@ html.monochrome {
 
 
 .header {
-    height: 60px;
+    height: 70px;
     border-bottom: 1px solid #eee;
     background: #fff;
 }
@@ -4447,7 +4447,7 @@ html.monochrome {
 
 
 .logo img {
-    height: 70px;
+    height: 78px;
     padding: 7px 0;
 }
 
@@ -4455,7 +4455,7 @@ html.monochrome {
     display: flex;
     align-items: center;
     gap: 5px;
-    font-size: 16px;
+    font-size: 17px;
     /* padding-bottom: 10px; */
 }
 
