@@ -134,6 +134,7 @@ class ProductsController extends Controller
             'image_courtesy' => $request->image_courtesy,
             'gallery' => $request->gallery,
             'status' => $request->status,
+            'updated_date_status' => !empty($request->updated_date_status) ? 'on' : null,
             'badge' => $request->badge,
             'tax_percentage' => $request->tax_percentage,
             'subcategory_id' => $request->subcategory_id,
@@ -162,7 +163,8 @@ class ProductsController extends Controller
         $product = Products::find($id);
         $all_languages = Language::all();
         $all_category = ProductCategory::where(['status' => 'publish', 'lang' => $product->lang])->get();
-        $all_subcategory = ProductSubCategory::where(['status' => 'publish', 'lang' => $product->lang,'product_category_id' => $product->category_id])->get();
+        $all_subcategory = ProductSubCategory::where(['status' => 'publish', 'lang' => $product->lang, 'product_category_id' => $product->category_id])->get();
+
         return view('backend.products.edit-product')->with([
             'all_languages' => $all_languages,
             'all_categories' => $all_category,
@@ -180,7 +182,7 @@ class ProductsController extends Controller
             'attributes_description' => $product->attributes_description,
             'lang' => $product->lang,
             'title' => $product->title,
-            'slug' => $product->slug.'-clone',
+            'slug' => $product->slug . random_int(999,9999),
             'category_id' => $product->category_id,
             'description' => $product->description,
             'short_description' => $product->short_description,
@@ -197,6 +199,7 @@ class ProductsController extends Controller
             'badge' => $product->badge,
             'tax_percentage' => $product->tax_percentage,
             'status' => 'draft',
+            'updated_date_status' => $product->updated_date_status,
             'variant' => $product->variant,
             'subcategory_id' => $product->subcategory_id,
             'direct_download' =>  !empty($product->direct_download) ? 1 : 0,
@@ -266,6 +269,7 @@ class ProductsController extends Controller
             'image_courtesy' => $request->image_courtesy,
             'gallery' => $request->gallery,
             'status' => $request->status,
+            'updated_date_status' => !empty($request->updated_date_status) ? 'on' : null,
             'badge' => $request->badge,
             'tax_percentage' => $request->tax_percentage,
             'subcategory_id' => $request->subcategory_id,

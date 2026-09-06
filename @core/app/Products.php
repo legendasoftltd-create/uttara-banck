@@ -35,6 +35,7 @@ class Products extends Model
         'subcategory_id',
         'direct_download',
         'download_count',
+        'updated_date_status',
     ];
     public function category(){
         return $this->hasOne('App\ProductCategory','id','category_id');

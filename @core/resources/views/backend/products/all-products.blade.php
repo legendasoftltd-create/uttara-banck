@@ -72,6 +72,9 @@
                                             <th>{{__('Product Type')}}</th>
                                             <!-- <th>{{__('Sales')}}</th> -->
                                             <th>{{__('Status')}}</th>
+                                            <th>{{__('Created Date')}}</th>
+                                            <th>{{__('Updated Date')}}</th>
+                                            <th>{{__('Show Date')}}</th>
                                             <th>{{__('Action')}}</th>
                                             </thead>
                                             <tbody>
@@ -119,6 +122,15 @@
                                                             <span class="alert alert-warning" >{{__('Draft')}}</span>
                                                         @else
                                                             <span class="alert alert-success">{{__('Publish')}}</span>
+                                                        @endif
+                                                    </td>
+                                                    <td>{{ $data->created_at ? $data->created_at->format('d-M-Y') : '' }}</td>
+                                                    <td>{{ $data->updated_at ? $data->updated_at->format('d-M-Y') : '' }}</td>
+                                                    <td>
+                                                        @if(!empty($data->updated_date_status))
+                                                            <span class="badge badge-success">{{__('Enabled')}}</span>
+                                                        @else
+                                                            <span class="badge badge-secondary">{{__('Disabled')}}</span>
                                                         @endif
                                                     </td>
                                                     <td>

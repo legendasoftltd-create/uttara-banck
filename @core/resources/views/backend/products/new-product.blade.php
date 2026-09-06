@@ -205,6 +205,13 @@
                                             <option value="draft">{{__('Draft')}}</option>
                                         </select>
                                     </div>
+                                    <div class="form-group">
+                                        <label for="updated_date_status"><strong>{{__('Show Updated Date (Frontend)')}}</strong></label>
+                                        <label class="switch d-block">
+                                            <input type="checkbox" name="updated_date_status" value="on">
+                                            <span class="slider onff"></span>
+                                        </label>
+                                    </div>
                                     <button type="submit" class="btn btn-primary mt-4 pr-4 pl-4">{{__('Add New Product')}}</button>
                                 </div>
                             </div>
